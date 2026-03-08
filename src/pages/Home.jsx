@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
-import HeroEvent from "../components/events/HeroEvent";
-import EventCard from "../components/events/EventCard";
+import HeroEvent from "@/components/events/HeroEvent";
+import EventCard from "@/components/events/EventCard";
 import { Calendar } from "lucide-react";
 
 export default function Home() {

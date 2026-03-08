@@ -5,7 +5,7 @@ import { format } from "date-fns";
 import { es } from "date-fns/locale";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
-import BuyTicketModal from "../components/tickets/BuyTicketModal";
+import BuyTicketModal from "@/components/tickets/BuyTicketModal";
 
 export default function EventDetail() {
   const [event, setEvent] = useState(null);
