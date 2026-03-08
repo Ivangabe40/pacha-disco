@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Menu, X, Instagram, Facebook, Music2 } from "lucide-react";
 
-const LOGO_GOLD = "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/user_69abf6aff758a16386edeb04/71fcb4c4f_IMG-20260121-WA0030.jpg";
 const LOGO_RED = "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/user_69abf6aff758a16386edeb04/0e73ec46b_IMG-20260121-WA0031.jpg";
 
 const navLinks = [
@@ -15,26 +14,41 @@ const navLinks = [
 
 export default function Layout({ children, currentPageName }) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const isAdmin = currentPageName === "Admin";
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <div className="min-h-screen flex flex-col" style={{ background: "#0A0A0A", color: "#F5F0E8" }}>
+    <div className="min-h-screen flex flex-col" style={{ background: "#070707", color: "#F0EBE3" }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap');
-        body { font-family: 'Inter', sans-serif; background: #0A0A0A; }
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600&display=swap');
+        body { font-family: 'Inter', sans-serif; background: #070707; }
         h1,h2,h3,h4,h5 { font-family: 'Playfair Display', serif; }
-        .nav-link { transition: color 0.2s; }
-        .nav-link:hover { color: #C9A84C; }
-        .nav-link.active { color: #C9A84C; border-bottom: 1px solid #C9A84C; }
+        .nav-link { transition: color 0.2s, text-shadow 0.2s; color: #888; letter-spacing: 0.1em; }
+        .nav-link:hover { color: #fff; }
+        .nav-link.active { color: #E8001D; text-shadow: 0 0 12px rgba(232,0,29,0.6); }
       `}</style>
 
       {/* NAVBAR */}
-      <nav style={{ background: "rgba(10,10,10,0.97)", borderBottom: "1px solid #1a1a1a", backdropFilter: "blur(10px)" }}
-        className="sticky top-0 z-50">
+      <nav
+        className="sticky top-0 z-50 transition-all duration-300"
+        style={{
+          background: scrolled ? "rgba(7,7,7,0.98)" : "rgba(7,7,7,0.7)",
+          borderBottom: scrolled ? "1px solid rgba(232,0,29,0.2)" : "1px solid rgba(255,255,255,0.05)",
+          backdropFilter: "blur(20px)",
+        }}>
+        {/* Red top line */}
+        <div className="h-0.5 w-full" style={{ background: "linear-gradient(90deg, transparent, #E8001D 30%, #E8001D 70%, transparent)" }} />
+
         <div className="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to={createPageUrl("Home")} className="flex items-center gap-2">
-            <img src={LOGO_RED} alt="Pachá" className="h-10 w-auto object-contain" />
+          <Link to={createPageUrl("Home")} className="flex items-center">
+            <img src={LOGO_RED} alt="Pachá" className="h-10 w-auto object-contain"
+              style={{ filter: "drop-shadow(0 0 12px rgba(232,0,29,0.5))" }} />
           </Link>
 
           {/* Desktop Nav */}
@@ -43,40 +57,44 @@ export default function Layout({ children, currentPageName }) {
               <Link
                 key={l.page}
                 to={createPageUrl(l.page)}
-                className={`nav-link text-sm font-medium tracking-widest uppercase pb-1 ${currentPageName === l.page ? "active" : "text-gray-400"}`}
-              >
+                className={`nav-link text-xs font-semibold tracking-widest uppercase pb-0.5 ${currentPageName === l.page ? "active" : ""}`}>
                 {l.label}
               </Link>
             ))}
-            <Link
-              to={createPageUrl("Home")}
-              className="btn-gold px-5 py-2 rounded text-sm font-semibold tracking-wider uppercase"
-              style={{ background: "linear-gradient(135deg, #C9A84C 0%, #E8C97A 50%, #C9A84C 100%)", color: "#0A0A0A" }}
-            >
-              Entradas
+          </div>
+
+          {/* CTA */}
+          <div className="hidden md:block">
+            <Link to={createPageUrl("Home")}>
+              <button className="btn-red px-6 py-2.5 rounded-lg text-xs font-black tracking-widest uppercase">
+                ENTRADAS
+              </button>
             </Link>
           </div>
 
           {/* Mobile menu btn */}
-          <button className="md:hidden text-gray-300" onClick={() => setMenuOpen(!menuOpen)}>
-            {menuOpen ? <X size={24} /> : <Menu size={24} />}
+          <button className="md:hidden text-gray-400 hover:text-white transition-colors p-1" onClick={() => setMenuOpen(!menuOpen)}>
+            {menuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
 
         {/* Mobile menu */}
         {menuOpen && (
-          <div style={{ background: "#111" }} className="md:hidden border-t border-gray-800 px-4 py-6 flex flex-col gap-5">
+          <div className="md:hidden px-4 py-6 flex flex-col gap-4"
+            style={{ background: "#0d0d0d", borderTop: "1px solid rgba(232,0,29,0.15)" }}>
             {navLinks.map(l => (
-              <Link key={l.page} to={createPageUrl(l.page)}
+              <Link
+                key={l.page}
+                to={createPageUrl(l.page)}
                 onClick={() => setMenuOpen(false)}
-                className="text-gray-300 text-base font-medium tracking-widest uppercase">
+                className={`text-sm font-semibold tracking-widest uppercase py-2 ${currentPageName === l.page ? "text-red-500" : "text-gray-400"}`}>
                 {l.label}
               </Link>
             ))}
-            <Link to={createPageUrl("Home")} onClick={() => setMenuOpen(false)}
-              className="text-center py-3 rounded font-semibold tracking-wider uppercase mt-2"
-              style={{ background: "linear-gradient(135deg, #C9A84C 0%, #E8C97A 50%, #C9A84C 100%)", color: "#0A0A0A" }}>
-              Comprar Entradas
+            <Link to={createPageUrl("Home")} onClick={() => setMenuOpen(false)}>
+              <button className="btn-red w-full py-3.5 rounded-lg text-sm font-black tracking-widest uppercase mt-2">
+                COMPRAR ENTRADAS
+              </button>
             </Link>
           </div>
         )}
@@ -88,20 +106,46 @@ export default function Layout({ children, currentPageName }) {
       </main>
 
       {/* FOOTER */}
-      <footer style={{ background: "#080808", borderTop: "1px solid #1a1a1a" }} className="py-12 px-4">
+      <footer className="py-14 px-4" style={{ background: "#050505", borderTop: "1px solid rgba(232,0,29,0.15)" }}>
         <div className="max-w-7xl mx-auto">
+          {/* Red divider */}
+          <div className="h-px w-full mb-10" style={{ background: "linear-gradient(90deg, transparent, rgba(232,0,29,0.4), transparent)" }} />
+
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-            <div className="flex flex-col items-center md:items-start gap-3">
-              <img src={LOGO_RED} alt="Pachá" className="h-12 w-auto object-contain" />
-              <p className="text-gray-500 text-sm">Club Premium · Multigenero</p>
+            <div className="flex flex-col items-center md:items-start gap-2">
+              <img src={LOGO_RED} alt="Pachá" className="h-12 w-auto object-contain"
+                style={{ filter: "drop-shadow(0 0 10px rgba(232,0,29,0.4))" }} />
+              <p className="text-gray-600 text-xs tracking-widest uppercase">Club Premium · Multigenero</p>
             </div>
-            <div className="flex items-center gap-6">
-              <a href="#" className="text-gray-500 hover:text-yellow-400 transition-colors"><Instagram size={20} /></a>
-              <a href="#" className="text-gray-500 hover:text-yellow-400 transition-colors"><Facebook size={20} /></a>
-              <a href="#" className="text-gray-500 hover:text-yellow-400 transition-colors"><Music2 size={20} /></a>
+
+            <div className="flex items-center gap-5">
+              <a href="#" aria-label="Instagram"
+                className="w-9 h-9 flex items-center justify-center rounded-full transition-all"
+                style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}
+                onMouseEnter={e => e.currentTarget.style.borderColor = "rgba(232,0,29,0.5)"}
+                onMouseLeave={e => e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"}>
+                <Instagram size={15} className="text-gray-500" />
+              </a>
+              <a href="#" aria-label="Facebook"
+                className="w-9 h-9 flex items-center justify-center rounded-full transition-all"
+                style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}
+                onMouseEnter={e => e.currentTarget.style.borderColor = "rgba(232,0,29,0.5)"}
+                onMouseLeave={e => e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"}>
+                <Facebook size={15} className="text-gray-500" />
+              </a>
+              <a href="#" aria-label="Music"
+                className="w-9 h-9 flex items-center justify-center rounded-full transition-all"
+                style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}
+                onMouseEnter={e => e.currentTarget.style.borderColor = "rgba(232,0,29,0.5)"}
+                onMouseLeave={e => e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"}>
+                <Music2 size={15} className="text-gray-500" />
+              </a>
             </div>
+
             <div className="text-center md:text-right">
-              <Link to={createPageUrl("Admin")} className="text-gray-700 hover:text-gray-500 text-xs">Panel Admin</Link>
+              <Link to={createPageUrl("Admin")} className="text-gray-700 hover:text-gray-500 text-xs transition-colors">
+                Panel Admin
+              </Link>
               <p className="text-gray-700 text-xs mt-1">© 2026 Pachá. Todos los derechos reservados.</p>
             </div>
           </div>

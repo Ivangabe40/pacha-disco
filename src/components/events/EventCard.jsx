@@ -8,88 +8,106 @@ export default function EventCard({ event }) {
   const date = new Date(event.date);
   const isSoldOut = event.status === "agotado";
   const isCancelled = event.status === "cancelado";
+  const isActive = !isSoldOut && !isCancelled;
 
   return (
-    <div className="event-card rounded-xl overflow-hidden group cursor-pointer"
-      style={{ background: "#111", border: "1px solid #222" }}>
+    <div className="event-card rounded-xl overflow-hidden group cursor-pointer flex flex-col">
       {/* Flyer */}
       <div className="relative aspect-[3/4] overflow-hidden">
         {event.flyer_url ? (
-          <img src={event.flyer_url} alt={event.title}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+          <img
+            src={event.flyer_url}
+            alt={event.title}
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+          />
         ) : (
-          <div className="w-full h-full flex items-center justify-center"
-            style={{ background: "linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%)" }}>
-            <Music size={48} style={{ color: "#C9A84C", opacity: 0.4 }} />
+          <div className="w-full h-full flex flex-col items-center justify-center gap-3"
+            style={{ background: "linear-gradient(135deg, #1a0005 0%, #0d0d0d 100%)" }}>
+            <Music size={40} style={{ color: "#E8001D", opacity: 0.4 }} />
+            <span className="text-gray-600 text-xs tracking-widest uppercase">Sin flyer</span>
           </div>
         )}
-        {/* Status badge */}
+
+        {/* Overlay gradient */}
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+          style={{ background: "linear-gradient(to top, rgba(232,0,29,0.4) 0%, transparent 60%)" }} />
+
+        {/* Status overlay */}
         {(isSoldOut || isCancelled) && (
-          <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
-            <span className="text-white font-bold text-xl tracking-widest uppercase px-4 py-2 border-2 border-white">
+          <div className="absolute inset-0 flex items-center justify-center"
+            style={{ background: "rgba(0,0,0,0.7)" }}>
+            <span className="font-black text-xl tracking-widest uppercase px-5 py-2.5"
+              style={{
+                border: `2px solid ${isSoldOut ? "#E8001D" : "#555"}`,
+                color: isSoldOut ? "#E8001D" : "#777",
+                textShadow: isSoldOut ? "0 0 20px rgba(232,0,29,0.8)" : "none"
+              }}>
               {isSoldOut ? "AGOTADO" : "CANCELADO"}
             </span>
           </div>
         )}
-        {event.is_featured && !isSoldOut && !isCancelled && (
-          <div className="absolute top-3 left-3 px-3 py-1 text-xs font-bold tracking-widest uppercase rounded"
-            style={{ background: "linear-gradient(135deg, #C9A84C, #E8C97A)", color: "#0A0A0A" }}>
-            Destacado
+
+        {/* Featured badge */}
+        {event.is_featured && isActive && (
+          <div className="absolute top-3 left-3 px-3 py-1 text-xs font-black tracking-widest uppercase rounded-full"
+            style={{ background: "#E8001D", color: "#fff", boxShadow: "0 0 15px rgba(232,0,29,0.6)" }}>
+            ★ DESTACADO
           </div>
         )}
       </div>
 
       {/* Info */}
-      <div className="p-4">
-        <h3 className="font-bold text-lg mb-2 text-white leading-tight" style={{ fontFamily: "'Playfair Display', serif" }}>
+      <div className="p-4 flex flex-col flex-1" style={{ background: "#0f0f0f" }}>
+        <h3 className="font-bold text-base mb-2 text-white leading-tight uppercase tracking-wide"
+          style={{ fontFamily: "'Playfair Display', serif" }}>
           {event.title}
         </h3>
-        <div className="flex flex-col gap-1 mb-3">
-          <div className="flex items-center gap-2 text-sm text-gray-400">
-            <Calendar size={13} style={{ color: "#C9A84C" }} />
-            <span>{format(date, "EEEE d 'de' MMMM", { locale: es })}</span>
-          </div>
-          <div className="flex items-center gap-2 text-sm text-gray-400">
-            <Clock size={13} style={{ color: "#C9A84C" }} />
+
+        <div className="flex flex-col gap-1.5 mb-4 flex-1">
+          <div className="flex items-center gap-2 text-xs text-gray-500">
+            <Calendar size={11} style={{ color: "#E8001D" }} />
+            <span className="capitalize">{format(date, "EEE d 'de' MMM", { locale: es })}</span>
+            <span className="text-gray-700">·</span>
+            <Clock size={11} style={{ color: "#E8001D" }} />
             <span>{format(date, "HH:mm")}hs</span>
           </div>
           {event.genres && (
-            <div className="flex items-center gap-2 text-sm text-gray-400">
-              <Music size={13} style={{ color: "#C9A84C" }} />
+            <div className="flex items-center gap-2 text-xs text-gray-600">
+              <Music size={11} style={{ color: "#C9A84C" }} />
               <span>{event.genres}</span>
             </div>
           )}
         </div>
 
+        {/* Price */}
         {event.ticket_price && (
-          <div className="flex items-center justify-between mb-3">
+          <div className="flex items-end justify-between mb-4 pb-3"
+            style={{ borderBottom: "1px solid #1a1a1a" }}>
             <div>
-              <span className="text-xs text-gray-500 uppercase tracking-wider">Anticipada</span>
-              <div className="font-bold text-lg" style={{ color: "#C9A84C" }}>
+              <div className="text-xs text-gray-600 uppercase tracking-widest mb-0.5">Anticipada</div>
+              <div className="font-black text-xl" style={{ color: "#E8001D", textShadow: "0 0 15px rgba(232,0,29,0.4)" }}>
                 ${event.ticket_price.toLocaleString()}
               </div>
             </div>
             {event.ticket_price_door && (
               <div className="text-right">
-                <span className="text-xs text-gray-500 uppercase tracking-wider">En puerta</span>
-                <div className="font-semibold text-sm text-gray-400">
-                  ${event.ticket_price_door.toLocaleString()}
-                </div>
+                <div className="text-xs text-gray-600 uppercase tracking-widest mb-0.5">En puerta</div>
+                <div className="font-semibold text-sm text-gray-500">${event.ticket_price_door.toLocaleString()}</div>
               </div>
             )}
           </div>
         )}
 
-        <Link to={createPageUrl(`EventDetail?id=${event.id}`)}>
+        <Link to={createPageUrl(`EventDetail?id=${event.id}`)} className="block">
           <button
-            disabled={isSoldOut || isCancelled}
-            className="w-full py-2.5 rounded text-sm font-semibold tracking-wider uppercase flex items-center justify-center gap-2 transition-all"
-            style={isSoldOut || isCancelled
-              ? { background: "#222", color: "#555", cursor: "not-allowed" }
-              : { background: "linear-gradient(135deg, #C9A84C 0%, #E8C97A 50%, #C9A84C 100%)", color: "#0A0A0A" }
+            disabled={!isActive}
+            className="w-full py-3 rounded-lg text-xs font-black tracking-widest uppercase flex items-center justify-center gap-2 transition-all"
+            style={isActive
+              ? { background: "linear-gradient(135deg, #E8001D, #ff1a35)", color: "#fff", boxShadow: "0 4px 20px rgba(232,0,29,0.3)" }
+              : { background: "#1a1a1a", color: "#444", cursor: "not-allowed" }
             }>
-            <Ticket size={14} />
-            {isSoldOut ? "Agotado" : isCancelled ? "Cancelado" : "Ver Evento"}
+            <Ticket size={13} />
+            {isSoldOut ? "Agotado" : isCancelled ? "Cancelado" : "Ver & Comprar"}
           </button>
         </Link>
       </div>
