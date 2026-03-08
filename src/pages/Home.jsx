@@ -29,27 +29,30 @@ export default function Home() {
   );
 
   return (
-    <div style={{ background: "#0A0A0A", minHeight: "100vh" }}>
+    <div style={{ background: "#070707", minHeight: "100vh" }}>
       {/* HERO */}
       {featured && <HeroEvent event={featured} />}
 
       {/* UPCOMING EVENTS */}
-      <section className="max-w-7xl mx-auto px-4 md:px-8 py-16">
-        <div className="flex items-center gap-3 mb-10">
-          <div className="w-1 h-8 rounded" style={{ background: "linear-gradient(#C9A84C, #E8C97A)" }}></div>
-          <h2 className="text-3xl font-bold text-white" style={{ fontFamily: "'Playfair Display', serif" }}>
-            Próximos Eventos
-          </h2>
+      <section className="max-w-7xl mx-auto px-4 md:px-8 py-16 md:py-24">
+        <div className="flex items-center gap-4 mb-12">
+          <div className="w-1 h-10 rounded-full" style={{ background: "linear-gradient(#E8001D, #9B0013)" }} />
+          <div>
+            <p className="text-xs tracking-widest uppercase mb-0.5" style={{ color: "#E8001D" }}>Agenda</p>
+            <h2 className="text-3xl md:text-4xl font-black text-white uppercase" style={{ fontFamily: "'Playfair Display', serif" }}>
+              Próximos Eventos
+            </h2>
+          </div>
         </div>
 
         {upcoming.length === 0 ? (
-          <div className="text-center py-20">
-            <Calendar size={48} className="mx-auto mb-4 opacity-20" style={{ color: "#C9A84C" }} />
+          <div className="text-center py-24">
+            <Calendar size={48} className="mx-auto mb-4" style={{ color: "#E8001D", opacity: 0.3 }} />
             <p className="text-gray-500 text-lg">Próximamente nuevos eventos</p>
-            <p className="text-gray-600 text-sm mt-2">Seguinos en redes para enterarte primero</p>
+            <p className="text-gray-700 text-sm mt-2 tracking-wider uppercase">Seguinos en redes para enterarte primero</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
             {upcoming.map(event => <EventCard key={event.id} event={event} />)}
           </div>
         )}
@@ -57,20 +60,23 @@ export default function Home() {
 
       {/* PAST EVENTS */}
       {past.length > 0 && (
-        <section className="max-w-7xl mx-auto px-4 md:px-8 pb-16">
-          <div className="flex items-center gap-3 mb-8">
-            <div className="w-1 h-8 rounded" style={{ background: "#333" }}></div>
-            <h2 className="text-2xl font-bold text-gray-600" style={{ fontFamily: "'Playfair Display', serif" }}>
+        <section className="max-w-7xl mx-auto px-4 md:px-8 pb-20">
+          <div className="h-px w-full mb-10" style={{ background: "linear-gradient(90deg, transparent, rgba(232,0,29,0.2), transparent)" }} />
+          <div className="flex items-center gap-4 mb-8">
+            <div className="w-1 h-8 rounded-full" style={{ background: "#2a2a2a" }} />
+            <h2 className="text-xl font-bold text-gray-600 uppercase tracking-widest" style={{ fontFamily: "'Playfair Display', serif" }}>
               Ediciones Anteriores
             </h2>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3">
             {past.slice(0, 6).map(event => (
-              <div key={event.id} className="relative aspect-[3/4] rounded-lg overflow-hidden opacity-50 hover:opacity-70 transition-opacity">
+              <div key={event.id} className="relative aspect-[3/4] rounded-lg overflow-hidden group"
+                style={{ border: "1px solid #1a1a1a" }}>
                 {event.flyer_url ? (
-                  <img src={event.flyer_url} alt={event.title} className="w-full h-full object-cover" />
+                  <img src={event.flyer_url} alt={event.title}
+                    className="w-full h-full object-cover opacity-30 group-hover:opacity-50 transition-opacity duration-300" />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center text-xs text-gray-600 text-center p-2"
+                  <div className="w-full h-full flex items-center justify-center text-xs text-gray-700 text-center p-2"
                     style={{ background: "#111" }}>{event.title}</div>
                 )}
               </div>
