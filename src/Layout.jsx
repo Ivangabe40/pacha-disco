@@ -115,7 +115,7 @@ export default function Layout({ children, currentPageName }) {
             <div className="flex flex-col items-center md:items-start gap-2">
               <img src={LOGO_RED} alt="Pachá" className="h-12 w-auto object-contain"
                 style={{ filter: "drop-shadow(0 0 10px rgba(232,0,29,0.4))" }} />
-              <p className="text-gray-600 text-xs tracking-widest uppercase">Club Premium · Multigenero</p>
+              <p className="text-gray-600 text-xs tracking-widest uppercase">Pachá Night Club · Exclusivo Mayores</p>
             </div>
 
             <div className="flex items-center gap-5">
