@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
-import AdminEvents from "../components/admin/AdminEvents";
-import AdminArtists from "../components/admin/AdminArtists";
-import AdminGallery from "../components/admin/AdminGallery";
-import AdminTickets from "../components/admin/AdminTickets";
-import { Calendar, Music, Camera, Ticket, LayoutDashboard } from "lucide-react";
+import AdminEvents from "@/components/admin/AdminEvents";
+import AdminArtists from "@/components/admin/AdminArtists";
+import AdminGallery from "@/components/admin/AdminGallery";
+import AdminTickets from "@/components/admin/AdminTickets";
+import { Calendar, Music, Camera, Ticket } from "lucide-react";
 
 const LOGO_RED = "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/user_69abf6aff758a16386edeb04/0e73ec46b_IMG-20260121-WA0031.jpg";
 
