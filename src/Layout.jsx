@@ -34,7 +34,7 @@ export default function Layout({ children, currentPageName }) {
         <div className="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between h-16">
           {/* Logo */}
           <Link to={createPageUrl("Home")} className="flex items-center gap-2">
-            <img src={LOGO_GOLD} alt="Pachá" className="h-10 w-auto object-contain" style={{ filter: "drop-shadow(0 0 8px rgba(201,168,76,0.3))" }} />
+            <img src={LOGO_RED} alt="Pachá" className="h-10 w-auto object-contain" />
           </Link>
 
           {/* Desktop Nav */}
@@ -92,7 +92,7 @@ export default function Layout({ children, currentPageName }) {
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="flex flex-col items-center md:items-start gap-3">
-              <img src={LOGO_GOLD} alt="Pachá" className="h-12 w-auto object-contain" />
+              <img src={LOGO_RED} alt="Pachá" className="h-12 w-auto object-contain" />
               <p className="text-gray-500 text-sm">Club Premium · Multigenero</p>
             </div>
             <div className="flex items-center gap-6">
