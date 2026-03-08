@@ -20,10 +20,11 @@ export default function Home() {
   const featured = upcoming.find(e => e.is_featured) || upcoming[0];
 
   if (loading) return (
-    <div className="min-h-screen flex items-center justify-center" style={{ background: "#0A0A0A" }}>
+    <div className="min-h-screen flex items-center justify-center" style={{ background: "#070707" }}>
       <div className="text-center">
-        <div className="w-12 h-12 rounded-full border-2 border-t-yellow-500 border-gray-800 animate-spin mx-auto mb-4"></div>
-        <p className="text-gray-500 text-sm tracking-widest uppercase">Cargando eventos</p>
+        <div className="w-12 h-12 rounded-full animate-spin mx-auto mb-4"
+          style={{ border: "2px solid #1a1a1a", borderTop: "2px solid #E8001D" }} />
+        <p className="text-gray-600 text-xs tracking-widest uppercase">Cargando eventos</p>
       </div>
     </div>
   );
