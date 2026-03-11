@@ -26,7 +26,7 @@ export default function Menu() {
     });
   }, []);
 
-  const available = items.filter(i => i.is_available);
+  const available = items.filter(i => i.is_available !== false);
   const categories = [...new Set(available.map(i => i.category))];
   const featured = available.filter(i => i.is_featured);
 
