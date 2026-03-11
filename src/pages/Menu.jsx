@@ -35,7 +35,7 @@ export default function Menu() {
   }, []);
 
   const available = items.filter(i => i.is_available !== false);
-  const categories = [...new Set(available.map(i => i.category))];
+  const categories = CATEGORY_ORDER.filter(cat => available.some(i => i.category === cat));
   const featured = available.filter(i => i.is_featured);
 
   const filtered = activeCategory === "all"
