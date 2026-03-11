@@ -20,6 +20,8 @@ export default function EventDetail() {
         setEvent(data.find(e => e.id === id) || null);
         setLoading(false);
       });
+    } else {
+      setLoading(false);
     }
   }, []);
 
