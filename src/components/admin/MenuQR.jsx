@@ -51,6 +51,11 @@ export default function MenuQR() {
             {copied ? <Check size={14} /> : <Copy size={14} />}
             {copied ? "¡Copiado!" : "Copiar enlace"}
           </button>
+          <button onClick={downloadQR}
+            className="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg text-sm font-bold transition-all"
+            style={{ background: "rgba(201,168,76,0.12)", color: "#C9A84C", border: "1px solid rgba(201,168,76,0.3)" }}>
+            <Download size={14} /> Descargar QR
+          </button>
           <a href={menuUrl} target="_blank" rel="noopener noreferrer"
             className="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg text-sm font-bold"
             style={{ background: "rgba(232,0,29,0.15)", color: "#E8001D", border: "1px solid rgba(232,0,29,0.3)" }}>
