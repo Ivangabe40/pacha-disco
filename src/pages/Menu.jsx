@@ -4,14 +4,22 @@ import { Wine, Star, ChevronDown } from "lucide-react";
 
 const LOGO_RED = "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/user_69abf6aff758a16386edeb04/0e73ec46b_IMG-20260121-WA0031.jpg";
 
+const CATEGORY_ORDER = [
+  "Sin Alcohol", "Vodkas", "Vermuts", "Cervezas", "Gin",
+  "Clásicos", "Whiskies", "Bottle Service", "Espumosos", "Sugerencias Verano"
+];
+
 const CATEGORY_ICONS = {
-  "Tragos Clásicos": "🍸",
-  "Tragos de la Casa": "🍹",
-  "Shots": "🥃",
-  "Cervezas": "🍺",
-  "Vinos & Espumantes": "🍷",
   "Sin Alcohol": "🥤",
-  "Combos": "✨",
+  "Vodkas": "🍹",
+  "Vermuts": "🍊",
+  "Cervezas": "🍺",
+  "Gin": "🌿",
+  "Clásicos": "🍸",
+  "Whiskies": "🥃",
+  "Bottle Service": "🍾",
+  "Espumosos": "🥂",
+  "Sugerencias Verano": "☀️",
 };
 
 export default function Menu() {
