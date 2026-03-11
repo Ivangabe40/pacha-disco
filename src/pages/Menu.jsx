@@ -125,33 +125,34 @@ export default function Menu() {
       </div>
 
       {/* Menu Items */}
-      <div className="max-w-2xl mx-auto px-4 pb-20 space-y-8">
+      <div className="max-w-2xl mx-auto px-4 pb-20 space-y-10">
         {Object.entries(grouped).map(([category, catItems]) => (
           <div key={category}>
             {/* Category Header */}
-            <div className="flex items-center gap-3 mb-4">
-              <span className="text-2xl">{CATEGORY_ICONS[category]}</span>
-              <h2 className="text-lg font-black text-white uppercase tracking-widest"
-                style={{ fontFamily: "'Playfair Display', serif" }}>
+            <div className="flex items-center gap-3 mb-5">
+              <span className="text-xl">{CATEGORY_ICONS[category]}</span>
+              <h2 className="text-base font-black text-white uppercase tracking-widest"
+                style={{ fontFamily: "'Playfair Display', serif", letterSpacing: "0.15em" }}>
                 {category}
               </h2>
-              <div className="flex-1 h-px" style={{ background: "linear-gradient(90deg, rgba(232,0,29,0.3), transparent)" }} />
+              <div className="flex-1 h-px" style={{ background: "linear-gradient(90deg, rgba(232,0,29,0.4), transparent)" }} />
             </div>
 
             {/* Items */}
-            <div className="space-y-2">
-              {catItems.map(item => (
+            <div className="space-y-1">
+              {catItems.map((item, idx) => (
                 <div key={item.id}
-                  className="flex items-center justify-between gap-4 py-3 px-4 rounded-xl transition-all"
-                  style={{ background: "#0f0f0f", border: "1px solid #1a1a1a" }}
-                  onMouseEnter={e => e.currentTarget.style.borderColor = "rgba(232,0,29,0.25)"}
-                  onMouseLeave={e => e.currentTarget.style.borderColor = "#1a1a1a"}>
-                  <div className="flex-1">
-                    <div className="text-white font-semibold text-sm">{item.name}</div>
-                    {item.description && <div className="text-gray-500 text-xs mt-0.5">{item.description}</div>}
+                  className="flex items-baseline justify-between gap-3 py-3 px-1"
+                  style={{ borderBottom: idx < catItems.length - 1 ? "1px solid rgba(255,255,255,0.04)" : "none" }}>
+                  <div className="flex-1 min-w-0">
+                    <span className="text-white font-medium text-sm leading-tight">{item.name}</span>
+                    {item.description && <p className="text-gray-600 text-xs mt-0.5 leading-snug">{item.description}</p>}
                   </div>
-                  <div className="text-base font-black shrink-0" style={{ color: "#C9A84C" }}>
-                    ${item.price.toLocaleString()}
+                  <div className="flex items-center gap-1.5 shrink-0">
+                    <div className="flex-1 border-b border-dotted border-gray-800 min-w-8" style={{ height: "1px", alignSelf: "center" }} />
+                    <span className="text-sm font-bold tabular-nums" style={{ color: "#C9A84C" }}>
+                      ${item.price.toLocaleString()}
+                    </span>
                   </div>
                 </div>
               ))}
