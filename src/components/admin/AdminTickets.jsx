@@ -46,54 +46,84 @@ export default function AdminTickets() {
         <div className="flex justify-center py-12">
           <div className="w-8 h-8 rounded-full border-2 border-t-yellow-500 border-gray-800 animate-spin"></div>
         </div>
+      ) : filtered.length === 0 ? (
+        <div className="text-center py-12 text-gray-600">No se encontraron entradas</div>
       ) : (
-        <div className="overflow-x-auto rounded-xl" style={{ border: "1px solid #222" }}>
-          <table className="w-full text-sm">
-            <thead>
-              <tr style={{ background: "#111", borderBottom: "1px solid #222" }}>
-                {["Código", "Comprador", "Evento", "Tipo", "Cant.", "Total", "Estado", "Fecha"].map(h => (
-                  <th key={h} className="text-left px-4 py-3 text-xs text-gray-500 uppercase tracking-wider">{h}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {filtered.map((t, i) => (
-                <tr key={t.id} style={{ background: i % 2 === 0 ? "#0d0d0d" : "#111", borderBottom: "1px solid #1a1a1a" }}>
-                  <td className="px-4 py-3 font-mono text-xs" style={{ color: "#C9A84C" }}>{t.ticket_code}</td>
-                  <td className="px-4 py-3">
-                    <div className="text-white font-medium">{t.buyer_name}</div>
-                    <div className="text-gray-500 text-xs">{t.buyer_email}</div>
-                  </td>
-                  <td className="px-4 py-3 text-gray-300 max-w-xs truncate">{t.event_title}</td>
-                  <td className="px-4 py-3">
-                    <span className="capitalize px-2 py-0.5 rounded text-xs"
-                      style={t.ticket_type === "anticipada"
-                        ? { background: "rgba(201,168,76,0.15)", color: "#C9A84C" }
-                        : { background: "rgba(136,136,255,0.15)", color: "#8888FF" }}>
-                      {t.ticket_type}
-                    </span>
-                  </td>
-                  <td className="px-4 py-3 text-white text-center">{t.quantity}</td>
-                  <td className="px-4 py-3 font-semibold" style={{ color: "#C9A84C" }}>
-                    {t.total_amount ? `$${t.total_amount.toLocaleString()}` : "—"}
-                  </td>
-                  <td className="px-4 py-3">
-                    <div className="flex items-center gap-1.5">
-                      {statusIcon(t.status)}
-                      <span className="capitalize text-gray-300">{t.status}</span>
-                    </div>
-                  </td>
-                  <td className="px-4 py-3 text-gray-500 text-xs">
-                    {t.created_date ? format(new Date(t.created_date), "d MMM HH:mm", { locale: es }) : ""}
-                  </td>
+        <>
+          {/* Desktop table */}
+          <div className="hidden md:block overflow-x-auto rounded-xl" style={{ border: "1px solid #222" }}>
+            <table className="w-full text-sm">
+              <thead>
+                <tr style={{ background: "#111", borderBottom: "1px solid #222" }}>
+                  {["Código", "Comprador", "Evento", "Tipo", "Cant.", "Total", "Estado", "Fecha"].map(h => (
+                    <th key={h} className="text-left px-4 py-3 text-xs text-gray-500 uppercase tracking-wider">{h}</th>
+                  ))}
                 </tr>
-              ))}
-              {filtered.length === 0 && (
-                <tr><td colSpan={8} className="px-4 py-12 text-center text-gray-600">No se encontraron entradas</td></tr>
-              )}
-            </tbody>
-          </table>
-        </div>
+              </thead>
+              <tbody>
+                {filtered.map((t, i) => (
+                  <tr key={t.id} style={{ background: i % 2 === 0 ? "#0d0d0d" : "#111", borderBottom: "1px solid #1a1a1a" }}>
+                    <td className="px-4 py-3 font-mono text-xs" style={{ color: "#C9A84C" }}>{t.ticket_code}</td>
+                    <td className="px-4 py-3">
+                      <div className="text-white font-medium">{t.buyer_name}</div>
+                      <div className="text-gray-500 text-xs">{t.buyer_email}</div>
+                    </td>
+                    <td className="px-4 py-3 text-gray-300 max-w-xs truncate">{t.event_title}</td>
+                    <td className="px-4 py-3">
+                      <span className="capitalize px-2 py-0.5 rounded text-xs"
+                        style={t.ticket_type === "anticipada"
+                          ? { background: "rgba(201,168,76,0.15)", color: "#C9A84C" }
+                          : { background: "rgba(136,136,255,0.15)", color: "#8888FF" }}>
+                        {t.ticket_type}
+                      </span>
+                    </td>
+                    <td className="px-4 py-3 text-white text-center">{t.quantity}</td>
+                    <td className="px-4 py-3 font-semibold" style={{ color: "#C9A84C" }}>
+                      {t.total_amount ? `$${t.total_amount.toLocaleString()}` : "—"}
+                    </td>
+                    <td className="px-4 py-3">
+                      <div className="flex items-center gap-1.5">
+                        {statusIcon(t.status)}
+                        <span className="capitalize text-gray-300">{t.status}</span>
+                      </div>
+                    </td>
+                    <td className="px-4 py-3 text-gray-500 text-xs">
+                      {t.created_date ? format(new Date(t.created_date), "d MMM HH:mm", { locale: es }) : ""}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Mobile cards */}
+          <div className="md:hidden space-y-3">
+            {filtered.map(t => (
+              <div key={t.id} className="p-4 rounded-xl space-y-2" style={{ background: "#111", border: "1px solid #222" }}>
+                <div className="flex items-center justify-between">
+                  <span className="font-mono text-xs font-bold" style={{ color: "#C9A84C" }}>{t.ticket_code}</span>
+                  <div className="flex items-center gap-1.5">{statusIcon(t.status)}<span className="capitalize text-gray-300 text-xs">{t.status}</span></div>
+                </div>
+                <div>
+                  <div className="text-white font-medium text-sm">{t.buyer_name}</div>
+                  <div className="text-gray-500 text-xs">{t.buyer_email}</div>
+                </div>
+                <div className="text-gray-400 text-xs truncate">{t.event_title}</div>
+                <div className="flex items-center justify-between">
+                  <span className="capitalize px-2 py-0.5 rounded text-xs"
+                    style={t.ticket_type === "anticipada"
+                      ? { background: "rgba(201,168,76,0.15)", color: "#C9A84C" }
+                      : { background: "rgba(136,136,255,0.15)", color: "#8888FF" }}>
+                    {t.ticket_type} · {t.quantity}x
+                  </span>
+                  <span className="font-semibold text-sm" style={{ color: "#C9A84C" }}>
+                    {t.total_amount ? `$${t.total_amount.toLocaleString()}` : "Pago en puerta"}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </>
       )}
     </div>
   );
