@@ -30,16 +30,14 @@ export default function AdminTickets() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <h2 className="text-2xl font-bold text-white" style={{ fontFamily: "'Playfair Display', serif" }}>Entradas Vendidas</h2>
-          <p className="text-sm mt-1" style={{ color: "#C9A84C" }}>Total recaudado: ${total.toLocaleString()}</p>
-        </div>
+      <div className="mb-6">
+        <h2 className="text-2xl font-bold text-white mb-1" style={{ fontFamily: "'Playfair Display', serif" }}>Entradas Vendidas</h2>
+        <p className="text-sm mb-4" style={{ color: "#C9A84C" }}>Total recaudado: ${total.toLocaleString()}</p>
         <div className="relative">
           <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" />
           <input value={search} onChange={e => setSearch(e.target.value)}
-            placeholder="Buscar por nombre, email, código..."
-            className="pl-9 pr-4 py-2 rounded-xl text-white text-sm outline-none w-64"
+            placeholder="Buscar por nombre, email o código..."
+            className="pl-9 pr-4 py-2.5 rounded-xl text-white text-sm outline-none w-full"
             style={{ background: "#111", border: "1px solid #333" }} />
         </div>
       </div>
