@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { QrCode, ExternalLink, Copy, Check } from "lucide-react";
+import { QrCode, ExternalLink, Copy, Check, Download } from "lucide-react";
 import { createPageUrl } from "@/utils";
 
 export default function MenuQR() {
