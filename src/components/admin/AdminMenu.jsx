@@ -60,6 +60,48 @@ export default function AdminMenu() {
     loadItems();
   };
 
+  const handleImportExcel = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    setImporting(true);
+    const { file_url } = await base44.integrations.Core.UploadFile({ file });
+    const result = await base44.integrations.Core.ExtractDataFromUploadedFile({
+      file_url,
+      json_schema: {
+        type: "object",
+        properties: {
+          items: {
+            type: "array",
+            items: {
+              type: "object",
+              properties: {
+                name: { type: "string" },
+                description: { type: "string" },
+                price: { type: "number" },
+                category: { type: "string" },
+              }
+            }
+          }
+        }
+      }
+    });
+    if (result.status === "success" && result.output?.items?.length) {
+      const toCreate = result.output.items.map((item, idx) => ({
+        name: item.name || "Sin nombre",
+        description: item.description || "",
+        price: parseFloat(item.price) || 0,
+        category: CATEGORIES.includes(item.category) ? item.category : "Tragos Clásicos",
+        is_available: true,
+        is_featured: false,
+        sort_order: idx,
+      }));
+      await base44.entities.MenuItem.bulkCreate(toCreate);
+      loadItems();
+    }
+    setImporting(false);
+    e.target.value = "";
+  };
+
   const categories = [...new Set(items.map(i => i.category))];
   const filtered = activeCategory === "all" ? items : items.filter(i => i.category === activeCategory);
 
