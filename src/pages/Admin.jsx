@@ -15,7 +15,7 @@ const tabs = [
   { id: "tickets", label: "Entradas", icon: Ticket },
   { id: "artists", label: "Artistas", icon: Music },
   { id: "gallery", label: "Galería", icon: Camera },
-  { id: "menu", label: "Carta Tragos", icon: Wine },
+  { id: "menu", label: "Carta", icon: Wine },
 ];
 
 export default function Admin() {
