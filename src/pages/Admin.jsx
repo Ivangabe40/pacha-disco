@@ -37,38 +37,37 @@ export default function Admin() {
       {/* Admin Header */}
       <div className="sticky top-16 z-40 border-b" style={{ background: "#080808", borderColor: "#1a1a1a" }}>
         <div className="max-w-7xl mx-auto px-4 md:px-8">
-          <div className="flex items-center gap-4 py-4">
+          <div className="flex items-center gap-3 py-3">
             <img src={LOGO_RED} alt="Pachá Admin" className="h-8 object-contain" />
-            <div>
-              <h1 className="text-white font-bold text-lg" style={{ fontFamily: "'Playfair Display', serif" }}>Panel de Administración</h1>
-            </div>
+            <h1 className="text-white font-bold text-base md:text-lg" style={{ fontFamily: "'Playfair Display', serif" }}>Panel Admin</h1>
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-3 gap-4 pb-4">
+          <div className="grid grid-cols-3 gap-2 pb-3">
             {[
-              { label: "Eventos", value: stats.events, color: "#C9A84C" },
-              { label: "Entradas vendidas", value: stats.tickets, color: "#E8001D" },
-              { label: "Artistas", value: stats.artists, color: "#8888FF" },
+              { label: "Eventos", labelMd: "Eventos", value: stats.events, color: "#C9A84C" },
+              { label: "Entradas", labelMd: "Entradas vendidas", value: stats.tickets, color: "#E8001D" },
+              { label: "Artistas", labelMd: "Artistas", value: stats.artists, color: "#8888FF" },
             ].map(s => (
-              <div key={s.label} className="p-3 rounded-xl text-center" style={{ background: "#111", border: "1px solid #222" }}>
-                <div className="text-2xl font-bold" style={{ color: s.color }}>{s.value}</div>
-                <div className="text-xs text-gray-500 mt-0.5">{s.label}</div>
+              <div key={s.label} className="p-2 md:p-3 rounded-xl text-center" style={{ background: "#111", border: "1px solid #222" }}>
+                <div className="text-xl md:text-2xl font-bold" style={{ color: s.color }}>{s.value}</div>
+                <div className="text-xs text-gray-500 mt-0.5 hidden md:block">{s.labelMd}</div>
+                <div className="text-xs text-gray-500 mt-0.5 md:hidden">{s.label}</div>
               </div>
             ))}
           </div>
 
-          {/* Tabs */}
-          <div className="flex gap-1">
+          {/* Tabs - scrollable on mobile */}
+          <div className="flex gap-0.5 overflow-x-auto scrollbar-hide -mx-1 px-1">
             {tabs.map(t => {
               const Icon = t.icon;
               return (
                 <button key={t.id} onClick={() => setActiveTab(t.id)}
-                  className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium transition-colors rounded-t-lg"
+                  className="flex items-center gap-1.5 px-3 py-2.5 text-xs md:text-sm font-medium transition-colors rounded-t-lg shrink-0"
                   style={activeTab === t.id
                     ? { color: "#C9A84C", borderBottom: "2px solid #C9A84C", background: "rgba(201,168,76,0.05)" }
                     : { color: "#666" }}>
-                  <Icon size={14} />{t.label}
+                  <Icon size={13} /><span>{t.label}</span>
                 </button>
               );
             })}
