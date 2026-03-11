@@ -84,6 +84,18 @@ export default function Menu() {
             Carta de Tragos
           </h1>
           <p className="text-gray-500 text-sm mt-3 tracking-wider">Exclusivo · Mayores de edad</p>
+          {qrUrl && (
+            <div className="mt-6 flex flex-col items-center gap-3">
+              <div className="p-2 rounded-xl" style={{ background: "#0f0f0f", border: "1px solid #222" }}>
+                <img src={qrUrl} alt="QR Carta" className="w-28 h-28 rounded-lg" />
+              </div>
+              <button onClick={downloadQR}
+                className="flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold tracking-wider transition-all"
+                style={{ background: "#1a1a1a", color: "#C9A84C", border: "1px solid rgba(201,168,76,0.3)" }}>
+                <Download size={13} /> Descargar QR
+              </button>
+            </div>
+          )}
         </div>
       </div>
 
