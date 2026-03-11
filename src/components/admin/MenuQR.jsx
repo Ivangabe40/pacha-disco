@@ -18,6 +18,14 @@ export default function MenuQR() {
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const downloadQR = () => {
+    const link = document.createElement("a");
+    link.href = qrUrl;
+    link.download = "qr-carta-pacha.png";
+    link.target = "_blank";
+    link.click();
+  };
+
   return (
     <div className="p-6 rounded-2xl" style={{ background: "#0f0f0f", border: "1px solid #1e1e1e" }}>
       <div className="flex items-center gap-3 mb-5">
