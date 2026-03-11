@@ -14,6 +14,8 @@ export default function AdminMenu() {
   const [form, setForm] = useState(empty);
   const [saving, setSaving] = useState(false);
   const [activeCategory, setActiveCategory] = useState("all");
+  const [importing, setImporting] = useState(false);
+  const fileInputRef = useRef(null);
 
   useEffect(() => { loadItems(); }, []);
 
