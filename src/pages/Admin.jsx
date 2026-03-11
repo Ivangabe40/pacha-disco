@@ -6,7 +6,7 @@ import AdminGallery from "@/components/admin/AdminGallery";
 import AdminTickets from "@/components/admin/AdminTickets";
 import AdminMenu from "@/components/admin/AdminMenu";
 import MenuQR from "@/components/admin/MenuQR";
-import { Calendar, Music, Camera, Ticket, Wine } from "lucide-react";
+import { Calendar, Music, Camera, Ticket, Wine, ShieldOff } from "lucide-react";
 
 const LOGO_RED = "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/user_69abf6aff758a16386edeb04/0e73ec46b_IMG-20260121-WA0031.jpg";
 
@@ -21,8 +21,20 @@ const tabs = [
 export default function Admin() {
   const [activeTab, setActiveTab] = useState("events");
   const [stats, setStats] = useState({ events: 0, tickets: 0, artists: 0 });
+  const [user, setUser] = useState(null);
+  const [authLoading, setAuthLoading] = useState(true);
 
   useEffect(() => {
+    base44.auth.me().then(u => {
+      setUser(u);
+      setAuthLoading(false);
+    }).catch(() => {
+      setAuthLoading(false);
+    });
+  }, []);
+
+  useEffect(() => {
+    if (user?.role !== "admin") return;
     Promise.all([
       base44.entities.Event.list(),
       base44.entities.Ticket.list(),
@@ -30,7 +42,28 @@ export default function Admin() {
     ]).then(([events, tickets, artists]) => {
       setStats({ events: events.length, tickets: tickets.length, artists: artists.length });
     });
-  }, []);
+  }, [user]);
+
+  if (authLoading) return (
+    <div className="min-h-screen flex items-center justify-center" style={{ background: "#070707" }}>
+      <div className="w-10 h-10 rounded-full animate-spin" style={{ border: "2px solid #1a1a1a", borderTop: "2px solid #E8001D" }} />
+    </div>
+  );
+
+  if (!user || user.role !== "admin") return (
+    <div className="min-h-screen flex flex-col items-center justify-center gap-6 px-4" style={{ background: "#070707" }}>
+      <ShieldOff size={48} style={{ color: "#E8001D", opacity: 0.6 }} />
+      <div className="text-center">
+        <h2 className="text-2xl font-bold text-white mb-2" style={{ fontFamily: "'Playfair Display', serif" }}>Acceso Restringido</h2>
+        <p className="text-gray-500 text-sm">Esta sección es solo para administradores.</p>
+      </div>
+      <button onClick={() => base44.auth.redirectToLogin(window.location.href)}
+        className="px-6 py-3 rounded-lg text-sm font-bold text-white"
+        style={{ background: "#E8001D" }}>
+        Iniciar Sesión
+      </button>
+    </div>
+  );
 
   return (
     <div style={{ background: "#0A0A0A", minHeight: "100vh" }}>

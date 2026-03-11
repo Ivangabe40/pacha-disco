@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { base44 } from "@/api/base44Client";
-import { Plus, Pencil, Trash2, Star, X, Check, Wine } from "lucide-react";
+import { Plus, Pencil, Trash2, Star, X, Check, Wine, Upload, Loader2 } from "lucide-react";
 
 const CATEGORIES = ["Tragos Clásicos", "Tragos de la Casa", "Shots", "Cervezas", "Vinos & Espumantes", "Sin Alcohol", "Combos"];
 
