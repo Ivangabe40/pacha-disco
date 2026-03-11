@@ -20,7 +20,7 @@ export default function Menu() {
   const [activeCategory, setActiveCategory] = useState("all");
 
   useEffect(() => {
-    base44.entities.MenuItem.filter({ is_available: true }, "sort_order").then(data => {
+    base44.entities.MenuItem.list("sort_order").then(data => {
       setItems(data);
       setLoading(false);
     });
