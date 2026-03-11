@@ -26,6 +26,20 @@ export default function Menu() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState("all");
+  const [qrUrl, setQrUrl] = useState("");
+
+  useEffect(() => {
+    const menuUrl = encodeURIComponent(window.location.href.split("?")[0]);
+    setQrUrl(`https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${menuUrl}&color=E8001D&bgcolor=070707&format=png&qzone=2`);
+  }, []);
+
+  const downloadQR = () => {
+    const link = document.createElement("a");
+    link.href = qrUrl;
+    link.download = "qr-carta-pacha.png";
+    link.target = "_blank";
+    link.click();
+  };
 
   useEffect(() => {
     base44.entities.MenuItem.list("sort_order").then(data => {
