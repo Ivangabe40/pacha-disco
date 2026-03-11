@@ -5,7 +5,7 @@ import { createPageUrl } from "@/utils";
 export default function MenuQR() {
   const [copied, setCopied] = useState(false);
   const [qrUrl, setQrUrl] = useState("");
-  const menuUrl = `${window.location.origin}${window.location.pathname}#/${createPageUrl("Menu")}`;
+  const menuUrl = `${window.location.origin}/${createPageUrl("Menu")}`;
 
   useEffect(() => {
     const url = encodeURIComponent(menuUrl);

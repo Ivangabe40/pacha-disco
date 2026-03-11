@@ -43,7 +43,7 @@ export default function HeroEvent({ event }) {
           </div>
 
           {/* Title */}
-          <h1 className="text-5xl md:text-8xl font-black text-white mb-6 leading-none uppercase tracking-tight"
+          <h1 className="text-4xl sm:text-6xl md:text-8xl font-black text-white mb-6 leading-none uppercase tracking-tight"
             style={{ fontFamily: "'Playfair Display', serif", textShadow: "0 0 60px rgba(232,0,29,0.3)" }}>
             {event.title}
           </h1>
