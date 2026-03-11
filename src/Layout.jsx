@@ -9,6 +9,7 @@ const navLinks = [
   { label: "Eventos", page: "Home" },
   { label: "DJs & Artistas", page: "Artists" },
   { label: "Galería", page: "Gallery" },
+  { label: "Carta", page: "Menu" },
   { label: "Nosotros", page: "About" },
 ];
 
