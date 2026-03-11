@@ -116,11 +116,20 @@ export default function AdminMenu() {
             {items.length} productos
           </span>
         </div>
-        <button onClick={openNew}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-bold"
-          style={{ background: "#E8001D", color: "#fff" }}>
-          <Plus size={15} /> Agregar
-        </button>
+        <div className="flex items-center gap-2">
+          <input ref={fileInputRef} type="file" accept=".xlsx,.xls,.csv" className="hidden" onChange={handleImportExcel} />
+          <button onClick={() => fileInputRef.current?.click()} disabled={importing}
+            className="flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-bold"
+            style={{ background: "#1a1a1a", color: "#C9A84C", border: "1px solid #2a2a2a", opacity: importing ? 0.7 : 1 }}>
+            {importing ? <Loader2 size={15} className="animate-spin" /> : <Upload size={15} />}
+            {importing ? "Importando..." : "Importar Excel"}
+          </button>
+          <button onClick={openNew}
+            className="flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-bold"
+            style={{ background: "#E8001D", color: "#fff" }}>
+            <Plus size={15} /> Agregar
+          </button>
+        </div>
       </div>
 
       {/* Category filter */}
