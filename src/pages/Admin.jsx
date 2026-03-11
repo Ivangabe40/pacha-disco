@@ -15,7 +15,7 @@ const tabs = [
   { id: "tickets", label: "Entradas", icon: Ticket },
   { id: "artists", label: "Artistas", icon: Music },
   { id: "gallery", label: "Galería", icon: Camera },
-  { id: "menu", label: "Carta", icon: Wine },
+  { id: "menu", label: "Carta Tragos", icon: Wine },
 ];
 
 export default function Admin() {
@@ -83,8 +83,8 @@ export default function Admin() {
         {activeTab === "artists" && <AdminArtists />}
         {activeTab === "gallery" && <AdminGallery />}
         {activeTab === "menu" && (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div className="lg:col-span-2"><AdminMenu /></div>
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="md:col-span-2"><AdminMenu /></div>
             <div><MenuQR /></div>
           </div>
         )}
