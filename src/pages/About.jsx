@@ -59,9 +59,14 @@ export default function About() {
              damianrodriguez432@gmail.com
             </a>
             <a href="https://www.instagram.com/pachaoficialok" target="_blank" rel="noopener noreferrer"
-              className="px-8 py-3 rounded-xl font-semibold text-sm tracking-wider uppercase"
-              style={{ border: "1px solid #C9A84C", color: "#C9A84C" }}>
-              @pachaoficialok
+             className="px-8 py-3 rounded-xl font-semibold text-sm tracking-wider uppercase"
+             style={{ border: "1px solid #C9A84C", color: "#C9A84C" }}>
+             @pachaoficialok
+            </a>
+            <a href="https://wa.me/5493468546935" target="_blank" rel="noopener noreferrer"
+             className="px-8 py-3 rounded-xl font-semibold text-sm tracking-wider uppercase"
+             style={{ border: "1px solid #25D366", color: "#25D366" }}>
+             WhatsApp
             </a>
           </div>
         </div>
