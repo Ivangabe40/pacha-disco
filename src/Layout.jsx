@@ -117,6 +117,10 @@ export default function Layout({ children, currentPageName }) {
               <img src={LOGO_RED} alt="Pachá" className="h-12 w-auto object-contain"
                 style={{ filter: "drop-shadow(0 0 10px rgba(232,0,29,0.4))" }} />
               <p className="text-gray-600 text-xs tracking-widest uppercase">Pachá Night Club · Exclusivo Mayores</p>
+              <a href="https://maps.app.goo.gl/outiaSZFTh14BhGK8" target="_blank" rel="noopener noreferrer"
+                className="flex items-center gap-1.5 text-gray-600 hover:text-gray-400 text-xs transition-colors mt-1">
+                <MapPin size={11} /> Ver en Google Maps
+              </a>
             </div>
 
             <div className="flex items-center gap-5">
