@@ -84,7 +84,7 @@ export default function About() {
             <a href="mailto:damianrodriguez432@gmail.com"
              className="px-8 py-3 rounded-xl font-semibold text-sm tracking-wider uppercase"
              style={{ background: "linear-gradient(135deg, #C9A84C 0%, #E8C97A 50%, #C9A84C 100%)", color: "#0A0A0A" }}>
-             damianrodriguez432@gmail.com
+             Email
             </a>
             <a href="https://www.instagram.com/pachaoficialok" target="_blank" rel="noopener noreferrer"
              className="px-8 py-3 rounded-xl font-semibold text-sm tracking-wider uppercase"
