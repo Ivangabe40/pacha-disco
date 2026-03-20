@@ -58,7 +58,7 @@ export default function About() {
              style={{ background: "linear-gradient(135deg, #C9A84C 0%, #E8C97A 50%, #C9A84C 100%)", color: "#0A0A0A" }}>
              damianrodriguez432@gmail.com
             </a>
-            <a href="https://instagram.com"
+            <a href="https://www.instagram.com/pachaoficialok" target="_blank" rel="noopener noreferrer"
               className="px-8 py-3 rounded-xl font-semibold text-sm tracking-wider uppercase"
               style={{ border: "1px solid #C9A84C", color: "#C9A84C" }}>
               @pacha.oficial
