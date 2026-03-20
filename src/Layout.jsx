@@ -134,6 +134,13 @@ export default function Layout({ children, currentPageName }) {
                 onMouseLeave={e => e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"}>
                 <Facebook size={15} className="text-gray-500" />
               </a>
+              <a href="https://wa.me/5493468546935" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"
+                className="w-9 h-9 flex items-center justify-center rounded-full transition-all"
+                style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}
+                onMouseEnter={e => e.currentTarget.style.borderColor = "rgba(37,211,102,0.5)"}
+                onMouseLeave={e => e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"}>
+                <MessageCircle size={15} className="text-gray-500" />
+              </a>
               <a href="#" aria-label="Music"
                 className="w-9 h-9 flex items-center justify-center rounded-full transition-all"
                 style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}
