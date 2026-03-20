@@ -11,6 +11,25 @@ export default function EventDetail() {
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  const shareUrl = window.location.href;
+
+  const copyLink = () => {
+    navigator.clipboard.writeText(shareUrl);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const shareWhatsApp = () => {
+    const text = event ? `🎉 *${event.title}* — ¡No te lo pierdas! Comprá tu entrada acá: ${shareUrl}` : shareUrl;
+    window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, "_blank");
+  };
+
+  const shareTwitter = () => {
+    const text = event ? `🎉 ${event.title} — ¡No te lo pierdas! 🎶` : "";
+    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(shareUrl)}`, "_blank");
+  };
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
