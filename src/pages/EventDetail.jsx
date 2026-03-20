@@ -76,6 +76,27 @@ export default function EventDetail() {
           <h1 className="text-4xl md:text-6xl font-bold text-white leading-tight" style={{ fontFamily: "'Playfair Display', serif" }}>
             {event.title}
           </h1>
+          {/* Share buttons */}
+          <div className="flex flex-wrap gap-3 mt-6">
+            <span className="flex items-center gap-1.5 text-gray-500 text-xs uppercase tracking-wider">
+              <Share2 size={12} /> Compartir
+            </span>
+            <button onClick={shareWhatsApp}
+              className="flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold transition-all"
+              style={{ background: "rgba(37,211,102,0.12)", border: "1px solid rgba(37,211,102,0.35)", color: "#25D366" }}>
+              WhatsApp
+            </button>
+            <button onClick={shareTwitter}
+              className="flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold transition-all"
+              style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.15)", color: "#ccc" }}>
+              X / Twitter
+            </button>
+            <button onClick={copyLink}
+              className="flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold transition-all"
+              style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.15)", color: "#ccc" }}>
+              {copied ? <><Check size={12} /> ¡Copiado!</> : <><Copy size={12} /> Copiar link</>}
+            </button>
+          </div>
         </div>
       </div>
 
