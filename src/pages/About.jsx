@@ -61,7 +61,7 @@ export default function About() {
             <a href="https://www.instagram.com/pachaoficialok" target="_blank" rel="noopener noreferrer"
               className="px-8 py-3 rounded-xl font-semibold text-sm tracking-wider uppercase"
               style={{ border: "1px solid #C9A84C", color: "#C9A84C" }}>
-              @pacha.oficial
+              @pachaoficialok
             </a>
           </div>
         </div>
