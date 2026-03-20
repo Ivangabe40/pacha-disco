@@ -53,10 +53,10 @@ export default function About() {
           <h2 className="text-3xl font-bold text-white mb-4" style={{ fontFamily: "'Playfair Display', serif" }}>Contacto</h2>
           <p className="text-gray-400 mb-6">Para reservas VIP, eventos privados o prensa:</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="mailto:info@pacha.com"
-              className="px-8 py-3 rounded-xl font-semibold text-sm tracking-wider uppercase"
-              style={{ background: "linear-gradient(135deg, #C9A84C 0%, #E8C97A 50%, #C9A84C 100%)", color: "#0A0A0A" }}>
-              info@pacha.com
+            <a href="mailto:damianrodriguez432@gmail.com"
+             className="px-8 py-3 rounded-xl font-semibold text-sm tracking-wider uppercase"
+             style={{ background: "linear-gradient(135deg, #C9A84C 0%, #E8C97A 50%, #C9A84C 100%)", color: "#0A0A0A" }}>
+             damianrodriguez432@gmail.com
             </a>
             <a href="https://instagram.com"
               className="px-8 py-3 rounded-xl font-semibold text-sm tracking-wider uppercase"
