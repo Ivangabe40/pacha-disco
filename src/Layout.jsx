@@ -120,7 +120,7 @@ export default function Layout({ children, currentPageName }) {
             </div>
 
             <div className="flex items-center gap-5">
-              <a href="#" aria-label="Instagram"
+              <a href="https://www.instagram.com/pachaoficialok" target="_blank" rel="noopener noreferrer" aria-label="Instagram"
                 className="w-9 h-9 flex items-center justify-center rounded-full transition-all"
                 style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}
                 onMouseEnter={e => e.currentTarget.style.borderColor = "rgba(232,0,29,0.5)"}
