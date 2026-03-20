@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
-import { Calendar, Clock, Music, Users, Ticket, ChevronLeft, MapPin } from "lucide-react";
+import { Calendar, Clock, Music, Users, Ticket, ChevronLeft, Share2, Copy, Check } from "lucide-react";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 import { Link } from "react-router-dom";
