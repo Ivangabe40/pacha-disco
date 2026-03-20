@@ -48,6 +48,34 @@ export default function About() {
           </div>
         </div>
 
+        {/* Map */}
+        <div className="mb-10 rounded-2xl overflow-hidden" style={{ border: "1px solid #222" }}>
+          <div className="px-6 pt-6 pb-4" style={{ background: "#111" }}>
+            <h2 className="text-2xl font-bold text-white" style={{ fontFamily: "'Playfair Display', serif" }}>¿Dónde estamos?</h2>
+            <p className="text-gray-500 text-sm mt-1">Encontranos en Google Maps</p>
+          </div>
+          <div className="relative w-full" style={{ height: "360px" }}>
+            <iframe
+              title="Ubicación Pachá"
+              src="https://www.google.com/maps?q=-33.0077,-60.6635&hl=es&z=16&output=embed"
+              width="100%"
+              height="100%"
+              style={{ border: 0, filter: "invert(90%) hue-rotate(180deg) saturate(0.8)" }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          </div>
+          <div className="px-6 py-4 flex items-center justify-between" style={{ background: "#111" }}>
+            <span className="text-gray-500 text-sm">Pachá Night Club · Exclusivo Mayores</span>
+            <a href="https://maps.app.goo.gl/outiaSZFTh14BhGK8" target="_blank" rel="noopener noreferrer"
+              className="text-xs font-semibold px-4 py-2 rounded-lg transition-all"
+              style={{ background: "rgba(232,0,29,0.15)", border: "1px solid rgba(232,0,29,0.35)", color: "#E8001D" }}>
+              Abrir en Maps →
+            </a>
+          </div>
+        </div>
+
         {/* Contact */}
         <div className="text-center p-10 rounded-2xl" style={{ background: "#111", border: "1px solid #222" }}>
           <h2 className="text-3xl font-bold text-white mb-4" style={{ fontFamily: "'Playfair Display', serif" }}>Contacto</h2>
