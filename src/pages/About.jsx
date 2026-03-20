@@ -7,7 +7,8 @@ export default function About() {
       <div className="relative py-32 px-4 overflow-hidden">
         <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, rgba(201,168,76,0.07) 0%, transparent 70%)" }} />
         <div className="relative z-10 max-w-3xl mx-auto text-center">
-          <img src={LOGO_GOLD} alt="Pachá" className="h-20 mx-auto mb-8 object-contain" />
+          <img src={LOGO_GOLD} alt="Pachá" className="h-36 mx-auto mb-8 object-contain"
+            style={{ filter: "drop-shadow(0 0 20px rgba(232,0,29,0.7)) drop-shadow(0 0 50px rgba(232,0,29,0.4))" }} />
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6" style={{ fontFamily: "'Playfair Display', serif" }}>
             Nuestra Historia
           </h1>
