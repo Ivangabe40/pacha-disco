@@ -3,7 +3,7 @@ import { createPageUrl } from "@/utils";
 import { useState, useEffect } from "react";
 import { Menu, X, Instagram, Facebook, Music2, MessageCircle, MapPin } from "lucide-react";
 
-const LOGO_RED = "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/user_69abf6aff758a16386edeb04/0e73ec46b_IMG-20260121-WA0031.jpg";
+const LOGO_RED = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/a5ee03f15_1774650185102.png";
 
 const navLinks = [
   { label: "Eventos", page: "Home" },
