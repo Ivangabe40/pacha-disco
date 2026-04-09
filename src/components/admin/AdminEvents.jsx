@@ -7,7 +7,7 @@ import { es } from "date-fns/locale";
 const emptyEvent = {
   title: "", date: "", description: "", genres: "", djs: "",
   ticket_price: "", ticket_price_door: "", capacity: "",
-  flyer_url: "", status: "activo", is_featured: false
+  flyer_url: "", video_url: "", status: "activo", is_featured: false
 };
 
 export default function AdminEvents() {
@@ -24,11 +24,20 @@ export default function AdminEvents() {
   const openNew = () => { setForm(emptyEvent); setEditing(null); setShowForm(true); };
   const openEdit = (e) => { setForm({ ...e, ticket_price: e.ticket_price || "", ticket_price_door: e.ticket_price_door || "", capacity: e.capacity || "" }); setEditing(e); setShowForm(true); };
 
+  const [uploadingVideo, setUploadingVideo] = useState(false);
+
   const handleFlyer = async (file) => {
     setUploading(true);
     const { file_url } = await base44.integrations.Core.UploadFile({ file });
     setForm(f => ({ ...f, flyer_url: file_url }));
     setUploading(false);
+  };
+
+  const handleVideo = async (file) => {
+    setUploadingVideo(true);
+    const { file_url } = await base44.integrations.Core.UploadFile({ file });
+    setForm(f => ({ ...f, video_url: file_url }));
+    setUploadingVideo(false);
   };
 
   const handleSave = async () => {
@@ -137,7 +146,7 @@ export default function AdminEvents() {
             </div>
             {/* Flyer upload */}
             <div className="md:col-span-2">
-              <label className="text-xs text-gray-400 uppercase tracking-wider block mb-2">Flyer</label>
+              <label className="text-xs text-gray-400 uppercase tracking-wider block mb-2">Flyer (imagen)</label>
               <div className="flex items-start gap-4">
                 <label className="cursor-pointer flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium"
                   style={{ border: "1px solid #C9A84C", color: "#C9A84C" }}>
@@ -156,6 +165,29 @@ export default function AdminEvents() {
                   </div>
                 )}
               </div>
+            </div>
+            {/* Video flyer upload */}
+            <div className="md:col-span-2">
+              <label className="text-xs text-gray-400 uppercase tracking-wider block mb-2">Flyer en Video (opcional)</label>
+              <div className="flex items-start gap-4">
+                <label className="cursor-pointer flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium"
+                  style={{ border: "1px solid #E8001D", color: "#E8001D" }}>
+                  <Upload size={14} />
+                  {uploadingVideo ? "Subiendo..." : "Subir video"}
+                  <input type="file" accept="video/*" className="hidden"
+                    onChange={e => e.target.files[0] && handleVideo(e.target.files[0])} />
+                </label>
+                {form.video_url && (
+                  <div className="relative">
+                    <video src={form.video_url} className="h-20 rounded-lg object-cover" muted />
+                    <button onClick={() => setForm({ ...form, video_url: "" })}
+                      className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-red-600 text-white flex items-center justify-center text-xs">
+                      <X size={10} />
+                    </button>
+                  </div>
+                )}
+              </div>
+              {form.video_url && <p className="text-xs text-gray-600 mt-1">✓ Video cargado — se mostrará en lugar de la imagen</p>}
             </div>
             <div className="md:col-span-2 flex items-center gap-3">
               <input type="checkbox" id="featured" checked={form.is_featured} onChange={e => setForm({ ...form, is_featured: e.target.checked })}

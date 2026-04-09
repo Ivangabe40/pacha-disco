@@ -10,8 +10,15 @@ export default function HeroEvent({ event }) {
 
   return (
     <div className="relative w-full overflow-hidden scanlines" style={{ minHeight: "100vh" }}>
-      {/* Background image */}
-      {event.flyer_url ? (
+      {/* Background video or image */}
+      {event.video_url ? (
+        <video
+          src={event.video_url}
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ filter: "brightness(0.3) saturate(1.2)" }}
+          autoPlay loop muted playsInline
+        />
+      ) : event.flyer_url ? (
         <img
           src={event.flyer_url}
           alt={event.title}

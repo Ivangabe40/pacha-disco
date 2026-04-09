@@ -64,7 +64,10 @@ export default function EventDetail() {
     <div style={{ background: "#0A0A0A", minHeight: "100vh" }}>
       {/* Hero */}
       <div className="relative" style={{ minHeight: "60vh" }}>
-        {event.flyer_url && (
+        {event.video_url ? (
+          <video src={event.video_url} className="absolute inset-0 w-full h-full object-cover"
+            style={{ filter: "brightness(0.3)" }} autoPlay loop muted playsInline />
+        ) : event.flyer_url && (
           <img src={event.flyer_url} alt={event.title}
             className="absolute inset-0 w-full h-full object-cover" style={{ filter: "brightness(0.3)" }} />
         )}
@@ -103,11 +106,13 @@ export default function EventDetail() {
       {/* Content */}
       <div className="max-w-5xl mx-auto px-4 md:px-8 pb-20 -mt-4">
         <div className="grid md:grid-cols-3 gap-8">
-          {/* Left: Flyer */}
+          {/* Left: Flyer / Video */}
           <div className="md:col-span-1">
-            {event.flyer_url && (
+            {event.video_url ? (
+              <video src={event.video_url} className="w-full rounded-2xl shadow-2xl" autoPlay loop muted playsInline />
+            ) : event.flyer_url ? (
               <img src={event.flyer_url} alt={event.title} className="w-full rounded-2xl shadow-2xl" />
-            )}
+            ) : null}
           </div>
 
           {/* Right: Info */}

@@ -1,0 +1,70 @@
+{
+  "name": "Event",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Nombre del evento"
+    },
+    "date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Fecha y hora del evento"
+    },
+    "description": {
+      "type": "string",
+      "description": "Descripci\u00f3n del evento"
+    },
+    "flyer_url": {
+      "type": "string",
+      "description": "URL del flyer del evento"
+    },
+    "video_url": {
+      "type": "string",
+      "description": "URL del video flyer del evento"
+    },
+    "genres": {
+      "type": "string",
+      "description": "G\u00e9neros musicales"
+    },
+    "djs": {
+      "type": "string",
+      "description": "DJs / artistas del evento"
+    },
+    "ticket_price": {
+      "type": "number",
+      "description": "Precio entrada anticipada"
+    },
+    "ticket_price_door": {
+      "type": "number",
+      "description": "Precio en puerta"
+    },
+    "capacity": {
+      "type": "number",
+      "description": "Capacidad m\u00e1xima"
+    },
+    "tickets_sold": {
+      "type": "number",
+      "default": 0,
+      "description": "Entradas vendidas"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "activo",
+        "agotado",
+        "cancelado"
+      ],
+      "default": "activo"
+    },
+    "is_featured": {
+      "type": "boolean",
+      "default": false,
+      "description": "Evento destacado"
+    }
+  },
+  "required": [
+    "title",
+    "date"
+  ]
+}

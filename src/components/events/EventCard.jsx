@@ -12,9 +12,15 @@ export default function EventCard({ event }) {
 
   return (
     <div className="event-card rounded-xl overflow-hidden group cursor-pointer flex flex-col">
-      {/* Flyer */}
+      {/* Flyer / Video */}
       <div className="relative aspect-[3/4] overflow-hidden">
-        {event.flyer_url ? (
+        {event.video_url ? (
+          <video
+            src={event.video_url}
+            className="w-full h-full object-cover"
+            autoPlay loop muted playsInline
+          />
+        ) : event.flyer_url ? (
           <img
             src={event.flyer_url}
             alt={event.title}
