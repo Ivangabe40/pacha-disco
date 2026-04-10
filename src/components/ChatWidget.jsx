@@ -57,9 +57,26 @@ export default function ChatWidget() {
       {/* Floating button */}
       <button
         onClick={() => setOpen(o => !o)}
-        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-all duration-300"
-        style={{ background: "linear-gradient(135deg,#E8001D,#ff1a35)", boxShadow: "0 4px 24px rgba(232,0,29,0.5)" }}>
-        {open ? <X size={22} className="text-white" /> : <MessageCircle size={24} className="text-white" />}
+        className="fixed bottom-6 right-6 z-50 w-16 h-16 rounded-2xl flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-110"
+        style={{ background: "linear-gradient(135deg,#E8001D,#ff1a35)", boxShadow: "0 4px 28px rgba(232,0,29,0.6)", border: "2px solid rgba(255,255,255,0.15)" }}>
+        {open ? <X size={22} className="text-white" /> : (
+          <svg width="34" height="34" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            {/* Antena */}
+            <line x1="32" y1="8" x2="32" y2="18" stroke="white" strokeWidth="3" strokeLinecap="round"/>
+            <circle cx="32" cy="6" r="3" fill="white"/>
+            {/* Cabeza */}
+            <rect x="12" y="18" width="40" height="28" rx="8" fill="white" fillOpacity="0.95"/>
+            {/* Ojos */}
+            <circle cx="23" cy="30" r="4.5" fill="#E8001D"/>
+            <circle cx="41" cy="30" r="4.5" fill="#E8001D"/>
+            <circle cx="24.5" cy="28.5" r="1.5" fill="white"/>
+            <circle cx="42.5" cy="28.5" r="1.5" fill="white"/>
+            {/* Boca */}
+            <rect x="22" y="38" width="20" height="4" rx="2" fill="#E8001D" fillOpacity="0.7"/>
+            {/* Cuerpo */}
+            <rect x="20" y="48" width="24" height="10" rx="5" fill="white" fillOpacity="0.4"/>
+          </svg>
+        )}
       </button>
 
       {/* Chat window */}
