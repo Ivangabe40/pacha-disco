@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
 import HeroEvent from "@/components/events/HeroEvent";
 import EventCard from "@/components/events/EventCard";
+import PromotionPopup from "@/components/promotions/PromotionPopup";
 import { Calendar } from "lucide-react";
 
 export default function Home() {
@@ -31,6 +32,7 @@ export default function Home() {
 
   return (
     <div style={{ background: "#070707", minHeight: "100vh" }}>
+      <PromotionPopup />
       {/* HERO */}
       {featured && <HeroEvent event={featured} />}
 

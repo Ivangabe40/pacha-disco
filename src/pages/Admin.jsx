@@ -6,7 +6,8 @@ import AdminGallery from "@/components/admin/AdminGallery";
 import AdminTickets from "@/components/admin/AdminTickets";
 import AdminMenu from "@/components/admin/AdminMenu";
 import MenuQR from "@/components/admin/MenuQR";
-import { Calendar, Music, Camera, Ticket, Wine, ShieldOff } from "lucide-react";
+import AdminPromotions from "@/components/admin/AdminPromotions";
+import { Calendar, Music, Camera, Ticket, Wine, ShieldOff, Megaphone } from "lucide-react";
 
 const LOGO_RED = "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/user_69abf6aff758a16386edeb04/0e73ec46b_IMG-20260121-WA0031.jpg";
 
@@ -16,6 +17,7 @@ const tabs = [
   { id: "artists", label: "Artistas", icon: Music },
   { id: "gallery", label: "Galería", icon: Camera },
   { id: "menu", label: "Carta", icon: Wine },
+  { id: "promos", label: "Promos", icon: Megaphone },
 ];
 
 export default function Admin() {
@@ -114,6 +116,7 @@ export default function Admin() {
         {activeTab === "tickets" && <AdminTickets />}
         {activeTab === "artists" && <AdminArtists />}
         {activeTab === "gallery" && <AdminGallery />}
+        {activeTab === "promos" && <AdminPromotions />}
         {activeTab === "menu" && (
           <div className="grid md:grid-cols-3 gap-6">
             <div className="md:col-span-2"><AdminMenu /></div>
