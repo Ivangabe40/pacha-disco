@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
 import AdminEvents from "@/components/admin/AdminEvents";
 import AdminArtists from "@/components/admin/AdminArtists";
-import AdminGallery from "@/components/admin/AdminGallery";
+import AdminGalleryAlbums from "@/components/admin/AdminGalleryAlbums";
 import AdminTickets from "@/components/admin/AdminTickets";
 import AdminMenu from "@/components/admin/AdminMenu";
 import MenuQR from "@/components/admin/MenuQR";
@@ -115,7 +115,7 @@ export default function Admin() {
         {activeTab === "events" && <AdminEvents />}
         {activeTab === "tickets" && <AdminTickets />}
         {activeTab === "artists" && <AdminArtists />}
-        {activeTab === "gallery" && <AdminGallery />}
+        {activeTab === "gallery" && <AdminGalleryAlbums />}
         {activeTab === "promos" && <AdminPromotions />}
         {activeTab === "menu" && (
           <div className="grid md:grid-cols-3 gap-6">

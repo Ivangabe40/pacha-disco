@@ -1,15 +1,14 @@
 import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
-import { Camera, X } from "lucide-react";
+import { Camera, ExternalLink, ImageIcon } from "lucide-react";
 
 export default function Gallery() {
-  const [photos, setPhotos] = useState([]);
+  const [albums, setAlbums] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [selected, setSelected] = useState(null);
 
   useEffect(() => {
-    base44.entities.GalleryPhoto.list("-created_date").then(data => {
-      setPhotos(data);
+    base44.entities.GalleryAlbum.list("-created_date").then(data => {
+      setAlbums(data);
       setLoading(false);
     });
   }, []);
@@ -25,52 +24,57 @@ export default function Gallery() {
             Galería
           </h1>
           <div className="w-24 h-px mx-auto mt-6" style={{ background: "linear-gradient(to right, transparent, #C9A84C, transparent)" }}></div>
+          <p className="text-gray-500 text-sm mt-4">Revivé cada noche. Accedé a las fotos de cada sábado.</p>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 md:px-8 pb-20">
+      <div className="max-w-5xl mx-auto px-4 md:px-8 pb-20">
         {loading ? (
           <div className="flex justify-center py-20">
             <div className="w-10 h-10 rounded-full border-2 border-t-yellow-500 border-gray-800 animate-spin"></div>
           </div>
-        ) : photos.length === 0 ? (
+        ) : albums.length === 0 ? (
           <div className="text-center py-20">
             <Camera size={48} className="mx-auto mb-4 opacity-20" style={{ color: "#C9A84C" }} />
             <p className="text-gray-500">Próximamente fotos de nuestros eventos</p>
           </div>
         ) : (
-          <div className="columns-2 md:columns-3 lg:columns-4 gap-3 space-y-3">
-            {photos.map(photo => (
-              <div key={photo.id} onClick={() => setSelected(photo)}
-                className="break-inside-avoid rounded-lg overflow-hidden cursor-pointer group relative">
-                <img src={photo.photo_url} alt={photo.caption || "Pachá"}
-                  className="w-full transition-transform duration-300 group-hover:scale-105" />
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3"
-                  style={{ background: "linear-gradient(to top, rgba(0,0,0,0.7), transparent)" }}>
-                  {photo.caption && <p className="text-white text-xs">{photo.caption}</p>}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {albums.map(album => (
+              <a key={album.id} href={album.link} target="_blank" rel="noopener noreferrer"
+                className="group block rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1"
+                style={{ background: "#111", border: "1px solid #222", boxShadow: "0 4px 20px rgba(0,0,0,0.4)" }}
+                onMouseEnter={e => e.currentTarget.style.borderColor = "rgba(232,0,29,0.4)"}
+                onMouseLeave={e => e.currentTarget.style.borderColor = "#222"}>
+                {/* Cover */}
+                <div className="relative overflow-hidden" style={{ aspectRatio: "16/9", background: "#0f0f0f" }}>
+                  {album.cover_url ? (
+                    <img src={album.cover_url} alt={album.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <ImageIcon size={40} style={{ color: "#2a2a2a" }} />
+                    </div>
+                  )}
+                  {/* Overlay */}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    style={{ background: "rgba(232,0,29,0.15)" }}>
+                    <div className="w-12 h-12 rounded-full flex items-center justify-center"
+                      style={{ background: "rgba(232,0,29,0.9)" }}>
+                      <ExternalLink size={18} className="text-white" />
+                    </div>
+                  </div>
                 </div>
-              </div>
+                {/* Title */}
+                <div className="px-4 py-3 flex items-center justify-between">
+                  <p className="text-white font-semibold text-sm">{album.title}</p>
+                  <ExternalLink size={13} className="text-gray-600 group-hover:text-red-500 transition-colors shrink-0 ml-2" />
+                </div>
+              </a>
             ))}
           </div>
         )}
       </div>
-
-      {/* Lightbox */}
-      {selected && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4"
-          style={{ background: "rgba(0,0,0,0.95)" }}
-          onClick={() => setSelected(null)}>
-          <button className="absolute top-4 right-4 text-white hover:text-gray-300">
-            <X size={28} />
-          </button>
-          <img src={selected.photo_url} alt={selected.caption}
-            className="max-w-full max-h-screen rounded-xl object-contain"
-            onClick={e => e.stopPropagation()} />
-          {selected.caption && (
-            <div className="absolute bottom-8 text-center text-gray-300 text-sm">{selected.caption}</div>
-          )}
-        </div>
-      )}
     </div>
   );
 }

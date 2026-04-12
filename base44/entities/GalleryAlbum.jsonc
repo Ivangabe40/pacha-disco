@@ -1,0 +1,22 @@
+{
+  "name": "GalleryAlbum",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "T\u00edtulo del \u00e1lbum (ej: S\u00e1bado 5 de Abril)"
+    },
+    "link": {
+      "type": "string",
+      "description": "URL del \u00e1lbum de fotos externo"
+    },
+    "cover_url": {
+      "type": "string",
+      "description": "Imagen de portada (opcional)"
+    }
+  },
+  "required": [
+    "title",
+    "link"
+  ]
+}
