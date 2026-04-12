@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
-import { Plus, Trash2, ExternalLink, Edit2, Check, X } from "lucide-react";
+import { Plus, Trash2, ExternalLink, Edit2, Check, X, Upload, ImageIcon } from "lucide-react";
 
 export default function AdminGalleryAlbums() {
   const [albums, setAlbums] = useState([]);
@@ -9,12 +9,21 @@ export default function AdminGalleryAlbums() {
   const [editing, setEditing] = useState(null);
   const [form, setForm] = useState({ title: "", link: "", cover_url: "" });
   const [saving, setSaving] = useState(false);
+  const [uploading, setUploading] = useState(false);
 
   const load = () => base44.entities.GalleryAlbum.list("-created_date").then(d => { setAlbums(d); setLoading(false); });
   useEffect(() => { load(); }, []);
 
   const openNew = () => { setForm({ title: "", link: "", cover_url: "" }); setEditing(null); setShowForm(true); };
   const openEdit = (a) => { setForm({ title: a.title, link: a.link, cover_url: a.cover_url || "" }); setEditing(a.id); setShowForm(true); };
+
+  const handleImageUpload = async (file) => {
+    if (!file) return;
+    setUploading(true);
+    const { file_url } = await base44.integrations.Core.UploadFile({ file });
+    setForm(f => ({ ...f, cover_url: file_url }));
+    setUploading(false);
+  };
 
   const save = async () => {
     if (!form.title.trim() || !form.link.trim()) return;
@@ -67,11 +76,26 @@ export default function AdminGalleryAlbums() {
             </div>
           </div>
           <div className="mb-4">
-            <label className="text-xs text-gray-400 uppercase tracking-wider block mb-1">URL imagen de portada (opcional)</label>
-            <input value={form.cover_url} onChange={e => setForm(f => ({ ...f, cover_url: e.target.value }))}
-              className="w-full px-4 py-2.5 rounded-xl text-white text-sm outline-none"
-              style={{ background: "#1a1a1a", border: "1px solid #333" }}
-              placeholder="https://..." />
+            <label className="text-xs text-gray-400 uppercase tracking-wider block mb-1">Imagen de portada (opcional)</label>
+            <label className="cursor-pointer block">
+              <div className="flex items-center gap-4 p-4 rounded-xl border-2 border-dashed transition-colors"
+                style={{ borderColor: form.cover_url ? "rgba(232,0,29,0.4)" : "#333", background: "#1a1a1a" }}>
+                {form.cover_url ? (
+                  <img src={form.cover_url} alt="portada" className="w-16 h-16 rounded-lg object-cover shrink-0" />
+                ) : (
+                  <div className="w-16 h-16 rounded-lg flex items-center justify-center shrink-0" style={{ background: "#222" }}>
+                    <ImageIcon size={24} style={{ color: "#444" }} />
+                  </div>
+                )}
+                <div>
+                  <p className="text-white text-sm font-medium">{uploading ? "Subiendo..." : form.cover_url ? "Cambiar imagen" : "Subir imagen de portada"}</p>
+                  <p className="text-gray-600 text-xs mt-0.5">JPG, PNG, WebP</p>
+                </div>
+                {uploading && <div className="w-5 h-5 rounded-full border-2 border-t-red-500 border-gray-700 animate-spin ml-auto" />}
+              </div>
+              <input type="file" accept="image/*" className="hidden"
+                onChange={e => e.target.files?.[0] && handleImageUpload(e.target.files[0])} />
+            </label>
           </div>
           <div className="flex gap-3">
             <button onClick={save} disabled={saving}
