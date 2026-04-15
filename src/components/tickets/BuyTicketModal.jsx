@@ -199,16 +199,26 @@ export default function BuyTicketModal({ event, onClose }) {
               {ticketType === "anticipada" && mpLink && (
                 <div className="space-y-3">
                   <p className="text-gray-400 text-sm">
-                    Para confirmar tu entrada, completá el pago en MercadoPago:
+                    Para confirmar {qty > 1 ? `tus ${qty} entradas` : "tu entrada"}, hacé el pago en MercadoPago:
                   </p>
-                  <a href={mpLink} target="_blank" rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl font-bold text-white text-base transition-all hover:-translate-y-0.5"
-                    style={{ background: "linear-gradient(135deg, #009ee3 0%, #00c8ff 100%)", boxShadow: "0 4px 20px rgba(0,158,227,0.4)" }}>
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm-.5 17.5l-4-4 1.41-1.41L11.5 14.67l5.09-5.09L18 11l-6.5 6.5z"/></svg>
-                    Pagar ${total.toLocaleString()} con MercadoPago
-                    <ExternalLink size={15} />
-                  </a>
-                  <p className="text-gray-600 text-xs">Guardá el código <strong className="text-gray-400">{ticketCode}</strong> — te lo pedirán en la entrada junto al comprobante de pago.</p>
+
+                  {qty > 1 && (
+                    <div className="p-3 rounded-xl text-xs text-yellow-300 text-center" style={{ background: "rgba(201,168,76,0.1)", border: "1px solid rgba(201,168,76,0.25)" }}>
+                      Compraste <strong>{qty} entradas</strong>. Deberás hacer <strong>{qty} pagos</strong> de <strong>${event.ticket_price?.toLocaleString()}</strong> c/u (total ${total.toLocaleString()}).
+                    </div>
+                  )}
+
+                  {Array.from({ length: qty }).map((_, i) => (
+                    <a key={i} href={mpLink} target="_blank" rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-2 w-full py-3 rounded-xl font-bold text-white text-sm transition-all hover:-translate-y-0.5"
+                      style={{ background: "linear-gradient(135deg, #009ee3 0%, #00c8ff 100%)", boxShadow: "0 4px 20px rgba(0,158,227,0.3)" }}>
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm-.5 17.5l-4-4 1.41-1.41L11.5 14.67l5.09-5.09L18 11l-6.5 6.5z"/></svg>
+                      {qty > 1 ? `Pagar entrada ${i + 1} de ${qty} — $${event.ticket_price?.toLocaleString()}` : `Pagar $${total.toLocaleString()} con MercadoPago`}
+                      <ExternalLink size={13} />
+                    </a>
+                  ))}
+
+                  <p className="text-gray-600 text-xs">Guardá el código <strong className="text-gray-400">{ticketCode}</strong> — te lo pedirán en la entrada junto al/los comprobante/s de pago.</p>
                 </div>
               )}
 

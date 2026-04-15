@@ -55,7 +55,7 @@ export default function AdminMercadoPago() {
             style={{ background: "#1a1a1a", border: "1px solid #333" }}
           />
           <p className="text-gray-600 text-xs mt-2">
-            Creá tu link en <a href="https://www.mercadopago.com.ar/tools/create" target="_blank" rel="noopener noreferrer" className="underline" style={{ color: "#009ee3" }}>MercadoPago → Cobrar → Link de pago</a>. El sistema abre el link con el monto calculado automáticamente.
+            Creá tu link en <a href="https://www.mercadopago.com.ar/tools/create" target="_blank" rel="noopener noreferrer" className="underline" style={{ color: "#009ee3" }}>MercadoPago → Cobrar → Link de pago</a>. <strong className="text-yellow-500">Configurá el link con el precio de 1 (una) entrada.</strong> Si el cliente compra varias, el sistema le mostrará un botón de pago por cada entrada individualmente.
           </p>
         </div>
 
