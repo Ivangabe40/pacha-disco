@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
-import { Search, CheckCircle, Clock, XCircle } from "lucide-react";
+import { Search, CheckCircle, Clock, XCircle, Trash2 } from "lucide-react";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 
@@ -8,6 +8,15 @@ export default function AdminTickets() {
   const [tickets, setTickets] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
+  const [deletingId, setDeletingId] = useState(null);
+
+  const handleDelete = async (ticket) => {
+    if (!confirm(`¿Eliminar el pedido ${ticket.ticket_code} de ${ticket.buyer_name}?`)) return;
+    setDeletingId(ticket.id);
+    await base44.entities.Ticket.delete(ticket.id);
+    setTickets(prev => prev.filter(t => t.id !== ticket.id));
+    setDeletingId(null);
+  };
 
   useEffect(() => {
     base44.entities.Ticket.list("-created_date").then(d => { setTickets(d); setLoading(false); });
@@ -55,7 +64,7 @@ export default function AdminTickets() {
             <table className="w-full text-sm">
               <thead>
                 <tr style={{ background: "#111", borderBottom: "1px solid #222" }}>
-                  {["Código", "Comprador", "Evento", "Tipo", "Cant.", "Total", "Estado", "Fecha"].map(h => (
+                  {["Código", "Comprador", "Evento", "Tipo", "Cant.", "Total", "Estado", "Fecha", ""].map(h => (
                     <th key={h} className="text-left px-4 py-3 text-xs text-gray-500 uppercase tracking-wider">{h}</th>
                   ))}
                 </tr>
@@ -88,9 +97,18 @@ export default function AdminTickets() {
                       </div>
                     </td>
                     <td className="px-4 py-3 text-gray-500 text-xs">
-                      {t.created_date ? format(new Date(t.created_date), "d MMM HH:mm", { locale: es }) : ""}
+                     {t.created_date ? format(new Date(t.created_date), "d MMM HH:mm", { locale: es }) : ""}
                     </td>
-                  </tr>
+                    <td className="px-4 py-3">
+                      {t.status === "pendiente" && (
+                        <button onClick={() => handleDelete(t)} disabled={deletingId === t.id}
+                          className="p-1.5 rounded-lg transition-colors hover:bg-red-900/30"
+                          title="Eliminar pedido sin confirmar">
+                          <Trash2 size={14} className={deletingId === t.id ? "text-gray-600" : "text-red-500"} />
+                        </button>
+                      )}
+                    </td>
+                    </tr>
                 ))}
               </tbody>
             </table>
@@ -116,9 +134,17 @@ export default function AdminTickets() {
                       : { background: "rgba(136,136,255,0.15)", color: "#8888FF" }}>
                     {t.ticket_type} · {t.quantity}x
                   </span>
-                  <span className="font-semibold text-sm" style={{ color: "#C9A84C" }}>
-                    {t.total_amount ? `$${t.total_amount.toLocaleString()}` : "Pago en puerta"}
-                  </span>
+                  <div className="flex items-center gap-2">
+                    <span className="font-semibold text-sm" style={{ color: "#C9A84C" }}>
+                      {t.total_amount ? `$${t.total_amount.toLocaleString()}` : "Pago en puerta"}
+                    </span>
+                    {t.status === "pendiente" && (
+                      <button onClick={() => handleDelete(t)} disabled={deletingId === t.id}
+                        className="p-1.5 rounded-lg transition-colors hover:bg-red-900/30">
+                        <Trash2 size={14} className={deletingId === t.id ? "text-gray-600" : "text-red-500"} />
+                      </button>
+                    )}
+                  </div>
                 </div>
               </div>
             ))}
