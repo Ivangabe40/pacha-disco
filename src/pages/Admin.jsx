@@ -8,7 +8,8 @@ import AdminMenu from "@/components/admin/AdminMenu";
 import MenuQR from "@/components/admin/MenuQR";
 import AdminPromotions from "@/components/admin/AdminPromotions";
 import AdminMercadoPago from "@/components/admin/AdminMercadoPago";
-import { Calendar, Music, Camera, Ticket, Wine, ShieldOff, Megaphone, CreditCard } from "lucide-react";
+import AdminScanner from "@/components/admin/AdminScanner";
+import { Calendar, Music, Camera, Ticket, Wine, ShieldOff, Megaphone, CreditCard, ScanLine } from "lucide-react";
 
 const LOGO_RED = "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/user_69abf6aff758a16386edeb04/0e73ec46b_IMG-20260121-WA0031.jpg";
 
@@ -20,6 +21,7 @@ const tabs = [
   { id: "menu", label: "Carta", icon: Wine },
   { id: "promos", label: "Promos", icon: Megaphone },
   { id: "pagos", label: "MercadoPago", icon: CreditCard },
+  { id: "scanner", label: "Escáner", icon: ScanLine },
 ];
 
 export default function Admin() {
@@ -120,6 +122,7 @@ export default function Admin() {
         {activeTab === "gallery" && <AdminGalleryAlbums />}
         {activeTab === "promos" && <AdminPromotions />}
         {activeTab === "pagos" && <AdminMercadoPago />}
+        {activeTab === "scanner" && <AdminScanner />}
         {activeTab === "menu" && (
           <div className="grid md:grid-cols-3 gap-6">
             <div className="md:col-span-2"><AdminMenu /></div>

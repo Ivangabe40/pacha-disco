@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
-import { X, Ticket, User, Mail, Phone, CheckCircle, ExternalLink } from "lucide-react";
+import { X, Ticket, User, Mail, Phone, CheckCircle, ExternalLink, FileText } from "lucide-react";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
+import TicketComprobante from "./TicketComprobante";
 
 export default function BuyTicketModal({ event, onClose }) {
   const [step, setStep] = useState(1); // 1: tipo, 2: datos, 3: redirigiendo a MP
@@ -12,6 +13,8 @@ export default function BuyTicketModal({ event, onClose }) {
   const [loading, setLoading] = useState(false);
   const [ticketCode, setTicketCode] = useState("");
   const [mpLink, setMpLink] = useState("");
+  const [savedTicket, setSavedTicket] = useState(null);
+  const [showComprobante, setShowComprobante] = useState(false);
 
   useEffect(() => {
     base44.entities.SiteConfig.filter({ key: "mp_link" }).then(data => {
@@ -25,7 +28,7 @@ export default function BuyTicketModal({ event, onClose }) {
   const handleBuy = async () => {
     setLoading(true);
     const code = "PCH-" + Math.random().toString(36).substring(2, 8).toUpperCase();
-    await base44.entities.Ticket.create({
+    const created = await base44.entities.Ticket.create({
       event_id: event.id,
       event_title: event.title,
       event_date: event.date,
@@ -38,6 +41,7 @@ export default function BuyTicketModal({ event, onClose }) {
       status: "pendiente",
       ticket_code: code,
     });
+    setSavedTicket(created);
     await base44.entities.Event.update(event.id, {
       tickets_sold: (event.tickets_sold || 0) + qty
     });
@@ -228,15 +232,27 @@ export default function BuyTicketModal({ event, onClose }) {
                 </div>
               )}
 
+              {/* Botón comprobante */}
+              <button onClick={() => setShowComprobante(true)}
+                className="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl font-bold text-white text-sm transition-all"
+                style={{ background: "#1a1a1a", border: "1px solid rgba(201,168,76,0.4)", color: "#C9A84C" }}>
+                <FileText size={15} /> Ver comprobante y QR
+              </button>
+
               <button onClick={onClose}
-                className="w-full py-3 rounded-xl font-semibold tracking-wider uppercase text-sm"
-                style={{ background: "#1a1a1a", color: "#888", border: "1px solid #333" }}>
+                className="w-full py-2.5 rounded-xl text-sm"
+                style={{ color: "#555" }}>
                 Cerrar
               </button>
             </div>
           )}
         </div>
       </div>
+
+      {/* Comprobante modal */}
+      {showComprobante && savedTicket && (
+        <TicketComprobante ticket={savedTicket} onClose={() => setShowComprobante(false)} />
+      )}
     </div>
   );
 }

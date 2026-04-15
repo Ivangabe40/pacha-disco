@@ -87,13 +87,20 @@ export default function HeroEvent({ event }) {
           {/* CTAs */}
           <div className="flex flex-wrap gap-4 items-center">
             <Link to={createPageUrl(`EventDetail?id=${event.id}`)}>
-              <button className="btn-red px-8 py-4 rounded-lg text-sm font-bold tracking-widest uppercase flex items-center gap-3">
-                Comprar Entrada
-                <ChevronRight size={16} />
+              <button className="relative overflow-hidden flex items-center gap-3 px-10 py-5 rounded-2xl text-base font-black tracking-widest uppercase transition-all"
+                style={{
+                  background: "linear-gradient(135deg, #E8001D 0%, #ff1a35 50%, #cc0019 100%)",
+                  boxShadow: "0 0 40px rgba(232,0,29,0.5), 0 4px 20px rgba(0,0,0,0.6)",
+                  letterSpacing: "0.12em"
+                }}>
+                <Zap size={18} fill="white" />
+                COMPRAR ENTRADA ANTICIPADA
+                <ChevronRight size={18} />
               </button>
             </Link>
             {event.ticket_price && (
-              <div className="btn-gold-outline px-6 py-4 rounded-lg text-sm font-semibold flex items-center gap-2">
+              <div className="px-6 py-5 rounded-2xl text-base font-bold flex items-center gap-2"
+                style={{ background: "rgba(201,168,76,0.08)", border: "1px solid rgba(201,168,76,0.4)", color: "#C9A84C" }}>
                 Desde ${event.ticket_price.toLocaleString()}
               </div>
             )}
