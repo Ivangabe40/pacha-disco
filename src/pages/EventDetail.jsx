@@ -104,7 +104,7 @@ export default function EventDetail() {
       </div>
 
       {/* Content */}
-      <div className="max-w-5xl mx-auto px-4 md:px-8 pb-20 -mt-4">
+      <div className="max-w-5xl mx-auto px-4 md:px-8 pb-20 mt-6 md:mt-8">
         <div className="grid md:grid-cols-3 gap-8">
           {/* Left: Flyer / Video */}
           <div className="md:col-span-1">
