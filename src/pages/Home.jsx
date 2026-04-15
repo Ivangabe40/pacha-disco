@@ -4,6 +4,7 @@ import HeroEvent from "@/components/events/HeroEvent";
 import EventCard from "@/components/events/EventCard";
 import PromotionPopup from "@/components/promotions/PromotionPopup";
 import { Calendar } from "lucide-react";
+import UpcomingEventsBanner from "@/components/events/UpcomingEventsBanner";
 
 export default function Home() {
   const [events, setEvents] = useState([]);
@@ -35,6 +36,9 @@ export default function Home() {
       <PromotionPopup />
       {/* HERO */}
       {featured && <HeroEvent event={featured} />}
+
+      {/* COUNTDOWN BANNERS */}
+      {upcoming.length > 0 && <UpcomingEventsBanner events={upcoming} />}
 
       {/* UPCOMING EVENTS */}
       <section className="max-w-7xl mx-auto px-4 md:px-8 py-16 md:py-24">
