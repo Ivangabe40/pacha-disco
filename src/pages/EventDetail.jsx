@@ -35,8 +35,8 @@ export default function EventDetail() {
     const params = new URLSearchParams(window.location.search);
     const id = params.get("id");
     if (id) {
-      base44.entities.Event.list().then(data => {
-        setEvent(data.find(e => e.id === id) || null);
+      base44.entities.Event.filter({ id }).then(data => {
+        setEvent(data[0] || null);
         setLoading(false);
       });
     } else {

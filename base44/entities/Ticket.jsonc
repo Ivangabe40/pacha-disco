@@ -1,0 +1,66 @@
+{
+  "name": "Ticket",
+  "type": "object",
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "description": "ID del evento"
+    },
+    "event_title": {
+      "type": "string",
+      "description": "Nombre del evento"
+    },
+    "event_date": {
+      "type": "string",
+      "description": "Fecha del evento"
+    },
+    "buyer_name": {
+      "type": "string",
+      "description": "Nombre del comprador"
+    },
+    "buyer_email": {
+      "type": "string",
+      "description": "Email del comprador"
+    },
+    "buyer_phone": {
+      "type": "string",
+      "description": "Tel\u00e9fono del comprador"
+    },
+    "quantity": {
+      "type": "number",
+      "default": 1,
+      "description": "Cantidad de entradas"
+    },
+    "ticket_type": {
+      "type": "string",
+      "enum": [
+        "anticipada",
+        "reserva"
+      ],
+      "default": "anticipada"
+    },
+    "total_amount": {
+      "type": "number",
+      "description": "Monto total"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "confirmado",
+        "pendiente",
+        "cancelado",
+        "usado"
+      ],
+      "default": "pendiente"
+    },
+    "ticket_code": {
+      "type": "string",
+      "description": "C\u00f3digo \u00fanico de entrada"
+    }
+  },
+  "required": [
+    "event_id",
+    "buyer_name",
+    "buyer_email"
+  ]
+}

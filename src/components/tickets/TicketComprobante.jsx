@@ -92,10 +92,10 @@ export default function TicketComprobante({ ticket, onClose }) {
               <div>
                 <p className="text-gray-500 text-xs uppercase tracking-wider mb-1">Estado</p>
                 <span className="text-xs px-2 py-1 rounded-full font-semibold"
-                  style={ticket.status === "confirmado"
+                  style={ticket.status === "confirmado" || ticket.status === "usado"
                     ? { background: "rgba(34,197,94,0.15)", color: "#22c55e" }
                     : { background: "rgba(201,168,76,0.15)", color: "#C9A84C" }}>
-                  {ticket.status === "confirmado" ? "✓ Confirmado" : "Pendiente pago"}
+                  {ticket.status === "confirmado" ? "✓ Confirmado" : ticket.status === "usado" ? "✓ Usado" : "Pendiente pago"}
                 </span>
               </div>
             </div>

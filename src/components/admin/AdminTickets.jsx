@@ -34,6 +34,7 @@ export default function AdminTickets() {
   const statusIcon = (s) => {
     if (s === "confirmado") return <CheckCircle size={14} className="text-green-400" />;
     if (s === "pendiente") return <Clock size={14} className="text-yellow-400" />;
+    if (s === "usado") return <CheckCircle size={14} className="text-blue-400" />;
     return <XCircle size={14} className="text-red-400" />;
   };
 
