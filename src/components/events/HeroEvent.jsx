@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
-import { Calendar, Music, Zap, ChevronRight } from "lucide-react";
+import { Calendar, Music, Zap, Ticket } from "lucide-react";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 
@@ -87,21 +87,21 @@ export default function HeroEvent({ event }) {
           {/* CTAs */}
           <div className="flex flex-wrap gap-4 items-center">
             <Link to={createPageUrl(`EventDetail?id=${event.id}`)}>
-              <button className="relative overflow-hidden flex items-center gap-3 px-10 py-5 rounded-2xl text-base font-black tracking-widest uppercase transition-all"
+              <button className="flex items-center gap-3 px-8 py-4 rounded-2xl font-bold tracking-wider uppercase transition-all hover:-translate-y-0.5"
                 style={{
-                  background: "linear-gradient(135deg, #E8001D 0%, #ff1a35 50%, #cc0019 100%)",
-                  boxShadow: "0 0 40px rgba(232,0,29,0.5), 0 4px 20px rgba(0,0,0,0.6)",
-                  letterSpacing: "0.12em"
+                  background: "linear-gradient(135deg, #C9A84C 0%, #E8C97A 50%, #C9A84C 100%)",
+                  color: "#0A0A0A",
+                  boxShadow: "0 4px 24px rgba(201,168,76,0.35)",
+                  letterSpacing: "0.1em"
                 }}>
-                <Zap size={18} fill="white" />
-                COMPRAR ENTRADA ANTICIPADA
-                <ChevronRight size={18} />
+                <Ticket size={18} />
+                COMPRAR ENTRADA
               </button>
             </Link>
             {event.ticket_price && (
-              <div className="px-6 py-5 rounded-2xl text-base font-bold flex items-center gap-2"
-                style={{ background: "rgba(201,168,76,0.08)", border: "1px solid rgba(201,168,76,0.4)", color: "#C9A84C" }}>
-                Desde ${event.ticket_price.toLocaleString()}
+              <div className="px-5 py-4 rounded-2xl text-sm font-semibold flex items-center gap-2"
+                style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)", color: "#aaa" }}>
+                Desde <span style={{ color: "#C9A84C", fontWeight: 700 }}>${event.ticket_price.toLocaleString()}</span>
               </div>
             )}
           </div>
