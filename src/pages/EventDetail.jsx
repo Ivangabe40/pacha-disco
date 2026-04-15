@@ -188,13 +188,13 @@ export default function EventDetail() {
 
               {!isSoldOut && event.status !== "cancelado" ? (
                 <button onClick={() => setShowModal(true)}
-                  className="w-full py-4 rounded-xl font-bold tracking-wider uppercase text-lg flex items-center justify-center gap-3"
-                  style={{ background: "linear-gradient(135deg, #C9A84C 0%, #E8C97A 50%, #C9A84C 100%)", color: "#0A0A0A" }}>
-                  <Ticket size={20} />
-                  Comprar Entrada Anticipada
+                  className="w-full py-3.5 md:py-4 rounded-xl font-bold tracking-wider uppercase text-sm md:text-base flex items-center justify-center gap-2 transition-all hover:-translate-y-0.5"
+                  style={{ background: "linear-gradient(135deg, #C9A84C 0%, #E8C97A 50%, #C9A84C 100%)", color: "#0A0A0A", boxShadow: "0 4px 20px rgba(201,168,76,0.3)" }}>
+                  <Ticket size={17} />
+                  Comprar Entrada
                 </button>
               ) : (
-                <div className="w-full py-4 rounded-xl font-bold text-center text-gray-500 uppercase tracking-wider"
+                <div className="w-full py-3.5 rounded-xl font-bold text-center text-gray-500 uppercase tracking-wider text-sm"
                   style={{ background: "#1a1a1a", border: "1px solid #333" }}>
                   {event.status === "agotado" ? "Entradas Agotadas" : "Evento Cancelado"}
                 </div>
