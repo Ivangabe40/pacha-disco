@@ -118,7 +118,7 @@ export default function EventDetail() {
           {/* Right: Info */}
           <div className="md:col-span-2 space-y-6">
             {/* Date/Time */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="p-4 rounded-xl" style={{ background: "#111", border: "1px solid #222" }}>
                 <div className="flex items-center gap-2 text-gray-400 text-xs uppercase tracking-wider mb-1">
                   <Calendar size={12} style={{ color: "#C9A84C" }} /> Fecha
