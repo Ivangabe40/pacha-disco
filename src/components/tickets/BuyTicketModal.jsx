@@ -1,16 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
-import { X, Ticket, User, Mail, Phone, CheckCircle } from "lucide-react";
+import { X, Ticket, User, Mail, Phone, CheckCircle, ExternalLink } from "lucide-react";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 
 export default function BuyTicketModal({ event, onClose }) {
-  const [step, setStep] = useState(1); // 1: tipo, 2: datos, 3: confirmado
+  const [step, setStep] = useState(1); // 1: tipo, 2: datos, 3: redirigiendo a MP
   const [ticketType, setTicketType] = useState("anticipada");
   const [qty, setQty] = useState(1);
   const [form, setForm] = useState({ buyer_name: "", buyer_email: "", buyer_phone: "" });
   const [loading, setLoading] = useState(false);
   const [ticketCode, setTicketCode] = useState("");
+  const [mpLink, setMpLink] = useState("");
+
+  useEffect(() => {
+    base44.entities.SiteConfig.filter({ key: "mp_link" }).then(data => {
+      if (data.length > 0) setMpLink(data[0].value);
+    });
+  }, []);
 
   const price = ticketType === "anticipada" ? event.ticket_price : null;
   const total = price ? price * qty : 0;
@@ -18,7 +25,7 @@ export default function BuyTicketModal({ event, onClose }) {
   const handleBuy = async () => {
     setLoading(true);
     const code = "PCH-" + Math.random().toString(36).substring(2, 8).toUpperCase();
-    const ticket = await base44.entities.Ticket.create({
+    await base44.entities.Ticket.create({
       event_id: event.id,
       event_title: event.title,
       event_date: event.date,
@@ -28,16 +35,20 @@ export default function BuyTicketModal({ event, onClose }) {
       quantity: qty,
       ticket_type: ticketType,
       total_amount: total,
-      status: ticketType === "reserva" ? "pendiente" : "confirmado",
+      status: "pendiente",
       ticket_code: code,
     });
-    // Update tickets_sold
     await base44.entities.Event.update(event.id, {
       tickets_sold: (event.tickets_sold || 0) + qty
     });
     setTicketCode(code);
     setLoading(false);
     setStep(3);
+
+    // Redirigir a MercadoPago si es anticipada
+    if (ticketType === "anticipada" && mpLink) {
+      setTimeout(() => window.open(mpLink, "_blank"), 800);
+    }
   };
 
   return (
@@ -170,31 +181,47 @@ export default function BuyTicketModal({ event, onClose }) {
             </div>
           )}
 
-          {/* STEP 3: Confirmación */}
+          {/* STEP 3: Confirmación + Pago MP */}
           {step === 3 && (
             <div className="text-center space-y-5">
               <div className="flex justify-center">
-                <CheckCircle size={64} style={{ color: "#C9A84C" }} />
+                <CheckCircle size={56} style={{ color: "#C9A84C" }} />
               </div>
               <div>
-                <p className="text-gray-400 mb-1 text-sm">Tu código de entrada</p>
-                <div className="text-3xl font-bold tracking-widest py-3 px-6 rounded-xl inline-block"
-                  style={{ background: "linear-gradient(135deg, #C9A84C 0%, #E8C97A 50%, #C9A84C 100%)", color: "#0A0A0A", fontFamily: "monospace" }}>
+                <p className="text-white font-bold text-lg">¡Pedido registrado!</p>
+                <p className="text-gray-400 text-sm mt-1">Tu código de reserva</p>
+                <div className="text-2xl font-bold tracking-widest py-3 px-6 rounded-xl inline-block mt-2"
+                  style={{ background: "#1a1a1a", color: "#C9A84C", fontFamily: "monospace", border: "1px solid rgba(201,168,76,0.3)" }}>
                   {ticketCode}
                 </div>
               </div>
-              <p className="text-gray-400 text-sm">
-                Guardá este código. Te lo pedirán en la entrada. También enviamos los detalles a <strong className="text-white">{form.buyer_email}</strong>
-              </p>
-              {ticketType === "reserva" && (
-                <div className="p-4 rounded-xl text-sm text-yellow-400" style={{ background: "rgba(201,168,76,0.1)", border: "1px solid rgba(201,168,76,0.3)" }}>
-                  Reserva confirmada. Recordá abonar en puerta: ${event.ticket_price_door?.toLocaleString() || "precio en puerta"}
+
+              {ticketType === "anticipada" && mpLink && (
+                <div className="space-y-3">
+                  <p className="text-gray-400 text-sm">
+                    Para confirmar tu entrada, completá el pago en MercadoPago:
+                  </p>
+                  <a href={mpLink} target="_blank" rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl font-bold text-white text-base transition-all hover:-translate-y-0.5"
+                    style={{ background: "linear-gradient(135deg, #009ee3 0%, #00c8ff 100%)", boxShadow: "0 4px 20px rgba(0,158,227,0.4)" }}>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm-.5 17.5l-4-4 1.41-1.41L11.5 14.67l5.09-5.09L18 11l-6.5 6.5z"/></svg>
+                    Pagar ${total.toLocaleString()} con MercadoPago
+                    <ExternalLink size={15} />
+                  </a>
+                  <p className="text-gray-600 text-xs">Guardá el código <strong className="text-gray-400">{ticketCode}</strong> — te lo pedirán en la entrada junto al comprobante de pago.</p>
                 </div>
               )}
+
+              {ticketType === "reserva" && (
+                <div className="p-4 rounded-xl text-sm text-yellow-400" style={{ background: "rgba(201,168,76,0.1)", border: "1px solid rgba(201,168,76,0.3)" }}>
+                  Reserva confirmada. Recordá abonar en puerta: ${event.ticket_price_door?.toLocaleString() || "consultar precio en puerta"}
+                </div>
+              )}
+
               <button onClick={onClose}
-                className="w-full py-3 rounded-xl font-semibold tracking-wider uppercase"
-                style={{ background: "linear-gradient(135deg, #C9A84C 0%, #E8C97A 50%, #C9A84C 100%)", color: "#0A0A0A" }}>
-                ¡Hasta pronto!
+                className="w-full py-3 rounded-xl font-semibold tracking-wider uppercase text-sm"
+                style={{ background: "#1a1a1a", color: "#888", border: "1px solid #333" }}>
+                Cerrar
               </button>
             </div>
           )}
