@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
-import { Calendar, Clock, Music, Users, Ticket, ChevronLeft, Share2, Copy, Check } from "lucide-react";
+import { Calendar, Clock, Music, Users, Ticket, ChevronLeft, Share2, Copy, Check, Bell, BellOff } from "lucide-react";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import BuyTicketModal from "@/components/tickets/BuyTicketModal";
+import { useEventReminder } from "@/hooks/useEventReminder";
 
 export default function EventDetail() {
   const [event, setEvent] = useState(null);
@@ -59,6 +60,7 @@ export default function EventDetail() {
   const date = new Date(event.date);
   const isSoldOut = event.status === "agotado";
   const availableTickets = event.capacity ? event.capacity - (event.tickets_sold || 0) : null;
+  const { reminded, toggle: toggleReminder } = useEventReminder(event);
 
   return (
     <div style={{ background: "#0A0A0A", minHeight: "100vh" }}>
@@ -79,8 +81,24 @@ export default function EventDetail() {
           <h1 className="text-4xl md:text-6xl font-bold text-white leading-tight" style={{ fontFamily: "'Playfair Display', serif" }}>
             {event.title}
           </h1>
+          {/* Reminder button */}
+          <div className="mt-6 mb-2">
+            <button
+              onClick={toggleReminder}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold transition-all"
+              style={reminded
+                ? { background: "rgba(201,168,76,0.15)", border: "1px solid rgba(201,168,76,0.5)", color: "#C9A84C" }
+                : { background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.15)", color: "#999" }
+              }
+            >
+              {reminded ? <Bell size={15} fill="#C9A84C" /> : <Bell size={15} />}
+              {reminded ? "Recordatorio activado" : "Recordarme"}
+              {reminded && <span className="ml-1 w-2 h-2 rounded-full bg-yellow-500 animate-pulse inline-block" />}
+            </button>
+          </div>
+
           {/* Share buttons */}
-          <div className="flex flex-wrap gap-3 mt-6">
+          <div className="flex flex-wrap gap-3 mt-2">
             <span className="flex items-center gap-1.5 text-gray-500 text-xs uppercase tracking-wider">
               <Share2 size={12} /> Compartir
             </span>

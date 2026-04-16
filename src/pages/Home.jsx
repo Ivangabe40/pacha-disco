@@ -5,6 +5,7 @@ import EventCard from "@/components/events/EventCard";
 import PromotionPopup from "@/components/promotions/PromotionPopup";
 import { Calendar } from "lucide-react";
 import UpcomingEventsBanner from "@/components/events/UpcomingEventsBanner";
+import { checkEventReminders } from "@/hooks/useEventReminder";
 
 export default function Home() {
   const [events, setEvents] = useState([]);
@@ -14,6 +15,7 @@ export default function Home() {
     base44.entities.Event.list("-date").then(data => {
       setEvents(data);
       setLoading(false);
+      checkEventReminders(data);
     });
   }, []);
 
