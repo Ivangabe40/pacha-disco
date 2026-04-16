@@ -13,6 +13,7 @@ export default function EventDetail() {
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [copied, setCopied] = useState(false);
+  const { reminded, toggle: toggleReminder } = useEventReminder(event);
 
   const shareUrl = window.location.href;
 
@@ -60,7 +61,6 @@ export default function EventDetail() {
   const date = new Date(event.date);
   const isSoldOut = event.status === "agotado";
   const availableTickets = event.capacity ? event.capacity - (event.tickets_sold || 0) : null;
-  const { reminded, toggle: toggleReminder } = useEventReminder(event);
 
   return (
     <div style={{ background: "#0A0A0A", minHeight: "100vh" }}>
