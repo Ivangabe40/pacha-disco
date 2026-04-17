@@ -12,7 +12,8 @@ const navLinks = [
 { label: "Galería", page: "Gallery" },
 { label: "Carta", page: "Menu" },
 { label: "Nosotros", page: "About" },
-{ label: "Eventos Privados", page: "PrivateEvents" }];
+{ label: "Eventos Privados", page: "PrivateEvents" },
+{ label: "Reservas VIP", page: "VIPReservations" }];
 
 
 export default function Layout({ children, currentPageName }) {
