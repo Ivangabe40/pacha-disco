@@ -11,16 +11,20 @@ export default function ChatWidget() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [conversation, setConversation] = useState(null);
+  const [authError, setAuthError] = useState(false);
   const bottomRef = useRef(null);
 
   useEffect(() => {
     if (open && !conversation) {
+      setAuthError(false);
       base44.agents.createConversation({
         agent_name: "pacha_assistant",
         metadata: { name: "Chat Pachá" }
       }).then(conv => {
         setConversation(conv);
         setMessages(conv.messages || []);
+      }).catch(() => {
+        setAuthError(true);
       });
     }
   }, [open]);
@@ -96,7 +100,22 @@ export default function ChatWidget() {
 
           {/* Messages */}
           <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3" style={{ scrollbarWidth: "none" }}>
-            {visibleMessages.length === 0 && !loading && (
+            {authError && (
+              <div className="text-center py-8 px-4">
+                <Bot size={32} className="mx-auto mb-3" style={{ color: "#E8001D", opacity: 0.5 }} />
+                <p className="text-gray-300 text-sm font-semibold mb-1">¡Hola! Soy el asistente de Pachá.</p>
+                <p className="text-gray-500 text-xs mb-4">Para chatear conmigo necesitás iniciar sesión, o podés contactarnos directamente por WhatsApp.</p>
+                <a
+                  href="https://wa.me/5493468546935"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-white text-xs font-semibold"
+                  style={{ background: "#25D366" }}>
+                  💬 Escribinos por WhatsApp
+                </a>
+              </div>
+            )}
+            {!authError && visibleMessages.length === 0 && !loading && (
               <div className="text-center py-8">
                 <Bot size={32} className="mx-auto mb-3" style={{ color: "#E8001D", opacity: 0.5 }} />
                 <p className="text-gray-400 text-sm">¡Hola! Soy el asistente de Pachá.</p>
@@ -130,24 +149,26 @@ export default function ChatWidget() {
           </div>
 
           {/* Input */}
-          <div className="px-3 py-3 shrink-0" style={{ borderTop: "1px solid #1a1a1a", background: "#0a0a0a" }}>
-            <div className="flex gap-2 items-end">
-              <textarea
-                value={input}
-                onChange={e => setInput(e.target.value)}
-                onKeyDown={handleKey}
-                placeholder="Escribí tu consulta..."
-                rows={1}
-                className="flex-1 bg-transparent text-white text-sm resize-none outline-none placeholder-gray-600 py-2 px-3 rounded-xl"
-                style={{ border: "1px solid #2a2a2a", maxHeight: "80px" }}
-              />
-              <button onClick={send} disabled={!input.trim() || loading}
-                className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 transition-all"
-                style={{ background: input.trim() && !loading ? "#E8001D" : "#1a1a1a" }}>
-                <Send size={14} className="text-white" />
-              </button>
+          {!authError && (
+            <div className="px-3 py-3 shrink-0" style={{ borderTop: "1px solid #1a1a1a", background: "#0a0a0a" }}>
+              <div className="flex gap-2 items-end">
+                <textarea
+                  value={input}
+                  onChange={e => setInput(e.target.value)}
+                  onKeyDown={handleKey}
+                  placeholder="Escribí tu consulta..."
+                  rows={1}
+                  className="flex-1 bg-transparent text-white text-sm resize-none outline-none placeholder-gray-600 py-2 px-3 rounded-xl"
+                  style={{ border: "1px solid #2a2a2a", maxHeight: "80px" }}
+                />
+                <button onClick={send} disabled={!input.trim() || loading}
+                  className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 transition-all"
+                  style={{ background: input.trim() && !loading ? "#E8001D" : "#1a1a1a" }}>
+                  <Send size={14} className="text-white" />
+                </button>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       )}
     </>
