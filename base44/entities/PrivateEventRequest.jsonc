@@ -1,0 +1,49 @@
+{
+  "name": "PrivateEventRequest",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Nombre del solicitante"
+    },
+    "email": {
+      "type": "string",
+      "description": "Email de contacto"
+    },
+    "phone": {
+      "type": "string",
+      "description": "Tel\u00e9fono de contacto"
+    },
+    "event_type": {
+      "type": "string",
+      "description": "Tipo de evento privado"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Fecha tentativa del evento"
+    },
+    "guests": {
+      "type": "number",
+      "description": "Cantidad de invitados"
+    },
+    "message": {
+      "type": "string",
+      "description": "Mensaje o descripci\u00f3n del evento"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pendiente",
+        "confirmada",
+        "cancelada"
+      ],
+      "default": "pendiente",
+      "description": "Estado de la solicitud"
+    }
+  },
+  "required": [
+    "name",
+    "email"
+  ]
+}
