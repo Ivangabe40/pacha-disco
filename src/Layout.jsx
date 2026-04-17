@@ -11,7 +11,8 @@ const navLinks = [
 { label: "DJs & Artistas", page: "Artists" },
 { label: "Galería", page: "Gallery" },
 { label: "Carta", page: "Menu" },
-{ label: "Nosotros", page: "About" }];
+{ label: "Nosotros", page: "About" },
+{ label: "Eventos Privados", page: "PrivateEvents" }];
 
 
 export default function Layout({ children, currentPageName }) {
