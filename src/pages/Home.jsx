@@ -6,6 +6,7 @@ import PromotionPopup from "@/components/promotions/PromotionPopup";
 import { Calendar } from "lucide-react";
 import UpcomingEventsBanner from "@/components/events/UpcomingEventsBanner";
 import { checkEventReminders } from "@/hooks/useEventReminder";
+import PastEventsCarousel from "@/components/events/PastEventsCarousel";
 
 export default function Home() {
   const [events, setEvents] = useState([]);
@@ -67,31 +68,14 @@ export default function Home() {
         )}
       </section>
 
-      {/* PAST EVENTS */}
+      {/* PAST EVENTS CAROUSEL */}
       {past.length > 0 && (
-        <section className="max-w-7xl mx-auto px-4 md:px-8 pb-20">
-          <div className="h-px w-full mb-10" style={{ background: "linear-gradient(90deg, transparent, rgba(232,0,29,0.2), transparent)" }} />
-          <div className="flex items-center gap-4 mb-8">
-            <div className="w-1 h-8 rounded-full" style={{ background: "#2a2a2a" }} />
-            <h2 className="text-xl font-bold text-gray-600 uppercase tracking-widest" style={{ fontFamily: "'Playfair Display', serif" }}>
-              Ediciones Anteriores
-            </h2>
+        <>
+          <div className="max-w-7xl mx-auto px-4 md:px-8">
+            <div className="h-px w-full" style={{ background: "linear-gradient(90deg, transparent, rgba(232,0,29,0.15), transparent)" }} />
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3">
-            {past.slice(0, 6).map(event => (
-              <div key={event.id} className="relative aspect-[3/4] rounded-lg overflow-hidden group"
-                style={{ border: "1px solid #1a1a1a" }}>
-                {event.flyer_url ? (
-                  <img src={event.flyer_url} alt={event.title}
-                    className="w-full h-full object-cover opacity-30 group-hover:opacity-50 transition-opacity duration-300" />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center text-xs text-gray-700 text-center p-2"
-                    style={{ background: "#111" }}>{event.title}</div>
-                )}
-              </div>
-            ))}
-          </div>
-        </section>
+          <PastEventsCarousel events={past} />
+        </>
       )}
     </div>
   );
