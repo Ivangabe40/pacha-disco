@@ -3,7 +3,6 @@ import { createPageUrl } from "@/utils";
 import { useState, useEffect } from "react";
 import { Menu, X, Instagram, Facebook, Music2, MessageCircle, MapPin } from "lucide-react";
 import ChatWidget from "@/components/ChatWidget";
-import NewsletterSubscribe from "@/components/NewsletterSubscribe";
 
 const LOGO_RED = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/a5ee03f15_1774650185102.png";
 
@@ -117,11 +116,6 @@ export default function Layout({ children, currentPageName }) {
         <div className="max-w-7xl mx-auto">
           {/* Red divider */}
           <div className="h-px w-full mb-10" style={{ background: "linear-gradient(90deg, transparent, rgba(232,0,29,0.4), transparent)" }} />
-
-          {/* Newsletter */}
-          <div className="mb-10 max-w-sm mx-auto md:mx-0">
-            <NewsletterSubscribe />
-          </div>
 
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="flex flex-col items-center md:items-start gap-2">
