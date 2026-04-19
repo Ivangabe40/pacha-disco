@@ -7,6 +7,7 @@ import { Calendar } from "lucide-react";
 import UpcomingEventsBanner from "@/components/events/UpcomingEventsBanner";
 import { checkEventReminders } from "@/hooks/useEventReminder";
 import PastEventsCarousel from "@/components/events/PastEventsCarousel";
+import NewsletterSubscribe from "@/components/NewsletterSubscribe";
 
 export default function Home() {
   const [events, setEvents] = useState([]);
@@ -80,6 +81,11 @@ export default function Home() {
           )}
         </section>
       )}
+
+      {/* NEWSLETTER */}
+      <div className="max-w-7xl mx-auto px-4 md:px-8 py-16">
+        <NewsletterSubscribe />
+      </div>
     </div>
   );
 }
