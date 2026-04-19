@@ -1,3 +1,5 @@
+import { base44 } from '@/api/base44Client';
+
 const LOGO_GOLD = "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/user_69abf6aff758a16386edeb04/0e73ec46b_IMG-20260121-WA0031.jpg";
 
 export default function About() {
@@ -93,9 +95,14 @@ export default function About() {
              @pachaoficialok
             </a>
             <a href="https://wa.me/5493468546935" target="_blank" rel="noopener noreferrer"
-             className="px-8 py-3 rounded-xl font-semibold text-sm tracking-wider uppercase"
-             style={{ border: "1px solid #25D366", color: "#25D366" }}>
-             WhatsApp
+            className="px-8 py-3 rounded-xl font-semibold text-sm tracking-wider uppercase"
+            style={{ border: "1px solid #25D366", color: "#25D366" }}>
+            WhatsApp
+            </a>
+            <a href={base44.agents.getWhatsAppConnectURL('pacha_assistant')} target="_blank" rel="noopener noreferrer"
+            className="px-8 py-3 rounded-xl font-semibold text-sm tracking-wider uppercase flex items-center gap-2 justify-center"
+            style={{ background: "linear-gradient(135deg, #25D366, #128C7E)", color: "#fff" }}>
+             💬 Asistente IA
             </a>
           </div>
         </div>
