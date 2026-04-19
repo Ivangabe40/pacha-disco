@@ -79,7 +79,7 @@ export default function PastEventsCarousel({ events }) {
                     {event.flyer_url ? (
                       <img src={event.flyer_url} alt={event.title}
                         className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
-                        style={{ filter: "brightness(0.45) saturate(0.8)" }} />
+                        style={{ filter: "brightness(0.85) saturate(1)" }} />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center"
                         style={{ background: "linear-gradient(135deg, #111 0%, #1a1a1a 100%)" }}>
