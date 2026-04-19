@@ -1,14 +1,11 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import useEmblaCarousel from "embla-carousel-react";
-import Autoplay from "embla-carousel-autoplay";
 import { ChevronLeft, ChevronRight, Calendar } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export default function PastEventsCarousel({ events }) {
-  const [emblaRef, emblaApi] = useEmblaCarousel(
-    { loop: true, align: "start", slidesToScroll: 1 },
-    [Autoplay({ delay: 4000, stopOnInteraction: true })]
-  );
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "start" });
+  const autoplayRef = useRef(null);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollSnaps, setScrollSnaps] = useState([]);
 
@@ -20,6 +17,12 @@ export default function PastEventsCarousel({ events }) {
     if (!emblaApi) return;
     setScrollSnaps(emblaApi.scrollSnapList());
     emblaApi.on("select", () => setSelectedIndex(emblaApi.selectedScrollSnap()));
+
+    autoplayRef.current = setInterval(() => {
+      emblaApi.scrollNext();
+    }, 4000);
+
+    return () => clearInterval(autoplayRef.current);
   }, [emblaApi]);
 
   if (!events || events.length === 0) return null;
