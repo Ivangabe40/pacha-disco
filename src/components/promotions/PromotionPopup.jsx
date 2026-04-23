@@ -31,11 +31,12 @@ export default function PromotionPopup() {
           <X size={14} className="text-white" />
         </button>
 
-        {/* Image */}
+        {/* Image — aspect ratio fijo para consistencia móvil/desktop */}
         {promo.image_url && (
-          <img src={promo.image_url} alt={promo.title}
-            className="w-full object-cover"
-            style={{ maxHeight: "400px" }} />
+          <div className="w-full" style={{ aspectRatio: "4/5", overflow: "hidden" }}>
+            <img src={promo.image_url} alt={promo.title}
+              className="w-full h-full object-cover object-center" />
+          </div>
         )}
 
         {/* Content */}
