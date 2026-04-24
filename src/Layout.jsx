@@ -181,7 +181,7 @@ export default function Layout({ children, currentPageName }) {
               <Link to={createPageUrl("Admin")} className="text-gray-700 hover:text-gray-500 text-xs transition-colors">
                 Panel Admin
               </Link>
-              <p className="text-gray-700 text-xs mt-1">© 2026 Pachá. Todos los derechos reservados.</p>
+              <p className="text-gray-700 text-xs mt-1">WEBDESIGN BY NDTX UNIVERSE 2026</p>
             </div>
           </div>
         </div>
