@@ -1,0 +1,31 @@
+{
+  "name": "GalleryPhoto",
+  "type": "object",
+  "properties": {
+    "photo_url": {
+      "type": "string",
+      "description": "URL de la foto"
+    },
+    "caption": {
+      "type": "string",
+      "description": "Descripci\u00f3n de la foto"
+    },
+    "event_name": {
+      "type": "string",
+      "description": "Evento relacionado"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Fecha de la foto"
+    },
+    "description": {
+      "type": "string",
+      "description": "Descripci\u00f3n extendida de la foto",
+      "maxLength": 1000
+    }
+  },
+  "required": [
+    "photo_url"
+  ]
+}

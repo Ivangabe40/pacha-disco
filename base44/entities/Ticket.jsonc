@@ -56,6 +56,11 @@
     "ticket_code": {
       "type": "string",
       "description": "C\u00f3digo \u00fanico de entrada"
+    },
+    "description": {
+      "type": "string",
+      "description": "Notas adicionales sobre el ticket",
+      "maxLength": 1000
     }
   },
   "required": [

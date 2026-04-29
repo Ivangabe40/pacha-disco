@@ -13,6 +13,11 @@
     "cover_url": {
       "type": "string",
       "description": "Imagen de portada (opcional)"
+    },
+    "description": {
+      "type": "string",
+      "description": "Descripci\u00f3n del \u00e1lbum",
+      "maxLength": 1000
     }
   },
   "required": [

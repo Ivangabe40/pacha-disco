@@ -47,6 +47,11 @@
       ],
       "default": "pendiente",
       "description": "Estado de la reserva"
+    },
+    "description": {
+      "type": "string",
+      "description": "Descripci\u00f3n adicional de la reserva",
+      "maxLength": 1000
     }
   },
   "required": [

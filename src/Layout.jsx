@@ -178,9 +178,11 @@ export default function Layout({ children, currentPageName }) {
             </div>
 
             <div className="text-center md:text-right">
-              <Link to={createPageUrl("Admin")} className="text-gray-700 hover:text-gray-500 text-xs transition-colors">
-                Panel Admin
-              </Link>
+              <div className="flex gap-4 mb-1">
+                <Link to={createPageUrl("About")} className="text-gray-500 hover:text-gray-300 text-xs transition-colors">Sobre Nosotros</Link>
+                <Link to={createPageUrl("Contact")} className="text-gray-500 hover:text-gray-300 text-xs transition-colors">Contacto</Link>
+                <Link to={createPageUrl("Admin")} className="text-gray-700 hover:text-gray-500 text-xs transition-colors">Panel Admin</Link>
+              </div>
               <p className="text-gray-700 text-xs mt-1">WEBDESIGN BY NDTX UNIVERSE 2026</p>
             </div>
           </div>
