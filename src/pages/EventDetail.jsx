@@ -38,13 +38,51 @@ export default function EventDetail() {
     const id = params.get("id");
     if (id) {
       base44.entities.Event.list().then((data) => {
-        setEvent(data.find((e) => e.id === id) || null);
+        const found = data.find((e) => e.id === id) || null;
+        setEvent(found);
         setLoading(false);
       });
     } else {
       setLoading(false);
     }
   }, []);
+
+  // SEO: actualizar meta tags dinámicamente cuando carga el evento
+  useEffect(() => {
+    if (!event) return;
+
+    const date = new Date(event.date);
+    const dateStr = format(date, "d 'de' MMMM 'de' yyyy", { locale: es });
+    const pageTitle = `${event.title} — ${dateStr} | Pachá Night Club`;
+    const djsStr = event.djs ? ` con ${event.djs}.` : "";
+    const genresStr = event.genres ? ` Música: ${event.genres}.` : "";
+    const metaDesc = `${event.title} en Pachá Night Club el ${dateStr}.${djsStr}${genresStr} Comprá tu entrada anticipada online.`;
+
+    // Title
+    document.title = pageTitle;
+
+    // Helpers
+    const setMeta = (name, content) => {
+      let el = document.querySelector(`meta[name="${name}"]`);
+      if (!el) { el = document.createElement("meta"); el.setAttribute("name", name); document.head.appendChild(el); }
+      el.setAttribute("content", content);
+    };
+    const setOG = (property, content) => {
+      let el = document.querySelector(`meta[property="${property}"]`);
+      if (!el) { el = document.createElement("meta"); el.setAttribute("property", property); document.head.appendChild(el); }
+      el.setAttribute("content", content);
+    };
+
+    setMeta("description", metaDesc);
+    setOG("og:title", pageTitle);
+    setOG("og:description", metaDesc);
+    setOG("og:type", "event");
+    setOG("og:url", window.location.href);
+    if (event.flyer_url) setOG("og:image", event.flyer_url);
+
+    // Cleanup: restaurar title original al salir
+    return () => { document.title = "Pachá Night Club"; };
+  }, [event]);
 
   if (loading) return (
     <div className="min-h-screen flex items-center justify-center" style={{ background: "#0A0A0A" }}>
