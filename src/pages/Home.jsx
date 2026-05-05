@@ -64,8 +64,9 @@ export default function Home() {
               muted
               loop
               playsInline
-              className="w-full"
-              style={{ display: "block", maxHeight: "80vh", objectFit: "cover" }}
+              preload="metadata"
+              className="w-full block"
+              style={{ maxHeight: "min(56vw, 500px)", objectFit: "cover", width: "100%" }}
             />
             {/* Red glow overlay bottom */}
             <div className="absolute bottom-0 left-0 right-0 h-24 pointer-events-none"
