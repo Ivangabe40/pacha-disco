@@ -1,8 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { useState, useEffect } from "react";
-import { Menu, X, Instagram, Facebook, Music2, MessageCircle, MapPin } from "lucide-react";
+import { Menu, X, Instagram, Facebook, MessageCircle, MapPin, ChevronLeft } from "lucide-react";
 import ChatWidget from "@/components/ChatWidget";
+import MobileBottomBar from "@/components/MobileBottomBar";
+
+const ROOT_ROUTES = new Set(["/", "/Home", "/Artists", "/Gallery", "/Menu", "/About", "/PrivateEvents", "/VIPReservations", "/Contact", "/Admin"]);
 
 const LOGO_RED = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/a5ee03f15_1774650185102.png";
 
@@ -19,6 +22,8 @@ const navLinks = [
 export default function Layout({ children, currentPageName }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
+  const isSubRoute = !ROOT_ROUTES.has(location.pathname);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -37,37 +42,55 @@ export default function Layout({ children, currentPageName }) {
         .nav-link.active { color: #E8001D; text-shadow: 0 0 12px rgba(232,0,29,0.6); }
       `}</style>
 
-      {/* NAVBAR */}
+      {/* NAVBAR — Desktop full / Mobile logo-only or back header */}
       <nav
         className="sticky top-0 z-50 transition-all duration-300"
         style={{
           background: scrolled ? "rgba(7,7,7,0.98)" : "rgba(7,7,7,0.7)",
           borderBottom: scrolled ? "1px solid rgba(232,0,29,0.2)" : "1px solid rgba(255,255,255,0.05)",
-          backdropFilter: "blur(20px)"
+          backdropFilter: "blur(20px)",
+          paddingTop: "env(safe-area-inset-top, 0px)",
         }}>
         {/* Red top line */}
         <div className="h-0.5 w-full" style={{ background: "linear-gradient(90deg, transparent, #E8001D 30%, #E8001D 70%, transparent)" }} />
 
-        <div className="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link to={createPageUrl("Home")} className="flex items-center">
+        <div className="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between h-14 md:h-16">
+          {/* Mobile: back button on sub-routes, logo otherwise */}
+          {isSubRoute ? (
+            <button
+              onClick={() => window.history.back()}
+              className="md:hidden flex items-center gap-1.5 text-gray-400 hover:text-white transition-colors"
+              style={{ userSelect: "none" }}
+            >
+              <ChevronLeft size={20} />
+              <span className="text-sm font-medium">Volver</span>
+            </button>
+          ) : (
+            <Link to={createPageUrl("Home")} className="md:hidden flex items-center">
+              <img src={LOGO_RED} alt="Pachá" className="h-8 w-auto object-contain"
+                style={{ filter: "drop-shadow(0 0 10px rgba(232,0,29,0.5))" }} />
+            </Link>
+          )}
+
+          {/* Desktop Logo */}
+          <Link to={createPageUrl("Home")} className="hidden md:flex items-center">
             <img src={LOGO_RED} alt="Pachá" className="h-10 w-auto object-contain"
-            style={{ filter: "drop-shadow(0 0 12px rgba(232,0,29,0.5))" }} />
+              style={{ filter: "drop-shadow(0 0 12px rgba(232,0,29,0.5))" }} />
           </Link>
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((l) =>
-            <Link
-              key={l.page}
-              to={createPageUrl(l.page)}
-              className={`nav-link text-xs font-semibold tracking-widest uppercase pb-0.5 ${currentPageName === l.page ? "active" : ""}`}>
+              <Link
+                key={l.page}
+                to={createPageUrl(l.page)}
+                className={`nav-link text-xs font-semibold tracking-widest uppercase pb-0.5 ${currentPageName === l.page ? "active" : ""}`}>
                 {l.label}
               </Link>
             )}
           </div>
 
-          {/* CTA */}
+          {/* Desktop CTA */}
           <div className="hidden md:block">
             <Link to={createPageUrl("Home")}>
               <button className="btn-red px-6 py-2.5 rounded-lg text-xs font-black tracking-widest uppercase">
@@ -76,40 +99,44 @@ export default function Layout({ children, currentPageName }) {
             </Link>
           </div>
 
-          {/* Mobile menu btn */}
-          <button className="md:hidden text-gray-400 hover:text-white transition-colors p-1" onClick={() => setMenuOpen(!menuOpen)}>
-            {menuOpen ? <X size={22} /> : <Menu size={22} />}
-          </button>
+          {/* Mobile hamburger (only on root routes) */}
+          {!isSubRoute && (
+            <button className="md:hidden text-gray-400 hover:text-white transition-colors p-1" onClick={() => setMenuOpen(!menuOpen)}>
+              {menuOpen ? <X size={22} /> : <Menu size={22} />}
+            </button>
+          )}
         </div>
 
-        {/* Mobile menu */}
-        {menuOpen &&
-        <div className="md:hidden px-4 py-6 flex flex-col gap-4"
-        style={{ background: "#0d0d0d", borderTop: "1px solid rgba(232,0,29,0.15)" }}>
+        {/* Mobile full menu */}
+        {menuOpen && !isSubRoute && (
+          <div className="md:hidden px-4 py-6 flex flex-col gap-4"
+            style={{ background: "#0d0d0d", borderTop: "1px solid rgba(232,0,29,0.15)" }}>
             {navLinks.map((l) =>
-          <Link
-            key={l.page}
-            to={createPageUrl(l.page)}
-            onClick={() => setMenuOpen(false)}
-            className={`text-sm font-semibold tracking-widest uppercase py-2 ${currentPageName === l.page ? "text-red-500" : "text-gray-400"}`}>
+              <Link
+                key={l.page}
+                to={createPageUrl(l.page)}
+                onClick={() => setMenuOpen(false)}
+                className={`text-sm font-semibold tracking-widest uppercase py-2 ${currentPageName === l.page ? "text-red-500" : "text-gray-400"}`}>
                 {l.label}
               </Link>
-          )}
+            )}
             <Link to={createPageUrl("Home")} onClick={() => setMenuOpen(false)}>
               <button className="btn-red w-full py-3.5 rounded-lg text-sm font-black tracking-widest uppercase mt-2">
                 COMPRAR ENTRADAS
               </button>
             </Link>
           </div>
-        }
+        )}
       </nav>
 
-      {/* PAGE CONTENT */}
-      <main className="flex-1">
+      {/* PAGE CONTENT — add bottom padding on mobile for the bottom bar */}
+      <main className="flex-1" style={{ paddingBottom: "calc(56px + env(safe-area-inset-bottom, 0px))" }}>
+        <style>{`@media(min-width:768px){main{padding-bottom:0!important}}`}</style>
         {children}
       </main>
 
       <ChatWidget />
+      <MobileBottomBar />
 
       {/* FOOTER */}
       <footer className="py-14 px-4" style={{ background: "#050505", borderTop: "1px solid rgba(232,0,29,0.15)" }}>

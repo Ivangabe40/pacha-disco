@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { PartyPopper, Briefcase, Music, Star, Users, ChevronDown, ChevronUp, Send, CheckCircle } from "lucide-react";
+import BottomSheetPicker from "@/components/BottomSheetPicker";
 
 const eventTypes = [
   {
@@ -39,6 +40,9 @@ export default function PrivateEvents() {
   const [form, setForm] = useState({ name: "", email: "", phone: "", eventType: "", date: "", guests: "", message: "" });
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
+  const [showEventTypePicker, setShowEventTypePicker] = useState(false);
+
+  const eventTypeOptions = eventTypes.map(ev => ({ value: ev.title, label: ev.title }));
 
   const handleSend = async (e) => {
     e.preventDefault();
@@ -192,17 +196,23 @@ export default function PrivateEvents() {
               </div>
               <div>
                 <label className="block text-xs text-gray-500 mb-1.5 tracking-wider uppercase">Tipo de evento</label>
-                <select
-                  value={form.eventType}
-                  onChange={e => setForm({ ...form, eventType: e.target.value })}
-                  className="w-full px-4 py-3 rounded-lg text-sm outline-none transition-all"
+                <button
+                  type="button"
+                  onClick={() => setShowEventTypePicker(true)}
+                  className="w-full px-4 py-3 rounded-lg text-sm outline-none transition-all text-left flex items-center justify-between"
                   style={{ background: "#0f0f0f", border: "1px solid #1e1e1e", color: form.eventType ? "#F0EBE3" : "#555" }}
-                  onFocus={e => e.target.style.borderColor = "rgba(232,0,29,0.5)"}
-                  onBlur={e => e.target.style.borderColor = "#1e1e1e"}
                 >
-                  <option value="" style={{ background: "#0f0f0f" }}>Seleccioná...</option>
-                  {eventTypes.map(ev => <option key={ev.title} value={ev.title} style={{ background: "#0f0f0f" }}>{ev.title}</option>)}
-                </select>
+                  <span>{form.eventType || "Seleccioná..."}</span>
+                  <ChevronDown size={14} style={{ color: "#555" }} />
+                </button>
+                <BottomSheetPicker
+                  open={showEventTypePicker}
+                  onClose={() => setShowEventTypePicker(false)}
+                  title="Tipo de evento"
+                  options={eventTypeOptions}
+                  value={form.eventType}
+                  onChange={val => setForm({ ...form, eventType: val })}
+                />
               </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
