@@ -61,8 +61,13 @@ export default function ChatWidget() {
       {/* Floating button */}
       <button
         onClick={() => setOpen(o => !o)}
-        className="fixed bottom-6 right-6 z-50 w-16 h-16 rounded-2xl flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-110"
-        style={{ background: "linear-gradient(135deg,#E8001D,#ff1a35)", boxShadow: "0 4px 28px rgba(232,0,29,0.6)", border: "2px solid rgba(255,255,255,0.15)" }}>
+        className="fixed right-4 z-50 w-14 h-14 md:w-16 md:h-16 rounded-2xl flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-110 md:bottom-6"
+        style={{
+          background: "linear-gradient(135deg,#E8001D,#ff1a35)",
+          boxShadow: "0 4px 28px rgba(232,0,29,0.6)",
+          border: "2px solid rgba(255,255,255,0.15)",
+          bottom: "calc(56px + env(safe-area-inset-bottom, 0px) + 12px)"
+        }}>
         {open ? <X size={22} className="text-white" /> : (
           <svg width="34" height="34" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
             {/* Antena */}
@@ -85,8 +90,13 @@ export default function ChatWidget() {
 
       {/* Chat window */}
       {open && (
-        <div className="fixed bottom-24 right-6 z-50 w-80 sm:w-96 rounded-2xl overflow-hidden shadow-2xl flex flex-col"
-          style={{ height: "520px", background: "#0f0f0f", border: "1px solid rgba(232,0,29,0.25)" }}>
+        <div className="fixed right-4 z-50 w-80 sm:w-96 rounded-2xl overflow-hidden shadow-2xl flex flex-col md:bottom-28"
+          style={{
+            height: "520px",
+            background: "#0f0f0f",
+            border: "1px solid rgba(232,0,29,0.25)",
+            bottom: "calc(56px + env(safe-area-inset-bottom, 0px) + 68px)"
+          }}>
 
           {/* Header */}
           <div className="flex items-center gap-3 px-4 py-3 shrink-0"
