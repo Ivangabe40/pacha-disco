@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { useState, useEffect } from "react";
-import { Menu, X, Instagram, Facebook, MessageCircle, MapPin, ChevronLeft } from "lucide-react";
+import { Menu, X, Instagram, Facebook, MessageCircle, MapPin, ChevronLeft, Coins } from "lucide-react";
 import ChatWidget from "@/components/ChatWidget";
 import MobileBottomBar from "@/components/MobileBottomBar";
 
@@ -16,7 +16,8 @@ const navLinks = [
 { label: "Carta", page: "Menu" },
 { label: "Nosotros", page: "About" },
 { label: "Eventos Privados", page: "PrivateEvents" },
-{ label: "Reservas VIP", page: "VIPReservations" }];
+{ label: "Reservas VIP", page: "VIPReservations" },
+{ label: "Mis Coins 🪙", page: "MisCuenta" }];
 
 
 export default function Layout({ children, currentPageName }) {

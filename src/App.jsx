@@ -9,6 +9,7 @@ import UserNotRegisteredError from '@/components/UserNotRegisteredError';
 import PrivateEvents from './pages/PrivateEvents';
 import VIPReservations from './pages/VIPReservations';
 import Contact from './pages/Contact';
+import MisCuenta from './pages/MisCuenta';
 import { AnimatePresence, motion } from 'framer-motion';
 
 const { Pages, Layout, mainPage } = pagesConfig;
@@ -77,6 +78,7 @@ const AuthenticatedApp = () => {
         <Route path="/PrivateEvents" element={<LayoutWrapper currentPageName="PrivateEvents"><PrivateEvents /></LayoutWrapper>} />
         <Route path="/VIPReservations" element={<LayoutWrapper currentPageName="VIPReservations"><VIPReservations /></LayoutWrapper>} />
         <Route path="/Contact" element={<LayoutWrapper currentPageName="Contact"><Contact /></LayoutWrapper>} />
+        <Route path="/MisCuenta" element={<LayoutWrapper currentPageName="MisCuenta"><MisCuenta /></LayoutWrapper>} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </AnimatePresence>

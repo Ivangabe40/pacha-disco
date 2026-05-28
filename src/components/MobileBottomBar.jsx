@@ -1,11 +1,12 @@
 import { Link, useLocation } from "react-router-dom";
-import { Home, Calendar, Wine, Crown } from "lucide-react";
+import { Home, Calendar, Wine, Crown, Coins } from "lucide-react";
 
 const tabs = [
   { label: "Home", icon: Home, path: "/" },
   { label: "Eventos", icon: Calendar, path: "/Home" },
   { label: "Carta", icon: Wine, path: "/Menu" },
   { label: "VIP", icon: Crown, path: "/VIPReservations" },
+  { label: "Mis Coins", icon: Coins, path: "/MisCuenta" },
 ];
 
 export default function MobileBottomBar() {
