@@ -1,0 +1,38 @@
+{
+  "name": "Artist",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Nombre del artista / DJ"
+    },
+    "genre": {
+      "type": "string",
+      "description": "G\u00e9nero musical"
+    },
+    "bio": {
+      "type": "string",
+      "description": "Biograf\u00eda corta"
+    },
+    "photo_url": {
+      "type": "string",
+      "description": "Foto del artista"
+    },
+    "instagram": {
+      "type": "string",
+      "description": "Instagram handle"
+    },
+    "soundcloud": {
+      "type": "string",
+      "description": "URL SoundCloud"
+    },
+    "is_resident": {
+      "type": "boolean",
+      "default": false,
+      "description": "DJ Residente"
+    }
+  },
+  "required": [
+    "name"
+  ]
+}

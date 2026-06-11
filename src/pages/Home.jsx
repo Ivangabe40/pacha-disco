@@ -9,6 +9,7 @@ import { checkEventReminders } from "@/hooks/useEventReminder";
 import PastEventsCarousel from "@/components/events/PastEventsCarousel";
 import NewsletterSubscribe from "@/components/NewsletterSubscribe";
 import HomeVideoSection from "@/components/HomeVideoSection";
+import EscapeBarSection from "@/components/EscapeBarSection";
 
 export default function Home() {
   const [events, setEvents] = useState([]);
@@ -85,6 +86,9 @@ export default function Home() {
           )}
         </section>
       )}
+
+      {/* ESCAPE BAR */}
+      <EscapeBarSection />
 
       {/* NEWSLETTER */}
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-16">
