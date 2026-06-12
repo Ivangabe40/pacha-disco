@@ -27,6 +27,11 @@
       "type": "boolean",
       "default": false,
       "description": "Destacar este evento"
+    },
+    "is_hidden": {
+      "type": "boolean",
+      "default": false,
+      "description": "Ocultar en el sitio (promoci\u00f3n vencida)"
     }
   },
   "required": [

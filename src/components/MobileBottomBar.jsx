@@ -2,11 +2,11 @@ import { Link, useLocation } from "react-router-dom";
 import { Home, Calendar, Wine, Crown, GlassWater } from "lucide-react";
 
 const tabs = [
-  { label: "Home", icon: Home, path: "/" },
+  { label: "Inicio", icon: Home, path: "/" },
   { label: "Eventos", icon: Calendar, path: "/Home" },
   { label: "Carta", icon: Wine, path: "/Menu" },
+  { label: "Bar", icon: GlassWater, path: "/EscapeBar" },
   { label: "VIP", icon: Crown, path: "/VIPReservations" },
-  { label: "Escape Bar", icon: GlassWater, path: "/EscapeBar" },
 ];
 
 export default function MobileBottomBar() {

@@ -1,174 +1,151 @@
-import { Instagram, MessageCircle, Globe } from "lucide-react";
+import { useState, useEffect } from "react";
+import { base44 } from "@/api/base44Client";
+import { Instagram, MessageCircle, Globe, CalendarDays, Tag, ChevronRight } from "lucide-react";
+import { Link } from "react-router-dom";
+import { format } from "date-fns";
+import { es } from "date-fns/locale";
 
-const FLYER_URL = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/794866eb3_file_000000003018720eb0c7273b79476914.png";
-
-const features = [
-  { icon: "🍹", label: "Carta de Tragos" },
-  { icon: "🍷", label: "Vinos" },
-  { icon: "🍺", label: "Cervezas" },
-  { icon: "🎵", label: "Música" },
-];
+const LOGO_URL = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/b9e1df1f5_lanzamiento_20260610_214740_0000.png";
 
 export default function EscapeBarSection() {
-  return (
-    <section className="relative overflow-hidden py-20 px-4" style={{ background: "#050303" }}>
-      {/* Background image blurred */}
-      <div
-        className="absolute inset-0 opacity-20"
-        style={{
-          backgroundImage: `url(${FLYER_URL})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center top",
-          filter: "blur(40px) saturate(1.5)",
-        }}
-      />
+  const [events, setEvents] = useState([]);
 
-      {/* Gold top border */}
+  useEffect(() => {
+    base44.entities.EscapeBarEvent.list("-date").then(data => {
+      setEvents(data.filter(e => !e.is_hidden));
+    });
+  }, []);
+
+  const featured = events.find(e => e.is_featured) || events[0];
+  const previews = events.filter(e => e.id !== featured?.id).slice(0, 3);
+
+  return (
+    <section className="relative overflow-hidden py-16 px-4" style={{ background: "#050303" }}>
+      {/* Gold borders */}
       <div className="absolute top-0 left-0 right-0 h-px"
+        style={{ background: "linear-gradient(90deg, transparent, #C9A84C 30%, #E8C97A 50%, #C9A84C 70%, transparent)" }} />
+      <div className="absolute bottom-0 left-0 right-0 h-px"
         style={{ background: "linear-gradient(90deg, transparent, #C9A84C 30%, #E8C97A 50%, #C9A84C 70%, transparent)" }} />
 
       <div className="relative max-w-5xl mx-auto">
-        {/* Eyebrow */}
-        <p className="text-center text-xs uppercase tracking-[0.4em] mb-3"
-          style={{ color: "#C9A84C", fontFamily: "'Inter', sans-serif" }}>
-          Una nueva experiencia
-        </p>
-
-        {/* Main logo text */}
-        <div className="text-center mb-2">
-          <h2
-            className="text-5xl md:text-7xl font-black uppercase leading-none"
-            style={{
-              fontFamily: "'Playfair Display', serif",
-              background: "linear-gradient(135deg, #C9A84C 0%, #F5E6A3 40%, #E8C97A 60%, #9A6F20 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-              textShadow: "none",
-              filter: "drop-shadow(0 0 30px rgba(201,168,76,0.4))",
-            }}>
-            Escape Bar
-          </h2>
-          <p className="text-lg md:text-xl tracking-[0.35em] uppercase mt-1"
-            style={{ color: "#E8C97A", fontFamily: "'Inter', sans-serif", fontWeight: 300 }}>
-            by Pachá
-          </p>
-        </div>
-
-        {/* Script "lanzamiento" */}
-        <p className="text-center text-4xl md:text-5xl my-4"
-          style={{
-            fontFamily: "'Playfair Display', serif",
-            fontStyle: "italic",
-            fontWeight: 400,
-            color: "#fff",
-            textShadow: "0 2px 20px rgba(255,255,255,0.15)",
-          }}>
-          lanzamiento
-        </p>
-
-        {/* Date box */}
-        <div className="max-w-xs mx-auto my-8 text-center px-8 py-6 relative"
-          style={{ border: "1px solid rgba(201,168,76,0.4)", background: "rgba(0,0,0,0.55)", backdropFilter: "blur(10px)" }}>
-          {/* Corner accents */}
-          <span className="absolute top-0 left-0 w-3 h-3 border-t border-l" style={{ borderColor: "#C9A84C" }} />
-          <span className="absolute top-0 right-0 w-3 h-3 border-t border-r" style={{ borderColor: "#C9A84C" }} />
-          <span className="absolute bottom-0 left-0 w-3 h-3 border-b border-l" style={{ borderColor: "#C9A84C" }} />
-          <span className="absolute bottom-0 right-0 w-3 h-3 border-b border-r" style={{ borderColor: "#C9A84C" }} />
-
-          <p className="text-xs uppercase tracking-[0.3em] mb-1" style={{ color: "#C9A84C" }}>Próximo Viernes</p>
-
-          {/* Gold divider */}
-          <div className="flex items-center gap-2 justify-center mb-2">
-            <div className="h-px flex-1" style={{ background: "linear-gradient(90deg, transparent, #C9A84C)" }} />
-            <span className="text-4xl font-black" style={{ color: "#E8C97A", fontFamily: "'Playfair Display', serif" }}>
-              19/06
-            </span>
-            <div className="h-px flex-1" style={{ background: "linear-gradient(90deg, #C9A84C, transparent)" }} />
+        {/* Header with logo */}
+        <div className="flex flex-col md:flex-row items-center gap-8 mb-12">
+          <div className="flex-shrink-0">
+            <img src={LOGO_URL} alt="Escape Bar by Pachá"
+              className="w-48 md:w-56 object-contain rounded-xl"
+              style={{ filter: "drop-shadow(0 0 30px rgba(201,168,76,0.3))" }} />
           </div>
-
-          <p className="text-xs uppercase tracking-[0.25em] font-bold mb-1" style={{ color: "#fff" }}>
-            Primera ronda de tragos 2x1
-          </p>
-          <p className="text-sm font-black uppercase tracking-widest mb-3" style={{ color: "#E8001D" }}>
-            Toda la noche.
-          </p>
-          <p className="text-xs leading-relaxed" style={{ color: "#aaa" }}>
-            Te esperamos a partir de las 23:00<br />para brindar y pasarla increíble.
-          </p>
-        </div>
-
-        {/* Features row */}
-        <div className="flex justify-center gap-6 md:gap-12 my-8">
-          {features.map(({ icon, label }) => (
-            <div key={label} className="flex flex-col items-center gap-2">
-              <span className="text-2xl">{icon}</span>
-              <div className="h-px w-px my-0.5" />
-              <p className="text-xs uppercase tracking-widest text-center leading-tight"
-                style={{ color: "#C9A84C", maxWidth: "60px" }}>
-                {label}
-              </p>
-            </div>
-          ))}
-        </div>
-
-        {/* Divider */}
-        <div className="flex items-center gap-4 my-8 max-w-lg mx-auto">
-          <div className="flex-1 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(201,168,76,0.3))" }} />
-          <span className="text-yellow-700 text-lg">✦</span>
-          <div className="flex-1 h-px" style={{ background: "linear-gradient(90deg, rgba(201,168,76,0.3), transparent)" }} />
-        </div>
-
-        {/* Tagline */}
-        <p className="text-center text-2xl md:text-3xl font-black uppercase tracking-widest"
-          style={{ color: "#E8C97A", fontFamily: "'Playfair Display', serif",
-            textShadow: "0 0 30px rgba(201,168,76,0.3)" }}>
-          Nuevo Espacio / Bar Lounge
-        </p>
-
-        {/* Contact row */}
-        <div className="flex flex-wrap items-center justify-center gap-6 mt-10">
-          <a href="https://www.instagram.com/pachaoficialok" target="_blank" rel="noopener noreferrer"
-            className="flex items-center gap-2 text-sm transition-opacity hover:opacity-70"
-            style={{ color: "#aaa" }}>
-            <Instagram size={16} style={{ color: "#C9A84C" }} />
-            @pachaoficialok
-          </a>
-          <div className="h-4 w-px" style={{ background: "#333" }} />
-          <a href="https://wa.me/5493468546935" target="_blank" rel="noopener noreferrer"
-            className="flex items-center gap-2 text-sm transition-opacity hover:opacity-70"
-            style={{ color: "#aaa" }}>
-            <MessageCircle size={16} style={{ color: "#C9A84C" }} />
-            3468-546935
-          </a>
-          <div className="h-4 w-px" style={{ background: "#333" }} />
-          <a href="http://www.pachadisco.com.ar" target="_blank" rel="noopener noreferrer"
-            className="flex items-center gap-2 text-sm transition-opacity hover:opacity-70"
-            style={{ color: "#aaa" }}>
-            <Globe size={16} style={{ color: "#C9A84C" }} />
-            www.pachadisco.com.ar
-          </a>
-        </div>
-
-        {/* CTA */}
-        <div className="text-center mt-10">
-          <a href="https://wa.me/5493468546935?text=Hola!%20Me%20interesa%20el%20lanzamiento%20de%20Escape%20Bar"
-            target="_blank" rel="noopener noreferrer">
-            <button className="px-10 py-4 rounded-lg text-sm font-black tracking-widest uppercase transition-all hover:-translate-y-1"
+          <div className="text-center md:text-left">
+            <p className="text-xs uppercase tracking-[0.4em] mb-2" style={{ color: "#C9A84C" }}>Una nueva experiencia</p>
+            <h2 className="text-4xl md:text-5xl font-black uppercase leading-none mb-2"
               style={{
-                background: "linear-gradient(135deg, #C9A84C, #E8C97A, #C9A84C)",
-                color: "#050303",
-                boxShadow: "0 4px 30px rgba(201,168,76,0.4)",
+                fontFamily: "'Playfair Display', serif",
+                background: "linear-gradient(135deg, #C9A84C 0%, #F5E6A3 40%, #E8C97A 60%, #9A6F20 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+                filter: "drop-shadow(0 0 20px rgba(201,168,76,0.3))",
               }}>
-              ¡Quiero ir al lanzamiento!
+              Escape Bar
+            </h2>
+            <p className="text-base tracking-[0.35em] uppercase" style={{ color: "#E8C97A", fontWeight: 300 }}>
+              Nuevo Espacio / Bar Lounge
+            </p>
+            <p className="text-sm mt-2" style={{ color: "#666" }}>
+              carta de tragos · vinos · cervezas · música · cada viernes
+            </p>
+          </div>
+        </div>
+
+        {/* Events content */}
+        {events.length > 0 && (
+          <div className="space-y-4">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-1 h-8 rounded-full" style={{ background: "linear-gradient(#C9A84C, #9A6F20)" }} />
+              <p className="text-sm uppercase tracking-widest font-bold" style={{ color: "#C9A84C" }}>Próximos viernes</p>
+            </div>
+
+            {/* Featured */}
+            {featured && (
+              <div className="rounded-2xl overflow-hidden"
+                style={{ background: "#0f0f0f", border: "1px solid rgba(201,168,76,0.35)" }}>
+                <div className="flex flex-col md:flex-row">
+                  {featured.photo_url && (
+                    <div className="md:w-2/5 aspect-video md:aspect-auto overflow-hidden">
+                      <img src={featured.photo_url} alt={featured.title} className="w-full h-full object-cover" />
+                    </div>
+                  )}
+                  <div className="flex-1 p-6 flex flex-col justify-center">
+                    {featured.is_featured && (
+                      <span className="inline-block text-xs px-2 py-0.5 rounded font-bold mb-3 self-start"
+                        style={{ background: "linear-gradient(135deg, #C9A84C, #E8C97A)", color: "#050303" }}>
+                        ⭐ Destacado
+                      </span>
+                    )}
+                    <div className="flex items-center gap-2 mb-2">
+                      <CalendarDays size={13} style={{ color: "#C9A84C" }} />
+                      <span className="text-xs uppercase tracking-widest" style={{ color: "#C9A84C" }}>
+                        {(() => { try { return format(new Date(featured.date + "T12:00:00"), "EEEE d 'de' MMMM", { locale: es }); } catch { return featured.date; } })()}
+                      </span>
+                    </div>
+                    <h3 className="text-2xl font-black text-white mb-2" style={{ fontFamily: "'Playfair Display', serif" }}>
+                      {featured.title}
+                    </h3>
+                    {featured.promo && (
+                      <div className="flex items-center gap-1.5 mb-2">
+                        <Tag size={12} style={{ color: "#E8001D" }} />
+                        <span className="text-sm font-bold" style={{ color: "#E8C97A" }}>{featured.promo}</span>
+                      </div>
+                    )}
+                    {featured.description && (
+                      <p className="text-gray-400 text-sm leading-relaxed">{featured.description}</p>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Preview cards */}
+            {previews.length > 0 && (
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
+                {previews.map(ev => (
+                  <div key={ev.id} className="rounded-xl overflow-hidden"
+                    style={{ background: "#0f0f0f", border: "1px solid #1e1e1e" }}>
+                    {ev.photo_url && (
+                      <div className="aspect-video overflow-hidden">
+                        <img src={ev.photo_url} alt={ev.title} className="w-full h-full object-cover" />
+                      </div>
+                    )}
+                    <div className="p-4">
+                      <p className="text-xs mb-1 uppercase tracking-widest" style={{ color: "#C9A84C" }}>
+                        {(() => { try { return format(new Date(ev.date + "T12:00:00"), "d MMM", { locale: es }); } catch { return ev.date; } })()}
+                      </p>
+                      <h4 className="text-white font-bold text-sm" style={{ fontFamily: "'Playfair Display', serif" }}>{ev.title}</h4>
+                      {ev.promo && <p className="text-xs mt-1" style={{ color: "#E8C97A" }}>🏷 {ev.promo}</p>}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Ver más CTA */}
+        <div className="text-center mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+          <Link to="/EscapeBar">
+            <button className="px-8 py-3 rounded-lg text-sm font-black tracking-widest uppercase transition-all hover:-translate-y-1"
+              style={{ background: "linear-gradient(135deg, #C9A84C, #E8C97A, #C9A84C)", color: "#050303", boxShadow: "0 4px 20px rgba(201,168,76,0.3)" }}>
+              Ver todos los viernes <ChevronRight size={14} className="inline ml-1" />
+            </button>
+          </Link>
+          <a href="https://wa.me/5493468546935?text=Hola!%20Me%20interesa%20Escape%20Bar" target="_blank" rel="noopener noreferrer">
+            <button className="px-8 py-3 rounded-lg text-sm font-bold tracking-widest uppercase transition-all hover:-translate-y-1"
+              style={{ background: "transparent", border: "1px solid rgba(201,168,76,0.4)", color: "#C9A84C" }}>
+              <MessageCircle size={14} className="inline mr-1" /> Consultar
             </button>
           </a>
         </div>
       </div>
-
-      {/* Gold bottom border */}
-      <div className="absolute bottom-0 left-0 right-0 h-px"
-        style={{ background: "linear-gradient(90deg, transparent, #C9A84C 30%, #E8C97A 50%, #C9A84C 70%, transparent)" }} />
     </section>
   );
 }
