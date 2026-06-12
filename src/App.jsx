@@ -7,6 +7,7 @@ import PageNotFound from './lib/PageNotFound';
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import UserNotRegisteredError from '@/components/UserNotRegisteredError';
 import PrivateEvents from './pages/PrivateEvents';
+import EscapeBar from './pages/EscapeBar';
 import VIPReservations from './pages/VIPReservations';
 import Contact from './pages/Contact';
 import MisCuenta from './pages/MisCuenta';
@@ -79,6 +80,7 @@ const AuthenticatedApp = () => {
         <Route path="/VIPReservations" element={<LayoutWrapper currentPageName="VIPReservations"><VIPReservations /></LayoutWrapper>} />
         <Route path="/Contact" element={<LayoutWrapper currentPageName="Contact"><Contact /></LayoutWrapper>} />
         <Route path="/MisCuenta" element={<LayoutWrapper currentPageName="MisCuenta"><MisCuenta /></LayoutWrapper>} />
+        <Route path="/EscapeBar" element={<LayoutWrapper currentPageName="EscapeBar"><EscapeBar /></LayoutWrapper>} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </AnimatePresence>

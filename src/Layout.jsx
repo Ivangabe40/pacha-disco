@@ -11,7 +11,7 @@ const LOGO_RED = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b11
 
 const navLinks = [
 { label: "Eventos", page: "Home" },
-{ label: "DJs & Artistas", page: "Artists" },
+{ label: "Escape Bar", page: "EscapeBar" },
 { label: "Galería", page: "Gallery" },
 { label: "Carta", page: "Menu" },
 { label: "Nosotros", page: "About" },

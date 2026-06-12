@@ -14,7 +14,8 @@ import AdminNewsletter from "@/components/admin/AdminNewsletter";
 import AdminHomeVideo from "@/components/admin/AdminHomeVideo";
 import AdminNotifications from "@/components/admin/AdminNotifications";
 import AdminCoins from "@/components/admin/AdminCoins";
-import { Calendar, Music, Camera, Ticket, Wine, ShieldOff, Megaphone, CreditCard, ScanLine, Crown, Mail, Video, Bell, Coins } from "lucide-react";
+import AdminEscapeBar from "@/components/admin/AdminEscapeBar";
+import { Calendar, Music, Camera, Ticket, Wine, ShieldOff, Megaphone, CreditCard, ScanLine, Crown, Mail, Video, Bell, Coins, GlassWater } from "lucide-react";
 
 const LOGO_RED = "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/user_69abf6aff758a16386edeb04/0e73ec46b_IMG-20260121-WA0031.jpg";
 
@@ -32,6 +33,7 @@ const tabs = [
   { id: "homevideo", label: "Video Home", icon: Video },
   { id: "notifications", label: "Notificaciones", icon: Bell },
   { id: "coins", label: "Pachá Coins", icon: Coins },
+  { id: "escapebar", label: "Escape Bar", icon: GlassWater },
 ];
 
 export default function Admin() {
@@ -138,6 +140,7 @@ export default function Admin() {
         {activeTab === "homevideo" && <AdminHomeVideo />}
         {activeTab === "notifications" && <AdminNotifications />}
         {activeTab === "coins" && <AdminCoins />}
+        {activeTab === "escapebar" && <AdminEscapeBar />}
         {activeTab === "menu" && (
           <div className="grid md:grid-cols-3 gap-6">
             <div className="md:col-span-2"><AdminMenu /></div>

@@ -1,0 +1,36 @@
+{
+  "name": "EscapeBarEvent",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "T\u00edtulo del evento / novedad"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Fecha del viernes"
+    },
+    "description": {
+      "type": "string",
+      "description": "Descripci\u00f3n del evento"
+    },
+    "photo_url": {
+      "type": "string",
+      "description": "Foto del evento"
+    },
+    "promo": {
+      "type": "string",
+      "description": "Promoci\u00f3n especial (ej: 2x1 en tragos)"
+    },
+    "is_featured": {
+      "type": "boolean",
+      "default": false,
+      "description": "Destacar este evento"
+    }
+  },
+  "required": [
+    "title",
+    "date"
+  ]
+}
