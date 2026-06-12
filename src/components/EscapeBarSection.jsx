@@ -5,8 +5,6 @@ import { Link } from "react-router-dom";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 
-const LOGO_URL = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/b9e1df1f5_lanzamiento_20260610_214740_0000.png";
-
 export default function EscapeBarSection() {
   const [events, setEvents] = useState([]);
 
@@ -30,11 +28,6 @@ export default function EscapeBarSection() {
       <div className="relative max-w-5xl mx-auto">
         {/* Header with logo */}
         <div className="flex flex-col md:flex-row items-center gap-8 mb-12">
-          <div className="flex-shrink-0">
-            <img src={LOGO_URL} alt="Escape Bar by Pachá"
-              className="w-48 md:w-56 object-contain rounded-xl"
-              style={{ filter: "drop-shadow(0 0 30px rgba(201,168,76,0.3))" }} />
-          </div>
           <div className="text-center md:text-left">
             <p className="text-xs uppercase tracking-[0.4em] mb-2" style={{ color: "#C9A84C" }}>Una nueva experiencia</p>
             <h2 className="text-4xl md:text-5xl font-black uppercase leading-none mb-2"
