@@ -31,9 +31,14 @@ export default function PromotionPopup() {
           <X size={14} className="text-white" />
         </button>
 
-        {/* Image — aspect ratio fijo para consistencia móvil/desktop */}
-        {promo.image_url && (
-          <div className="w-full" style={{ aspectRatio: "4/5", overflow: "hidden" }}>
+        {/* Video o imagen — aspecto reel 9:16 */}
+        {promo.video_url ? (
+          <div className="w-full" style={{ aspectRatio: "9/16", overflow: "hidden" }}>
+            <video src={promo.video_url} autoPlay muted loop playsInline
+              className="w-full h-full object-cover" />
+          </div>
+        ) : promo.image_url && (
+          <div className="w-full" style={{ aspectRatio: "9/16", overflow: "hidden" }}>
             <img src={promo.image_url} alt={promo.title}
               className="w-full h-full object-cover object-center" />
           </div>

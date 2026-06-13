@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
 import { Plus, Trash2, Upload, ToggleLeft, ToggleRight } from "lucide-react";
 
-const EMPTY = { title: "", description: "", image_url: "", button_label: "Ver más", button_url: "", is_active: true };
+const EMPTY = { title: "", description: "", image_url: "", video_url: "", button_label: "Ver más", button_url: "", is_active: true };
 
 export default function AdminPromotions() {
   const [promos, setPromos] = useState([]);
@@ -17,9 +17,18 @@ export default function AdminPromotions() {
   const handleImage = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
-    setUploading(true);
+    setUploading("image");
     const { file_url } = await base44.integrations.Core.UploadFile({ file });
     setForm(f => ({ ...f, image_url: file_url }));
+    setUploading(false);
+  };
+
+  const handleVideo = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    setUploading("video");
+    const { file_url } = await base44.integrations.Core.UploadFile({ file });
+    setForm(f => ({ ...f, video_url: file_url }));
     setUploading(false);
   };
 
@@ -46,7 +55,7 @@ export default function AdminPromotions() {
   };
 
   const edit = (p) => {
-    setForm({ title: p.title, description: p.description || "", image_url: p.image_url || "", button_label: p.button_label || "Ver más", button_url: p.button_url || "", is_active: p.is_active });
+    setForm({ title: p.title, description: p.description || "", image_url: p.image_url || "", video_url: p.video_url || "", button_label: p.button_label || "Ver más", button_url: p.button_url || "", is_active: p.is_active });
     setEditing(p.id);
     setShowForm(true);
   };
@@ -78,10 +87,28 @@ export default function AdminPromotions() {
               <label className="flex items-center gap-2 cursor-pointer px-3 py-2 rounded-lg text-sm text-gray-400 transition-colors"
                 style={{ border: "1px dashed #333", background: "#0a0a0a" }}>
                 <Upload size={14} />
-                {uploading ? "Subiendo..." : form.image_url ? "Cambiar imagen" : "Subir imagen de la promo"}
+                {uploading === "image" ? "Subiendo..." : form.image_url ? "Cambiar imagen" : "Subir imagen (fallback)"}
                 <input type="file" accept="image/*" className="hidden" onChange={handleImage} />
               </label>
-              {form.image_url && <img src={form.image_url} alt="" className="mt-2 h-32 object-contain rounded-lg" />}
+              {form.image_url && <img src={form.image_url} alt="" className="mt-2 h-24 object-contain rounded-lg" />}
+            </div>
+
+            {/* Video upload (reel 9:16) */}
+            <div>
+              <label className="flex items-center gap-2 cursor-pointer px-3 py-2 rounded-lg text-sm text-gray-400 transition-colors"
+                style={{ border: "1px dashed #555", background: "#0a0a0a" }}>
+                <Upload size={14} />
+                {uploading === "video" ? "Subiendo video..." : form.video_url ? "Cambiar video (reel)" : "Subir video reel 9:16 (opcional)"}
+                <input type="file" accept="video/*" className="hidden" onChange={handleVideo} />
+              </label>
+              {form.video_url && (
+                <div className="mt-2 flex items-center gap-2">
+                  <video src={form.video_url} className="h-24 rounded-lg" style={{ aspectRatio: "9/16" }} muted />
+                  <button type="button" onClick={() => setForm(f => ({ ...f, video_url: "" }))}
+                    className="text-xs text-red-500 hover:text-red-400">Quitar video</button>
+                </div>
+              )}
+              <p className="text-xs text-gray-600 mt-1">Si hay video, el popup mostrará el video. Si no, mostrará la imagen.</p>
             </div>
 
             <input value={form.button_label} onChange={e => setForm(f => ({ ...f, button_label: e.target.value }))}

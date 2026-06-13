@@ -14,6 +14,10 @@
       "type": "string",
       "description": "URL de la imagen de la promoci\u00f3n"
     },
+    "video_url": {
+      "type": "string",
+      "description": "URL del video tipo reel (9:16)"
+    },
     "button_label": {
       "type": "string",
       "description": "Texto del bot\u00f3n"

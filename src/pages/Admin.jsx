@@ -11,10 +11,9 @@ import AdminMercadoPago from "@/components/admin/AdminMercadoPago";
 import AdminScanner from "@/components/admin/AdminScanner";
 import AdminReservations from "@/components/admin/AdminReservations";
 import AdminNewsletter from "@/components/admin/AdminNewsletter";
-import AdminHomeVideo from "@/components/admin/AdminHomeVideo";
 import AdminNotifications from "@/components/admin/AdminNotifications";
 import AdminEscapeBar from "@/components/admin/AdminEscapeBar";
-import { Calendar, Music, Camera, Ticket, Wine, ShieldOff, Megaphone, CreditCard, ScanLine, Crown, Mail, Video, Bell, GlassWater } from "lucide-react";
+import { Calendar, Music, Camera, Ticket, Wine, ShieldOff, Megaphone, CreditCard, ScanLine, Crown, Mail, Bell, GlassWater } from "lucide-react";
 
 const LOGO_RED = "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/user_69abf6aff758a16386edeb04/0e73ec46b_IMG-20260121-WA0031.jpg";
 
@@ -29,7 +28,6 @@ const tabs = [
   { id: "scanner", label: "Escáner", icon: ScanLine },
   { id: "reservations", label: "Reservas", icon: Crown },
   { id: "newsletter", label: "Newsletter", icon: Mail },
-  { id: "homevideo", label: "Video Home", icon: Video },
   { id: "notifications", label: "Notificaciones", icon: Bell },
   { id: "escapebar", label: "Escape Bar", icon: GlassWater },
 ];
@@ -135,7 +133,6 @@ export default function Admin() {
         {activeTab === "scanner" && <AdminScanner />}
         {activeTab === "reservations" && <AdminReservations />}
         {activeTab === "newsletter" && <AdminNewsletter />}
-        {activeTab === "homevideo" && <AdminHomeVideo />}
         {activeTab === "notifications" && <AdminNotifications />}
         {activeTab === "escapebar" && <AdminEscapeBar />}
         {activeTab === "menu" && (
