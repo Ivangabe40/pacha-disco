@@ -87,6 +87,40 @@ export default function Home() {
         </section>
       )}
 
+      {/* GRACIAS POR ESTAR */}
+      <section className="py-16 md:py-24 px-4" style={{ background: "#070707" }}>
+        <div className="max-w-2xl mx-auto text-center">
+          <p className="text-xs tracking-widest uppercase mb-3" style={{ color: "#E8001D" }}>Nuestro equipo</p>
+          <h2 className="text-3xl md:text-5xl font-black text-white uppercase mb-10"
+            style={{ fontFamily: "'Playfair Display', serif", textShadow: "0 0 40px rgba(232,0,29,0.3)" }}>
+            ¡Gracias por estar!
+          </h2>
+          {/* Marco decorativo */}
+          <div className="relative inline-block w-full">
+            {/* Esquinas doradas */}
+            <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 z-10" style={{ borderColor: "#C9A84C" }} />
+            <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 z-10" style={{ borderColor: "#C9A84C" }} />
+            <div className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 z-10" style={{ borderColor: "#C9A84C" }} />
+            <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 z-10" style={{ borderColor: "#C9A84C" }} />
+            {/* Borde rojo interior */}
+            <div className="absolute inset-3 z-10 pointer-events-none rounded-xl"
+              style={{ border: "1px solid rgba(232,0,29,0.4)", boxShadow: "0 0 30px rgba(232,0,29,0.15) inset" }} />
+            {/* Foto */}
+            <div className="rounded-xl overflow-hidden"
+              style={{ boxShadow: "0 0 60px rgba(232,0,29,0.25), 0 0 120px rgba(201,168,76,0.1)", border: "2px solid rgba(201,168,76,0.35)" }}>
+              <img
+                src="https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/1cf2e2e4d_IMG-20260614-WA00172.jpg"
+                alt="El equipo de Pachá"
+                className="w-full h-auto object-cover"
+              />
+            </div>
+          </div>
+          <p className="mt-8 text-gray-400 text-sm md:text-base tracking-wide leading-relaxed">
+            23 años compartiendo la noche con ustedes. Gracias a nuestro increíble equipo y a todos los que nos eligen cada semana. 🖤
+          </p>
+        </div>
+      </section>
+
       {/* ESCAPE BAR */}
       <EscapeBarSection />
 
