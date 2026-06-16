@@ -40,11 +40,11 @@ export default function EscapeBar() {
 
           {/* Logo image */}
           <div className="flex justify-center mb-6">
-            <img
-              src={LOGO_URL}
-              alt="Escape Bar by Pachá"
-              className="w-72 md:w-96 object-contain rounded-2xl shadow-2xl hidden"
-              style={{ filter: "drop-shadow(0 0 40px rgba(201,168,76,0.25))" }} />
+            
+
+
+
+
             
           </div>
 
