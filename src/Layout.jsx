@@ -2,7 +2,6 @@ import { Link, useLocation } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { useState, useEffect } from "react";
 import { Menu, X, Instagram, Facebook, MessageCircle, MapPin, ChevronLeft, Coins } from "lucide-react";
-import ChatWidget from "@/components/ChatWidget";
 import MobileBottomBar from "@/components/MobileBottomBar";
 
 const ROOT_ROUTES = new Set(["/", "/Home", "/Artists", "/Gallery", "/Menu", "/About", "/PrivateEvents", "/VIPReservations", "/Contact", "/Admin"]);
@@ -135,7 +134,6 @@ export default function Layout({ children, currentPageName }) {
         {children}
       </main>
 
-      <ChatWidget />
       <MobileBottomBar />
 
       {/* FOOTER */}
