@@ -90,13 +90,7 @@ export default function Layout({ children, currentPageName }) {
           </div>
 
           {/* Desktop CTA */}
-          <div className="hidden md:block">
-            <Link to={createPageUrl("Home")}>
-              <button className="btn-red px-6 py-2.5 rounded-lg text-xs font-black tracking-widest uppercase">
-                ENTRADAS
-              </button>
-            </Link>
-          </div>
+          <div className="hidden md:block" />
 
           {/* Mobile hamburger (only on root routes) */}
           {!isSubRoute && (
@@ -119,11 +113,7 @@ export default function Layout({ children, currentPageName }) {
                 {l.label}
               </Link>
             )}
-            <Link to={createPageUrl("Home")} onClick={() => setMenuOpen(false)}>
-              <button className="btn-red w-full py-3.5 rounded-lg text-sm font-black tracking-widest uppercase mt-2">
-                COMPRAR ENTRADAS
-              </button>
-            </Link>
+
           </div>
         )}
       </nav>

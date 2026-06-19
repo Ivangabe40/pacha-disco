@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
-import { Calendar, Clock, Music, Ticket } from "lucide-react";
+import { Calendar, Clock, Music } from "lucide-react";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 
@@ -85,25 +85,6 @@ export default function EventCard({ event }) {
           )}
         </div>
 
-        {/* Price */}
-        {event.ticket_price && (
-          <div className="flex items-end justify-between mb-4 pb-3"
-            style={{ borderBottom: "1px solid #1a1a1a" }}>
-            <div>
-              <div className="text-xs text-gray-600 uppercase tracking-widest mb-0.5">Anticipada</div>
-              <div className="font-black text-xl" style={{ color: "#E8001D", textShadow: "0 0 15px rgba(232,0,29,0.4)" }}>
-                ${event.ticket_price.toLocaleString()}
-              </div>
-            </div>
-            {event.ticket_price_door && (
-              <div className="text-right">
-                <div className="text-xs text-gray-600 uppercase tracking-widest mb-0.5">En puerta</div>
-                <div className="font-semibold text-sm text-gray-500">${event.ticket_price_door.toLocaleString()}</div>
-              </div>
-            )}
-          </div>
-        )}
-
         <Link to={createPageUrl(`EventDetail?id=${event.id}`)} className="block">
           <button
             disabled={!isActive}
@@ -112,8 +93,7 @@ export default function EventCard({ event }) {
               ? { background: "linear-gradient(135deg, #E8001D, #ff1a35)", color: "#fff", boxShadow: "0 4px 20px rgba(232,0,29,0.3)" }
               : { background: "#1a1a1a", color: "#444", cursor: "not-allowed" }
             }>
-            <Ticket size={13} />
-            {isSoldOut ? "Agotado" : isCancelled ? "Cancelado" : "Ver & Comprar"}
+            {isSoldOut ? "Agotado" : isCancelled ? "Cancelado" : "Ver Evento"}
           </button>
         </Link>
       </div>

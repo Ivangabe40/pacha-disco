@@ -1,17 +1,15 @@
 import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
-import { Calendar, Clock, Music, Users, Ticket, ChevronLeft, Share2, Copy, Check, Bell, BellOff } from "lucide-react";
+import { Calendar, Clock, Music, ChevronLeft, Share2, Copy, Check, Bell } from "lucide-react";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
-import BuyTicketModal from "@/components/tickets/BuyTicketModal";
 import { useEventReminder } from "@/hooks/useEventReminder";
 
 export default function EventDetail() {
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [showModal, setShowModal] = useState(false);
   const [copied, setCopied] = useState(false);
   const { reminded, toggle: toggleReminder } = useEventReminder(event);
 
@@ -24,7 +22,7 @@ export default function EventDetail() {
   };
 
   const shareWhatsApp = () => {
-    const text = event ? `🎉 *${event.title}* — ¡No te lo pierdas! Comprá tu entrada acá: ${shareUrl}` : shareUrl;
+    const text = event ? `🎉 *${event.title}* — ¡No te lo pierdas! ${shareUrl}` : shareUrl;
     window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, "_blank");
   };
 
@@ -56,7 +54,7 @@ export default function EventDetail() {
     const pageTitle = `${event.title} — ${dateStr} | Pachá Night Club`;
     const djsStr = event.djs ? ` con ${event.djs}.` : "";
     const genresStr = event.genres ? ` Música: ${event.genres}.` : "";
-    const metaDesc = `${event.title} en Pachá Night Club el ${dateStr}.${djsStr}${genresStr} Comprá tu entrada anticipada online.`;
+    const metaDesc = `${event.title} en Pachá Night Club el ${dateStr}.${djsStr}${genresStr}`;
 
     // Title
     document.title = pageTitle;
@@ -97,8 +95,6 @@ export default function EventDetail() {
 
 
   const date = new Date(event.date);
-  const isSoldOut = event.status === "agotado";
-  const availableTickets = event.capacity ? event.capacity - (event.tickets_sold || 0) : null;
 
   return (
     <div style={{ background: "#0A0A0A", minHeight: "100vh" }}>
@@ -197,16 +193,7 @@ export default function EventDetail() {
                   <div className="text-white font-semibold">{event.genres}</div>
                 </div>
               }
-              {availableTickets !== null &&
-              <div className="p-4 rounded-xl" style={{ background: "#111", border: "1px solid #222" }}>
-                  <div className="flex items-center gap-2 text-gray-400 text-xs uppercase tracking-wider mb-1">
-                    <Users size={12} style={{ color: "#C9A84C" }} /> Disponibles
-                  </div>
-                  <div className="font-semibold" style={{ color: availableTickets < 20 ? "#E8001D" : "#C9A84C" }}>
-                    {availableTickets} entradas
-                  </div>
-                </div>
-              }
+
             </div>
 
             {/* DJs */}
@@ -224,43 +211,11 @@ export default function EventDetail() {
               </div>
             }
 
-            {/* Pricing */}
-            <div className="p-6 rounded-2xl" style={{ background: "#111", border: "1px solid #333" }}>
-              <h3 className="text-white font-bold mb-4 uppercase tracking-wider text-sm">Entradas</h3>
-              <div className="flex flex-col sm:flex-row gap-4 mb-6">
-                {event.ticket_price &&
-                <div className="flex-1 p-4 rounded-xl text-center" style={{ background: "rgba(201,168,76,0.08)", border: "1px solid rgba(201,168,76,0.3)" }}>
-                    <div className="text-xs uppercase tracking-widest text-gray-400 mb-1">Anticipada</div>
-                    <div className="text-3xl font-bold" style={{ color: "#C9A84C" }}>${event.ticket_price.toLocaleString()}</div>
-                  </div>
-                }
-                {event.ticket_price_door &&
-                <div className="flex-1 p-4 rounded-xl text-center" style={{ background: "#1a1a1a", border: "1px solid #333" }}>
-                    <div className="text-xs uppercase tracking-widest text-gray-400 mb-1">En Puerta</div>
-                    <div className="text-3xl font-bold text-gray-400">${event.ticket_price_door.toLocaleString()}</div>
-                  </div>
-                }
-              </div>
 
-              {!isSoldOut && event.status !== "cancelado" ?
-              <button onClick={() => setShowModal(true)}
-              className="w-full py-4 rounded-xl font-bold tracking-wider uppercase text-lg flex items-center justify-center gap-3"
-              style={{ background: "linear-gradient(135deg, #C9A84C 0%, #E8C97A 50%, #C9A84C 100%)", color: "#0A0A0A" }}>
-                  <Ticket size={20} />
-                  Comprar Entrada Anticipada
-                </button> :
-
-              <div className="w-full py-4 rounded-xl font-bold text-center text-gray-500 uppercase tracking-wider"
-              style={{ background: "#1a1a1a", border: "1px solid #333" }}>
-                  {event.status === "agotado" ? "Entradas Agotadas" : "Evento Cancelado"}
-                </div>
-              }
-            </div>
           </div>
         </div>
       </div>
 
-      {showModal && <BuyTicketModal event={event} onClose={() => setShowModal(false)} />}
     </div>);
 
 }

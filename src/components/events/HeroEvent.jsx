@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
-import { Calendar, Music, Zap, Ticket } from "lucide-react";
+import { Calendar, Music, Zap } from "lucide-react";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 
@@ -84,7 +84,7 @@ export default function HeroEvent({ event }) {
             </p>
           )}
 
-          {/* CTAs */}
+          {/* CTA */}
           <div className="flex flex-wrap gap-4 items-center">
             <Link to={createPageUrl(`EventDetail?id=${event.id}`)}>
               <button className="flex items-center gap-3 px-8 py-4 rounded-2xl font-bold tracking-wider uppercase transition-all hover:-translate-y-0.5"
@@ -94,16 +94,9 @@ export default function HeroEvent({ event }) {
                   boxShadow: "0 4px 24px rgba(201,168,76,0.35)",
                   letterSpacing: "0.1em"
                 }}>
-                <Ticket size={18} />
-                COMPRAR ENTRADA
+                VER EVENTO
               </button>
             </Link>
-            {event.ticket_price && (
-              <div className="px-5 py-4 rounded-2xl text-sm font-semibold flex items-center gap-2"
-                style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)", color: "#aaa" }}>
-                Desde <span style={{ color: "#C9A84C", fontWeight: 700 }}>${event.ticket_price.toLocaleString()}</span>
-              </div>
-            )}
           </div>
         </div>
       </div>

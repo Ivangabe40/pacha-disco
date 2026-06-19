@@ -3,30 +3,26 @@ import { base44 } from "@/api/base44Client";
 import AdminEvents from "@/components/admin/AdminEvents";
 import AdminArtists from "@/components/admin/AdminArtists";
 import AdminGalleryAlbums from "@/components/admin/AdminGalleryAlbums";
-import AdminTickets from "@/components/admin/AdminTickets";
+
 import AdminMenu from "@/components/admin/AdminMenu";
 import MenuQR from "@/components/admin/MenuQR";
 import AdminPromotions from "@/components/admin/AdminPromotions";
-import AdminMercadoPago from "@/components/admin/AdminMercadoPago";
-import AdminScanner from "@/components/admin/AdminScanner";
+
 import AdminReservations from "@/components/admin/AdminReservations";
 import AdminNewsletter from "@/components/admin/AdminNewsletter";
 import AdminNotifications from "@/components/admin/AdminNotifications";
 import AdminEscapeBar from "@/components/admin/AdminEscapeBar";
 import AdminNovedades from "@/components/admin/AdminNovedades";
-import { Calendar, Music, Camera, Ticket, Wine, ShieldOff, Megaphone, CreditCard, ScanLine, Crown, Mail, Bell, GlassWater, Sparkles } from "lucide-react";
+import { Calendar, Music, Camera, Wine, ShieldOff, Megaphone, Crown, Mail, Bell, GlassWater, Sparkles } from "lucide-react";
 
 const LOGO_RED = "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/user_69abf6aff758a16386edeb04/0e73ec46b_IMG-20260121-WA0031.jpg";
 
 const tabs = [
   { id: "events", label: "Eventos", icon: Calendar },
-  { id: "tickets", label: "Entradas", icon: Ticket },
   { id: "artists", label: "Artistas", icon: Music },
   { id: "gallery", label: "Galería", icon: Camera },
   { id: "menu", label: "Carta", icon: Wine },
   { id: "promos", label: "Promos", icon: Megaphone },
-  { id: "pagos", label: "MercadoPago", icon: CreditCard },
-  { id: "scanner", label: "Escáner", icon: ScanLine },
   { id: "reservations", label: "Reservas", icon: Crown },
   { id: "newsletter", label: "Newsletter", icon: Mail },
   { id: "notifications", label: "Notificaciones", icon: Bell },
@@ -52,11 +48,10 @@ export default function Admin() {
   useEffect(() => {
     if (user?.role !== "admin") return;
     Promise.all([
-      base44.entities.Event.list(),
-      base44.entities.Ticket.list(),
-      base44.entities.Artist.list(),
-    ]).then(([events, tickets, artists]) => {
-      setStats({ events: events.length, tickets: tickets.length, artists: artists.length });
+    base44.entities.Event.list(),
+    base44.entities.Artist.list(),
+    ]).then(([events, artists]) => {
+    setStats({ events: events.length, artists: artists.length });
     });
   }, [user]);
 
@@ -95,7 +90,6 @@ export default function Admin() {
           <div className="grid grid-cols-3 gap-2 pb-3">
             {[
               { label: "Eventos", labelMd: "Eventos", value: stats.events, color: "#C9A84C" },
-              { label: "Entradas", labelMd: "Entradas vendidas", value: stats.tickets, color: "#E8001D" },
               { label: "Artistas", labelMd: "Artistas", value: stats.artists, color: "#8888FF" },
             ].map(s => (
               <div key={s.label} className="p-2 md:p-3 rounded-xl text-center" style={{ background: "#111", border: "1px solid #222" }}>
@@ -127,12 +121,10 @@ export default function Admin() {
       {/* Tab Content */}
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-8">
         {activeTab === "events" && <AdminEvents />}
-        {activeTab === "tickets" && <AdminTickets />}
         {activeTab === "artists" && <AdminArtists />}
         {activeTab === "gallery" && <AdminGalleryAlbums />}
         {activeTab === "promos" && <AdminPromotions />}
-        {activeTab === "pagos" && <AdminMercadoPago />}
-        {activeTab === "scanner" && <AdminScanner />}
+
         {activeTab === "reservations" && <AdminReservations />}
         {activeTab === "newsletter" && <AdminNewsletter />}
         {activeTab === "notifications" && <AdminNotifications />}
