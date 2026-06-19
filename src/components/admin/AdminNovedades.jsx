@@ -1,0 +1,143 @@
+import { useState, useEffect } from "react";
+import { base44 } from "@/api/base44Client";
+import { Plus, Trash2, Eye, EyeOff, Upload, ExternalLink } from "lucide-react";
+
+export default function AdminNovedades() {
+  const [items, setItems] = useState([]);
+  const [showForm, setShowForm] = useState(false);
+  const [form, setForm] = useState({ title: "", image_url: "", link: "", is_active: true });
+  const [uploading, setUploading] = useState(false);
+
+  const load = () => base44.entities.NovedadBanner.list("-created_date").then(setItems);
+
+  useEffect(() => { load(); }, []);
+
+  const handleUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    setUploading(true);
+    const { file_url } = await base44.integrations.Core.UploadFile({ file });
+    setForm(f => ({ ...f, image_url: file_url }));
+    setUploading(false);
+  };
+
+  const handleSave = async () => {
+    if (!form.title || !form.image_url) return;
+    await base44.entities.NovedadBanner.create(form);
+    setForm({ title: "", image_url: "", link: "", is_active: true });
+    setShowForm(false);
+    load();
+  };
+
+  const toggleActive = async (item) => {
+    await base44.entities.NovedadBanner.update(item.id, { is_active: !item.is_active });
+    load();
+  };
+
+  const handleDelete = async (item) => {
+    await base44.entities.NovedadBanner.delete(item.id);
+    load();
+  };
+
+  return (
+    <div>
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-xl font-bold text-white" style={{ fontFamily: "'Playfair Display', serif" }}>
+          Banners de Novedades
+        </h2>
+        <button onClick={() => setShowForm(!showForm)}
+          className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-bold"
+          style={{ background: "#E8001D", color: "#fff" }}>
+          <Plus size={14} /> Nuevo
+        </button>
+      </div>
+
+      <p className="text-gray-500 text-xs mb-6">Solo se muestra 1 banner activo a la vez (el más reciente).</p>
+
+      {showForm && (
+        <div className="rounded-xl p-5 mb-6 space-y-4" style={{ background: "#111", border: "1px solid #222" }}>
+          <input
+            value={form.title}
+            onChange={e => setForm(f => ({ ...f, title: e.target.value }))}
+            placeholder="Título de la novedad"
+            className="w-full p-3 rounded-lg text-sm text-white"
+            style={{ background: "#1a1a1a", border: "1px solid #333" }}
+          />
+          <div>
+            <label className="block text-xs text-gray-500 mb-2">Imagen / Flyer</label>
+            {form.image_url ? (
+              <div className="relative rounded-lg overflow-hidden" style={{ maxHeight: 200 }}>
+                <img src={form.image_url} alt="" className="w-full object-cover" style={{ maxHeight: 200 }} />
+                <button onClick={() => setForm(f => ({ ...f, image_url: "" }))}
+                  className="absolute top-2 right-2 w-7 h-7 flex items-center justify-center rounded-full"
+                  style={{ background: "rgba(0,0,0,0.7)" }}>
+                  <Trash2 size={12} className="text-white" />
+                </button>
+              </div>
+            ) : (
+              <label className="flex items-center justify-center gap-2 p-6 rounded-lg cursor-pointer border-dashed border-2"
+                style={{ borderColor: "#333", color: "#666" }}>
+                <Upload size={16} />
+                <span className="text-sm">{uploading ? "Subiendo..." : "Subir imagen"}</span>
+                <input type="file" accept="image/*" className="hidden" onChange={handleUpload} disabled={uploading} />
+              </label>
+            )}
+          </div>
+          <input
+            value={form.link}
+            onChange={e => setForm(f => ({ ...f, link: e.target.value }))}
+            placeholder="Link destino (opcional)"
+            className="w-full p-3 rounded-lg text-sm text-white"
+            style={{ background: "#1a1a1a", border: "1px solid #333" }}
+          />
+          <div className="flex gap-3">
+            <button onClick={handleSave}
+              className="px-6 py-2.5 rounded-lg text-sm font-bold"
+              style={{ background: "#E8001D", color: "#fff" }}>
+              Guardar
+            </button>
+            <button onClick={() => setShowForm(false)}
+              className="px-6 py-2.5 rounded-lg text-sm font-bold"
+              style={{ background: "#222", color: "#888" }}>
+              Cancelar
+            </button>
+          </div>
+        </div>
+      )}
+
+      <div className="space-y-3">
+        {items.map(item => (
+          <div key={item.id} className="flex items-center gap-4 p-3 rounded-xl"
+            style={{ background: "#111", border: "1px solid #1e1e1e" }}>
+            {item.image_url && (
+              <img src={item.image_url} alt="" className="w-20 h-14 rounded-lg object-cover shrink-0" />
+            )}
+            <div className="flex-1 min-w-0">
+              <p className="text-white text-sm font-bold truncate">{item.title}</p>
+              {item.link && (
+                <a href={item.link} target="_blank" rel="noopener noreferrer" className="text-xs flex items-center gap-1" style={{ color: "#C9A84C" }}>
+                  <ExternalLink size={10} /> Link
+                </a>
+              )}
+            </div>
+            <div className="flex items-center gap-2 shrink-0">
+              <button onClick={() => toggleActive(item)}
+                className="w-8 h-8 flex items-center justify-center rounded-lg transition-all"
+                style={{ background: item.is_active ? "rgba(34,197,94,0.15)" : "rgba(255,255,255,0.05)" }}>
+                {item.is_active ? <Eye size={14} className="text-green-500" /> : <EyeOff size={14} className="text-gray-600" />}
+              </button>
+              <button onClick={() => handleDelete(item)}
+                className="w-8 h-8 flex items-center justify-center rounded-lg"
+                style={{ background: "rgba(232,0,29,0.1)" }}>
+                <Trash2 size={14} style={{ color: "#E8001D" }} />
+              </button>
+            </div>
+          </div>
+        ))}
+        {items.length === 0 && (
+          <p className="text-gray-600 text-sm text-center py-8">No hay novedades creadas aún.</p>
+        )}
+      </div>
+    </div>
+  );
+}

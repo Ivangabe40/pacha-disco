@@ -10,6 +10,7 @@ import PastEventsCarousel from "@/components/events/PastEventsCarousel";
 import NewsletterSubscribe from "@/components/NewsletterSubscribe";
 import HomeVideoSection from "@/components/HomeVideoSection";
 import EscapeBarSection from "@/components/EscapeBarSection";
+import NovedadBanner from "@/components/NovedadBanner";
 
 export default function Home() {
   const [events, setEvents] = useState([]);
@@ -42,6 +43,9 @@ export default function Home() {
   return (
     <div style={{ background: "#070707", minHeight: "100vh" }}>
       <PromotionPopup />
+
+      {/* BANNER NOVEDAD */}
+      <NovedadBanner />
 
       {/* HERO — solo si hay próximos eventos */}
       {featured && <HeroEvent event={featured} />}

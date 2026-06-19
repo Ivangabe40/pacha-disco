@@ -1,0 +1,27 @@
+{
+  "name": "NovedadBanner",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "T\u00edtulo de la novedad"
+    },
+    "image_url": {
+      "type": "string",
+      "description": "URL de la imagen o flyer"
+    },
+    "link": {
+      "type": "string",
+      "description": "URL de destino al hacer click (opcional)"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "description": "Mostrar en el sitio"
+    }
+  },
+  "required": [
+    "title",
+    "image_url"
+  ]
+}
