@@ -18,6 +18,11 @@
       "type": "boolean",
       "default": true,
       "description": "Mostrar en el sitio"
+    },
+    "description": {
+      "type": "string",
+      "description": "Descripci\u00f3n adicional del banner",
+      "maxLength": 1000
     }
   },
   "required": [
