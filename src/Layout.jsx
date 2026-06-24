@@ -198,7 +198,7 @@ export default function Layout({ children, currentPageName }) {
                 <Link to={createPageUrl("Contact")} className="text-gray-500 hover:text-gray-300 text-xs transition-colors">Contacto</Link>
                 <Link to={createPageUrl("Admin")} className="text-gray-700 hover:text-gray-500 text-xs transition-colors">Panel Admin</Link>
               </div>
-              <p className="text-gray-700 text-xs mt-1">WEBDESIGN BY NDTX UNIVERSE 2026</p>
+              <img src="https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/ec7f34e40_file_0000000027cc720ebb058e09702f19ff.png" alt="Pacha Games" className="h-10 w-auto object-contain mt-1" style={{ filter: "drop-shadow(0 0 8px rgba(201,168,76,0.3))" }} />
             </div>
           </div>
         </div>
