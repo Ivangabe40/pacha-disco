@@ -198,7 +198,10 @@ export default function Layout({ children, currentPageName }) {
                 <Link to={createPageUrl("Contact")} className="text-gray-500 hover:text-gray-300 text-xs transition-colors">Contacto</Link>
                 <Link to={createPageUrl("Admin")} className="text-gray-700 hover:text-gray-500 text-xs transition-colors">Panel Admin</Link>
               </div>
-              <img src="https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/ec7f34e40_file_0000000027cc720ebb058e09702f19ff.png" alt="Pacha Games" className="h-10 w-auto object-contain mt-1" style={{ filter: "drop-shadow(0 0 8px rgba(201,168,76,0.3))" }} />
+              <div className="flex items-center gap-2 mt-1">
+                <img src="https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/ec7f34e40_file_0000000027cc720ebb058e09702f19ff.png" alt="Pacha Games" className="h-10 w-auto object-contain" style={{ filter: "drop-shadow(0 0 8px rgba(201,168,76,0.3))" }} />
+                <span className="text-gray-600 text-xs">Desarrollado por Pacha Apps. 2026</span>
+              </div>
             </div>
           </div>
         </div>
