@@ -72,6 +72,11 @@ export default function EscapeBarSection() {
               <div className="rounded-2xl overflow-hidden"
                 style={{ background: "#0f0f0f", border: "1px solid rgba(201,168,76,0.35)" }}>
                 <div className="flex flex-col md:flex-row">
+                  {featured.photo_url && (
+                    <div className="md:w-2/5 aspect-video md:aspect-auto overflow-hidden">
+                      <img src={featured.photo_url} alt={featured.title} className="w-full h-full object-cover" />
+                    </div>
+                  )}
                   <div className="flex-1 p-6 flex flex-col justify-center">
                     {featured.is_featured && (
                       <span className="inline-block text-xs px-2 py-0.5 rounded font-bold mb-3 self-start"

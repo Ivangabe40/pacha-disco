@@ -4,8 +4,6 @@ import { Instagram, MessageCircle, Globe, CalendarDays, Tag } from "lucide-react
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 
-const LOGO_URL = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/b9e1df1f5_lanzamiento_20260610_214740_0000.png";
-
 export default function EscapeBar() {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -38,15 +36,7 @@ export default function EscapeBar() {
             Una nueva experiencia
           </p>
 
-          {/* Logo image */}
-          <div className="flex justify-center mb-6">
-            <img src={LOGO_URL} alt="Escape Bar" className="h-32 md:h-40 w-auto object-contain"
-              style={{ filter: "drop-shadow(0 0 24px rgba(201,168,76,0.35))" }} />
 
-
-            
-            
-          </div>
 
           <p className="text-sm md:text-base leading-relaxed max-w-lg mx-auto" style={{ color: "#888" }}>
             Nuevo espacio / Bar Lounge · carta de tragos · vinos · cervezas · música
