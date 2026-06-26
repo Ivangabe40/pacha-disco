@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
-import { Ticket } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import CountdownTimer from "./CountdownTimer";
 
 export default function UpcomingEventsBanner({ events }) {
@@ -51,7 +51,7 @@ export default function UpcomingEventsBanner({ events }) {
             <div className="shrink-0">
               <div className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold text-white transition-all"
                 style={{ background: "linear-gradient(135deg,#E8001D,#ff1a35)" }}>
-                <Ticket size={14} /> Entradas
+                Ver Evento <ChevronRight size={14} />
               </div>
             </div>
           </Link>

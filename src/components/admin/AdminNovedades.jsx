@@ -5,7 +5,7 @@ import { Plus, Trash2, Eye, EyeOff, Upload, ExternalLink } from "lucide-react";
 export default function AdminNovedades() {
   const [items, setItems] = useState([]);
   const [showForm, setShowForm] = useState(false);
-  const [form, setForm] = useState({ title: "", image_url: "", link: "", is_active: true });
+  const [form, setForm] = useState({ title: "", image_url: "", link: "", description: "", is_active: true });
   const [uploading, setUploading] = useState(false);
 
   const load = () => base44.entities.NovedadBanner.list("-created_date").then(setItems);
@@ -24,7 +24,7 @@ export default function AdminNovedades() {
   const handleSave = async () => {
     if (!form.title || !form.image_url) return;
     await base44.entities.NovedadBanner.create(form);
-    setForm({ title: "", image_url: "", link: "", is_active: true });
+    setForm({ title: "", image_url: "", link: "", description: "", is_active: true });
     setShowForm(false);
     load();
   };
@@ -88,6 +88,15 @@ export default function AdminNovedades() {
             onChange={e => setForm(f => ({ ...f, link: e.target.value }))}
             placeholder="Link destino (opcional)"
             className="w-full p-3 rounded-lg text-sm text-white"
+            style={{ background: "#1a1a1a", border: "1px solid #333" }}
+          />
+          <textarea
+            value={form.description}
+            onChange={e => setForm(f => ({ ...f, description: e.target.value }))}
+            placeholder="Descripción (opcional, máx. 1000 caracteres)"
+            maxLength={1000}
+            rows={3}
+            className="w-full p-3 rounded-lg text-sm text-white resize-none"
             style={{ background: "#1a1a1a", border: "1px solid #333" }}
           />
           <div className="flex gap-3">

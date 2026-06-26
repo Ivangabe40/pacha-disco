@@ -87,7 +87,7 @@ export default function Admin() {
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-3 gap-2 pb-3">
+          <div className="grid grid-cols-2 gap-2 pb-3">
             {[
               { label: "Eventos", labelMd: "Eventos", value: stats.events, color: "#C9A84C" },
               { label: "Artistas", labelMd: "Artistas", value: stats.artists, color: "#8888FF" },

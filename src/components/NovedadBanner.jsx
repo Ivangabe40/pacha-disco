@@ -53,6 +53,9 @@ export default function NovedadBanner() {
             style={{ fontFamily: "'Playfair Display', serif", textShadow: "0 2px 10px rgba(0,0,0,0.5)" }}>
             {novedad.title}
           </h3>
+          {novedad.description && (
+            <p className="text-gray-300 text-sm md:text-base mt-2 leading-relaxed line-clamp-2">{novedad.description}</p>
+          )}
         </div>
       </Wrapper>
     </section>
