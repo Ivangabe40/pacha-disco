@@ -1,5 +1,6 @@
-import { Link, useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Home, Calendar, Wine, Crown, GlassWater } from "lucide-react";
+import { useTabHistory } from "@/components/TabHistoryProvider";
 
 const tabs = [
   { label: "Inicio", icon: Home, path: "/" },
@@ -11,6 +12,16 @@ const tabs = [
 
 export default function MobileBottomBar() {
   const location = useLocation();
+  const navigate = useNavigate();
+  const tabHistory = useTabHistory();
+
+  const handleTabClick = (path) => {
+    if (tabHistory?.navigateToTab) {
+      tabHistory.navigateToTab(path);
+    } else {
+      navigate(path);
+    }
+  };
 
   return (
     <nav
@@ -29,11 +40,17 @@ export default function MobileBottomBar() {
             ? location.pathname === "/" || location.pathname === "/Home"
             : location.pathname === path;
         return (
-          <Link
+          <button
             key={path}
-            to={path}
+            onClick={() => handleTabClick(path)}
             className="flex flex-col items-center justify-center gap-1 flex-1 h-full"
-            style={{ userSelect: "none", WebkitTapHighlightColor: "transparent" }}
+            style={{
+              userSelect: "none",
+              WebkitTapHighlightColor: "transparent",
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+            }}
           >
             <Icon
               size={20}
@@ -45,7 +62,7 @@ export default function MobileBottomBar() {
             >
               {label}
             </span>
-          </Link>
+          </button>
         );
       })}
     </nav>

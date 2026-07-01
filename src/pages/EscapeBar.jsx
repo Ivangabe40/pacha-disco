@@ -1,24 +1,29 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { base44 } from "@/api/base44Client";
 import { Instagram, MessageCircle, Globe, CalendarDays, Tag } from "lucide-react";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
+import PullToRefresh from "@/components/PullToRefresh";
 
 export default function EscapeBar() {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    base44.entities.EscapeBarEvent.list("-date").then((data) => {
-      setEvents(data);
-      setLoading(false);
-    });
+  const loadEvents = useCallback(async () => {
+    const data = await base44.entities.EscapeBarEvent.list("-date");
+    setEvents(data);
+    setLoading(false);
   }, []);
+
+  useEffect(() => {
+    loadEvents();
+  }, [loadEvents]);
 
   const featured = events.find((e) => e.is_featured) || events[0];
   const rest = events.filter((e) => e.id !== featured?.id);
 
   return (
+    <PullToRefresh onRefresh={loadEvents}>
     <div style={{ background: "#070707", minHeight: "100vh" }}>
 
       {/* HERO HEADER */}
@@ -178,6 +183,7 @@ export default function EscapeBar() {
           </a>
         </div>
       </div>
-    </div>);
-
+    </div>
+    </PullToRefresh>
+  );
 }

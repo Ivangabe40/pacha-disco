@@ -12,6 +12,8 @@ import VIPReservations from './pages/VIPReservations';
 import Contact from './pages/Contact';
 import MisCuenta from './pages/MisCuenta';
 import { AnimatePresence, motion } from 'framer-motion';
+import { ThemeProvider } from 'next-themes';
+import { TabHistoryProvider } from '@/components/TabHistoryProvider';
 
 const { Pages, Layout, mainPage } = pagesConfig;
 const mainPageKey = mainPage ?? Object.keys(Pages)[0];
@@ -19,10 +21,10 @@ const MainPage = mainPageKey ? Pages[mainPageKey] : <></>;
 
 const PageTransition = ({ children }) => (
   <motion.div
-    initial={{ opacity: 0, y: 8 }}
-    animate={{ opacity: 1, y: 0 }}
-    exit={{ opacity: 0, y: -8 }}
-    transition={{ duration: 0.22, ease: "easeInOut" }}
+    initial={{ opacity: 0, x: "30%" }}
+    animate={{ opacity: 1, x: 0 }}
+    exit={{ opacity: 0, x: "-30%" }}
+    transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
   >
     {children}
   </motion.div>
@@ -91,14 +93,18 @@ const AuthenticatedApp = () => {
 function App() {
 
   return (
-    <AuthProvider>
-      <QueryClientProvider client={queryClientInstance}>
-        <Router>
-          <AuthenticatedApp />
-        </Router>
-        <Toaster />
-      </QueryClientProvider>
-    </AuthProvider>
+    <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+      <AuthProvider>
+        <QueryClientProvider client={queryClientInstance}>
+          <Router>
+            <TabHistoryProvider>
+              <AuthenticatedApp />
+            </TabHistoryProvider>
+          </Router>
+          <Toaster />
+        </QueryClientProvider>
+      </AuthProvider>
+    </ThemeProvider>
   )
 }
 

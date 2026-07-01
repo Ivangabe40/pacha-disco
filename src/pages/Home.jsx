@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { base44 } from "@/api/base44Client";
 import HeroEvent from "@/components/events/HeroEvent";
 import EventCard from "@/components/events/EventCard";
@@ -11,18 +11,22 @@ import NewsletterSubscribe from "@/components/NewsletterSubscribe";
 import HomeVideoSection from "@/components/HomeVideoSection";
 import EscapeBarSection from "@/components/EscapeBarSection";
 import NovedadBanner from "@/components/NovedadBanner";
+import PullToRefresh from "@/components/PullToRefresh";
 
 export default function Home() {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    base44.entities.Event.list("-date").then(data => {
-      setEvents(data);
-      setLoading(false);
-      checkEventReminders(data);
-    });
+  const loadEvents = useCallback(async () => {
+    const data = await base44.entities.Event.list("-date");
+    setEvents(data);
+    setLoading(false);
+    checkEventReminders(data);
   }, []);
+
+  useEffect(() => {
+    loadEvents();
+  }, [loadEvents]);
 
   const upcoming = events.filter(e => new Date(e.date) >= new Date());
   const past = events.filter(e => new Date(e.date) < new Date());
@@ -41,6 +45,7 @@ export default function Home() {
   const noUpcoming = upcoming.length === 0;
 
   return (
+    <PullToRefresh onRefresh={loadEvents}>
     <div style={{ background: "#070707", minHeight: "100vh" }}>
       <PromotionPopup />
 
@@ -133,5 +138,6 @@ export default function Home() {
         <NewsletterSubscribe />
       </div>
     </div>
+    </PullToRefresh>
   );
 }

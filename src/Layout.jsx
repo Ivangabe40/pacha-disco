@@ -31,7 +31,7 @@ export default function Layout({ children, currentPageName }) {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col" style={{ background: "#070707", color: "#F0EBE3" }}>
+    <div className="min-h-screen flex flex-col" suppressHydrationWarning style={{ background: "#070707", color: "#F0EBE3" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600&display=swap');
         body { font-family: 'Inter', sans-serif; background: #070707; }
