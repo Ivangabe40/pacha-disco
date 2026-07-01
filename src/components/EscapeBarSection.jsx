@@ -29,14 +29,14 @@ export default function EscapeBarSection() {
         {/* Header with video */}
         <div className="flex flex-col md:flex-row items-center gap-8 mb-12">
           {/* Video */}
-          <div className="w-full md:w-2/5 rounded-2xl overflow-hidden shrink-0 hidden"
-          style={{ border: "1px solid rgba(201,168,76,0.4)", boxShadow: "0 0 40px rgba(201,168,76,0.15)" }}>
-            <video
-              src="https://media.base44.com/videos/public/69ad4033370fdc9f9fe8b117/2733de2ac_gemini_generated_video_3a32a78a.mp4"
-              autoPlay muted loop playsInline
-              className="w-full h-full object-cover hidden" />
-            
-          </div>
+          
+
+
+
+
+
+
+          
           <div className="text-center md:text-left">
             <p className="text-xs uppercase tracking-[0.4em] mb-2" style={{ color: "#C9A84C" }}>Una nueva experiencia</p>
             <h2 className="text-4xl md:text-5xl font-black uppercase leading-none mb-2"

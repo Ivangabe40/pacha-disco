@@ -199,7 +199,7 @@ export default function Layout({ children, currentPageName }) {
                 <Link to={createPageUrl("Admin")} className="text-gray-700 hover:text-gray-500 text-xs transition-colors">Panel Admin</Link>
               </div>
               <div className="flex items-center gap-2 mt-1">
-                <img src="https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/ec7f34e40_file_0000000027cc720ebb058e09702f19ff.png" alt="Pacha Games" className="h-10 w-auto object-contain hidden" style={{ filter: "drop-shadow(0 0 8px rgba(201,168,76,0.3))" }} />
+                
                 <span className="text-gray-600 text-xs">Desarrollado por Pacha Apps. 2026</span>
               </div>
             </div>
