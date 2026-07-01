@@ -16,12 +16,12 @@ export default function HomeVideoSection() {
 
   return (
     <section className="relative w-full" style={{ background: "#070707" }}>
-      <div className="max-w-7xl mx-auto px-4 md:px-8 py-12 md:py-16">
-        <div className="flex items-center gap-4 mb-8">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 py-10 md:py-16">
+        <div className="flex items-center gap-4 mb-6 md:mb-8">
           <div className="w-1 h-10 rounded-full" style={{ background: "linear-gradient(#E8001D, #9B0013)" }} />
           <div>
             <p className="text-xs tracking-widest uppercase mb-0.5" style={{ color: "#E8001D" }}>Próximamente</p>
-            <h2 className="text-3xl md:text-4xl font-black text-white uppercase" style={{ fontFamily: "'Playfair Display', serif" }}>
+            <h2 className="text-2xl md:text-4xl font-black text-white uppercase" style={{ fontFamily: "'Playfair Display', serif" }}>
               Lo que se viene
             </h2>
           </div>

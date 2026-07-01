@@ -43,7 +43,7 @@ export default function NovedadBanner() {
           src={novedad.image_url}
           alt={novedad.title}
           className="w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-          style={{ maxHeight: "500px" }}
+          style={{ maxHeight: "400px" }}
         />
 
         {/* Title overlay */}

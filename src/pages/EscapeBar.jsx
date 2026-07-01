@@ -22,7 +22,7 @@ export default function EscapeBar() {
     <div style={{ background: "#070707", minHeight: "100vh" }}>
 
       {/* HERO HEADER */}
-      <div className="relative overflow-hidden py-20 px-4 text-center"
+      <div className="relative overflow-hidden py-16 md:py-20 px-4 text-center"
       style={{ background: "linear-gradient(180deg, #0d0a04 0%, #070707 100%)" }}>
         {/* Gold radial glow */}
         <div className="absolute inset-0 pointer-events-none"
@@ -52,8 +52,8 @@ export default function EscapeBar() {
       </div>
 
       {/* EVENTS SECTION */}
-      <section className="max-w-5xl mx-auto px-4 md:px-8 py-16">
-        <div className="flex items-center gap-4 mb-12">
+      <section className="max-w-5xl mx-auto px-4 md:px-8 py-12 md:py-16">
+        <div className="flex items-center gap-4 mb-8 md:mb-12">
           <div className="w-1 h-10 rounded-full" style={{ background: "linear-gradient(#C9A84C, #9A6F20)" }} />
           <div>
             <p className="text-xs tracking-widest uppercase mb-0.5" style={{ color: "#C9A84C" }}>Cada viernes</p>
@@ -160,8 +160,8 @@ export default function EscapeBar() {
       </section>
 
       {/* CONTACT FOOTER */}
-      <div className="py-12 px-4" style={{ borderTop: "1px solid #111" }}>
-        <div className="flex flex-wrap items-center justify-center gap-6">
+      <div className="py-10 md:py-12 px-4" style={{ borderTop: "1px solid #111" }}>
+        <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6">
           <a href="https://www.instagram.com/pachaoficialok" target="_blank" rel="noopener noreferrer"
           className="flex items-center gap-2 text-sm transition-opacity hover:opacity-70" style={{ color: "#888" }}>
             <Instagram size={16} style={{ color: "#C9A84C" }} /> @pachaoficialok

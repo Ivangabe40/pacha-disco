@@ -127,12 +127,12 @@ export default function Layout({ children, currentPageName }) {
       <MobileBottomBar />
 
       {/* FOOTER */}
-      <footer className="py-14 px-4" style={{ background: "#050505", borderTop: "1px solid rgba(232,0,29,0.15)" }}>
+      <footer className="py-10 md:py-14 px-4" style={{ background: "#050505", borderTop: "1px solid rgba(232,0,29,0.15)" }}>
         <div className="max-w-7xl mx-auto">
           {/* Red divider */}
-          <div className="h-px w-full mb-10" style={{ background: "linear-gradient(90deg, transparent, rgba(232,0,29,0.4), transparent)" }} />
+          <div className="h-px w-full mb-8 md:mb-10" style={{ background: "linear-gradient(90deg, transparent, rgba(232,0,29,0.4), transparent)" }} />
 
-          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8">
             <div className="flex flex-col items-center md:items-start gap-2">
               <img src={LOGO_RED} alt="Pachá" className="h-12 w-auto object-contain"
               style={{ filter: "drop-shadow(0 0 10px rgba(232,0,29,0.4))" }} />
@@ -193,7 +193,7 @@ export default function Layout({ children, currentPageName }) {
             </div>
 
             <div className="text-center md:text-right">
-              <div className="flex gap-4 mb-1">
+              <div className="flex flex-wrap justify-center gap-3 md:gap-4 mb-1">
                 <Link to={createPageUrl("About")} className="text-gray-500 hover:text-gray-300 text-xs transition-colors">Sobre Nosotros</Link>
                 <Link to={createPageUrl("Contact")} className="text-gray-500 hover:text-gray-300 text-xs transition-colors">Contacto</Link>
                 <Link to={createPageUrl("Admin")} className="text-gray-700 hover:text-gray-500 text-xs transition-colors">Panel Admin</Link>

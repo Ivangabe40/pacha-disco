@@ -6,16 +6,16 @@ export default function About() {
   return (
     <div style={{ background: "#0A0A0A", minHeight: "100vh" }}>
       {/* Hero */}
-      <div className="relative py-32 px-4 overflow-hidden">
+      <div className="relative py-20 md:py-32 px-4 overflow-hidden">
         <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, rgba(201,168,76,0.07) 0%, transparent 70%)" }} />
         <div className="relative z-10 max-w-3xl mx-auto text-center">
           <img src={LOGO_GOLD} alt="Pachá" className="h-36 mx-auto mb-8 object-contain"
             style={{ filter: "drop-shadow(0 0 20px rgba(232,0,29,0.7)) drop-shadow(0 0 50px rgba(232,0,29,0.4))" }} />
-          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6" style={{ fontFamily: "'Playfair Display', serif" }}>
+          <h1 className="text-4xl md:text-7xl font-bold text-white mb-6" style={{ fontFamily: "'Playfair Display', serif" }}>
             Nuestra Historia
           </h1>
           <div className="w-24 h-px mx-auto mb-8" style={{ background: "linear-gradient(to right, transparent, #C9A84C, transparent)" }}></div>
-          <p className="text-gray-300 text-lg leading-relaxed mb-6">
+          <p className="text-gray-300 text-base md:text-lg leading-relaxed mb-6">
             Pachá es más que un club. Es una experiencia. Desde sus puertas hasta la pista, cada detalle está diseñado para crear noches que no se olvidan.
           </p>
           <p className="text-gray-400 text-base leading-relaxed mb-4">
@@ -32,7 +32,7 @@ export default function About() {
 
       {/* Content */}
       <div className="max-w-5xl mx-auto px-4 md:px-8 pb-24">
-        <div className="grid md:grid-cols-2 gap-12 mb-16">
+        <div className="grid md:grid-cols-2 gap-8 md:gap-12 mb-16">
           <div>
             <h2 className="text-3xl font-bold text-white mb-4" style={{ fontFamily: "'Playfair Display', serif" }}>
               Club Premium
@@ -66,7 +66,7 @@ export default function About() {
             <h2 className="text-2xl font-bold text-white" style={{ fontFamily: "'Playfair Display', serif" }}>¿Dónde estamos?</h2>
             <p className="text-gray-500 text-sm mt-1">Encontranos en Google Maps</p>
           </div>
-          <div className="relative w-full" style={{ height: "360px" }}>
+          <div className="relative w-full" style={{ height: "250px" }}>
             <iframe
               title="Ubicación Pachá"
               src="https://www.google.com/maps?q=-33.0077,-60.6635&hl=es&z=16&output=embed"
@@ -89,7 +89,7 @@ export default function About() {
         </div>
 
         {/* Contact */}
-        <div className="text-center p-10 rounded-2xl" style={{ background: "#111", border: "1px solid #222" }}>
+        <div className="text-center p-6 md:p-10 rounded-2xl" style={{ background: "#111", border: "1px solid #222" }}>
           <h2 className="text-3xl font-bold text-white mb-4" style={{ fontFamily: "'Playfair Display', serif" }}>Contacto</h2>
           <p className="text-gray-400 mb-6">Para reservas VIP, eventos privados o prensa:</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

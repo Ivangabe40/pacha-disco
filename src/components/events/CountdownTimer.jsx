@@ -23,7 +23,7 @@ function useCountdown(targetDate) {
 function Unit({ value, label }) {
   return (
     <div className="flex flex-col items-center">
-      <div className="relative w-14 h-14 md:w-16 md:h-16 flex items-center justify-center rounded-xl font-black text-2xl md:text-3xl text-white"
+      <div className="relative w-12 h-12 md:w-16 md:h-16 flex items-center justify-center rounded-xl font-black text-xl md:text-3xl text-white"
         style={{ background: "rgba(232,0,29,0.12)", border: "1px solid rgba(232,0,29,0.3)", fontVariantNumeric: "tabular-nums" }}>
         {String(value).padStart(2, "0")}
       </div>

@@ -28,7 +28,7 @@ export default function Gallery() {
 
       {/* Header */}
       <motion.div
-        className="relative py-28 px-4 text-center overflow-hidden"
+        className="relative py-20 md:py-28 px-4 text-center overflow-hidden"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
@@ -45,7 +45,7 @@ export default function Gallery() {
             Nuestras
           </motion.p>
           <motion.h1
-            className="text-5xl md:text-7xl font-bold text-white"
+            className="text-4xl md:text-7xl font-bold text-white"
             style={{ fontFamily: "'Playfair Display', serif" }}
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
@@ -82,7 +82,7 @@ export default function Gallery() {
             <p className="text-gray-500">Próximamente fotos de nuestros eventos</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-7">
             {albums.map((album, i) => (
               <motion.a
                 key={album.id}

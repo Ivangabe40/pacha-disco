@@ -11,9 +11,9 @@ export default function Contact() {
   };
 
   return (
-    <div className="min-h-screen py-20 px-4" style={{ background: "#070707", color: "#F0EBE3" }}>
+    <div className="min-h-screen py-12 md:py-20 px-4" style={{ background: "#070707", color: "#F0EBE3" }}>
       <div className="max-w-2xl mx-auto">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4" style={{ fontFamily: "'Playfair Display', serif", color: "#E8001D" }}>
+        <h1 className="text-3xl md:text-5xl font-bold mb-4" style={{ fontFamily: "'Playfair Display', serif", color: "#E8001D" }}>
           Contacto
         </h1>
         <p className="text-gray-400 mb-10 text-lg">

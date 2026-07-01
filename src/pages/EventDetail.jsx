@@ -101,7 +101,7 @@ export default function EventDetail() {
   return (
     <div style={{ background: "#0A0A0A", minHeight: "100vh" }}>
       {/* Hero */}
-      <div className="relative" style={{ minHeight: "60vh" }}>
+      <div className="relative" style={{ minHeight: "50vh" }}>
         {event.video_url ?
         <video src={event.video_url} className="absolute inset-0 w-full h-full object-cover"
         style={{ filter: "brightness(0.3)" }} autoPlay loop muted playsInline /> :
@@ -114,7 +114,7 @@ export default function EventDetail() {
           <Link to={createPageUrl("Home")} className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-8 text-sm">
             <ChevronLeft size={16} /> Volver a eventos
           </Link>
-          <h1 className="text-4xl md:text-6xl font-bold text-white leading-tight" style={{ fontFamily: "'Playfair Display', serif" }}>
+          <h1 className="text-3xl md:text-6xl font-bold text-white leading-tight" style={{ fontFamily: "'Playfair Display', serif" }}>
             {event.title}
           </h1>
           {/* Reminder button */}
@@ -134,7 +134,7 @@ export default function EventDetail() {
           </div>
 
           {/* Share buttons */}
-          <div className="flex flex-wrap gap-3 mt-2">
+          <div className="flex flex-wrap gap-2 md:gap-3 mt-2">
             <span className="flex items-center gap-1.5 text-gray-500 text-xs uppercase tracking-wider">
               <Share2 size={12} /> Compartir
             </span>
@@ -159,7 +159,7 @@ export default function EventDetail() {
 
       {/* Content */}
       <div className="max-w-5xl mx-auto px-4 md:px-8 pb-20 mt-6 md:mt-8">
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-6 md:gap-8">
           {/* Left: Flyer / Video */}
           <div className="md:col-span-1">
             {event.video_url ?
@@ -172,7 +172,7 @@ export default function EventDetail() {
           {/* Right: Info */}
           <div className="md:col-span-2 space-y-6">
             {/* Date/Time */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-3 md:gap-4">
               <div className="p-4 rounded-xl" style={{ background: "#111", border: "1px solid #222" }}>
                 <div className="flex items-center gap-2 text-gray-400 text-xs uppercase tracking-wider mb-1">
                   <Calendar size={12} style={{ color: "#C9A84C" }} /> Fecha

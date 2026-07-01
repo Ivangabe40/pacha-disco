@@ -33,15 +33,15 @@ export default function PastEventsCarousel({ events }) {
   };
 
   return (
-    <section className="py-16 md:py-24 px-4 md:px-8" style={{ background: "#070707" }}>
+    <section className="py-12 md:py-24 px-4 md:px-8" style={{ background: "#070707" }}>
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="flex items-center justify-between mb-10">
+        <div className="flex items-center justify-between mb-8 md:mb-10">
           <div className="flex items-center gap-4">
             <div className="w-1 h-10 rounded-full" style={{ background: "linear-gradient(#555, #222)" }} />
             <div>
               <p className="text-xs tracking-widest uppercase mb-0.5" style={{ color: "#888" }}>Historia</p>
-              <h2 className="text-3xl md:text-4xl font-black text-white uppercase" style={{ fontFamily: "'Playfair Display', serif" }}>
+              <h2 className="text-2xl md:text-4xl font-black text-white uppercase" style={{ fontFamily: "'Playfair Display', serif" }}>
                 Ediciones <span style={{ color: "#E8001D" }}>Anteriores</span>
               </h2>
             </div>
@@ -71,7 +71,7 @@ export default function PastEventsCarousel({ events }) {
           <div className="flex gap-4">
             {events.map((event) => (
               <div key={event.id}
-                className="flex-none w-[75vw] sm:w-[45vw] md:w-[30vw] lg:w-[22vw] xl:w-[18vw]"
+                className="flex-none w-[80vw] sm:w-[45vw] md:w-[30vw] lg:w-[22vw] xl:w-[18vw]"
                 style={{ minWidth: 0 }}>
                 <Link to={`/EventDetail?id=${event.id}`}>
                   <div className="relative aspect-[3/4] rounded-xl overflow-hidden group cursor-pointer"

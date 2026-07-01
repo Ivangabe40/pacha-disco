@@ -37,7 +37,7 @@ export default function HeroEvent({ event }) {
       <div className="absolute top-0 left-0 right-0 h-0.5" style={{ background: "linear-gradient(90deg, transparent, #E8001D 30%, #E8001D 70%, transparent)" }} />
 
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8 flex flex-col justify-end h-full pb-16 md:pb-24" style={{ minHeight: "100vh" }}>
+      <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8 flex flex-col justify-end h-full pb-20 md:pb-24" style={{ minHeight: "100vh" }}>
         <div className="max-w-3xl">
 
           {/* Badge */}
@@ -50,44 +50,44 @@ export default function HeroEvent({ event }) {
           </div>
 
           {/* Title */}
-          <h1 className="text-4xl sm:text-6xl md:text-8xl font-black text-white mb-6 leading-none uppercase tracking-tight"
+          <h1 className="text-3xl sm:text-5xl md:text-8xl font-black text-white mb-4 md:mb-6 leading-none uppercase tracking-tight"
             style={{ fontFamily: "'Playfair Display', serif", textShadow: "0 0 60px rgba(232,0,29,0.3)" }}>
             {event.title}
           </h1>
 
           {/* Meta info */}
-          <div className="flex flex-wrap gap-4 mb-8">
-            <div className="flex items-center gap-2 px-4 py-2 rounded-full"
+          <div className="flex flex-wrap gap-2 md:gap-4 mb-6 md:mb-8">
+            <div className="flex items-center gap-1.5 px-3 md:px-4 py-1.5 md:py-2 rounded-full"
               style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}>
               <Calendar size={14} style={{ color: "#E8001D" }} />
-              <span className="text-sm text-gray-300 capitalize">
+              <span className="text-xs md:text-sm text-gray-300 capitalize">
                 {format(date, "EEEE d 'de' MMMM", { locale: es })}
               </span>
             </div>
-            <div className="flex items-center gap-2 px-4 py-2 rounded-full"
+            <div className="flex items-center gap-1.5 px-3 md:px-4 py-1.5 md:py-2 rounded-full"
               style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}>
-              <span className="text-sm text-gray-300">{format(date, "HH:mm")}hs</span>
+              <span className="text-xs md:text-sm text-gray-300">{format(date, "HH:mm")}hs</span>
             </div>
             {event.genres && (
-              <div className="flex items-center gap-2 px-4 py-2 rounded-full"
+              <div className="flex items-center gap-1.5 px-3 md:px-4 py-1.5 md:py-2 rounded-full"
                 style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}>
                 <Music size={14} style={{ color: "#C9A84C" }} />
-                <span className="text-sm text-gray-300">{event.genres}</span>
+                <span className="text-xs md:text-sm text-gray-300">{event.genres}</span>
               </div>
             )}
           </div>
 
           {/* DJs */}
           {event.djs && (
-            <p className="text-gray-500 mb-8 text-base">
-              Con: <span className="text-white font-semibold text-lg">{event.djs}</span>
+            <p className="text-gray-500 mb-6 md:mb-8 text-sm md:text-base">
+              Con: <span className="text-white font-semibold text-base md:text-lg">{event.djs}</span>
             </p>
           )}
 
           {/* CTA */}
           <div className="flex flex-wrap gap-4 items-center">
             <Link to={createPageUrl(`EventDetail?id=${event.id}`)}>
-              <button className="flex items-center gap-3 px-8 py-4 rounded-2xl font-bold tracking-wider uppercase transition-all hover:-translate-y-0.5"
+              <button className="flex items-center gap-2 md:gap-3 px-6 md:px-8 py-3 md:py-4 rounded-2xl font-bold tracking-wider uppercase transition-all hover:-translate-y-0.5 text-sm md:text-base"
                 style={{
                   background: "linear-gradient(135deg, #C9A84C 0%, #E8C97A 50%, #C9A84C 100%)",
                   color: "#0A0A0A",

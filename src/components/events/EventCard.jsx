@@ -63,8 +63,8 @@ export default function EventCard({ event }) {
       </div>
 
       {/* Info */}
-      <div className="p-4 flex flex-col flex-1" style={{ background: "#0f0f0f" }}>
-        <h3 className="font-bold text-base mb-2 text-white leading-tight uppercase tracking-wide"
+      <div className="p-3 md:p-4 flex flex-col flex-1" style={{ background: "#0f0f0f" }}>
+        <h3 className="font-bold text-sm md:text-base mb-2 text-white leading-tight uppercase tracking-wide"
           style={{ fontFamily: "'Playfair Display', serif" }}>
           {event.title}
         </h3>
@@ -88,7 +88,7 @@ export default function EventCard({ event }) {
         <Link to={createPageUrl(`EventDetail?id=${event.id}`)} className="block">
           <button
             disabled={!isActive}
-            className="w-full py-3 rounded-lg text-xs font-black tracking-widest uppercase flex items-center justify-center gap-2 transition-all"
+            className="w-full py-2.5 md:py-3 rounded-lg text-xs font-black tracking-widest uppercase flex items-center justify-center gap-2 transition-all"
             style={isActive
               ? { background: "linear-gradient(135deg, #E8001D, #ff1a35)", color: "#fff", boxShadow: "0 4px 20px rgba(232,0,29,0.3)" }
               : { background: "#1a1a1a", color: "#444", cursor: "not-allowed" }

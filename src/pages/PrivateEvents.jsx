@@ -74,7 +74,7 @@ export default function PrivateEvents() {
       <style>{`@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600&display=swap'); body{font-family:'Inter',sans-serif;} h1,h2,h3,h4{font-family:'Playfair Display',serif;}`}</style>
 
       {/* Hero */}
-      <div className="relative py-28 px-4 text-center overflow-hidden">
+      <div className="relative py-20 md:py-28 px-4 text-center overflow-hidden">
         <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, rgba(232,0,29,0.12) 0%, transparent 70%)" }} />
         <div className="relative z-10 max-w-3xl mx-auto">
           <p className="text-xs tracking-widest uppercase mb-4" style={{ color: "#E8001D" }}>Pachá · Espacios Exclusivos</p>
@@ -110,7 +110,7 @@ export default function PrivateEvents() {
                 }}
                 onClick={() => setOpenCard(isOpen ? null : i)}
               >
-                <div className="flex items-center justify-between px-6 py-5">
+                <div className="flex items-center justify-between px-4 md:px-6 py-4 md:py-5">
                   <div className="flex items-center gap-4">
                     <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ background: "rgba(232,0,29,0.12)" }}>
                       <Icon size={20} style={{ color: "#E8001D" }} />

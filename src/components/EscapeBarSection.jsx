@@ -18,7 +18,7 @@ export default function EscapeBarSection() {
   const previews = events.filter((e) => e.id !== featured?.id).slice(0, 3);
 
   return (
-    <section className="relative overflow-hidden py-16 px-4" style={{ background: "#050303" }}>
+    <section className="relative overflow-hidden py-12 md:py-16 px-4" style={{ background: "#050303" }}>
       {/* Gold borders */}
       <div className="absolute top-0 left-0 right-0 h-px"
       style={{ background: "linear-gradient(90deg, transparent, #C9A84C 30%, #E8C97A 50%, #C9A84C 70%, transparent)" }} />
@@ -27,7 +27,7 @@ export default function EscapeBarSection() {
 
       <div className="relative max-w-5xl mx-auto">
         {/* Header with video */}
-        <div className="flex flex-col md:flex-row items-center gap-8 mb-12">
+        <div className="flex flex-col md:flex-row items-center gap-6 md:gap-8 mb-10 md:mb-12">
           {/* Video */}
           
 
@@ -39,7 +39,7 @@ export default function EscapeBarSection() {
           
           <div className="text-center md:text-left">
             <p className="text-xs uppercase tracking-[0.4em] mb-2" style={{ color: "#C9A84C" }}>Una nueva experiencia</p>
-            <h2 className="text-4xl md:text-5xl font-black uppercase leading-none mb-2"
+            <h2 className="text-3xl md:text-5xl font-black uppercase leading-none mb-2"
             style={{
               fontFamily: "'Playfair Display', serif",
               background: "linear-gradient(135deg, #C9A84C 0%, #F5E6A3 40%, #E8C97A 60%, #9A6F20 100%)",
@@ -133,7 +133,7 @@ export default function EscapeBarSection() {
         }
 
         {/* Ver más CTA */}
-        <div className="text-center mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+        <div className="text-center mt-8 md:mt-10 flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
           <Link to="/EscapeBar">
             <button className="px-8 py-3 rounded-lg text-sm font-black tracking-widest uppercase transition-all hover:-translate-y-1"
             style={{ background: "linear-gradient(135deg, #C9A84C, #E8C97A, #C9A84C)", color: "#050303", boxShadow: "0 4px 20px rgba(201,168,76,0.3)" }}>

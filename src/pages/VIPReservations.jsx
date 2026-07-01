@@ -102,7 +102,7 @@ export default function VIPReservations() {
   return (
     <div style={{ background: "#070707", minHeight: "100vh" }}>
       {/* Hero */}
-      <div className="relative py-20 px-4 text-center overflow-hidden">
+      <div className="relative py-16 md:py-20 px-4 text-center overflow-hidden">
         <div className="absolute inset-0" style={{
           background: "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(232,0,29,0.12) 0%, transparent 70%)"
         }} />
@@ -173,7 +173,7 @@ export default function VIPReservations() {
               </div>
 
               {/* Phone + Email */}
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="text-gray-400 text-xs uppercase tracking-widest mb-1.5 flex items-center gap-1">
                     <Phone size={10} /> Teléfono *
@@ -201,7 +201,7 @@ export default function VIPReservations() {
               </div>
 
               {/* Date + Guests */}
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="text-gray-400 text-xs uppercase tracking-widest mb-1.5 flex items-center gap-1">
                     <Calendar size={10} /> Fecha del evento *

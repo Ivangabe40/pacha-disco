@@ -19,11 +19,11 @@ export default function Artists() {
   return (
     <div style={{ background: "#0A0A0A", minHeight: "100vh" }}>
       {/* Header */}
-      <div className="relative py-24 px-4 text-center overflow-hidden">
+      <div className="relative py-16 md:py-24 px-4 text-center overflow-hidden">
         <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, rgba(201,168,76,0.05) 0%, transparent 70%)" }} />
         <div className="relative z-10">
           <p className="text-xs uppercase tracking-[0.4em] mb-3" style={{ color: "#C9A84C" }}>Nuestros</p>
-          <h1 className="text-5xl md:text-7xl font-bold text-white" style={{ fontFamily: "'Playfair Display', serif" }}>
+          <h1 className="text-4xl md:text-7xl font-bold text-white" style={{ fontFamily: "'Playfair Display', serif" }}>
             DJs & Artistas
           </h1>
           <div className="w-24 h-px mx-auto mt-6" style={{ background: "linear-gradient(to right, transparent, #C9A84C, transparent)" }}></div>
@@ -48,7 +48,7 @@ export default function Artists() {
                   <Star size={16} style={{ color: "#C9A84C" }} />
                   <h2 className="text-2xl font-bold text-white" style={{ fontFamily: "'Playfair Display', serif" }}>Residentes</h2>
                 </div>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
                   {residents.map(artist => <ArtistCard key={artist.id} artist={artist} />)}
                 </div>
               </section>
@@ -59,7 +59,7 @@ export default function Artists() {
                   <div className="w-1 h-6 rounded" style={{ background: "#C9A84C" }}></div>
                   <h2 className="text-2xl font-bold text-white" style={{ fontFamily: "'Playfair Display', serif" }}>Artistas Invitados</h2>
                 </div>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
                   {guests.map(artist => <ArtistCard key={artist.id} artist={artist} />)}
                 </div>
               </section>
@@ -91,8 +91,8 @@ function ArtistCard({ artist }) {
           </div>
         )}
       </div>
-      <div className="p-4">
-        <h3 className="font-bold text-white text-lg" style={{ fontFamily: "'Playfair Display', serif" }}>{artist.name}</h3>
+      <div className="p-3 md:p-4">
+        <h3 className="font-bold text-white text-sm md:text-lg" style={{ fontFamily: "'Playfair Display', serif" }}>{artist.name}</h3>
         {artist.genre && <p className="text-sm mt-0.5" style={{ color: "#C9A84C" }}>{artist.genre}</p>}
         {artist.bio && <p className="text-gray-400 text-xs mt-2 leading-relaxed line-clamp-3">{artist.bio}</p>}
         {artist.instagram && (

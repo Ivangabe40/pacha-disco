@@ -61,7 +61,7 @@ export default function Home() {
         past.length > 0 ? (
           <PastEventsCarousel events={past} />
         ) : (
-          <div className="text-center py-40">
+          <div className="text-center py-24 md:py-40">
             <Calendar size={48} className="mx-auto mb-4" style={{ color: "#E8001D", opacity: 0.3 }} />
             <p className="text-gray-500 text-lg">Próximamente nuevos eventos</p>
             <p className="text-gray-700 text-sm mt-2 tracking-wider uppercase">Seguinos en redes para enterarte primero</p>
@@ -69,21 +69,21 @@ export default function Home() {
         )
       ) : (
         /* Con próximos eventos: grilla + carrusel de pasados abajo */
-        <section className="max-w-7xl mx-auto px-4 md:px-8 py-16 md:py-24">
-          <div className="flex items-center gap-4 mb-12">
+        <section className="max-w-7xl mx-auto px-4 md:px-8 py-12 md:py-24">
+          <div className="flex items-center gap-4 mb-8 md:mb-12">
             <div className="w-1 h-10 rounded-full" style={{ background: "linear-gradient(#E8001D, #9B0013)" }} />
             <div>
               <p className="text-xs tracking-widest uppercase mb-0.5" style={{ color: "#E8001D" }}>Agenda</p>
-              <h2 className="text-3xl md:text-4xl font-black text-white uppercase" style={{ fontFamily: "'Playfair Display', serif" }}>
+              <h2 className="text-2xl md:text-4xl font-black text-white uppercase" style={{ fontFamily: "'Playfair Display', serif" }}>
                 Próximos Eventos
               </h2>
             </div>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5">
             {upcoming.map(event => <EventCard key={event.id} event={event} />)}
           </div>
           {past.length > 0 && (
-            <div className="mt-20">
+            <div className="mt-12 md:mt-20">
               <div className="h-px w-full mb-4" style={{ background: "linear-gradient(90deg, transparent, rgba(232,0,29,0.15), transparent)" }} />
               <PastEventsCarousel events={past} />
             </div>
@@ -92,10 +92,10 @@ export default function Home() {
       )}
 
       {/* GRACIAS POR ESTAR */}
-      <section className="py-16 md:py-24 px-4" style={{ background: "#070707" }}>
+      <section className="py-12 md:py-24 px-4" style={{ background: "#070707" }}>
         <div className="max-w-2xl mx-auto text-center">
           <p className="text-xs tracking-widest uppercase mb-3" style={{ color: "#E8001D" }}>Nuestro equipo</p>
-          <h2 className="text-3xl md:text-5xl font-black text-white uppercase mb-10"
+          <h2 className="text-2xl md:text-5xl font-black text-white uppercase mb-8 md:mb-10"
             style={{ fontFamily: "'Playfair Display', serif", textShadow: "0 0 40px rgba(232,0,29,0.3)" }}>
             ¡Gracias por estar!
           </h2>
@@ -129,7 +129,7 @@ export default function Home() {
       <EscapeBarSection />
 
       {/* NEWSLETTER */}
-      <div className="max-w-7xl mx-auto px-4 md:px-8 py-16">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 py-12 md:py-16 pb-24 md:pb-16">
         <NewsletterSubscribe />
       </div>
     </div>
