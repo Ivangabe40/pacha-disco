@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
 import { Plus, Trash2, ExternalLink, Edit2, Check, X, Upload, ImageIcon } from "lucide-react";
+import ImageSizeHint from "./ImageSizeHint";
 
 export default function AdminGalleryAlbums() {
   const [albums, setAlbums] = useState([]);
@@ -57,7 +58,7 @@ export default function AdminGalleryAlbums() {
 
       {/* Form */}
       {showForm && (
-        <div className="mb-6 p-6 rounded-2xl" style={{ background: "#111", border: "1px solid rgba(232,0,29,0.3)" }}>
+        <div className="mb-6 p-4 sm:p-6 rounded-2xl" style={{ background: "#111", border: "1px solid rgba(232,0,29,0.3)" }}>
           <h3 className="text-white font-semibold mb-4">{editing ? "Editar álbum" : "Nuevo álbum"}</h3>
           <div className="grid md:grid-cols-2 gap-4 mb-4">
             <div>
@@ -96,6 +97,7 @@ export default function AdminGalleryAlbums() {
               <input type="file" accept="image/*" className="hidden"
                 onChange={e => e.target.files?.[0] && handleImageUpload(e.target.files[0])} />
             </label>
+            <ImageSizeHint size="600×600" ratio="1:1" note="formato cuadrado" />
           </div>
           <div className="flex gap-3">
             <button onClick={save} disabled={saving}
@@ -120,7 +122,7 @@ export default function AdminGalleryAlbums() {
       ) : (
         <div className="space-y-3">
           {albums.map(a => (
-            <div key={a.id} className="flex items-center gap-4 p-4 rounded-xl"
+            <div key={a.id} className="flex items-center gap-2 sm:gap-4 p-3 sm:p-4 rounded-xl"
               style={{ background: "#111", border: "1px solid #222" }}>
               {a.cover_url ? (
                 <img src={a.cover_url} alt={a.title} className="w-14 h-14 rounded-lg object-cover shrink-0" />
@@ -132,7 +134,7 @@ export default function AdminGalleryAlbums() {
                 <p className="text-white font-semibold truncate">{a.title}</p>
                 <p className="text-gray-500 text-xs truncate mt-0.5">{a.link}</p>
               </div>
-              <div className="flex items-center gap-2 shrink-0">
+              <div className="flex items-center gap-1 sm:gap-2 shrink-0">
                 <a href={a.link} target="_blank" rel="noopener noreferrer"
                   className="p-2 rounded-lg text-gray-400 hover:text-white transition-colors"
                   style={{ background: "#1a1a1a" }}>

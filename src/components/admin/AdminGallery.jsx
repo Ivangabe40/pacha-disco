@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
 import { Plus, Trash2, Upload, X } from "lucide-react";
+import ImageSizeHint from "./ImageSizeHint";
 
 export default function AdminGallery() {
   const [photos, setPhotos] = useState([]);
@@ -40,7 +41,7 @@ export default function AdminGallery() {
       <h2 className="text-2xl font-bold text-white mb-6" style={{ fontFamily: "'Playfair Display', serif" }}>Galería de Fotos</h2>
 
       {/* Upload area */}
-      <div className="mb-8 p-6 rounded-2xl" style={{ background: "#111", border: "1px solid #333" }}>
+      <div className="mb-8 p-4 sm:p-6 rounded-2xl" style={{ background: "#111", border: "1px solid #333" }}>
         <h3 className="text-white font-semibold mb-4">Subir fotos</h3>
         <div className="grid md:grid-cols-2 gap-4 mb-4">
           <div>
@@ -68,6 +69,7 @@ export default function AdminGallery() {
           <input type="file" accept="image/*" multiple className="hidden"
             onChange={e => e.target.files?.length && handleUpload([...e.target.files])} />
         </label>
+        <ImageSizeHint size="1080×1080" ratio="1:1" note="formato cuadrado" />
       </div>
 
       {/* Grid */}

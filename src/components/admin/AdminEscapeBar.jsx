@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
 import { Plus, Trash2, Star, StarOff, Upload, Loader2, Eye, EyeOff, Pencil, X, Check } from "lucide-react";
+import ImageSizeHint from "./ImageSizeHint";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 
@@ -67,7 +68,7 @@ export default function AdminEscapeBar() {
   const displayed = showHidden ? events : visible;
 
   const FormFields = ({ onSubmit, submitLabel, onCancel }) => (
-    <form onSubmit={onSubmit} className="rounded-xl p-5 mb-5 space-y-4"
+    <form onSubmit={onSubmit} className="rounded-xl p-4 sm:p-5 mb-5 space-y-4"
       style={{ background: "#0f0f0f", border: "1px solid rgba(201,168,76,0.3)" }}>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
@@ -97,6 +98,7 @@ export default function AdminEscapeBar() {
       </div>
       <div>
         <label className="text-xs text-gray-400 uppercase tracking-wider block mb-1">Foto del evento</label>
+        <ImageSizeHint size="1200×675" ratio="16:9" note="formato horizontal" />
         <div className="flex items-center gap-3">
           <label className="flex items-center gap-2 px-4 py-2 rounded-lg cursor-pointer text-sm font-bold"
             style={{ background: "#1a1a1a", border: "1px solid #333", color: "#C9A84C" }}>
@@ -179,11 +181,11 @@ export default function AdminEscapeBar() {
                     border: ev.is_featured ? "1px solid rgba(201,168,76,0.45)" : "1px solid #1e1e1e",
                     opacity: ev.is_hidden ? 0.5 : 1,
                   }}>
-                  <div className="flex items-center gap-3 p-3">
+                  <div className="flex items-center gap-2 sm:gap-3 p-2.5 sm:p-3">
                     {ev.photo_url ? (
-                      <img src={ev.photo_url} alt={ev.title} className="w-14 h-14 object-cover rounded-lg flex-shrink-0" />
+                      <img src={ev.photo_url} alt={ev.title} className="w-12 h-12 sm:w-14 sm:h-14 object-cover rounded-lg flex-shrink-0" />
                     ) : (
-                      <div className="w-14 h-14 rounded-lg flex-shrink-0 flex items-center justify-center text-2xl"
+                      <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-lg flex-shrink-0 flex items-center justify-center text-2xl"
                         style={{ background: "#1a1a1a" }}>🍹</div>
                     )}
                     <div className="flex-1 min-w-0">
@@ -202,7 +204,7 @@ export default function AdminEscapeBar() {
                       {ev.promo && <p className="text-xs mt-0.5" style={{ color: "#E8C97A" }}>🏷 {ev.promo}</p>}
                     </div>
                     {/* Actions */}
-                    <div className="flex items-center gap-1 flex-shrink-0">
+                    <div className="flex items-center gap-0.5 sm:gap-1 flex-shrink-0">
                       <button onClick={() => toggleField(ev, "is_featured")} title={ev.is_featured ? "Quitar destacado" : "Destacar"}
                         className="p-1.5 rounded-lg hover:bg-white/5 transition-colors">
                         {ev.is_featured ? <StarOff size={15} style={{ color: "#C9A84C" }} /> : <Star size={15} className="text-gray-600" />}

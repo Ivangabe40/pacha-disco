@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
 import { Upload, Trash2, Video } from "lucide-react";
+import ImageSizeHint from "./ImageSizeHint";
 
 const CONFIG_KEY = "home_video_url";
 
@@ -51,6 +52,7 @@ export default function AdminHomeVideo() {
         <h3 className="text-white font-bold text-lg" style={{ fontFamily: "'Playfair Display', serif" }}>
           Video "Lo que se viene" — Home
         </h3>
+        <ImageSizeHint size="1920×1080" ratio="16:9" note="formato horizontal · máx. 20MB" />
       </div>
 
       {videoUrl ? (

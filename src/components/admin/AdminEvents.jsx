@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
 import { Plus, Pencil, Trash2, Star, StarOff, Upload, X } from "lucide-react";
+import ImageSizeHint from "./ImageSizeHint";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 
@@ -80,7 +81,7 @@ export default function AdminEvents() {
 
       {/* FORM */}
       {showForm && (
-        <div className="mb-8 p-6 rounded-2xl" style={{ background: "#111", border: "1px solid #333" }}>
+        <div className="mb-8 p-4 sm:p-6 rounded-2xl" style={{ background: "#111", border: "1px solid #333" }}>
           <div className="flex items-center justify-between mb-6">
             <h3 className="text-lg font-bold text-white">{editing ? "Editar Evento" : "Nuevo Evento"}</h3>
             <button onClick={() => setShowForm(false)} className="text-gray-500 hover:text-white"><X size={18} /></button>
@@ -147,6 +148,7 @@ export default function AdminEvents() {
             {/* Flyer upload */}
             <div className="md:col-span-2">
               <label className="text-xs text-gray-400 uppercase tracking-wider block mb-2">Flyer (imagen)</label>
+              <ImageSizeHint size="1080×1350" ratio="4:5" note="formato vertical" />
               <div className="flex items-start gap-4">
                 <label className="cursor-pointer flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium"
                   style={{ border: "1px solid #C9A84C", color: "#C9A84C" }}>
@@ -169,6 +171,7 @@ export default function AdminEvents() {
             {/* Video flyer upload */}
             <div className="md:col-span-2">
               <label className="text-xs text-gray-400 uppercase tracking-wider block mb-2">Flyer en Video (opcional)</label>
+              <ImageSizeHint size="1080×1920" ratio="9:16" note="formato vertical · máx. 10MB" />
               <div className="flex items-start gap-4">
                 <label className="cursor-pointer flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium"
                   style={{ border: "1px solid #E8001D", color: "#E8001D" }}>
@@ -217,7 +220,7 @@ export default function AdminEvents() {
       ) : (
         <div className="space-y-3">
           {events.map(event => (
-            <div key={event.id} className="flex items-center gap-4 p-4 rounded-xl"
+            <div key={event.id} className="flex items-center gap-2 sm:gap-4 p-3 sm:p-4 rounded-xl"
               style={{ background: "#111", border: "1px solid #222" }}>
               {event.flyer_url && (
                 <img src={event.flyer_url} alt={event.title} className="w-12 h-16 object-cover rounded-lg flex-shrink-0" />
@@ -236,7 +239,7 @@ export default function AdminEvents() {
                   {event.tickets_sold ? ` · ${event.tickets_sold} vendidas` : ""}
                 </p>
               </div>
-              <div className="flex items-center gap-2 flex-shrink-0">
+              <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
                 <button onClick={() => toggleFeatured(event)} className="p-2 rounded-lg hover:bg-gray-800 transition-colors"
                   title={event.is_featured ? "Quitar destacado" : "Destacar"}>
                   {event.is_featured ? <Star size={15} style={{ color: "#C9A84C" }} /> : <StarOff size={15} className="text-gray-600" />}

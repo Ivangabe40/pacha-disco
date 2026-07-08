@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
 import { Plus, Pencil, Trash2, Upload, X } from "lucide-react";
+import ImageSizeHint from "./ImageSizeHint";
 
 const emptyArtist = { name: "", genre: "", bio: "", photo_url: "", instagram: "", soundcloud: "", is_resident: false };
 
@@ -50,7 +51,7 @@ export default function AdminArtists() {
       </div>
 
       {showForm && (
-        <div className="mb-8 p-6 rounded-2xl" style={{ background: "#111", border: "1px solid #333" }}>
+        <div className="mb-8 p-4 sm:p-6 rounded-2xl" style={{ background: "#111", border: "1px solid #333" }}>
           <div className="flex items-center justify-between mb-6">
             <h3 className="text-lg font-bold text-white">{editing ? "Editar Artista" : "Nuevo Artista"}</h3>
             <button onClick={() => setShowForm(false)} className="text-gray-500 hover:text-white"><X size={18} /></button>
@@ -88,6 +89,7 @@ export default function AdminArtists() {
             </div>
             <div className="md:col-span-2">
               <label className="text-xs text-gray-400 uppercase tracking-wider block mb-2">Foto</label>
+              <ImageSizeHint size="500×500" ratio="1:1" note="formato cuadrado" />
               <div className="flex items-start gap-4">
                 <label className="cursor-pointer flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium"
                   style={{ border: "1px solid #C9A84C", color: "#C9A84C" }}>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
 import { Plus, Trash2, Upload, ToggleLeft, ToggleRight } from "lucide-react";
+import ImageSizeHint from "./ImageSizeHint";
 
 const EMPTY = { title: "", description: "", image_url: "", video_url: "", button_label: "Ver más", button_url: "", is_active: true };
 
@@ -72,7 +73,7 @@ export default function AdminPromotions() {
       </div>
 
       {showForm && (
-        <div className="p-5 rounded-xl mb-6" style={{ background: "#111", border: "1px solid #222" }}>
+        <div className="p-4 sm:p-5 rounded-xl mb-6" style={{ background: "#111", border: "1px solid #222" }}>
           <div className="grid gap-3">
             <input value={form.title} onChange={e => setForm(f => ({ ...f, title: e.target.value }))}
               placeholder="Título *" className="w-full px-3 py-2 rounded-lg text-sm text-white bg-transparent"
@@ -90,6 +91,7 @@ export default function AdminPromotions() {
                 {uploading === "image" ? "Subiendo..." : form.image_url ? "Cambiar imagen" : "Subir imagen (fallback)"}
                 <input type="file" accept="image/*" className="hidden" onChange={handleImage} />
               </label>
+              <ImageSizeHint size="1080×1350" ratio="4:5" note="formato vertical" />
               {form.image_url && <img src={form.image_url} alt="" className="mt-2 h-24 object-contain rounded-lg" />}
             </div>
 
@@ -101,6 +103,7 @@ export default function AdminPromotions() {
                 {uploading === "video" ? "Subiendo video..." : form.video_url ? "Cambiar video (reel)" : "Subir video reel 9:16 (opcional)"}
                 <input type="file" accept="video/*" className="hidden" onChange={handleVideo} />
               </label>
+              <ImageSizeHint size="1080×1920" ratio="9:16" note="formato reel vertical · máx. 10MB" />
               {form.video_url && (
                 <div className="mt-2 flex items-center gap-2">
                   <video src={form.video_url} className="h-24 rounded-lg" style={{ aspectRatio: "9/16" }} muted />
@@ -141,9 +144,9 @@ export default function AdminPromotions() {
 
       <div className="grid gap-4">
         {promos.map(p => (
-          <div key={p.id} className="flex gap-4 items-start p-4 rounded-xl"
+          <div key={p.id} className="flex gap-2 sm:gap-4 items-start p-3 sm:p-4 rounded-xl"
             style={{ background: "#111", border: "1px solid #222" }}>
-            {p.image_url && <img src={p.image_url} alt={p.title} className="w-16 h-20 object-cover rounded-lg shrink-0" />}
+            {p.image_url && <img src={p.image_url} alt={p.title} className="w-12 h-16 sm:w-16 sm:h-20 object-cover rounded-lg shrink-0" />}
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 mb-1">
                 <span className="text-white font-semibold text-sm truncate">{p.title}</span>

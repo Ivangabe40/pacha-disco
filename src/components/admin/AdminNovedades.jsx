@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
 import { Plus, Trash2, Eye, EyeOff, Upload, ExternalLink } from "lucide-react";
+import ImageSizeHint from "./ImageSizeHint";
 
 export default function AdminNovedades() {
   const [items, setItems] = useState([]);
@@ -55,7 +56,7 @@ export default function AdminNovedades() {
       <p className="text-gray-500 text-xs mb-6">Solo se muestra 1 banner activo a la vez (el más reciente).</p>
 
       {showForm && (
-        <div className="rounded-xl p-5 mb-6 space-y-4" style={{ background: "#111", border: "1px solid #222" }}>
+        <div className="rounded-xl p-4 sm:p-5 mb-6 space-y-4" style={{ background: "#111", border: "1px solid #222" }}>
           <input
             value={form.title}
             onChange={e => setForm(f => ({ ...f, title: e.target.value }))}
@@ -65,6 +66,7 @@ export default function AdminNovedades() {
           />
           <div>
             <label className="block text-xs text-gray-500 mb-2">Imagen / Flyer</label>
+            <ImageSizeHint size="1200×675" ratio="16:9" note="formato horizontal" />
             {form.image_url ? (
               <div className="relative rounded-lg overflow-hidden" style={{ maxHeight: 200 }}>
                 <img src={form.image_url} alt="" className="w-full object-cover" style={{ maxHeight: 200 }} />
@@ -116,7 +118,7 @@ export default function AdminNovedades() {
 
       <div className="space-y-3">
         {items.map(item => (
-          <div key={item.id} className="flex items-center gap-4 p-3 rounded-xl"
+          <div key={item.id} className="flex items-center gap-2 sm:gap-4 p-3 rounded-xl"
             style={{ background: "#111", border: "1px solid #1e1e1e" }}>
             {item.image_url && (
               <img src={item.image_url} alt="" className="w-20 h-14 rounded-lg object-cover shrink-0" />
@@ -129,7 +131,7 @@ export default function AdminNovedades() {
                 </a>
               )}
             </div>
-            <div className="flex items-center gap-2 shrink-0">
+            <div className="flex items-center gap-1 sm:gap-2 shrink-0">
               <button onClick={() => toggleActive(item)}
                 className="w-8 h-8 flex items-center justify-center rounded-lg transition-all"
                 style={{ background: item.is_active ? "rgba(34,197,94,0.15)" : "rgba(255,255,255,0.05)" }}>
