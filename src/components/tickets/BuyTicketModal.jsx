@@ -25,33 +25,41 @@ export default function BuyTicketModal({ event, onClose }) {
   const price = ticketType === "anticipada" ? event.ticket_price : null;
   const total = price ? price * qty : 0;
 
+  const [buyError, setBuyError] = useState("");
+
   const handleBuy = async () => {
     setLoading(true);
+    setBuyError("");
     const code = "PCH-" + Math.random().toString(36).substring(2, 8).toUpperCase();
-    const created = await base44.entities.Ticket.create({
-      event_id: event.id,
-      event_title: event.title,
-      event_date: event.date,
-      buyer_name: form.buyer_name,
-      buyer_email: form.buyer_email,
-      buyer_phone: form.buyer_phone,
-      quantity: qty,
-      ticket_type: ticketType,
-      total_amount: total,
-      status: "pendiente",
-      ticket_code: code,
-    });
-    setSavedTicket(created);
-    await base44.entities.Event.update(event.id, {
-      tickets_sold: (event.tickets_sold || 0) + qty
-    });
-    setTicketCode(code);
-    setLoading(false);
-    setStep(3);
+    try {
+      const created = await base44.entities.Ticket.create({
+        event_id: event.id,
+        event_title: event.title,
+        event_date: event.date,
+        buyer_name: form.buyer_name,
+        buyer_email: form.buyer_email,
+        buyer_phone: form.buyer_phone,
+        quantity: qty,
+        ticket_type: ticketType,
+        total_amount: total,
+        status: "pendiente",
+        ticket_code: code,
+      });
+      setSavedTicket(created);
+      await base44.entities.Event.update(event.id, {
+        tickets_sold: (event.tickets_sold || 0) + qty
+      });
+      setTicketCode(code);
+      setStep(3);
 
-    // Redirigir a MercadoPago si es anticipada
-    if (ticketType === "anticipada" && mpLink) {
-      setTimeout(() => window.open(mpLink, "_blank"), 800);
+      // Redirigir a MercadoPago si es anticipada
+      if (ticketType === "anticipada" && mpLink) {
+        setTimeout(() => window.open(mpLink, "_blank"), 800);
+      }
+    } catch {
+      setBuyError("Ocurrió un error al registrar tu entrada. Intentá nuevamente.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -161,6 +169,10 @@ export default function BuyTicketModal({ event, onClose }) {
                   {ticketType === "reserva" && <span className="text-gray-400">Pago en puerta</span>}
                 </div>
               </div>
+
+              {buyError && (
+                <p className="text-red-500 text-xs px-1">{buyError}</p>
+              )}
 
               <div className="flex gap-3">
                 <button onClick={() => setStep(1)} className="flex-1 py-3 rounded-xl text-gray-400 font-medium"

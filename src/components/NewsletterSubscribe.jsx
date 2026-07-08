@@ -12,19 +12,23 @@ export default function NewsletterSubscribe() {
     if (!email) return;
     setStatus("loading");
 
-    // Verificar si ya está suscrito
-    const existing = await base44.entities.NewsletterSubscriber.filter({ email });
-    if (existing.length > 0) {
-      setStatus("success");
-      return;
-    }
+    try {
+      // Verificar si ya está suscrito
+      const existing = await base44.entities.NewsletterSubscriber.filter({ email });
+      if (existing.length > 0) {
+        setStatus("success");
+        return;
+      }
 
-    await base44.entities.NewsletterSubscriber.create({
-      email,
-      name: name || undefined,
-      is_active: true
-    });
-    setStatus("success");
+      await base44.entities.NewsletterSubscriber.create({
+        email,
+        name: name || undefined,
+        is_active: true
+      });
+      setStatus("success");
+    } catch {
+      setStatus("error");
+    }
   };
 
   if (status === "success") {
@@ -32,6 +36,15 @@ export default function NewsletterSubscribe() {
       <div className="flex items-center gap-3 py-3">
         <CheckCircle2 size={20} className="text-green-400 shrink-0" />
         <p className="text-sm text-green-400 font-medium">¡Suscripción confirmada! Te avisaremos de los próximos eventos.</p>
+      </div>
+    );
+  }
+
+  if (status === "error") {
+    return (
+      <div className="flex items-center gap-3 py-3">
+        <p className="text-sm text-red-400 font-medium">Ocurrió un error. Intentá nuevamente.</p>
+        <button onClick={() => setStatus("idle")} className="text-xs text-gray-400 underline">Reintentar</button>
       </div>
     );
   }

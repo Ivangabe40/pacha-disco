@@ -65,9 +65,14 @@ export default function VIPReservations() {
     }
     setError("");
     setLoading(true);
-    await base44.entities.VIPReservation.create({ ...form, guests: Number(form.guests), status: "pendiente" });
-    setLoading(false);
-    setSuccess(true);
+    try {
+      await base44.entities.VIPReservation.create({ ...form, guests: Number(form.guests), status: "pendiente" });
+      setSuccess(true);
+    } catch {
+      setError("Ocurrió un error al enviar la solicitud. Intentá nuevamente.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (success) {
