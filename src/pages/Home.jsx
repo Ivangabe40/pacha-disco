@@ -47,13 +47,8 @@ export default function Home() {
   return (
     <PullToRefresh onRefresh={loadEvents}>
     <div style={{
-      background: "#070707",
-      minHeight: "100vh",
-      backgroundImage: `url("https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/99bd3ae57_file_000000005d4c720eae26471f7fa80296.png")`,
-      backgroundSize: "cover",
-      backgroundPosition: "center",
-      backgroundAttachment: "fixed",
-      backgroundRepeat: "no-repeat"
+      background: "transparent",
+      minHeight: "100vh"
     }}>
       <PromotionPopup />
 
@@ -105,7 +100,7 @@ export default function Home() {
       )}
 
       {/* GRACIAS POR ESTAR */}
-      <section className="py-12 md:py-24 px-4" style={{ background: "#070707" }}>
+      <section className="py-12 md:py-24 px-4" style={{ background: "rgba(7,7,7,0.82)" }}>
         <div className="max-w-2xl mx-auto text-center">
           <p className="text-xs tracking-widest uppercase mb-3" style={{ color: "#75AADB" }}>Nuestro equipo</p>
           <h2 className="text-2xl md:text-5xl font-black text-white uppercase mb-8 md:mb-10"

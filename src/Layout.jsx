@@ -30,8 +30,25 @@ export default function Layout({ children, currentPageName }) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const isHomePage = currentPageName === "Home";
+  const BG_IMAGE = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/99bd3ae57_file_000000005d4c720eae26471f7fa80296.png";
+
   return (
     <div className="min-h-screen flex flex-col" suppressHydrationWarning style={{ background: "#070707", color: "#F0EBE3" }}>
+      {isHomePage && (
+        <div
+          style={{
+            position: "fixed",
+            inset: 0,
+            backgroundImage: `url("${BG_IMAGE}")`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            zIndex: 0,
+            pointerEvents: "none",
+          }}
+        />
+      )}
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600&display=swap');
         body { font-family: 'Inter', sans-serif; background: #070707; }
@@ -44,6 +61,7 @@ export default function Layout({ children, currentPageName }) {
       {/* NAVBAR — Desktop full / Mobile logo-only or back header */}
       <nav
         className="sticky top-0 z-50 transition-all duration-300"
+        style={{ position: "sticky", zIndex: 50 }}
         style={{
           background: scrolled ? "rgba(7,7,7,0.98)" : "rgba(7,7,7,0.7)",
           borderBottom: scrolled ? "1px solid rgba(116,172,223,0.2)" : "1px solid rgba(255,255,255,0.05)",
@@ -119,7 +137,7 @@ export default function Layout({ children, currentPageName }) {
       </nav>
 
       {/* PAGE CONTENT — add bottom padding on mobile for the bottom bar */}
-      <main className="flex-1" style={{ paddingBottom: "calc(56px + env(safe-area-inset-bottom, 0px))" }}>
+      <main className="flex-1" style={{ paddingBottom: "calc(56px + env(safe-area-inset-bottom, 0px))", position: "relative", zIndex: 1 }}>
         <style>{`@media(min-width:768px){main{padding-bottom:0!important}}`}</style>
         {children}
       </main>
