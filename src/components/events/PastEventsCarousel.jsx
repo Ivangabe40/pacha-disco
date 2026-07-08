@@ -42,7 +42,7 @@ export default function PastEventsCarousel({ events }) {
             <div>
               <p className="text-xs tracking-widest uppercase mb-0.5" style={{ color: "#888" }}>Historia</p>
               <h2 className="text-2xl md:text-4xl font-black text-white uppercase" style={{ fontFamily: "'Playfair Display', serif" }}>
-                Ediciones <span style={{ color: "#E8001D" }}>Anteriores</span>
+                Ediciones <span style={{ color: "#75AADB" }}>Anteriores</span>
               </h2>
             </div>
           </div>
@@ -52,14 +52,14 @@ export default function PastEventsCarousel({ events }) {
             <button onClick={scrollPrev}
               className="w-10 h-10 flex items-center justify-center rounded-full transition-all"
               style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}
-              onMouseEnter={e => e.currentTarget.style.borderColor = "rgba(232,0,29,0.6)"}
+              onMouseEnter={e => e.currentTarget.style.borderColor = "rgba(116,172,223,0.6)"}
               onMouseLeave={e => e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)"}>
               <ChevronLeft size={18} className="text-gray-400" />
             </button>
             <button onClick={scrollNext}
               className="w-10 h-10 flex items-center justify-center rounded-full transition-all"
               style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}
-              onMouseEnter={e => e.currentTarget.style.borderColor = "rgba(232,0,29,0.6)"}
+              onMouseEnter={e => e.currentTarget.style.borderColor = "rgba(116,172,223,0.6)"}
               onMouseLeave={e => e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)"}>
               <ChevronRight size={18} className="text-gray-400" />
             </button>
@@ -95,13 +95,13 @@ export default function PastEventsCarousel({ events }) {
 
                     {/* Hover red glow */}
                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                      style={{ background: "linear-gradient(135deg, rgba(232,0,29,0.08) 0%, transparent 60%)" }} />
+                      style={{ background: "linear-gradient(135deg, rgba(116,172,223,0.08) 0%, transparent 60%)" }} />
 
                     {/* Content */}
                     <div className="absolute bottom-0 left-0 right-0 p-4">
                       {event.genres && (
                         <p className="text-xs tracking-widest uppercase mb-1.5 font-medium"
-                          style={{ color: "#E8001D" }}>
+                          style={{ color: "#75AADB" }}>
                           {event.genres.split(",")[0].trim()}
                         </p>
                       )}
@@ -139,7 +139,7 @@ export default function PastEventsCarousel({ events }) {
                 style={{
                   width: i === selectedIndex ? "24px" : "6px",
                   height: "6px",
-                  background: i === selectedIndex ? "#E8001D" : "#2a2a2a"
+                  background: i === selectedIndex ? "#75AADB" : "#2a2a2a"
                 }} />
             ))}
           </div>

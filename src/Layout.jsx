@@ -38,7 +38,7 @@ export default function Layout({ children, currentPageName }) {
         h1,h2,h3,h4,h5 { font-family: 'Playfair Display', serif; }
         .nav-link { transition: color 0.2s, text-shadow 0.2s; color: #888; letter-spacing: 0.1em; }
         .nav-link:hover { color: #fff; }
-        .nav-link.active { color: #E8001D; text-shadow: 0 0 12px rgba(232,0,29,0.6); }
+        .nav-link.active { color: #75AADB; text-shadow: 0 0 12px rgba(116,172,223,0.6); }
       `}</style>
 
       {/* NAVBAR — Desktop full / Mobile logo-only or back header */}
@@ -46,12 +46,12 @@ export default function Layout({ children, currentPageName }) {
         className="sticky top-0 z-50 transition-all duration-300"
         style={{
           background: scrolled ? "rgba(7,7,7,0.98)" : "rgba(7,7,7,0.7)",
-          borderBottom: scrolled ? "1px solid rgba(232,0,29,0.2)" : "1px solid rgba(255,255,255,0.05)",
+          borderBottom: scrolled ? "1px solid rgba(116,172,223,0.2)" : "1px solid rgba(255,255,255,0.05)",
           backdropFilter: "blur(20px)",
           paddingTop: "env(safe-area-inset-top, 0px)"
         }}>
         {/* Red top line */}
-        <div className="h-0.5 w-full" style={{ background: "linear-gradient(90deg, transparent, #E8001D 30%, #E8001D 70%, transparent)" }} />
+        <div className="h-0.5 w-full" style={{ background: "linear-gradient(90deg, transparent, #75AADB 30%, #75AADB 70%, transparent)" }} />
 
         <div className="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between h-14 md:h-16">
           {/* Mobile: back button on sub-routes, logo otherwise */}
@@ -67,14 +67,14 @@ export default function Layout({ children, currentPageName }) {
 
           <Link to={createPageUrl("Home")} className="md:hidden flex items-center">
               <img src={LOGO_RED} alt="Pachá" className="h-8 w-auto object-contain"
-            style={{ filter: "drop-shadow(0 0 10px rgba(232,0,29,0.5))" }} />
+            style={{ filter: "drop-shadow(0 0 10px rgba(116,172,223,0.5))" }} />
             </Link>
           }
 
           {/* Desktop Logo */}
           <Link to={createPageUrl("Home")} className="hidden md:flex items-center">
             <img src={LOGO_RED} alt="Pachá" className="h-10 w-auto object-contain"
-            style={{ filter: "drop-shadow(0 0 12px rgba(232,0,29,0.5))" }} />
+            style={{ filter: "drop-shadow(0 0 12px rgba(116,172,223,0.5))" }} />
           </Link>
 
           {/* Desktop Nav */}
@@ -103,13 +103,13 @@ export default function Layout({ children, currentPageName }) {
         {/* Mobile full menu */}
         {menuOpen && !isSubRoute &&
         <div className="md:hidden px-4 py-6 flex flex-col gap-4"
-        style={{ background: "#0d0d0d", borderTop: "1px solid rgba(232,0,29,0.15)" }}>
+        style={{ background: "#0d0d0d", borderTop: "1px solid rgba(116,172,223,0.15)" }}>
             {navLinks.map((l) =>
           <Link
             key={l.page}
             to={createPageUrl(l.page)}
             onClick={() => setMenuOpen(false)}
-            className={`text-sm font-semibold tracking-widest uppercase py-2 ${currentPageName === l.page ? "text-red-500" : "text-gray-400"}`}>
+            className={`text-sm font-semibold tracking-widest uppercase py-2 ${currentPageName === l.page ? "text-sky-400" : "text-gray-400"}`}>
                 {l.label}
               </Link>
           )}
@@ -127,15 +127,15 @@ export default function Layout({ children, currentPageName }) {
       <MobileBottomBar />
 
       {/* FOOTER */}
-      <footer className="py-10 md:py-14 px-4" style={{ background: "#050505", borderTop: "1px solid rgba(232,0,29,0.15)" }}>
+      <footer className="py-10 md:py-14 px-4" style={{ background: "#050505", borderTop: "1px solid rgba(116,172,223,0.15)" }}>
         <div className="max-w-7xl mx-auto">
           {/* Red divider */}
-          <div className="h-px w-full mb-8 md:mb-10" style={{ background: "linear-gradient(90deg, transparent, rgba(232,0,29,0.4), transparent)" }} />
+          <div className="h-px w-full mb-8 md:mb-10" style={{ background: "linear-gradient(90deg, transparent, rgba(116,172,223,0.4), transparent)" }} />
 
           <div className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8">
             <div className="flex flex-col items-center md:items-start gap-2">
               <img src={LOGO_RED} alt="Pachá" className="h-12 w-auto object-contain"
-              style={{ filter: "drop-shadow(0 0 10px rgba(232,0,29,0.4))" }} />
+              style={{ filter: "drop-shadow(0 0 10px rgba(116,172,223,0.4))" }} />
               <p className="text-gray-600 text-xs tracking-widest uppercase">Pachá Night Club · Exclusivo Mayores</p>
               <a href="https://maps.app.goo.gl/outiaSZFTh14BhGK8" target="_blank" rel="noopener noreferrer"
               className="flex items-center gap-1.5 text-gray-600 hover:text-gray-400 text-xs transition-colors mt-1">
@@ -147,14 +147,14 @@ export default function Layout({ children, currentPageName }) {
               <a href="https://www.instagram.com/pachaoficialok" target="_blank" rel="noopener noreferrer" aria-label="Instagram"
               className="w-9 h-9 flex items-center justify-center rounded-full transition-all"
               style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}
-              onMouseEnter={(e) => e.currentTarget.style.borderColor = "rgba(232,0,29,0.5)"}
+              onMouseEnter={(e) => e.currentTarget.style.borderColor = "rgba(116,172,223,0.5)"}
               onMouseLeave={(e) => e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"}>
                 <Instagram size={15} className="text-gray-500" />
               </a>
               <a href="#" aria-label="Facebook"
               className="w-9 h-9 flex items-center justify-center rounded-full transition-all"
               style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}
-              onMouseEnter={(e) => e.currentTarget.style.borderColor = "rgba(232,0,29,0.5)"}
+              onMouseEnter={(e) => e.currentTarget.style.borderColor = "rgba(116,172,223,0.5)"}
               onMouseLeave={(e) => e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"}>
                 <Facebook size={15} className="text-gray-500" />
               </a>
@@ -177,7 +177,7 @@ export default function Layout({ children, currentPageName }) {
               <a href="https://www.tiktok.com/@pachaoficialok" target="_blank" rel="noopener noreferrer" aria-label="TikTok"
               className="w-9 h-9 flex items-center justify-center rounded-full transition-all"
               style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}
-              onMouseEnter={(e) => e.currentTarget.style.borderColor = "rgba(232,0,29,0.5)"}
+              onMouseEnter={(e) => e.currentTarget.style.borderColor = "rgba(116,172,223,0.5)"}
               onMouseLeave={(e) => e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" className="text-gray-500">
                   <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z" />

@@ -83,7 +83,7 @@ export default function AdminGallery() {
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-end p-2"
                 style={{ background: "rgba(0,0,0,0.5)" }}>
                 <button onClick={() => handleDelete(photo.id)}
-                  className="p-1.5 rounded-lg bg-red-600 text-white hover:bg-red-700 transition-colors">
+                  className="p-1.5 rounded-lg bg-sky-500 text-white hover:bg-sky-600 transition-colors">
                   <Trash2 size={12} />
                 </button>
               </div>

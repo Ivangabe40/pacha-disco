@@ -29,7 +29,7 @@ export default function MenuQR() {
   return (
     <div className="p-6 rounded-2xl" style={{ background: "#0f0f0f", border: "1px solid #1e1e1e" }}>
       <div className="flex items-center gap-3 mb-5">
-        <QrCode size={18} style={{ color: "#E8001D" }} />
+        <QrCode size={18} style={{ color: "#75AADB" }} />
         <h3 className="text-white font-bold">QR de la Carta</h3>
       </div>
 
@@ -58,7 +58,7 @@ export default function MenuQR() {
           </button>
           <a href={menuUrl} target="_blank" rel="noopener noreferrer"
             className="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg text-sm font-bold"
-            style={{ background: "rgba(232,0,29,0.15)", color: "#E8001D", border: "1px solid rgba(232,0,29,0.3)" }}>
+            style={{ background: "rgba(116,172,223,0.15)", color: "#75AADB", border: "1px solid rgba(116,172,223,0.3)" }}>
             <ExternalLink size={14} /> Ver Carta
           </a>
         </div>

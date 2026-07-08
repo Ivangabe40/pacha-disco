@@ -7,7 +7,7 @@ const LEVELS = [
   { name: "Regular", min: 100, max: 299, color: "#8888FF", icon: "⭐" },
   { name: "VIP", min: 300, max: 699, color: "#C9A84C", icon: "👑" },
   { name: "Platinum", min: 700, max: 1499, color: "#E8E8FF", icon: "💎" },
-  { name: "Pachá Elite", min: 1500, max: Infinity, color: "#E8001D", icon: "🔴" },
+  { name: "Pachá Elite", min: 1500, max: Infinity, color: "#75AADB", icon: "🔴" },
 ];
 
 function getLevel(coins) {
@@ -81,7 +81,7 @@ export default function AdminCoins() {
           </button>
           <button onClick={() => setShowCreate(!showCreate)}
             className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-bold text-white transition-all"
-            style={{ background: "#E8001D" }}>
+            style={{ background: "#75AADB" }}>
             <Plus size={14} /> Agregar usuario
           </button>
         </div>
@@ -104,7 +104,7 @@ export default function AdminCoins() {
           <div className="flex gap-2">
             <button onClick={handleCreate} disabled={creating || !newEmail.trim()}
               className="px-4 py-2 rounded-lg text-sm font-bold text-white"
-              style={{ background: creating ? "#333" : "#E8001D" }}>
+              style={{ background: creating ? "#333" : "#75AADB" }}>
               {creating ? "Creando..." : "Crear"}
             </button>
             <button onClick={() => setShowCreate(false)}
@@ -154,7 +154,7 @@ export default function AdminCoins() {
                     </div>
                     <button onClick={() => setAdjusting(isAdjusting ? null : p.id)}
                       className="p-2 rounded-lg transition-colors"
-                      style={{ background: isAdjusting ? "rgba(232,0,29,0.1)" : "#1a1a1a", color: isAdjusting ? "#E8001D" : "#666" }}>
+                      style={{ background: isAdjusting ? "rgba(116,172,223,0.1)" : "#1a1a1a", color: isAdjusting ? "#75AADB" : "#666" }}>
                       <Coins size={15} />
                     </button>
                   </div>
@@ -185,7 +185,7 @@ export default function AdminCoins() {
                       </button>
                       <button onClick={() => handleAdjust(p, -amount)}
                         className="flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold flex-1"
-                        style={{ background: "rgba(232,0,29,0.1)", border: "1px solid rgba(232,0,29,0.2)", color: "#E8001D" }}>
+                        style={{ background: "rgba(116,172,223,0.1)", border: "1px solid rgba(116,172,223,0.2)", color: "#75AADB" }}>
                         <Minus size={13} /> Restar {amount} coins
                       </button>
                     </div>

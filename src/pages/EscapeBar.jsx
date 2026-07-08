@@ -110,7 +110,7 @@ export default function EscapeBar() {
                     </h3>
                     {featured.promo &&
                 <div className="flex items-center gap-2 mb-3">
-                        <Tag size={13} style={{ color: "#E8001D" }} />
+                        <Tag size={13} style={{ color: "#75AADB" }} />
                         <span className="text-sm font-bold" style={{ color: "#E8C97A" }}>{featured.promo}</span>
                       </div>
                 }
@@ -148,7 +148,7 @@ export default function EscapeBar() {
                       </h3>
                       {ev.promo &&
                 <div className="flex items-center gap-1.5 mb-2">
-                          <Tag size={11} style={{ color: "#E8001D" }} />
+                          <Tag size={11} style={{ color: "#75AADB" }} />
                           <span className="text-xs font-semibold" style={{ color: "#E8C97A" }}>{ev.promo}</span>
                         </div>
                 }

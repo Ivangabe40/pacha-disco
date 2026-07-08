@@ -22,7 +22,7 @@ export default function PromotionPopup() {
       style={{ background: "rgba(0,0,0,0.85)", backdropFilter: "blur(6px)" }}
       onClick={() => setVisible(false)}>
       <div className="relative rounded-2xl overflow-hidden shadow-2xl"
-        style={{ border: "1px solid rgba(232,0,29,0.3)", background: "#0f0f0f", width: "min(360px, 90vw)", maxHeight: "90vh", display: "flex", flexDirection: "column" }}
+        style={{ border: "1px solid rgba(116,172,223,0.3)", background: "#0f0f0f", width: "min(360px, 90vw)", maxHeight: "90vh", display: "flex", flexDirection: "column" }}
         onClick={e => e.stopPropagation()}>
         {/* Close */}
         <button onClick={() => setVisible(false)}
@@ -53,7 +53,7 @@ export default function PromotionPopup() {
             {promo.button_url && (
               <a href={promo.button_url} target="_blank" rel="noopener noreferrer"
                 className="block w-full text-center py-3 rounded-xl font-bold text-sm tracking-widest uppercase transition-all"
-                style={{ background: "linear-gradient(135deg,#E8001D,#ff1a35)", color: "#fff" }}
+                style={{ background: "linear-gradient(135deg,#75AADB,#92C8F0)", color: "#fff" }}
                 onMouseEnter={e => e.currentTarget.style.transform = "translateY(-2px)"}
                 onMouseLeave={e => e.currentTarget.style.transform = "translateY(0)"}>
                 {promo.button_label || "Ver más"}

@@ -8,8 +8,8 @@ const SECTORS = [
     label: "Mesa VIP Planta Baja",
     desc: "Vista directa a la pista. Capacidad hasta 8 personas.",
     icon: "🍾",
-    color: "rgba(232,0,29,0.15)",
-    border: "rgba(232,0,29,0.4)"
+    color: "rgba(116,172,223,0.15)",
+    border: "rgba(116,172,223,0.4)"
   },
   {
     id: "Mesa VIP Planta Alta",
@@ -32,8 +32,8 @@ const SECTORS = [
     label: "Barra Exclusiva",
     desc: "Atención personalizada en barra privada. Hasta 6 personas.",
     icon: "🥂",
-    color: "rgba(232,0,29,0.08)",
-    border: "rgba(232,0,29,0.25)"
+    color: "rgba(116,172,223,0.08)",
+    border: "rgba(116,172,223,0.25)"
   },
   {
     id: "Reservado Premium",
@@ -80,8 +80,8 @@ export default function VIPReservations() {
       <div className="min-h-screen flex items-center justify-center px-4" style={{ background: "#070707" }}>
         <div className="text-center max-w-md">
           <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6"
-            style={{ background: "rgba(232,0,29,0.1)", border: "1px solid rgba(232,0,29,0.3)" }}>
-            <CheckCircle2 size={40} style={{ color: "#E8001D" }} />
+            style={{ background: "rgba(116,172,223,0.1)", border: "1px solid rgba(116,172,223,0.3)" }}>
+            <CheckCircle2 size={40} style={{ color: "#75AADB" }} />
           </div>
           <h2 className="text-3xl font-black text-white mb-3" style={{ fontFamily: "'Playfair Display', serif" }}>
             ¡Reserva Enviada!
@@ -109,7 +109,7 @@ export default function VIPReservations() {
       {/* Hero */}
       <div className="relative py-16 md:py-20 px-4 text-center overflow-hidden">
         <div className="absolute inset-0" style={{
-          background: "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(232,0,29,0.12) 0%, transparent 70%)"
+          background: "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(116,172,223,0.12) 0%, transparent 70%)"
         }} />
         <div className="relative z-10 max-w-2xl mx-auto">
           <div className="flex items-center justify-center gap-2 mb-4">
@@ -118,8 +118,8 @@ export default function VIPReservations() {
             <div className="h-px w-12" style={{ background: "rgba(201,168,76,0.5)" }} />
           </div>
           <h1 className="text-4xl md:text-6xl font-black text-white uppercase mb-4"
-            style={{ fontFamily: "'Playfair Display', serif", textShadow: "0 0 40px rgba(232,0,29,0.3)" }}>
-            Reservas <span style={{ color: "#E8001D" }}>VIP</span>
+            style={{ fontFamily: "'Playfair Display', serif", textShadow: "0 0 40px rgba(116,172,223,0.3)" }}>
+            Reservas <span style={{ color: "#75AADB" }}>VIP</span>
           </h1>
           <p className="text-gray-400 text-lg">
             Viví la noche en Pachá como nunca antes. Elegí tu sector, fecha y nosotros nos encargamos del resto.
@@ -151,7 +151,7 @@ export default function VIPReservations() {
                     <p className="text-white font-semibold text-sm">{s.label}</p>
                     <p className="text-gray-500 text-xs mt-0.5">{s.desc}</p>
                   </div>
-                  {form.sector === s.id && <ChevronRight size={16} style={{ color: "#E8001D" }} />}
+                  {form.sector === s.id && <ChevronRight size={16} style={{ color: "#75AADB" }} />}
                 </button>
               ))}
             </div>
@@ -172,7 +172,7 @@ export default function VIPReservations() {
                   placeholder="Tu nombre"
                   className="w-full px-4 py-3 rounded-xl text-white text-sm outline-none placeholder-gray-700 transition-all"
                   style={{ background: "#0f0f0f", border: "1px solid #2a2a2a" }}
-                  onFocus={e => e.target.style.borderColor = "#E8001D"}
+                  onFocus={e => e.target.style.borderColor = "#75AADB"}
                   onBlur={e => e.target.style.borderColor = "#2a2a2a"}
                 />
               </div>
@@ -187,7 +187,7 @@ export default function VIPReservations() {
                     placeholder="+54 9..."
                     className="w-full px-4 py-3 rounded-xl text-white text-sm outline-none placeholder-gray-700 transition-all"
                     style={{ background: "#0f0f0f", border: "1px solid #2a2a2a" }}
-                    onFocus={e => e.target.style.borderColor = "#E8001D"}
+                    onFocus={e => e.target.style.borderColor = "#75AADB"}
                     onBlur={e => e.target.style.borderColor = "#2a2a2a"}
                   />
                 </div>
@@ -199,7 +199,7 @@ export default function VIPReservations() {
                     placeholder="tu@email.com" type="email"
                     className="w-full px-4 py-3 rounded-xl text-white text-sm outline-none placeholder-gray-700 transition-all"
                     style={{ background: "#0f0f0f", border: "1px solid #2a2a2a" }}
-                    onFocus={e => e.target.style.borderColor = "#E8001D"}
+                    onFocus={e => e.target.style.borderColor = "#75AADB"}
                     onBlur={e => e.target.style.borderColor = "#2a2a2a"}
                   />
                 </div>
@@ -215,7 +215,7 @@ export default function VIPReservations() {
                     type="date" min={new Date().toISOString().split("T")[0]}
                     className="w-full px-4 py-3 rounded-xl text-white text-sm outline-none transition-all"
                     style={{ background: "#0f0f0f", border: "1px solid #2a2a2a", colorScheme: "dark" }}
-                    onFocus={e => e.target.style.borderColor = "#E8001D"}
+                    onFocus={e => e.target.style.borderColor = "#75AADB"}
                     onBlur={e => e.target.style.borderColor = "#2a2a2a"}
                   />
                 </div>
@@ -227,7 +227,7 @@ export default function VIPReservations() {
                     type="number" min="1" max="30" placeholder="Ej: 6"
                     className="w-full px-4 py-3 rounded-xl text-white text-sm outline-none placeholder-gray-700 transition-all"
                     style={{ background: "#0f0f0f", border: "1px solid #2a2a2a" }}
-                    onFocus={e => e.target.style.borderColor = "#E8001D"}
+                    onFocus={e => e.target.style.borderColor = "#75AADB"}
                     onBlur={e => e.target.style.borderColor = "#2a2a2a"}
                   />
                 </div>
@@ -236,8 +236,8 @@ export default function VIPReservations() {
               {/* Sector display */}
               {form.sector && (
                 <div className="flex items-center gap-2 px-4 py-3 rounded-xl"
-                  style={{ background: "rgba(232,0,29,0.08)", border: "1px solid rgba(232,0,29,0.2)" }}>
-                  <MapPin size={13} style={{ color: "#E8001D" }} />
+                  style={{ background: "rgba(116,172,223,0.08)", border: "1px solid rgba(116,172,223,0.2)" }}>
+                  <MapPin size={13} style={{ color: "#75AADB" }} />
                   <span className="text-gray-300 text-sm">{form.sector}</span>
                 </div>
               )}
@@ -252,13 +252,13 @@ export default function VIPReservations() {
                   rows={3}
                   className="w-full px-4 py-3 rounded-xl text-white text-sm outline-none placeholder-gray-700 resize-none transition-all"
                   style={{ background: "#0f0f0f", border: "1px solid #2a2a2a" }}
-                  onFocus={e => e.target.style.borderColor = "#E8001D"}
+                  onFocus={e => e.target.style.borderColor = "#75AADB"}
                   onBlur={e => e.target.style.borderColor = "#2a2a2a"}
                 />
               </div>
 
               {error && (
-                <p className="text-red-500 text-xs px-1">{error}</p>
+                <p className="text-sky-400 text-xs px-1">{error}</p>
               )}
 
               <button type="submit" disabled={loading}

@@ -17,11 +17,11 @@ export default function UpcomingEventsBanner({ events }) {
         <Link key={event.id} to={`/EventDetail?id=${event.id}`}
         className="group flex flex-row items-center gap-3 md:gap-8 p-4 md:p-6 rounded-2xl transition-all duration-300"
         style={{
-          background: i === 0 ? "rgba(232,0,29,0.07)" : "#0f0f0f",
-          border: `1px solid ${i === 0 ? "rgba(232,0,29,0.35)" : "#1a1a1a"}`
+          background: i === 0 ? "rgba(116,172,223,0.07)" : "#0f0f0f",
+          border: `1px solid ${i === 0 ? "rgba(116,172,223,0.35)" : "#1a1a1a"}`
         }}
-        onMouseEnter={(e) => e.currentTarget.style.borderColor = "rgba(232,0,29,0.5)"}
-        onMouseLeave={(e) => e.currentTarget.style.borderColor = i === 0 ? "rgba(232,0,29,0.35)" : "#1a1a1a"}>
+        onMouseEnter={(e) => e.currentTarget.style.borderColor = "rgba(116,172,223,0.5)"}
+        onMouseLeave={(e) => e.currentTarget.style.borderColor = i === 0 ? "rgba(116,172,223,0.35)" : "#1a1a1a"}>
 
             {/* Flyer thumbnail */}
             {event.flyer_url &&
@@ -33,7 +33,7 @@ export default function UpcomingEventsBanner({ events }) {
             <div className="flex-1 min-w-0">
               {i === 0 &&
             <span className="inline-block text-xs font-bold uppercase tracking-widest px-2 py-0.5 rounded mb-1"
-            style={{ background: "rgba(232,0,29,0.2)", color: "#E8001D" }}>Próximo</span>
+            style={{ background: "rgba(116,172,223,0.2)", color: "#75AADB" }}>Próximo</span>
             }
               <h3 className="text-white font-bold text-sm md:text-xl leading-tight truncate"
             style={{ fontFamily: "'Playfair Display', serif" }}>{event.title}</h3>
@@ -50,7 +50,7 @@ export default function UpcomingEventsBanner({ events }) {
             {/* CTA */}
             <div className="shrink-0">
               <div className="flex items-center gap-1 md:gap-2 px-3 md:px-4 py-2 md:py-2.5 rounded-xl text-xs md:text-sm font-bold text-white transition-all"
-            style={{ background: "linear-gradient(135deg,#E8001D,#ff1a35)" }}>
+            style={{ background: "linear-gradient(135deg,#75AADB,#ff1a35)" }}>
                 <span className="hidden md:inline">Ver Evento</span> <ChevronRight size={14} />
               </div>
             </div>

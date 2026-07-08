@@ -67,7 +67,7 @@ export default function AdminPromotions() {
         <h2 className="text-white font-bold text-lg" style={{ fontFamily: "'Playfair Display', serif" }}>Promociones</h2>
         <button onClick={() => { setForm(EMPTY); setEditing(null); setShowForm(true); }}
           className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-bold text-white"
-          style={{ background: "#E8001D" }}>
+          style={{ background: "#75AADB" }}>
           <Plus size={15} /> Nueva
         </button>
       </div>
@@ -129,7 +129,7 @@ export default function AdminPromotions() {
             <div className="flex gap-2 mt-1">
               <button onClick={save}
                 className="flex-1 py-2 rounded-lg text-sm font-bold text-white"
-                style={{ background: "#E8001D" }}>
+                style={{ background: "#75AADB" }}>
                 {editing ? "Guardar cambios" : "Crear promoción"}
               </button>
               <button onClick={() => { setShowForm(false); setEditing(null); }}
@@ -156,7 +156,7 @@ export default function AdminPromotions() {
                 </span>
               </div>
               {p.description && <p className="text-gray-500 text-xs mb-1 line-clamp-2">{p.description}</p>}
-              {p.button_url && <p className="text-xs truncate" style={{ color: "#E8001D" }}>{p.button_url}</p>}
+              {p.button_url && <p className="text-xs truncate" style={{ color: "#75AADB" }}>{p.button_url}</p>}
             </div>
             <div className="flex flex-col gap-2 shrink-0">
               <button onClick={() => toggleActive(p)} className="text-gray-400 hover:text-white transition-colors">

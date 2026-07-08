@@ -95,12 +95,12 @@ export default function PullToRefresh({ onRefresh, children }) {
         }}
       >
         {isRefreshing ? (
-          <RefreshCw size={22} className="animate-spin" style={{ color: "#E8001D" }} />
+          <RefreshCw size={22} className="animate-spin" style={{ color: "#75AADB" }} />
         ) : pullDistance > 5 ? (
           <ChevronDown
             size={22}
             style={{
-              color: "#E8001D",
+              color: "#75AADB",
               opacity: progress,
               transform: `scale(${0.6 + progress * 0.4})`,
               transition: "transform 0.1s",

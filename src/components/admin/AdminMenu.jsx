@@ -110,7 +110,7 @@ export default function AdminMenu() {
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
-          <Wine size={20} style={{ color: "#E8001D" }} />
+          <Wine size={20} style={{ color: "#75AADB" }} />
           <h2 className="text-xl font-bold text-white">Carta de Tragos</h2>
           <span className="text-xs px-2 py-0.5 rounded-full text-gray-400" style={{ background: "#1a1a1a" }}>
             {items.length} productos
@@ -126,7 +126,7 @@ export default function AdminMenu() {
           </button>
           <button onClick={openNew}
             className="flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-bold"
-            style={{ background: "#E8001D", color: "#fff" }}>
+            style={{ background: "#75AADB", color: "#fff" }}>
             <Plus size={15} /> Agregar
           </button>
         </div>
@@ -136,13 +136,13 @@ export default function AdminMenu() {
       <div className="flex gap-2 overflow-x-auto pb-2 mb-5 scrollbar-hide">
         <button onClick={() => setActiveCategory("all")}
           className="shrink-0 px-3 py-1.5 rounded-full text-xs font-bold transition-all"
-          style={activeCategory === "all" ? { background: "#E8001D", color: "#fff" } : { background: "#1a1a1a", color: "#666" }}>
+          style={activeCategory === "all" ? { background: "#75AADB", color: "#fff" } : { background: "#1a1a1a", color: "#666" }}>
           Todos
         </button>
         {categories.map(cat => (
           <button key={cat} onClick={() => setActiveCategory(cat)}
             className="shrink-0 px-3 py-1.5 rounded-full text-xs font-bold transition-all"
-            style={activeCategory === cat ? { background: "#E8001D", color: "#fff" } : { background: "#1a1a1a", color: "#666" }}>
+            style={activeCategory === cat ? { background: "#75AADB", color: "#fff" } : { background: "#1a1a1a", color: "#666" }}>
             {cat}
           </button>
         ))}
@@ -217,7 +217,7 @@ export default function AdminMenu() {
               </button>
               <button onClick={handleSave} disabled={saving}
                 className="flex-1 py-3 rounded-lg text-sm font-bold text-white flex items-center justify-center gap-2"
-                style={{ background: "#E8001D", opacity: saving ? 0.7 : 1 }}>
+                style={{ background: "#75AADB", opacity: saving ? 0.7 : 1 }}>
                 <Check size={15} /> {saving ? "Guardando..." : "Guardar"}
               </button>
             </div>

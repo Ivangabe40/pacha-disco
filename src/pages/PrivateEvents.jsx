@@ -75,11 +75,11 @@ export default function PrivateEvents() {
 
       {/* Hero */}
       <div className="relative py-20 md:py-28 px-4 text-center overflow-hidden">
-        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, rgba(232,0,29,0.12) 0%, transparent 70%)" }} />
+        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, rgba(116,172,223,0.12) 0%, transparent 70%)" }} />
         <div className="relative z-10 max-w-3xl mx-auto">
-          <p className="text-xs tracking-widest uppercase mb-4" style={{ color: "#E8001D" }}>Pachá · Espacios Exclusivos</p>
+          <p className="text-xs tracking-widest uppercase mb-4" style={{ color: "#75AADB" }}>Pachá · Espacios Exclusivos</p>
           <h1 className="text-4xl md:text-6xl font-black mb-6" style={{ fontFamily: "'Playfair Display', serif" }}>
-            Eventos <span style={{ color: "#E8001D" }}>Privados</span>
+            Eventos <span style={{ color: "#75AADB" }}>Privados</span>
           </h1>
           <p className="text-gray-400 text-lg leading-relaxed max-w-2xl mx-auto">
             Convertí Pachá en el escenario de tu próxima celebración. Nuestro equipo se encarga de cada detalle para que vivas una experiencia única e irrepetible.
@@ -88,7 +88,7 @@ export default function PrivateEvents() {
       </div>
 
       {/* Divider */}
-      <div className="h-px max-w-5xl mx-auto mb-16" style={{ background: "linear-gradient(90deg, transparent, rgba(232,0,29,0.4), transparent)" }} />
+      <div className="h-px max-w-5xl mx-auto mb-16" style={{ background: "linear-gradient(90deg, transparent, rgba(116,172,223,0.4), transparent)" }} />
 
       {/* Event Types */}
       <div className="max-w-5xl mx-auto px-4 mb-24">
@@ -105,15 +105,15 @@ export default function PrivateEvents() {
                 className="rounded-xl overflow-hidden cursor-pointer transition-all duration-300"
                 style={{
                   background: "#0f0f0f",
-                  border: isOpen ? "1px solid rgba(232,0,29,0.5)" : "1px solid #1e1e1e",
-                  boxShadow: isOpen ? "0 4px 30px rgba(232,0,29,0.1)" : "none"
+                  border: isOpen ? "1px solid rgba(116,172,223,0.5)" : "1px solid #1e1e1e",
+                  boxShadow: isOpen ? "0 4px 30px rgba(116,172,223,0.1)" : "none"
                 }}
                 onClick={() => setOpenCard(isOpen ? null : i)}
               >
                 <div className="flex items-center justify-between px-4 md:px-6 py-4 md:py-5">
                   <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ background: "rgba(232,0,29,0.12)" }}>
-                      <Icon size={20} style={{ color: "#E8001D" }} />
+                    <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ background: "rgba(116,172,223,0.12)" }}>
+                      <Icon size={20} style={{ color: "#75AADB" }} />
                     </div>
                     <h3 className="text-lg font-bold">{ev.title}</h3>
                   </div>
@@ -124,7 +124,7 @@ export default function PrivateEvents() {
                     <p className="text-gray-400 mb-4 leading-relaxed">{ev.description}</p>
                     <div className="flex flex-wrap gap-2">
                       {ev.features.map((f, j) => (
-                        <span key={j} className="text-xs px-3 py-1 rounded-full" style={{ background: "rgba(232,0,29,0.1)", color: "#E8001D", border: "1px solid rgba(232,0,29,0.2)" }}>
+                        <span key={j} className="text-xs px-3 py-1 rounded-full" style={{ background: "rgba(116,172,223,0.1)", color: "#75AADB", border: "1px solid rgba(116,172,223,0.2)" }}>
                           {f}
                         </span>
                       ))}
@@ -139,7 +139,7 @@ export default function PrivateEvents() {
 
       {/* Contact Form */}
       <div className="max-w-2xl mx-auto px-4 pb-24">
-        <div className="h-px mb-16" style={{ background: "linear-gradient(90deg, transparent, rgba(232,0,29,0.3), transparent)" }} />
+        <div className="h-px mb-16" style={{ background: "linear-gradient(90deg, transparent, rgba(116,172,223,0.3), transparent)" }} />
         <h2 className="text-2xl md:text-3xl font-bold text-center mb-3" style={{ fontFamily: "'Playfair Display', serif" }}>
           Consultá tu Evento
         </h2>
@@ -147,7 +147,7 @@ export default function PrivateEvents() {
 
         {sent ? (
           <div className="text-center py-16">
-            <CheckCircle size={48} className="mx-auto mb-4" style={{ color: "#E8001D" }} />
+            <CheckCircle size={48} className="mx-auto mb-4" style={{ color: "#75AADB" }} />
             <h3 className="text-xl font-bold mb-2">¡Consulta enviada!</h3>
             <p className="text-gray-500">Nos ponemos en contacto a la brevedad.</p>
           </div>
@@ -163,7 +163,7 @@ export default function PrivateEvents() {
                   placeholder="Tu nombre"
                   className="w-full px-4 py-3 rounded-lg text-sm outline-none transition-all"
                   style={{ background: "#0f0f0f", border: "1px solid #1e1e1e", color: "#F0EBE3" }}
-                  onFocus={e => e.target.style.borderColor = "rgba(232,0,29,0.5)"}
+                  onFocus={e => e.target.style.borderColor = "rgba(116,172,223,0.5)"}
                   onBlur={e => e.target.style.borderColor = "#1e1e1e"}
                 />
               </div>
@@ -176,7 +176,7 @@ export default function PrivateEvents() {
                   placeholder="tu@email.com"
                   className="w-full px-4 py-3 rounded-lg text-sm outline-none transition-all"
                   style={{ background: "#0f0f0f", border: "1px solid #1e1e1e", color: "#F0EBE3" }}
-                  onFocus={e => e.target.style.borderColor = "rgba(232,0,29,0.5)"}
+                  onFocus={e => e.target.style.borderColor = "rgba(116,172,223,0.5)"}
                   onBlur={e => e.target.style.borderColor = "#1e1e1e"}
                 />
               </div>
@@ -190,7 +190,7 @@ export default function PrivateEvents() {
                   placeholder="+54 9 ..."
                   className="w-full px-4 py-3 rounded-lg text-sm outline-none transition-all"
                   style={{ background: "#0f0f0f", border: "1px solid #1e1e1e", color: "#F0EBE3" }}
-                  onFocus={e => e.target.style.borderColor = "rgba(232,0,29,0.5)"}
+                  onFocus={e => e.target.style.borderColor = "rgba(116,172,223,0.5)"}
                   onBlur={e => e.target.style.borderColor = "#1e1e1e"}
                 />
               </div>
@@ -224,7 +224,7 @@ export default function PrivateEvents() {
                   onChange={e => setForm({ ...form, date: e.target.value })}
                   className="w-full px-4 py-3 rounded-lg text-sm outline-none transition-all"
                   style={{ background: "#0f0f0f", border: "1px solid #1e1e1e", color: "#F0EBE3", colorScheme: "dark" }}
-                  onFocus={e => e.target.style.borderColor = "rgba(232,0,29,0.5)"}
+                  onFocus={e => e.target.style.borderColor = "rgba(116,172,223,0.5)"}
                   onBlur={e => e.target.style.borderColor = "#1e1e1e"}
                 />
               </div>
@@ -237,7 +237,7 @@ export default function PrivateEvents() {
                   placeholder="Ej: 150"
                   className="w-full px-4 py-3 rounded-lg text-sm outline-none transition-all"
                   style={{ background: "#0f0f0f", border: "1px solid #1e1e1e", color: "#F0EBE3" }}
-                  onFocus={e => e.target.style.borderColor = "rgba(232,0,29,0.5)"}
+                  onFocus={e => e.target.style.borderColor = "rgba(116,172,223,0.5)"}
                   onBlur={e => e.target.style.borderColor = "#1e1e1e"}
                 />
               </div>
@@ -251,7 +251,7 @@ export default function PrivateEvents() {
                 rows={4}
                 className="w-full px-4 py-3 rounded-lg text-sm outline-none transition-all resize-none"
                 style={{ background: "#0f0f0f", border: "1px solid #1e1e1e", color: "#F0EBE3" }}
-                onFocus={e => e.target.style.borderColor = "rgba(232,0,29,0.5)"}
+                onFocus={e => e.target.style.borderColor = "rgba(116,172,223,0.5)"}
                 onBlur={e => e.target.style.borderColor = "#1e1e1e"}
               />
             </div>
@@ -259,7 +259,7 @@ export default function PrivateEvents() {
               type="submit"
               disabled={sending}
               className="w-full py-4 rounded-lg font-black tracking-widest uppercase text-sm flex items-center justify-center gap-2 transition-all"
-              style={{ background: "linear-gradient(135deg, #E8001D, #ff1a35)", color: "#fff", opacity: sending ? 0.7 : 1 }}
+              style={{ background: "linear-gradient(135deg, #75AADB, #92C8F0)", color: "#fff", opacity: sending ? 0.7 : 1 }}
             >
               <Send size={16} />
               {sending ? "Enviando..." : "Enviar Consulta"}

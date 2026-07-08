@@ -55,7 +55,7 @@ export default function AdminNewsletter() {
       {/* Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="rounded-xl p-5 flex items-center gap-4" style={{ background: "#111", border: "1px solid #222" }}>
-          <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ background: "rgba(232,0,29,0.15)" }}>
+          <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ background: "rgba(116,172,223,0.15)" }}>
             <Users size={20} className="text-red-500" />
           </div>
           <div>
@@ -64,7 +64,7 @@ export default function AdminNewsletter() {
           </div>
         </div>
         <div className="rounded-xl p-5 flex items-center gap-4" style={{ background: "#111", border: "1px solid #222" }}>
-          <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ background: "rgba(232,0,29,0.15)" }}>
+          <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ background: "rgba(116,172,223,0.15)" }}>
             <Mail size={20} className="text-red-500" />
           </div>
           <div>
@@ -122,7 +122,7 @@ export default function AdminNewsletter() {
               type="submit"
               disabled={sending || subscribers.length === 0}
               className="w-full py-3 rounded-lg text-sm font-bold text-white flex items-center justify-center gap-2 transition-all disabled:opacity-40"
-              style={{ background: "linear-gradient(135deg, #E8001D, #ff1a35)" }}
+              style={{ background: "linear-gradient(135deg, #75AADB, #ff1a35)" }}
             >
               {sending ? (
                 <><Loader2 size={16} className="animate-spin" /> Enviando...</>

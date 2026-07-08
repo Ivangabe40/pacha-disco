@@ -51,14 +51,14 @@ export default function AdminGalleryAlbums() {
         <h2 className="text-2xl font-bold text-white" style={{ fontFamily: "'Playfair Display', serif" }}>Álbumes de Fotos</h2>
         <button onClick={openNew}
           className="flex items-center gap-2 px-4 py-2 rounded-xl text-white text-sm font-semibold transition-all"
-          style={{ background: "linear-gradient(135deg,#E8001D,#ff1a35)" }}>
+          style={{ background: "linear-gradient(135deg,#75AADB,#ff1a35)" }}>
           <Plus size={16} /> Nuevo Álbum
         </button>
       </div>
 
       {/* Form */}
       {showForm && (
-        <div className="mb-6 p-4 sm:p-6 rounded-2xl" style={{ background: "#111", border: "1px solid rgba(232,0,29,0.3)" }}>
+        <div className="mb-6 p-4 sm:p-6 rounded-2xl" style={{ background: "#111", border: "1px solid rgba(116,172,223,0.3)" }}>
           <h3 className="text-white font-semibold mb-4">{editing ? "Editar álbum" : "Nuevo álbum"}</h3>
           <div className="grid md:grid-cols-2 gap-4 mb-4">
             <div>
@@ -80,7 +80,7 @@ export default function AdminGalleryAlbums() {
             <label className="text-xs text-gray-400 uppercase tracking-wider block mb-1">Imagen de portada (opcional)</label>
             <label className="cursor-pointer block">
               <div className="flex items-center gap-4 p-4 rounded-xl border-2 border-dashed transition-colors"
-                style={{ borderColor: form.cover_url ? "rgba(232,0,29,0.4)" : "#333", background: "#1a1a1a" }}>
+                style={{ borderColor: form.cover_url ? "rgba(116,172,223,0.4)" : "#333", background: "#1a1a1a" }}>
                 {form.cover_url ? (
                   <img src={form.cover_url} alt="portada" className="w-16 h-16 rounded-lg object-cover shrink-0" />
                 ) : (
@@ -102,7 +102,7 @@ export default function AdminGalleryAlbums() {
           <div className="flex gap-3">
             <button onClick={save} disabled={saving}
               className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-white text-sm font-semibold"
-              style={{ background: "#E8001D" }}>
+              style={{ background: "#75AADB" }}>
               <Check size={15} /> {saving ? "Guardando..." : "Guardar"}
             </button>
             <button onClick={() => setShowForm(false)}

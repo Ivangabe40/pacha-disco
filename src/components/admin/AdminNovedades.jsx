@@ -48,7 +48,7 @@ export default function AdminNovedades() {
         </h2>
         <button onClick={() => setShowForm(!showForm)}
           className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-bold"
-          style={{ background: "#E8001D", color: "#fff" }}>
+          style={{ background: "#75AADB", color: "#fff" }}>
           <Plus size={14} /> Nuevo
         </button>
       </div>
@@ -104,7 +104,7 @@ export default function AdminNovedades() {
           <div className="flex gap-3">
             <button onClick={handleSave}
               className="px-6 py-2.5 rounded-lg text-sm font-bold"
-              style={{ background: "#E8001D", color: "#fff" }}>
+              style={{ background: "#75AADB", color: "#fff" }}>
               Guardar
             </button>
             <button onClick={() => setShowForm(false)}
@@ -139,8 +139,8 @@ export default function AdminNovedades() {
               </button>
               <button onClick={() => handleDelete(item)}
                 className="w-8 h-8 flex items-center justify-center rounded-lg"
-                style={{ background: "rgba(232,0,29,0.1)" }}>
-                <Trash2 size={14} style={{ color: "#E8001D" }} />
+                style={{ background: "rgba(116,172,223,0.1)" }}>
+                <Trash2 size={14} style={{ color: "#75AADB" }} />
               </button>
             </div>
           </div>
