@@ -3,7 +3,7 @@ import QRCode from "qrcode";
 import { Download, ExternalLink } from "lucide-react";
 
 const APP_URL = "https://pachadisco.com.ar/";
-const LOGO_RED = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/a5ee03f15_1774650185102.png";
+const LOGO_RED = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/1694b7ceb_file_0000000075b871f59cf8aa63d96c0d8d.png";
 
 export default function QRPage() {
   const [qrDataUrl, setQrDataUrl] = useState(null);

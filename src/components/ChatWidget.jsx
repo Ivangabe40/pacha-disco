@@ -3,7 +3,7 @@ import { base44 } from "@/api/base44Client";
 import { MessageCircle, X, Send, Loader2, Bot } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 
-const LOGO = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/a5ee03f15_1774650185102.png";
+const LOGO = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/1694b7ceb_file_0000000075b871f59cf8aa63d96c0d8d.png";
 
 export default function ChatWidget() {
   const [open, setOpen] = useState(false);
