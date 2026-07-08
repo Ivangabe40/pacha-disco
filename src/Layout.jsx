@@ -61,8 +61,9 @@ export default function Layout({ children, currentPageName }) {
       {/* NAVBAR — Desktop full / Mobile logo-only or back header */}
       <nav
         className="sticky top-0 z-50 transition-all duration-300"
-        style={{ position: "sticky", zIndex: 50 }}
         style={{
+          position: "sticky",
+          zIndex: 50,
           background: scrolled ? "rgba(7,7,7,0.98)" : "rgba(7,7,7,0.7)",
           borderBottom: scrolled ? "1px solid rgba(116,172,223,0.2)" : "1px solid rgba(255,255,255,0.05)",
           backdropFilter: "blur(20px)",
@@ -145,7 +146,7 @@ export default function Layout({ children, currentPageName }) {
       <MobileBottomBar />
 
       {/* FOOTER */}
-      <footer className="py-10 md:py-14 px-4" style={{ background: "#050505", borderTop: "1px solid rgba(116,172,223,0.15)" }}>
+      <footer className="py-10 md:py-14 px-4" style={{ background: "#050505", borderTop: "1px solid rgba(116,172,223,0.15)", position: "relative", zIndex: 1 }}>
         <div className="max-w-7xl mx-auto">
           {/* Red divider */}
           <div className="h-px w-full mb-8 md:mb-10" style={{ background: "linear-gradient(90deg, transparent, rgba(116,172,223,0.4), transparent)" }} />
