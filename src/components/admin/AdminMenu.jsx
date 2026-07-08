@@ -198,13 +198,13 @@ export default function AdminMenu() {
               <div className="flex gap-4">
                 <label className="flex items-center gap-2 cursor-pointer">
                   <input type="checkbox" checked={form.is_available} onChange={e => setForm({ ...form, is_available: e.target.checked })}
-                    className="w-4 h-4 rounded accent-red-600" />
-                  <span className="text-sm text-gray-400">Disponible</span>
+                    className="w-4 h-4 rounded accent-sky-500" />
+                    <span className="text-sm text-gray-400">Disponible</span>
                 </label>
                 <label className="flex items-center gap-2 cursor-pointer">
                   <input type="checkbox" checked={form.is_featured} onChange={e => setForm({ ...form, is_featured: e.target.checked })}
-                    className="w-4 h-4 rounded accent-red-600" />
-                  <span className="text-sm text-gray-400">Destacado</span>
+                    className="w-4 h-4 rounded accent-sky-500" />
+                    <span className="text-sm text-gray-400">Destacado</span>
                 </label>
               </div>
             </div>
@@ -259,7 +259,7 @@ export default function AdminMenu() {
                   <Pencil size={12} />
                 </button>
                 <button onClick={() => handleDelete(item.id)}
-                  className="w-7 h-7 rounded-lg flex items-center justify-center transition-all hover:text-red-500 text-gray-700"
+                  className="w-7 h-7 rounded-lg flex items-center justify-center transition-all hover:text-red-400 text-gray-700"
                   style={{ background: "#1a1a1a" }}>
                   <Trash2 size={12} />
                 </button>

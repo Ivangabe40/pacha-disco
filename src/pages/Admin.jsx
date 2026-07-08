@@ -13,7 +13,8 @@ import AdminNewsletter from "@/components/admin/AdminNewsletter";
 import AdminNotifications from "@/components/admin/AdminNotifications";
 import AdminEscapeBar from "@/components/admin/AdminEscapeBar";
 import AdminNovedades from "@/components/admin/AdminNovedades";
-import { Calendar, Music, Camera, Wine, ShieldOff, Megaphone, Crown, Mail, Bell, GlassWater, Sparkles } from "lucide-react";
+import AdminConfiguracion from "@/components/admin/AdminConfiguracion";
+import { Calendar, Music, Camera, Wine, ShieldOff, Megaphone, Crown, Mail, Bell, GlassWater, Sparkles, Settings } from "lucide-react";
 
 const LOGO_RED = "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/user_69abf6aff758a16386edeb04/0e73ec46b_IMG-20260121-WA0031.jpg";
 
@@ -28,6 +29,7 @@ const tabs = [
   { id: "notifications", label: "Notificaciones", icon: Bell },
   { id: "escapebar", label: "Escape Bar", icon: GlassWater },
   { id: "novedades", label: "Novedades", icon: Sparkles },
+  { id: "config", label: "Configuración", icon: Settings },
 ];
 
 export default function Admin() {
@@ -79,7 +81,7 @@ export default function Admin() {
   return (
     <div style={{ background: "#0A0A0A", minHeight: "100vh" }}>
       {/* Admin Header */}
-      <div className="sticky top-16 z-40 border-b" style={{ background: "#080808", borderColor: "#1a1a1a" }}>
+      <div className="sticky top-14 md:top-16 z-40 border-b" style={{ background: "#080808", borderColor: "#1a1a1a" }}>
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           <div className="flex items-center gap-3 py-3">
             <img src={LOGO_RED} alt="Pachá Admin" className="h-8 object-contain" />
@@ -130,6 +132,7 @@ export default function Admin() {
         {activeTab === "notifications" && <AdminNotifications />}
         {activeTab === "escapebar" && <AdminEscapeBar />}
         {activeTab === "novedades" && <AdminNovedades />}
+        {activeTab === "config" && <AdminConfiguracion />}
         {activeTab === "menu" && (
           <div className="grid md:grid-cols-3 gap-6">
             <div className="md:col-span-2"><AdminMenu /></div>

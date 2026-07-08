@@ -92,7 +92,7 @@ export default function EscapeBar() {
             }
                 <div className="flex flex-col md:flex-row">
                   {featured.photo_url &&
-              <div className="md:w-1/2 aspect-video md:aspect-auto md:min-h-64 overflow-hidden">
+              <div className="md:w-1/2 aspect-video md:min-h-64 overflow-hidden">
                       <img src={featured.photo_url} alt={featured.title}
                 className="w-full h-full object-cover" />
                     </div>

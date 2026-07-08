@@ -25,6 +25,15 @@ export default function PullToRefresh({ onRefresh, children }) {
 
     const handleTouchMove = (e) => {
       if (!pulling.current || isRefreshing) return;
+      // Cancel pull if user scrolled away from top
+      if (window.scrollY > 0) {
+        pulling.current = false;
+        if (pullDistRef.current !== 0) {
+          pullDistRef.current = 0;
+          setPullDistance(0);
+        }
+        return;
+      }
       const diff = e.touches[0].clientY - startY.current;
       if (diff <= 0) {
         if (pullDistRef.current !== 0) {
@@ -33,42 +42,48 @@ export default function PullToRefresh({ onRefresh, children }) {
         }
         return;
       }
-      // Prevent native scroll/bounce while pulling
+      // Prevent native scroll/bounce only while actively pulling at top
       e.preventDefault();
       const dist = Math.min(diff * 0.5, MAX_PULL);
       pullDistRef.current = dist;
       setPullDistance(dist);
     };
 
-    const handleTouchEnd = async () => {
+    const resetPull = () => {
       if (!pulling.current) return;
       pulling.current = false;
       const dist = pullDistRef.current;
-      if (dist >= PULL_THRESHOLD) {
+      if (dist >= PULL_THRESHOLD && !isRefreshing) {
         setIsRefreshing(true);
         setPullDistance(PULL_THRESHOLD);
         pullDistRef.current = PULL_THRESHOLD;
-        try {
-          await onRefresh();
-        } finally {
+        onRefresh().finally(() => {
           setIsRefreshing(false);
           setPullDistance(0);
           pullDistRef.current = 0;
-        }
+        });
       } else {
         setPullDistance(0);
         pullDistRef.current = 0;
       }
     };
 
+    const handleTouchCancel = () => {
+      pulling.current = false;
+      setPullDistance(0);
+      pullDistRef.current = 0;
+    };
+
     el.addEventListener("touchstart", handleTouchStart, { passive: true });
     el.addEventListener("touchmove", handleTouchMove, { passive: false });
-    el.addEventListener("touchend", handleTouchEnd, { passive: true });
+    el.addEventListener("touchend", resetPull, { passive: true });
+    el.addEventListener("touchcancel", handleTouchCancel, { passive: true });
 
     return () => {
       el.removeEventListener("touchstart", handleTouchStart);
       el.removeEventListener("touchmove", handleTouchMove);
-      el.removeEventListener("touchend", handleTouchEnd);
+      el.removeEventListener("touchend", resetPull);
+      el.removeEventListener("touchcancel", handleTouchCancel);
     };
   }, [isRefreshing, onRefresh]);
 

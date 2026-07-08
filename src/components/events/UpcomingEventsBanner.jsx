@@ -50,7 +50,7 @@ export default function UpcomingEventsBanner({ events }) {
             {/* CTA */}
             <div className="shrink-0">
               <div className="flex items-center gap-1 md:gap-2 px-3 md:px-4 py-2 md:py-2.5 rounded-xl text-xs md:text-sm font-bold text-white transition-all"
-            style={{ background: "linear-gradient(135deg,#75AADB,#ff1a35)" }}>
+            style={{ background: "linear-gradient(135deg,#75AADB,#4A8BC2)" }}>
                 <span className="hidden md:inline">Ver Evento</span> <ChevronRight size={14} />
               </div>
             </div>

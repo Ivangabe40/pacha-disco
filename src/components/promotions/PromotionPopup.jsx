@@ -38,9 +38,9 @@ export default function PromotionPopup() {
               className="w-full h-full object-cover" style={{ maxHeight: "75vh" }} />
           </div>
         ) : promo.image_url && (
-          <div style={{ flex: "1 1 auto", minHeight: 0, overflow: "hidden" }}>
+          <div style={{ flex: "1 1 auto", minHeight: 0, overflow: "hidden", aspectRatio: "9/16", maxHeight: "75vh" }}>
             <img src={promo.image_url} alt={promo.title}
-              className="w-full object-cover object-center" style={{ maxHeight: "75vh", display: "block" }} />
+              className="w-full h-full object-cover object-center" style={{ display: "block" }} />
           </div>
         )}
 
