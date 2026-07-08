@@ -3,7 +3,7 @@ import { base44 } from "@/api/base44Client";
 import { MessageCircle, X, Send, Loader2, Bot } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 
-const LOGO = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/1694b7ceb_file_0000000075b871f59cf8aa63d96c0d8d.png";
+const LOGO = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/7c4e34300_1783489304034.png";
 
 export default function ChatWidget() {
   const [open, setOpen] = useState(false);
@@ -101,7 +101,7 @@ export default function ChatWidget() {
           {/* Header */}
           <div className="flex items-center gap-3 px-4 py-3 shrink-0"
             style={{ background: "#0a0a0a", borderBottom: "1px solid #1a1a1a" }}>
-            <img src={LOGO} alt="Pachá" className="h-7 w-auto object-contain" />
+            <img src={LOGO} alt="Pachá" className="h-9 w-auto object-contain" />
             <div className="flex-1">
               <p className="text-white text-sm font-semibold leading-none">Asistente Pachá</p>
               <p className="text-xs mt-0.5" style={{ color: "#00c864" }}>● Disponible 24/7</p>

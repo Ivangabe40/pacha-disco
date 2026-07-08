@@ -6,7 +6,7 @@ import { es } from "date-fns/locale";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 
-const LOGO = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/1694b7ceb_file_0000000075b871f59cf8aa63d96c0d8d.png";
+const LOGO = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/7c4e34300_1783489304034.png";
 
 export default function TicketComprobante({ ticket, onClose }) {
   const [qrDataUrl, setQrDataUrl] = useState("");
@@ -52,7 +52,7 @@ export default function TicketComprobante({ ticket, onClose }) {
         <div ref={comprobanteRef} className="rounded-2xl overflow-hidden" style={{ background: "#111", border: "1px solid #2a2a2a" }}>
           {/* Header rojo */}
           <div className="px-6 py-5 flex items-center justify-between" style={{ background: "linear-gradient(135deg, #75AADB 0%, #9B0013 100%)" }}>
-            <img src={LOGO} alt="Pachá" className="h-10 object-contain" style={{ filter: "brightness(0) invert(1)" }} />
+            <img src={LOGO} alt="Pachá" className="h-12 object-contain" style={{ filter: "brightness(0) invert(1)" }} />
             <div className="text-right">
               <p className="text-white/70 text-xs uppercase tracking-wider">Entrada</p>
               <p className="text-white font-bold text-sm capitalize">{ticket.ticket_type}</p>

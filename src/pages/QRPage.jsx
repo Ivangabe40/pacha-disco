@@ -3,7 +3,7 @@ import QRCode from "qrcode";
 import { Download, ExternalLink } from "lucide-react";
 
 const APP_URL = "https://pachadisco.com.ar/";
-const LOGO_RED = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/1694b7ceb_file_0000000075b871f59cf8aa63d96c0d8d.png";
+const LOGO_RED = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/7c4e34300_1783489304034.png";
 
 export default function QRPage() {
   const [qrDataUrl, setQrDataUrl] = useState(null);
@@ -29,7 +29,7 @@ export default function QRPage() {
     <div className="min-h-screen flex items-center justify-center px-4 py-12" style={{ background: "#070707" }}>
       <div className="max-w-sm w-full text-center">
         {/* Logo */}
-        <img src={LOGO_RED} alt="Pachá" className="h-12 w-auto object-contain mx-auto mb-6"
+        <img src={LOGO_RED} alt="Pachá" className="h-14 w-auto object-contain mx-auto mb-6"
           style={{ filter: "drop-shadow(0 0 12px rgba(116,172,223,0.5))" }} />
 
         <p className="text-xs tracking-widest uppercase mb-1" style={{ color: "#75AADB" }}>
@@ -52,7 +52,7 @@ export default function QRPage() {
               {/* Logo overlay center */}
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                 <div className="rounded-lg overflow-hidden" style={{ background: "#F0EBE3", padding: 6 }}>
-                  <img src={LOGO_RED} alt="Pachá" className="h-10 w-auto object-contain" />
+                  <img src={LOGO_RED} alt="Pachá" className="h-12 w-auto object-contain" />
                 </div>
               </div>
             </div>

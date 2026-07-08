@@ -6,7 +6,7 @@ import MobileBottomBar from "@/components/MobileBottomBar";
 
 const ROOT_ROUTES = new Set(["/", "/Home", "/Artists", "/Gallery", "/Menu", "/About", "/PrivateEvents", "/VIPReservations", "/Contact", "/Admin", "/configuracion", "/gestor-menu"]);
 
-const LOGO_RED = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/1694b7ceb_file_0000000075b871f59cf8aa63d96c0d8d.png";
+const LOGO_RED = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/7c4e34300_1783489304034.png";
 
 const navLinks = [
 { label: "Eventos", page: "Home" },
@@ -66,14 +66,14 @@ export default function Layout({ children, currentPageName }) {
             </button> :
 
           <Link to={createPageUrl("Home")} className="md:hidden flex items-center">
-              <img src={LOGO_RED} alt="Pachá" className="h-8 w-auto object-contain"
+              <img src={LOGO_RED} alt="Pachá" className="h-10 w-auto object-contain"
             style={{ filter: "drop-shadow(0 0 10px rgba(116,172,223,0.5))" }} />
             </Link>
           }
 
           {/* Desktop Logo */}
           <Link to={createPageUrl("Home")} className="hidden md:flex items-center">
-            <img src={LOGO_RED} alt="Pachá" className="h-10 w-auto object-contain"
+            <img src={LOGO_RED} alt="Pachá" className="h-12 w-auto object-contain"
             style={{ filter: "drop-shadow(0 0 12px rgba(116,172,223,0.5))" }} />
           </Link>
 
@@ -134,7 +134,7 @@ export default function Layout({ children, currentPageName }) {
 
           <div className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8">
             <div className="flex flex-col items-center md:items-start gap-2">
-              <img src={LOGO_RED} alt="Pachá" className="h-12 w-auto object-contain"
+              <img src={LOGO_RED} alt="Pachá" className="h-14 w-auto object-contain"
               style={{ filter: "drop-shadow(0 0 10px rgba(116,172,223,0.4))" }} />
               <p className="text-gray-600 text-xs tracking-widest uppercase">Pachá Night Club · Exclusivo Mayores</p>
               <a href="https://maps.app.goo.gl/outiaSZFTh14BhGK8" target="_blank" rel="noopener noreferrer"

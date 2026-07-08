@@ -16,7 +16,7 @@ import AdminNovedades from "@/components/admin/AdminNovedades";
 import AdminConfiguracion from "@/components/admin/AdminConfiguracion";
 import { Calendar, Music, Camera, Wine, ShieldOff, Megaphone, Crown, Mail, Bell, GlassWater, Sparkles, Settings } from "lucide-react";
 
-const LOGO_RED = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/1694b7ceb_file_0000000075b871f59cf8aa63d96c0d8d.png";
+const LOGO_RED = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/7c4e34300_1783489304034.png";
 
 const tabs = [
   { id: "events", label: "Eventos", icon: Calendar },
@@ -84,7 +84,7 @@ export default function Admin() {
       <div className="sticky top-14 md:top-16 z-40 border-b" style={{ background: "#080808", borderColor: "#1a1a1a" }}>
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           <div className="flex items-center gap-3 py-3">
-            <img src={LOGO_RED} alt="Pachá Admin" className="h-8 object-contain" />
+            <img src={LOGO_RED} alt="Pachá Admin" className="h-10 object-contain" />
             <h1 className="text-white font-bold text-base md:text-lg" style={{ fontFamily: "'Playfair Display', serif" }}>Panel Admin</h1>
           </div>
 
