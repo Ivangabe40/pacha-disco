@@ -46,7 +46,15 @@ export default function Home() {
 
   return (
     <PullToRefresh onRefresh={loadEvents}>
-    <div style={{ background: "#070707", minHeight: "100vh" }}>
+    <div style={{
+      background: "#070707",
+      minHeight: "100vh",
+      backgroundImage: `url("https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/99bd3ae57_file_000000005d4c720eae26471f7fa80296.png")`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      backgroundAttachment: "fixed",
+      backgroundRepeat: "no-repeat"
+    }}>
       <PromotionPopup />
 
       {/* BANNER NOVEDAD */}
