@@ -13,6 +13,8 @@ import VIPReservations from './pages/VIPReservations';
 import Contact from './pages/Contact';
 import MisCuenta from './pages/MisCuenta';
 import QRPage from './pages/QRPage';
+import Configuracion from './pages/Configuracion';
+import GestorMenu from './pages/GestorMenu';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ThemeProvider } from 'next-themes';
 import { TabHistoryProvider } from '@/components/TabHistoryProvider';
@@ -86,6 +88,8 @@ const AuthenticatedApp = () => {
         <Route path="/MisCuenta" element={<LayoutWrapper currentPageName="MisCuenta"><MisCuenta /></LayoutWrapper>} />
         <Route path="/EscapeBar" element={<LayoutWrapper currentPageName="EscapeBar"><EscapeBar /></LayoutWrapper>} />
         <Route path="/QR" element={<LayoutWrapper currentPageName="QRPage"><QRPage /></LayoutWrapper>} />
+        <Route path="/configuracion" element={<LayoutWrapper currentPageName="Configuracion"><Configuracion /></LayoutWrapper>} />
+        <Route path="/gestor-menu" element={<LayoutWrapper currentPageName="GestorMenu"><GestorMenu /></LayoutWrapper>} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </AnimatePresence>
