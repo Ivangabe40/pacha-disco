@@ -30,25 +30,8 @@ export default function Layout({ children, currentPageName }) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const isHomePage = currentPageName === "Home";
-  const BG_IMAGE = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/99bd3ae57_file_000000005d4c720eae26471f7fa80296.png";
-
   return (
     <div className="min-h-screen flex flex-col" suppressHydrationWarning style={{ background: "#070707", color: "#F0EBE3" }}>
-      {isHomePage && (
-        <div
-          style={{
-            position: "fixed",
-            inset: 0,
-            backgroundImage: `url("${BG_IMAGE}")`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-            zIndex: 0,
-            pointerEvents: "none",
-          }}
-        />
-      )}
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600&display=swap');
         body { font-family: 'Inter', sans-serif; background: #070707; }
