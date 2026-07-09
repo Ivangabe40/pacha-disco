@@ -158,7 +158,7 @@ export default function AdminEscapeBar() {
       </div>
 
       {/* Create form */}
-      {showForm && <FormFields onSubmit={handleCreate} submitLabel="Publicar" onCancel={() => { setShowForm(false); setForm(emptyForm); }} />}
+      {showForm && FormFields({ onSubmit: handleCreate, submitLabel: "Publicar", onCancel: () => { setShowForm(false); setForm(emptyForm); } })}
 
       {loading ? (
         <div className="flex justify-center py-12">
@@ -173,7 +173,7 @@ export default function AdminEscapeBar() {
           {displayed.map(ev => (
             <div key={ev.id}>
               {editingId === ev.id ? (
-                <FormFields onSubmit={handleUpdate} submitLabel="Guardar cambios" onCancel={cancelEdit} />
+                FormFields({ onSubmit: handleUpdate, submitLabel: "Guardar cambios", onCancel: cancelEdit })
               ) : (
                 <div className="rounded-xl overflow-hidden"
                   style={{
