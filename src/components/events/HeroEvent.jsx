@@ -18,9 +18,9 @@ export default function HeroEvent({ event }) {
           style={{ filter: "brightness(0.3) saturate(1.2)" }}
           autoPlay loop muted playsInline
         />
-      ) : event.flyer_url ? (
+      ) : (event.background_url || event.flyer_url) ? (
         <img
-          src={event.flyer_url}
+          src={event.background_url || event.flyer_url}
           alt={event.title}
           className="absolute inset-0 w-full h-full object-cover"
           style={{ filter: "brightness(0.25) saturate(1.2)" }}

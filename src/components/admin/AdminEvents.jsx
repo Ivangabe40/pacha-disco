@@ -8,7 +8,7 @@ import { es } from "date-fns/locale";
 const emptyEvent = {
   title: "", date: "", description: "", genres: "", djs: "",
   ticket_price: "", ticket_price_door: "", capacity: "",
-  flyer_url: "", video_url: "", status: "activo", is_featured: false
+  flyer_url: "", background_url: "", video_url: "", status: "activo", is_featured: false
 };
 
 export default function AdminEvents() {
@@ -23,7 +23,7 @@ export default function AdminEvents() {
   useEffect(() => { load(); }, []);
 
   const openNew = () => { setForm(emptyEvent); setEditing(null); setShowForm(true); };
-  const openEdit = (e) => { setForm({ ...e, ticket_price: e.ticket_price || "", ticket_price_door: e.ticket_price_door || "", capacity: e.capacity || "" }); setEditing(e); setShowForm(true); };
+  const openEdit = (e) => { setForm({ ...e, ticket_price: e.ticket_price || "", ticket_price_door: e.ticket_price_door || "", capacity: e.capacity || "", background_url: e.background_url || "" }); setEditing(e); setShowForm(true); };
 
   const [uploadingVideo, setUploadingVideo] = useState(false);
 
@@ -39,6 +39,14 @@ export default function AdminEvents() {
     const { file_url } = await base44.integrations.Core.UploadFile({ file });
     setForm(f => ({ ...f, video_url: file_url }));
     setUploadingVideo(false);
+  };
+
+  const [uploadingBg, setUploadingBg] = useState(false);
+  const handleBackground = async (file) => {
+    setUploadingBg(true);
+    const { file_url } = await base44.integrations.Core.UploadFile({ file });
+    setForm(f => ({ ...f, background_url: file_url }));
+    setUploadingBg(false);
   };
 
   const handleSave = async () => {
@@ -161,6 +169,30 @@ export default function AdminEvents() {
                   <div className="relative">
                     <img src={form.flyer_url} alt="flyer" className="h-20 rounded-lg object-cover" />
                     <button onClick={() => setForm({ ...form, flyer_url: "" })}
+                      className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-sky-500 text-white flex items-center justify-center text-xs">
+                      <X size={10} />
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
+            {/* Background image upload */}
+            <div className="md:col-span-2">
+              <label className="text-xs text-gray-400 uppercase tracking-wider block mb-2">Imagen de Fondo (Hero)</label>
+              <ImageSizeHint size="1920×1080" ratio="16:9" note="formato horizontal · imagen de fondo del hero" />
+              <p className="text-xs text-gray-600 mb-3">Se muestra como fondo del hero en el inicio. Si no se carga, se usa el flyer como respaldo.</p>
+              <div className="flex items-start gap-4">
+                <label className="cursor-pointer flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium"
+                  style={{ border: "1px solid #75AADB", color: "#75AADB" }}>
+                  <Upload size={14} />
+                  {uploadingBg ? "Subiendo..." : form.background_url ? "Cambiar fondo" : "Subir fondo"}
+                  <input type="file" accept="image/*" className="hidden"
+                    onChange={e => e.target.files[0] && handleBackground(e.target.files[0])} />
+                </label>
+                {form.background_url && (
+                  <div className="relative">
+                    <img src={form.background_url} alt="background" className="h-20 w-32 rounded-lg object-cover" />
+                    <button onClick={() => setForm({ ...form, background_url: "" })}
                       className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-sky-500 text-white flex items-center justify-center text-xs">
                       <X size={10} />
                     </button>

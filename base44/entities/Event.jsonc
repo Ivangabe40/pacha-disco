@@ -19,6 +19,10 @@
       "type": "string",
       "description": "URL del flyer del evento"
     },
+    "background_url": {
+      "type": "string",
+      "description": "URL de la imagen de fondo del hero (independiente del flyer)"
+    },
     "video_url": {
       "type": "string",
       "description": "URL del video flyer del evento"
