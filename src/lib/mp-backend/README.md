@@ -16,8 +16,8 @@ Obtener credenciales en: https://www.mercadopago.com.ar/developers/panel/app
 ## Backend Functions
 
 Los archivos de referencia están en:
-- `src/lib/mp-backend/create-preference.ts`
-- `src/lib/mp-backend/mercadopago-webhook.ts`
+- `src/lib/mp-backend/create-preference.txt`
+- `src/lib/mp-backend/mercadopago-webhook.txt`
 
 ### Pasos para activar (requiere plan Builder+)
 

@@ -25,6 +25,8 @@ export default function TicketSales() {
       setEvents(available);
       if (available.length > 0) setSelectedId(available[0].id);
       setLoading(false);
+    }).catch(() => {
+      setLoading(false);
     });
   }, []);
 

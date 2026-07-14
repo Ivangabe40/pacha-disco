@@ -1,7 +1,7 @@
 // ═══════════════════════════════════════════════════════════
 // REFERENCIA — Backend Function: mercadopago-webhook
 // ═══════════════════════════════════════════════════════════
-// Este archivo es de REFERENCIA. Para activarlo:
+// Este archivo es de REFERENCIA (no se compila). Para activarlo:
 //   1. Upgrade a plan Builder+
 //   2. Crear el archivo en: base44/functions/mercadopago-webhook/entry.ts
 //   3. Copiar este código tal cual
@@ -15,7 +15,7 @@ Deno.serve(async (req) => {
   const base44 = createClientFromRequest(req);
 
   try {
-    let paymentId: string | null = null;
+    let paymentId = null;
 
     // --- Soportar IPN (GET) y Webhook (POST) ---
     if (req.method === "GET") {
@@ -27,10 +27,8 @@ Deno.serve(async (req) => {
       }
     } else if (req.method === "POST") {
       const body = await req.json();
-      // Formato nuevo: { type: "payment", data: { id: "123" } }
-      // Formato acción:  { action: "payment.updated", data: { id: "123" } }
       if (body.type === "payment" || (body.action && String(body.action).startsWith("payment"))) {
-        paymentId = body.data?.id ? String(body.data.id) : null;
+        paymentId = body.data && body.data.id ? String(body.data.id) : null;
       }
     }
 
@@ -45,8 +43,8 @@ Deno.serve(async (req) => {
       return Response.json({ status: "ok" }, { status: 200 });
     }
 
-    const paymentResponse = await fetch(`https://api.mercadopago.com/v1/payments/${paymentId}`, {
-      headers: { Authorization: `Bearer ${accessToken}` },
+    const paymentResponse = await fetch("https://api.mercadopago.com/v1/payments/" + paymentId, {
+      headers: { Authorization: "Bearer " + accessToken },
     });
 
     if (!paymentResponse.ok) {
@@ -56,9 +54,9 @@ Deno.serve(async (req) => {
     const payment = await paymentResponse.json();
     const preferenceId = payment.preference_id;
     const externalRef = payment.external_reference;
-    const mpStatus = payment.status; // approved, rejected, pending, in_process, cancelled...
+    const mpStatus = payment.status;
 
-    // --- Buscar la orden por external_reference (order ID) o preference_id ---
+    // --- Buscar la orden por external_reference o preference_id ---
     let order = null;
     if (externalRef) {
       try {
@@ -86,7 +84,7 @@ Deno.serve(async (req) => {
       await base44.asServiceRole.entities.TicketOrder.update(order.id, {
         status: orderStatus,
         payment_id: String(paymentId),
-        buyer_email: order.buyer_email || payment.payer?.email || "",
+        buyer_email: order.buyer_email || (payment.payer && payment.payer.email) || "",
       });
 
       // --- Descontar stock solo cuando el pago pasa a aprobado ---
@@ -104,7 +102,6 @@ Deno.serve(async (req) => {
     return Response.json({ status: "ok" }, { status: 200 });
   } catch (error) {
     console.error("webhook error:", error);
-    // Siempre 200 para que MP no reintente innecesariamente
     return Response.json({ status: "ok", error: error.message }, { status: 200 });
   }
 });

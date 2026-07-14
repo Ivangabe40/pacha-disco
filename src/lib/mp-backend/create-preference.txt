@@ -1,9 +1,9 @@
 // ═══════════════════════════════════════════════════════════
 // REFERENCIA — Backend Function: create-preference
 // ═══════════════════════════════════════════════════════════
-// Este archivo es de REFERENCIA. Para activarlo:
+// Este archivo es de REFERENCIA (no se compila). Para activarlo:
 //   1. Upgrade a plan Builder+
-// 2. Crear el archivo en: base44/functions/create-preference/entry.ts
+//   2. Crear el archivo en: base44/functions/create-preference/entry.ts
 //   3. Copiar este código tal cual
 //   4. Deployar: npx base44 functions deploy create-preference
 // ═══════════════════════════════════════════════════════════
@@ -32,7 +32,7 @@ Deno.serve(async (req) => {
 
     const MAX_TICKETS = parseInt(Deno.env.get("MAX_TICKETS_PER_ORDER") || "10");
     if (qty > MAX_TICKETS) {
-      return Response.json({ error: `Máximo ${MAX_TICKETS} entradas por compra` }, { status: 400 });
+      return Response.json({ error: "Máximo " + MAX_TICKETS + " entradas por compra" }, { status: 400 });
     }
 
     const base44 = createClientFromRequest(req);
@@ -58,7 +58,7 @@ Deno.serve(async (req) => {
     const available = capacity > 0 ? capacity - sold : 999999;
     if (capacity > 0 && qty > available) {
       return Response.json(
-        { error: `Solo quedan ${available} entradas disponibles` },
+        { error: "Solo quedan " + available + " entradas disponibles" },
         { status: 400 }
       );
     }
@@ -80,7 +80,7 @@ Deno.serve(async (req) => {
     });
 
     // --- Crear preferencia de Mercado Pago Checkout Pro ---
-    const preferenceData: Record<string, unknown> = {
+    const preferenceData = {
       items: [
         {
           title: "Entrada anticipada discoteca",
@@ -90,9 +90,9 @@ Deno.serve(async (req) => {
         },
       ],
       back_urls: {
-        success: `${baseUrl}/payment/success`,
-        failure: `${baseUrl}/payment/failure`,
-        pending: `${baseUrl}/payment/pending`,
+        success: baseUrl + "/payment/success",
+        failure: baseUrl + "/payment/failure",
+        pending: baseUrl + "/payment/pending",
       },
       auto_return: "approved",
       external_reference: order.id,
@@ -114,7 +114,7 @@ Deno.serve(async (req) => {
     const mpResponse = await fetch("https://api.mercadopago.com/checkout/preferences", {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${accessToken}`,
+        Authorization: "Bearer " + accessToken,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(preferenceData),
