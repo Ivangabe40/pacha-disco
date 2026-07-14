@@ -4,6 +4,7 @@ import { Instagram, MessageCircle, Globe, CalendarDays, Tag, ChevronRight } from
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
+import EscapeBarGamePromo from "@/components/EscapeBarGamePromo";
 
 export default function EscapeBarSection() {
   const [events, setEvents] = useState([]);
@@ -58,6 +59,9 @@ export default function EscapeBarSection() {
             </p>
           </div>
         </div>
+
+        {/* JUEGO OFICIAL */}
+        <EscapeBarGamePromo />
 
         {/* Events content */}
         {events.length > 0 &&
