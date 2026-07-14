@@ -44,6 +44,11 @@
     "buyer_email": {
       "type": "string",
       "description": "Email del comprador"
+    },
+    "description": {
+      "type": "string",
+      "description": "Notas o descripci\u00f3n adicional de la orden",
+      "maxLength": 1000
     }
   },
   "required": [
