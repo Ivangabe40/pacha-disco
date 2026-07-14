@@ -57,11 +57,6 @@ export default function EscapeBar() {
         </div>
       </div>
 
-      {/* JUEGO OFICIAL */}
-      <div className="max-w-5xl mx-auto px-4 md:px-8 -mt-4 mb-4">
-        <EscapeBarGamePromo />
-      </div>
-
       {/* EVENTS SECTION */}
       <section className="max-w-5xl mx-auto px-4 md:px-8 py-12 md:py-16">
         <div className="flex items-center gap-4 mb-8 md:mb-12">
@@ -169,6 +164,11 @@ export default function EscapeBar() {
           </div>
         }
       </section>
+
+      {/* JUEGO OFICIAL */}
+      <div className="max-w-5xl mx-auto px-4 md:px-8 mb-10 md:mb-12">
+        <EscapeBarGamePromo />
+      </div>
 
       {/* CONTACT FOOTER */}
       <div className="py-10 md:py-12 px-4" style={{ borderTop: "1px solid #111" }}>
