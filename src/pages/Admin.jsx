@@ -14,7 +14,8 @@ import AdminNotifications from "@/components/admin/AdminNotifications";
 import AdminEscapeBar from "@/components/admin/AdminEscapeBar";
 import AdminNovedades from "@/components/admin/AdminNovedades";
 import AdminConfiguracion from "@/components/admin/AdminConfiguracion";
-import { Calendar, Music, Camera, Wine, ShieldOff, Megaphone, Crown, Mail, Bell, GlassWater, Sparkles, Settings } from "lucide-react";
+import AdminTicketOrders from "@/components/admin/AdminTicketOrders";
+import { Calendar, Music, Camera, Wine, ShieldOff, Megaphone, Crown, Mail, Bell, GlassWater, Sparkles, Settings, ShoppingBag } from "lucide-react";
 
 const LOGO_RED = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/7c4e34300_1783489304034.png";
 
@@ -29,6 +30,7 @@ const tabs = [
   { id: "notifications", label: "Notificaciones", icon: Bell },
   { id: "escapebar", label: "Escape Bar", icon: GlassWater },
   { id: "novedades", label: "Novedades", icon: Sparkles },
+  { id: "orders", label: "Órdenes MP", icon: ShoppingBag },
   { id: "config", label: "Configuración", icon: Settings },
 ];
 
@@ -132,6 +134,7 @@ export default function Admin() {
         {activeTab === "notifications" && <AdminNotifications />}
         {activeTab === "escapebar" && <AdminEscapeBar />}
         {activeTab === "novedades" && <AdminNovedades />}
+        {activeTab === "orders" && <AdminTicketOrders />}
         {activeTab === "config" && <AdminConfiguracion />}
         {activeTab === "menu" && (
           <div className="grid md:grid-cols-3 gap-6">
