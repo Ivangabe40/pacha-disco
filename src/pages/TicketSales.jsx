@@ -32,7 +32,7 @@ export default function TicketSales() {
   const availableStock = event && event.capacity
     ? Math.max(0, event.capacity - (event.tickets_sold || 0))
     : null;
-  const maxQty = Math.min(MAX_QTY, availableStock || MAX_QTY);
+  const maxQty = Math.min(MAX_QTY, availableStock !== null ? availableStock : MAX_QTY);
   const total = event ? event.ticket_price * quantity : 0;
 
   const handleBuy = async () => {
@@ -145,7 +145,14 @@ export default function TicketSales() {
               )}
             </div>
 
-            {availableStock !== null && availableStock <= 20 && (
+            {availableStock !== null && availableStock === 0 && (
+              <div className="mb-6 p-3 rounded-lg text-sm font-semibold"
+                style={{ background: "rgba(255,80,80,0.08)", border: "1px solid rgba(255,80,80,0.2)", color: "#ff5050" }}>
+                Entradas agotadas para este evento.
+              </div>
+            )}
+
+            {availableStock !== null && availableStock > 0 && availableStock <= 20 && (
               <div className="mb-6 p-3 rounded-lg text-sm"
                 style={{ background: "rgba(255,100,100,0.08)", border: "1px solid rgba(255,100,100,0.2)", color: "#ff6b6b" }}>
                 ¡Quedan solo {availableStock} entradas!
@@ -232,10 +239,10 @@ export default function TicketSales() {
             {/* Botón Mercado Pago */}
             <button
               onClick={handleBuy}
-              disabled={buying}
+              disabled={buying || maxQty === 0}
               className="w-full py-4 rounded-xl font-bold text-white text-base flex items-center justify-center gap-3 transition-all hover:-translate-y-0.5"
               style={{
-                background: buying ? "#333" : "linear-gradient(135deg, #009EE3 0%, #00B7EA 100%)",
+                background: (buying || maxQty === 0) ? "#333" : "linear-gradient(135deg, #009EE3 0%, #00B7EA 100%)",
                 boxShadow: buying ? "none" : "0 4px 24px rgba(0,158,227,0.35)",
                 cursor: buying ? "not-allowed" : "pointer"
               }}
