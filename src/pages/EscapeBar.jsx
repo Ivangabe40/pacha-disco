@@ -4,6 +4,7 @@ import { Instagram, MessageCircle, Globe, CalendarDays, Tag } from "lucide-react
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 import PullToRefresh from "@/components/PullToRefresh";
+import EscapeBarGamePromo from "@/components/EscapeBarGamePromo";
 
 export default function EscapeBar() {
   const [events, setEvents] = useState([]);
@@ -54,6 +55,11 @@ export default function EscapeBar() {
             <div className="flex-1 h-px" style={{ background: "linear-gradient(90deg, #C9A84C, transparent)" }} />
           </div>
         </div>
+      </div>
+
+      {/* JUEGO OFICIAL */}
+      <div className="max-w-5xl mx-auto px-4 md:px-8 -mt-4 mb-4">
+        <EscapeBarGamePromo />
       </div>
 
       {/* EVENTS SECTION */}
