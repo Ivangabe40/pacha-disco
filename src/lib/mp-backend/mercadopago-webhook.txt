@@ -1,15 +1,27 @@
 // ═══════════════════════════════════════════════════════════
 // REFERENCIA — Backend Function: mercadopago-webhook
 // ═══════════════════════════════════════════════════════════
-// Este archivo es de REFERENCIA (no se compila). Para activarlo:
+// Este archivo es de REFERENCIA (no se compila). El código real
+// está en: base44/functions/mercadopago-webhook/entry.ts
+//
+// Para activarlo:
 //   1. Upgrade a plan Builder+
-//   2. Crear el archivo en: base44/functions/mercadopago-webhook/entry.ts
-//   3. Copiar este código tal cual
-//   4. Deployar: npx base44 functions deploy mercadopago-webhook
-//   5. Configurar la URL en MP Developers → Webhooks
+//   2. Deployar: npx base44 functions deploy mercadopago-webhook
+//   3. Configurar la URL en MP Developers → Webhooks:
+//      https://pachadisco.base44.app/functions/mercadopago-webhook
+//   4. Activar el evento "payment" en la configuración de webhooks
 // ═══════════════════════════════════════════════════════════
 
 import { createClientFromRequest } from "npm:@base44/sdk";
+
+function generateTicketCode() {
+  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+  let code = "PCH-";
+  for (let i = 0; i < 6; i++) {
+    code += chars[Math.floor(Math.random() * chars.length)];
+  }
+  return code;
+}
 
 Deno.serve(async (req) => {
   const base44 = createClientFromRequest(req);
@@ -17,14 +29,11 @@ Deno.serve(async (req) => {
   try {
     let paymentId = null;
 
-    // --- Soportar IPN (GET) y Webhook (POST) ---
     if (req.method === "GET") {
       const url = new URL(req.url);
       const topic = url.searchParams.get("topic");
       const id = url.searchParams.get("id");
-      if (topic === "payment" && id) {
-        paymentId = id;
-      }
+      if (topic === "payment" && id) paymentId = id;
     } else if (req.method === "POST") {
       const body = await req.json();
       if (body.type === "payment" || (body.action && String(body.action).startsWith("payment"))) {
@@ -32,22 +41,19 @@ Deno.serve(async (req) => {
       }
     }
 
-    // Siempre responder 200/201 a Mercado Pago
     if (!paymentId) {
       return Response.json({ status: "ok", message: "Not a payment notification" }, { status: 200 });
     }
 
-    // --- Consultar el pago en Mercado Pago ---
     const accessToken = Deno.env.get("MERCADOPAGO_ACCESS_TOKEN");
-    if (!accessToken) {
-      return Response.json({ status: "ok" }, { status: 200 });
-    }
+    if (!accessToken) return Response.json({ status: "ok" }, { status: 200 });
 
     const paymentResponse = await fetch("https://api.mercadopago.com/v1/payments/" + paymentId, {
       headers: { Authorization: "Bearer " + accessToken },
     });
 
     if (!paymentResponse.ok) {
+      console.error("MP payment query error:", await paymentResponse.text());
       return Response.json({ status: "ok" }, { status: 200 });
     }
 
@@ -56,38 +62,35 @@ Deno.serve(async (req) => {
     const externalRef = payment.external_reference;
     const mpStatus = payment.status;
 
-    // --- Buscar la orden por external_reference o preference_id ---
     let order = null;
     if (externalRef) {
-      try {
-        order = await base44.asServiceRole.entities.TicketOrder.get(externalRef);
-      } catch {
-        order = null;
-      }
+      try { order = await base44.asServiceRole.entities.TicketOrder.get(externalRef); }
+      catch { order = null; }
     }
     if (!order && preferenceId) {
       const orders = await base44.asServiceRole.entities.TicketOrder.filter({ preference_id: preferenceId });
       if (orders.length > 0) order = orders[0];
     }
 
-    if (!order) {
-      return Response.json({ status: "ok", message: "Order not found" }, { status: 200 });
-    }
+    if (!order) return Response.json({ status: "ok", message: "Order not found" }, { status: 200 });
 
-    // --- Mapear estado de MP a estado interno ---
     let orderStatus = "pending";
     if (mpStatus === "approved") orderStatus = "approved";
     else if (mpStatus === "rejected" || mpStatus === "cancelled") orderStatus = "rejected";
 
-    // --- Actualizar solo si el estado cambió ---
     if (order.status !== orderStatus) {
-      await base44.asServiceRole.entities.TicketOrder.update(order.id, {
+      const updateData = {
         status: orderStatus,
         payment_id: String(paymentId),
         buyer_email: order.buyer_email || (payment.payer && payment.payer.email) || "",
-      });
+      };
 
-      // --- Descontar stock solo cuando el pago pasa a aprobado ---
+      if (orderStatus === "approved") {
+        updateData.approval_date = new Date().toISOString();
+      }
+
+      await base44.asServiceRole.entities.TicketOrder.update(order.id, updateData);
+
       if (orderStatus === "approved") {
         const event = await base44.asServiceRole.entities.Event.get(order.event_id);
         if (event) {
@@ -95,6 +98,28 @@ Deno.serve(async (req) => {
           await base44.asServiceRole.entities.Event.update(order.event_id, {
             tickets_sold: currentSold + order.quantity,
           });
+        }
+
+        const tickets = [];
+        for (let i = 0; i < order.quantity; i++) {
+          tickets.push({
+            event_id: order.event_id,
+            event_title: order.event_title,
+            event_date: event ? event.date : "",
+            order_id: order.id,
+            buyer_name: order.buyer_name || "",
+            buyer_email: order.buyer_email || "",
+            buyer_phone: order.buyer_phone || "",
+            quantity: 1,
+            ticket_type: order.ticket_type || "anticipada",
+            total_amount: order.unit_price,
+            status: "confirmado",
+            ticket_code: generateTicketCode(),
+          });
+        }
+
+        if (tickets.length > 0) {
+          await base44.asServiceRole.entities.Ticket.bulkCreate(tickets);
         }
       }
     }

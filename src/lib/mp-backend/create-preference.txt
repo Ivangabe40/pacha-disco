@@ -1,11 +1,16 @@
 // ═══════════════════════════════════════════════════════════
 // REFERENCIA — Backend Function: create-preference
 // ═══════════════════════════════════════════════════════════
-// Este archivo es de REFERENCIA (no se compila). Para activarlo:
+// Este archivo es de REFERENCIA (no se compila). El código real
+// está en: base44/functions/create-preference/entry.ts
+//
+// Para activarlo:
 //   1. Upgrade a plan Builder+
-//   2. Crear el archivo en: base44/functions/create-preference/entry.ts
-//   3. Copiar este código tal cual
-//   4. Deployar: npx base44 functions deploy create-preference
+//   2. Deployar: npx base44 functions deploy create-preference
+//   3. Configurar secrets:
+//      - MERCADOPAGO_ACCESS_TOKEN
+//      - BASE_URL (ej: https://pachadisco.base44.app)
+//      - MAX_TICKETS_PER_ORDER (ej: 10)
 // ═══════════════════════════════════════════════════════════
 
 import { createClientFromRequest } from "npm:@base44/sdk";
@@ -22,9 +27,8 @@ Deno.serve(async (req) => {
       });
     }
 
-    const { event_id, quantity, buyer_email } = await req.json();
+    const { event_id, quantity, buyer_name, buyer_email, buyer_phone } = await req.json();
 
-    // --- Validaciones de cantidad ---
     const qty = parseInt(quantity);
     if (!qty || qty < 1) {
       return Response.json({ error: "La cantidad debe ser al menos 1" }, { status: 400 });
@@ -35,38 +39,34 @@ Deno.serve(async (req) => {
       return Response.json({ error: "Máximo " + MAX_TICKETS + " entradas por compra" }, { status: 400 });
     }
 
+    if (!buyer_name || !buyer_name.trim()) {
+      return Response.json({ error: "El nombre del comprador es obligatorio" }, { status: 400 });
+    }
+
+    if (!buyer_email || !buyer_email.trim()) {
+      return Response.json({ error: "El email del comprador es obligatorio" }, { status: 400 });
+    }
+
     const base44 = createClientFromRequest(req);
 
-    // --- Fetch del evento desde DB (nunca confiar en precio del frontend) ---
     const event = await base44.asServiceRole.entities.Event.get(event_id);
-    if (!event) {
-      return Response.json({ error: "Evento no encontrado" }, { status: 404 });
-    }
-
-    if (event.status === "cancelado") {
-      return Response.json({ error: "Este evento fue cancelado" }, { status: 400 });
-    }
+    if (!event) return Response.json({ error: "Evento no encontrado" }, { status: 404 });
+    if (event.status === "cancelado") return Response.json({ error: "Este evento fue cancelado" }, { status: 400 });
+    if (event.status === "agotado") return Response.json({ error: "Las entradas están agotadas" }, { status: 400 });
 
     const unitPrice = event.ticket_price;
-    if (!unitPrice || unitPrice <= 0) {
-      return Response.json({ error: "Este evento no tiene precio configurado" }, { status: 400 });
-    }
+    if (!unitPrice || unitPrice <= 0) return Response.json({ error: "Evento sin precio configurado" }, { status: 400 });
 
-    // --- Validar stock disponible ---
     const capacity = event.capacity || 0;
     const sold = event.tickets_sold || 0;
     const available = capacity > 0 ? capacity - sold : 999999;
     if (capacity > 0 && qty > available) {
-      return Response.json(
-        { error: "Solo quedan " + available + " entradas disponibles" },
-        { status: 400 }
-      );
+      return Response.json({ error: "Solo quedan " + available + " entradas disponibles" }, { status: 400 });
     }
 
     const total = Math.round(unitPrice * qty);
     const baseUrl = Deno.env.get("BASE_URL") || "";
 
-    // --- Registrar la orden ANTES de redirigir a MP ---
     const order = await base44.asServiceRole.entities.TicketOrder.create({
       event_id: event_id,
       event_title: event.title,
@@ -76,19 +76,21 @@ Deno.serve(async (req) => {
       status: "pending",
       preference_id: "",
       payment_id: "",
-      buyer_email: buyer_email || "",
+      external_reference: "",
+      buyer_name: buyer_name.trim(),
+      buyer_email: buyer_email.trim(),
+      buyer_phone: buyer_phone || "",
+      ticket_type: "anticipada",
     });
 
-    // --- Crear preferencia de Mercado Pago Checkout Pro ---
     const preferenceData = {
-      items: [
-        {
-          title: "Entrada anticipada discoteca",
-          quantity: qty,
-          unit_price: unitPrice,
-          currency_id: "ARS",
-        },
-      ],
+      items: [{
+        title: "Entrada " + event.title + " - Pachá Night Club",
+        quantity: qty,
+        unit_price: unitPrice,
+        currency_id: "ARS",
+        description: "Entrada anticipada · " + qty + " unidad(es)",
+      }],
       back_urls: {
         success: baseUrl + "/payment/success",
         failure: baseUrl + "/payment/failure",
@@ -100,40 +102,36 @@ Deno.serve(async (req) => {
     };
 
     if (buyer_email) {
-      preferenceData.payer = { email: buyer_email };
+      preferenceData.payer = { email: buyer_email.trim() };
+      if (buyer_name) preferenceData.payer.name = buyer_name.trim();
     }
 
     const accessToken = Deno.env.get("MERCADOPAGO_ACCESS_TOKEN");
     if (!accessToken) {
-      return Response.json(
-        { error: "Credenciales de Mercado Pago no configuradas" },
-        { status: 500 }
-      );
+      return Response.json({ error: "Credenciales de Mercado Pago no configuradas" }, { status: 500 });
     }
 
     const mpResponse = await fetch("https://api.mercadopago.com/checkout/preferences", {
       method: "POST",
-      headers: {
-        Authorization: "Bearer " + accessToken,
-        "Content-Type": "application/json",
-      },
+      headers: { Authorization: "Bearer " + accessToken, "Content-Type": "application/json" },
       body: JSON.stringify(preferenceData),
     });
 
     if (!mpResponse.ok) {
       const errorText = await mpResponse.text();
       console.error("MP error:", errorText);
-      return Response.json(
-        { error: "Error al crear preferencia de pago" },
-        { status: 500 }
-      );
+      await base44.asServiceRole.entities.TicketOrder.update(order.id, {
+        status: "rejected",
+        description: "Error al crear preferencia: " + errorText.slice(0, 500),
+      });
+      return Response.json({ error: "Error al crear preferencia de pago" }, { status: 500 });
     }
 
     const preference = await mpResponse.json();
 
-    // --- Actualizar orden con preference_id ---
     await base44.asServiceRole.entities.TicketOrder.update(order.id, {
       preference_id: preference.id,
+      external_reference: order.id,
     });
 
     return Response.json({

@@ -14,6 +14,10 @@
       "type": "string",
       "description": "Fecha del evento"
     },
+    "order_id": {
+      "type": "string",
+      "description": "ID de la orden de compra asociada"
+    },
     "buyer_name": {
       "type": "string",
       "description": "Nombre del comprador"
@@ -29,7 +33,7 @@
     "quantity": {
       "type": "number",
       "default": 1,
-      "description": "Cantidad de entradas"
+      "description": "Cantidad de entradas que representa este ticket"
     },
     "ticket_type": {
       "type": "string",

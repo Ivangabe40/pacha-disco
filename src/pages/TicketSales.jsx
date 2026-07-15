@@ -1,17 +1,21 @@
 import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
+import { useSearchParams } from "react-router-dom";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
-import { Calendar, Clock, Minus, Plus, Music, Loader2, AlertCircle, ChevronDown, Ticket } from "lucide-react";
+import { Calendar, Clock, Minus, Plus, Music, Loader2, AlertCircle, ChevronDown, Ticket, User, Mail, Phone } from "lucide-react";
 
 const MAX_QTY = 10;
 
 export default function TicketSales() {
+  const [params] = useSearchParams();
+  const preselectEventId = params.get("event");
+
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedId, setSelectedId] = useState(null);
   const [quantity, setQuantity] = useState(1);
-  const [email, setEmail] = useState("");
+  const [form, setForm] = useState({ buyer_name: "", buyer_email: "", buyer_phone: "" });
   const [buying, setBuying] = useState(false);
   const [error, setError] = useState("");
 
@@ -23,12 +27,15 @@ export default function TicketSales() {
         e.ticket_price && e.ticket_price > 0
       );
       setEvents(available);
-      if (available.length > 0) setSelectedId(available[0].id);
+      if (available.length > 0) {
+        const preselected = preselectEventId && available.find(e => e.id === preselectEventId);
+        setSelectedId(preselected ? preselected.id : available[0].id);
+      }
       setLoading(false);
     }).catch(() => {
       setLoading(false);
     });
-  }, []);
+  }, [preselectEventId]);
 
   const event = events.find(e => e.id === selectedId);
   const availableStock = event && event.capacity
@@ -39,13 +46,19 @@ export default function TicketSales() {
 
   const handleBuy = async () => {
     if (!event) return;
+    if (!form.buyer_name.trim() || !form.buyer_email.trim()) {
+      setError("Completá tu nombre y email para continuar");
+      return;
+    }
     setBuying(true);
     setError("");
     try {
       const res = await base44.functions.invoke("create-preference", {
         event_id: event.id,
         quantity: quantity,
-        buyer_email: email,
+        buyer_name: form.buyer_name,
+        buyer_email: form.buyer_email,
+        buyer_phone: form.buyer_phone,
       });
       if (res.data?.init_point) {
         window.location.href = res.data.init_point;
@@ -77,7 +90,6 @@ export default function TicketSales() {
 
   return (
     <div className="min-h-screen" style={{ background: "#070707" }}>
-      {/* Hero con imagen del evento */}
       {event && (event.background_url || event.flyer_url) && (
         <div className="relative h-64 sm:h-80 md:h-96 overflow-hidden">
           <img
@@ -91,7 +103,6 @@ export default function TicketSales() {
       )}
 
       <div className="max-w-2xl mx-auto px-4 md:px-8 -mt-16 relative z-10 pb-16">
-        {/* Selector de evento */}
         {events.length > 1 && (
           <div className="mb-6">
             <label className="text-xs text-gray-400 uppercase tracking-widest block mb-2">Seleccionar evento</label>
@@ -111,9 +122,7 @@ export default function TicketSales() {
           </div>
         )}
 
-        {/* Card principal */}
         <div className="rounded-2xl overflow-hidden" style={{ background: "#111", border: "1px solid #222", boxShadow: "0 10px 60px rgba(201,168,76,0.08)" }}>
-          {/* Info del evento */}
           <div className="p-6 md:p-8">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full mb-4"
               style={{ background: "rgba(201,168,76,0.12)", border: "1px solid rgba(201,168,76,0.3)" }}>
@@ -161,7 +170,6 @@ export default function TicketSales() {
               </div>
             )}
 
-            {/* Precio unitario */}
             <div className="flex items-center justify-between p-4 rounded-xl mb-6"
               style={{ background: "#1a1a1a", border: "1px solid #2a2a2a" }}>
               <span className="text-gray-400 text-sm">Precio por entrada</span>
@@ -205,17 +213,48 @@ export default function TicketSales() {
               </div>
             </div>
 
-            {/* Email */}
-            <div className="mb-6">
-              <label className="text-xs text-gray-400 uppercase tracking-widest block mb-2">Email (opcional)</label>
-              <input
-                type="email"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-                placeholder="tu@email.com"
-                className="w-full px-4 py-3 rounded-xl text-white text-sm outline-none"
-                style={{ background: "#1a1a1a", border: "1px solid #333" }}
-              />
+            {/* Datos del comprador */}
+            <div className="space-y-4 mb-6">
+              <div>
+                <label className="text-xs text-gray-400 uppercase tracking-widest block mb-2">Nombre completo *</label>
+                <div className="relative">
+                  <User size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" />
+                  <input
+                    value={form.buyer_name}
+                    onChange={e => setForm({ ...form, buyer_name: e.target.value })}
+                    placeholder="Tu nombre y apellido"
+                    className="w-full pl-9 pr-4 py-3 rounded-xl text-white text-sm outline-none"
+                    style={{ background: "#1a1a1a", border: "1px solid #333" }}
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="text-xs text-gray-400 uppercase tracking-widest block mb-2">Email *</label>
+                <div className="relative">
+                  <Mail size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" />
+                  <input
+                    type="email"
+                    value={form.buyer_email}
+                    onChange={e => setForm({ ...form, buyer_email: e.target.value })}
+                    placeholder="tu@email.com"
+                    className="w-full pl-9 pr-4 py-3 rounded-xl text-white text-sm outline-none"
+                    style={{ background: "#1a1a1a", border: "1px solid #333" }}
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="text-xs text-gray-400 uppercase tracking-widest block mb-2">Teléfono (opcional)</label>
+                <div className="relative">
+                  <Phone size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" />
+                  <input
+                    value={form.buyer_phone}
+                    onChange={e => setForm({ ...form, buyer_phone: e.target.value })}
+                    placeholder="+54 11 ..."
+                    className="w-full pl-9 pr-4 py-3 rounded-xl text-white text-sm outline-none"
+                    style={{ background: "#1a1a1a", border: "1px solid #333" }}
+                  />
+                </div>
+              </div>
             </div>
 
             {/* Total */}
@@ -238,7 +277,6 @@ export default function TicketSales() {
               </div>
             )}
 
-            {/* Botón Mercado Pago */}
             <button
               onClick={handleBuy}
               disabled={buying || maxQty === 0}

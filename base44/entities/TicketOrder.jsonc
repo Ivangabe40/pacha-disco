@@ -41,9 +41,35 @@
       "type": "string",
       "description": "ID de pago de Mercado Pago"
     },
+    "external_reference": {
+      "type": "string",
+      "description": "Referencia externa enviada a Mercado Pago (igual al ID de la orden)"
+    },
+    "buyer_name": {
+      "type": "string",
+      "description": "Nombre del comprador"
+    },
     "buyer_email": {
       "type": "string",
       "description": "Email del comprador"
+    },
+    "buyer_phone": {
+      "type": "string",
+      "description": "Tel\u00e9fono del comprador"
+    },
+    "ticket_type": {
+      "type": "string",
+      "enum": [
+        "anticipada",
+        "reserva"
+      ],
+      "default": "anticipada",
+      "description": "Tipo de entrada"
+    },
+    "approval_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Fecha y hora de aprobaci\u00f3n del pago"
     },
     "description": {
       "type": "string",
