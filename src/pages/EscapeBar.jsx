@@ -11,9 +11,14 @@ export default function EscapeBar() {
   const [loading, setLoading] = useState(true);
 
   const loadEvents = useCallback(async () => {
-    const data = await base44.entities.EscapeBarEvent.list("-date");
-    setEvents(data);
-    setLoading(false);
+    try {
+      const data = await base44.entities.EscapeBarEvent.list("-date");
+      setEvents(data);
+    } catch {
+      // silent fail
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
   useEffect(() => {

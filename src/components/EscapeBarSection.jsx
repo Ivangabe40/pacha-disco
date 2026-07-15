@@ -12,7 +12,7 @@ export default function EscapeBarSection() {
   useEffect(() => {
     base44.entities.EscapeBarEvent.list("-date").then((data) => {
       setEvents(data.filter((e) => !e.is_hidden));
-    });
+    }).catch(() => {});
   }, []);
 
   const featured = events.find((e) => e.is_featured) || events[0];

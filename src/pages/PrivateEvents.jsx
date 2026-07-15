@@ -40,6 +40,7 @@ export default function PrivateEvents() {
   const [form, setForm] = useState({ name: "", email: "", phone: "", eventType: "", date: "", guests: "", message: "" });
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
+  const [sendError, setSendError] = useState("");
   const [showEventTypePicker, setShowEventTypePicker] = useState(false);
 
   const eventTypeOptions = eventTypes.map(ev => ({ value: ev.title, label: ev.title }));
@@ -47,26 +48,32 @@ export default function PrivateEvents() {
   const handleSend = async (e) => {
     e.preventDefault();
     setSending(true);
-    const { base44 } = await import("@/api/base44Client");
-    await Promise.all([
-      base44.entities.PrivateEventRequest.create({
-        name: form.name,
-        email: form.email,
-        phone: form.phone,
-        event_type: form.eventType,
-        date: form.date,
-        guests: form.guests ? Number(form.guests) : undefined,
-        message: form.message,
-        status: "pendiente"
-      }),
-      base44.integrations.Core.SendEmail({
-        to: "contacto@pachadisco.com.ar",
-        subject: `Consulta Evento Privado - ${form.eventType || "Sin especificar"}`,
-        body: `Nombre: ${form.name}\nEmail: ${form.email}\nTeléfono: ${form.phone}\nTipo de evento: ${form.eventType}\nFecha tentativa: ${form.date}\nCantidad de invitados: ${form.guests}\n\nMensaje:\n${form.message}`
-      })
-    ]);
-    setSent(true);
-    setSending(false);
+    setSendError("");
+    try {
+      const { base44 } = await import("@/api/base44Client");
+      await Promise.all([
+        base44.entities.PrivateEventRequest.create({
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          event_type: form.eventType,
+          date: form.date,
+          guests: form.guests ? Number(form.guests) : undefined,
+          message: form.message,
+          status: "pendiente"
+        }),
+        base44.integrations.Core.SendEmail({
+          to: "contacto@pachadisco.com.ar",
+          subject: `Consulta Evento Privado - ${form.eventType || "Sin especificar"}`,
+          body: `Nombre: ${form.name}\nEmail: ${form.email}\nTeléfono: ${form.phone}\nTipo de evento: ${form.eventType}\nFecha tentativa: ${form.date}\nCantidad de invitados: ${form.guests}\n\nMensaje:\n${form.message}`
+        })
+      ]);
+      setSent(true);
+    } catch {
+      setSendError("Ocurrió un error al enviar. Intentá nuevamente.");
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -255,6 +262,9 @@ export default function PrivateEvents() {
                 onBlur={e => e.target.style.borderColor = "#1e1e1e"}
               />
             </div>
+            {sendError && (
+              <p className="text-red-400 text-sm text-center">{sendError}</p>
+            )}
             <button
               type="submit"
               disabled={sending}

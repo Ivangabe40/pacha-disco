@@ -37,8 +37,7 @@ export default function Menu() {
     ]).then(([menuData, promoData]) => {
       setItems(menuData);
       setPromos(promoData);
-      setLoading(false);
-    });
+    }).catch(() => {}).finally(() => setLoading(false));
   }, []);
 
   const available = items.filter(i => i.is_available !== false);

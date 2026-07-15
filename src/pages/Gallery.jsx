@@ -19,8 +19,7 @@ export default function Gallery() {
   useEffect(() => {
     base44.entities.GalleryAlbum.list("-created_date").then(data => {
       setAlbums(data);
-      setLoading(false);
-    });
+    }).catch(() => {}).finally(() => setLoading(false));
   }, []);
 
   return (

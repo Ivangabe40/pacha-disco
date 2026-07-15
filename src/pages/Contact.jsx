@@ -1,13 +1,29 @@
 import { useState } from "react";
-import { Instagram, MessageCircle, Mail, MapPin } from "lucide-react";
+import { base44 } from "@/api/base44Client";
+import { Instagram, MessageCircle, Mail, MapPin, Loader2 } from "lucide-react";
 
 export default function Contact() {
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState("");
   const [form, setForm] = useState({ name: "", email: "", message: "" });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSent(true);
+    setSending(true);
+    setError("");
+    try {
+      await base44.integrations.Core.SendEmail({
+        to: "contacto@pachadisco.com.ar",
+        subject: `Consulta web - ${form.name}`,
+        body: `Nombre: ${form.name}\nEmail: ${form.email}\n\nMensaje:\n${form.message}`
+      });
+      setSent(true);
+    } catch {
+      setError("Ocurrió un error al enviar. Intentá nuevamente.");
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -21,8 +37,8 @@ export default function Contact() {
         </p>
 
         <div className="flex flex-col gap-4 mb-10">
-          <a href="mailto:pacha@pacha.com" className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors">
-            <Mail size={18} className="text-red-500" /> pacha@pacha.com
+          <a href="mailto:contacto@pachadisco.com.ar" className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors">
+            <Mail size={18} className="text-red-500" /> contacto@pachadisco.com.ar
           </a>
           <a href="https://wa.me/5493468546935" target="_blank" rel="noopener noreferrer"
             className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors">
@@ -72,8 +88,12 @@ export default function Contact() {
                 className="rounded-lg px-4 py-3 text-sm outline-none resize-none"
                 style={{ background: "#1a1a1a", border: "1px solid #2a2a2a", color: "#F0EBE3" }}
               />
-              <button type="submit" className="btn-red py-3 rounded-lg text-sm font-bold tracking-widest uppercase">
-                Enviar mensaje
+              {error && (
+                <p className="text-red-400 text-sm">{error}</p>
+              )}
+              <button type="submit" disabled={sending} className="btn-red py-3 rounded-lg text-sm font-bold tracking-widest uppercase flex items-center justify-center gap-2"
+                style={{ opacity: sending ? 0.7 : 1 }}>
+                {sending ? <><Loader2 size={15} className="animate-spin" /> Enviando...</> : "Enviar mensaje"}
               </button>
             </form>
           )}

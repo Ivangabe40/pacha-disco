@@ -8,8 +8,7 @@ export default function HomeVideoSection() {
   useEffect(() => {
     base44.entities.SiteConfig.filter({ key: "home_video_url" }).then(data => {
       if (data.length > 0 && data[0].value) setVideoUrl(data[0].value);
-      setLoaded(true);
-    });
+    }).catch(() => {}).finally(() => setLoaded(true));
   }, []);
 
   if (!loaded || !videoUrl) return null;

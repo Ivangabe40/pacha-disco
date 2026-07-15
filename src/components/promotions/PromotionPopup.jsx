@@ -12,7 +12,7 @@ export default function PromotionPopup() {
         setPromo(data[0]);
         setVisible(true);
       }
-    });
+    }).catch(() => {});
   }, []);
 
   if (!visible || !promo) return null;

@@ -9,7 +9,7 @@ export default function NovedadBanner() {
   useEffect(() => {
     base44.entities.NovedadBanner.filter({ is_active: true }, "-created_date", 1).then(data => {
       if (data.length > 0) setNovedad(data[0]);
-    });
+    }).catch(() => {});
   }, []);
 
   if (!novedad || dismissed) return null;

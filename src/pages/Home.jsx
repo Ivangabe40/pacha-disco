@@ -18,10 +18,15 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
 
   const loadEvents = useCallback(async () => {
-    const data = await base44.entities.Event.list("-date");
-    setEvents(data);
-    setLoading(false);
-    checkEventReminders(data);
+    try {
+      const data = await base44.entities.Event.list("-date");
+      setEvents(data);
+      checkEventReminders(data);
+    } catch {
+      // silent fail — loading will be cleared in finally
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
   useEffect(() => {
