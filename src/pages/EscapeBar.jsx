@@ -206,9 +206,9 @@ export default function EscapeBar() {
             <MessageCircle size={16} style={{ color: "#C9A84C" }} /> 3468-546935
           </a>
           <div className="h-4 w-px" style={{ background: "#222" }} />
-          <a href="http://www.pachadisco.com.ar" target="_blank" rel="noopener noreferrer"
+          <a href="https://pachadisco.base44.app" target="_blank" rel="noopener noreferrer"
           className="flex items-center gap-2 text-sm transition-opacity hover:opacity-70" style={{ color: "#888" }}>
-            <Globe size={16} style={{ color: "#C9A84C" }} /> www.pachadisco.com.ar
+            <Globe size={16} style={{ color: "#C9A84C" }} /> pachadisco.base44.app
           </a>
         </div>
       </div>

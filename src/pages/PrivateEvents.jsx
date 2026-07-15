@@ -63,7 +63,7 @@ export default function PrivateEvents() {
           status: "pendiente"
         }),
         base44.integrations.Core.SendEmail({
-          to: "contacto@pachadisco.com.ar",
+          to: "contacto@pachadisco.base44.app",
           subject: `Consulta Evento Privado - ${form.eventType || "Sin especificar"}`,
           body: `Nombre: ${form.name}\nEmail: ${form.email}\nTeléfono: ${form.phone}\nTipo de evento: ${form.eventType}\nFecha tentativa: ${form.date}\nCantidad de invitados: ${form.guests}\n\nMensaje:\n${form.message}`
         })
