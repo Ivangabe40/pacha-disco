@@ -13,13 +13,18 @@ export default function AdminTickets() {
   const handleDelete = async (ticket) => {
     if (!confirm(`¿Eliminar el pedido ${ticket.ticket_code} de ${ticket.buyer_name}?`)) return;
     setDeletingId(ticket.id);
-    await base44.entities.Ticket.delete(ticket.id);
-    setTickets(prev => prev.filter(t => t.id !== ticket.id));
-    setDeletingId(null);
+    try {
+      await base44.entities.Ticket.delete(ticket.id);
+      setTickets(prev => prev.filter(t => t.id !== ticket.id));
+    } catch {
+      /* silent */
+    } finally {
+      setDeletingId(null);
+    }
   };
 
   useEffect(() => {
-    base44.entities.Ticket.list("-created_date").then(d => { setTickets(d); setLoading(false); });
+    base44.entities.Ticket.list("-created_date").then(d => { setTickets(d); }).catch(() => {}).finally(() => setLoading(false));
   }, []);
 
   const filtered = tickets.filter(t =>

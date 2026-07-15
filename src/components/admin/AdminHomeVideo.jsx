@@ -17,7 +17,7 @@ export default function AdminHomeVideo() {
         setVideoUrl(data[0].value);
         setConfigId(data[0].id);
       }
-    });
+    }).catch(() => {});
   }, []);
 
   const handleUpload = async (file) => {

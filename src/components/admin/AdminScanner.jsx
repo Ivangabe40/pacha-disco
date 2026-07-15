@@ -47,20 +47,24 @@ export default function AdminScanner() {
   const validateCode = async (code) => {
     setLoading(true);
     setResult(null);
-    const tickets = await base44.entities.Ticket.filter({ ticket_code: code });
-    if (tickets.length === 0) {
+    try {
+      const tickets = await base44.entities.Ticket.filter({ ticket_code: code });
+      if (tickets.length === 0) {
+        setResult({ status: "not_found", code });
+        return;
+      }
+      const ticket = tickets[0];
+      if (ticket.status === "usado") {
+        setResult({ status: "used", ticket });
+      } else {
+        await base44.entities.Ticket.update(ticket.id, { status: "usado" });
+        setResult({ status: "valid", ticket: { ...ticket, status: "usado" } });
+      }
+    } catch {
       setResult({ status: "not_found", code });
+    } finally {
       setLoading(false);
-      return;
     }
-    const ticket = tickets[0];
-    if (ticket.status === "usado") {
-      setResult({ status: "used", ticket });
-    } else {
-      await base44.entities.Ticket.update(ticket.id, { status: "usado" });
-      setResult({ status: "valid", ticket: { ...ticket, status: "usado" } });
-    }
-    setLoading(false);
   };
 
   const handleManual = (e) => {

@@ -44,6 +44,7 @@ export default function MisCuenta() {
   const [loading, setLoading] = useState(true);
   const [redeeming, setRedeeming] = useState(null);
   const [redeemSuccess, setRedeemSuccess] = useState(null);
+  const [redeemError, setRedeemError] = useState(null);
   const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
@@ -61,11 +62,17 @@ export default function MisCuenta() {
     if (!profile || profile.coins < reward.coins) return;
     setRedeeming(reward.coins);
     const newCoins = profile.coins - reward.coins;
-    await base44.entities.PachaCoins.update(profile.id, { coins: newCoins });
-    setProfile(prev => ({ ...prev, coins: newCoins }));
-    setRedeemSuccess(reward.label);
-    setRedeeming(null);
-    setTimeout(() => setRedeemSuccess(null), 4000);
+    try {
+      await base44.entities.PachaCoins.update(profile.id, { coins: newCoins });
+      setProfile(prev => ({ ...prev, coins: newCoins }));
+      setRedeemSuccess(reward.label);
+      setTimeout(() => setRedeemSuccess(null), 4000);
+    } catch {
+      setRedeemError("No se pudo canjear. Intentá nuevamente.");
+      setTimeout(() => setRedeemError(null), 4000);
+    } finally {
+      setRedeeming(null);
+    }
   };
 
   const handleDeleteAccount = async () => {
@@ -214,6 +221,13 @@ export default function MisCuenta() {
                 <p className="text-white text-sm font-bold">¡Canjeado! Mostrá esta pantalla en la barra</p>
                 <p className="text-gray-400 text-xs">{redeemSuccess}</p>
               </div>
+            </div>
+          )}
+
+          {redeemError && (
+            <div className="flex items-center gap-3 px-4 py-3 rounded-xl mb-3"
+              style={{ background: "rgba(239,68,68,0.08)", border: "1px solid rgba(239,68,68,0.2)" }}>
+              <p className="text-red-400 text-sm font-medium">{redeemError}</p>
             </div>
           )}
 

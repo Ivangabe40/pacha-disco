@@ -13,7 +13,7 @@ export default function AdminArtists() {
   const [uploading, setUploading] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  const load = () => base44.entities.Artist.list("name").then(d => { setArtists(d); setLoading(false); });
+  const load = () => base44.entities.Artist.list("name").then(d => { setArtists(d); }).catch(() => {}).finally(() => setLoading(false));
   useEffect(() => { load(); }, []);
 
   const openNew = () => { setForm(emptyArtist); setEditing(null); setShowForm(true); };

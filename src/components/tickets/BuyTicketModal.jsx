@@ -19,7 +19,7 @@ export default function BuyTicketModal({ event, onClose }) {
   useEffect(() => {
     base44.entities.SiteConfig.filter({ key: "mp_link" }).then(data => {
       if (data.length > 0) setMpLink(data[0].value);
-    });
+    }).catch(() => {});
   }, []);
 
   const price = ticketType === "anticipada" ? event.ticket_price : null;

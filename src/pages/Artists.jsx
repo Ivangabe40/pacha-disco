@@ -9,8 +9,7 @@ export default function Artists() {
   useEffect(() => {
     base44.entities.Artist.list("name").then(data => {
       setArtists(data);
-      setLoading(false);
-    });
+    }).catch(() => {}).finally(() => setLoading(false));
   }, []);
 
   const residents = artists.filter(a => a.is_resident);

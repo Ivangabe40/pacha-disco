@@ -9,7 +9,7 @@ export default function AdminNovedades() {
   const [form, setForm] = useState({ title: "", image_url: "", link: "", description: "", is_active: true });
   const [uploading, setUploading] = useState(false);
 
-  const load = () => base44.entities.NovedadBanner.list("-created_date").then(setItems);
+  const load = () => base44.entities.NovedadBanner.list("-created_date").then(setItems).catch(() => {});
 
   useEffect(() => { load(); }, []);
 

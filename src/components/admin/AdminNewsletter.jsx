@@ -16,9 +16,14 @@ export default function AdminNewsletter() {
 
   const loadSubscribers = async () => {
     setLoading(true);
-    const data = await base44.entities.NewsletterSubscriber.filter({ is_active: true });
-    setSubscribers(data);
-    setLoading(false);
+    try {
+      const data = await base44.entities.NewsletterSubscriber.filter({ is_active: true });
+      setSubscribers(data);
+    } catch {
+      /* silent */
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleDelete = async (id) => {
@@ -30,24 +35,26 @@ export default function AdminNewsletter() {
     e.preventDefault();
     if (!subject || !body || subscribers.length === 0) return;
     setSending(true);
-
-    // Enviar email a cada suscriptor
-    await Promise.all(
-      subscribers.map(s =>
-        base44.integrations.Core.SendEmail({
-          from_name: "Pachá Night Club",
-          to: s.email,
-          subject,
-          body: s.name ? `Hola ${s.name}!\n\n${body}\n\n---\nPachá Night Club` : `${body}\n\n---\nPachá Night Club`
-        })
-      )
-    );
-
-    setSending(false);
-    setSent(true);
-    setSubject("");
-    setBody("");
-    setTimeout(() => setSent(false), 4000);
+    try {
+      await Promise.all(
+        subscribers.map(s =>
+          base44.integrations.Core.SendEmail({
+            from_name: "Pachá Night Club",
+            to: s.email,
+            subject,
+            body: s.name ? `Hola ${s.name}!\n\n${body}\n\n---\nPachá Night Club` : `${body}\n\n---\nPachá Night Club`
+          })
+        )
+      );
+      setSent(true);
+      setSubject("");
+      setBody("");
+      setTimeout(() => setSent(false), 4000);
+    } catch {
+      /* silent */
+    } finally {
+      setSending(false);
+    }
   };
 
   return (

@@ -32,34 +32,45 @@ export default function AdminCoins() {
 
   const load = () => {
     setLoading(true);
-    base44.entities.PachaCoins.list("-coins").then(d => { setProfiles(d); setLoading(false); });
+    base44.entities.PachaCoins.list("-coins").then(d => { setProfiles(d); }).catch(() => {}).finally(() => setLoading(false));
   };
 
   const handleAdjust = async (profile, delta) => {
     const newCoins = Math.max(0, profile.coins + delta);
     const newTotal = delta > 0 ? (profile.total_earned || 0) + delta : (profile.total_earned || 0);
-    await base44.entities.PachaCoins.update(profile.id, {
-      coins: newCoins,
-      total_earned: newTotal,
-      notes: reason || profile.notes,
-    });
-    setProfiles(prev => prev.map(p => p.id === profile.id ? { ...p, coins: newCoins, total_earned: newTotal } : p));
-    setAdjusting(null);
-    setReason("");
+    try {
+      await base44.entities.PachaCoins.update(profile.id, {
+        coins: newCoins,
+        total_earned: newTotal,
+        notes: reason || profile.notes,
+      });
+      setProfiles(prev => prev.map(p => p.id === profile.id ? { ...p, coins: newCoins, total_earned: newTotal } : p));
+    } catch {
+      /* silent */
+    } finally {
+      setAdjusting(null);
+      setReason("");
+    }
   };
 
   const handleCreate = async () => {
     if (!newEmail.trim()) return;
     setCreating(true);
-    const rec = await base44.entities.PachaCoins.create({
-      user_email: newEmail.trim(),
-      user_name: newName.trim() || newEmail.trim(),
-      coins: 0,
-      total_earned: 0,
-      tickets_count: 0,
-    });
-    setProfiles(prev => [rec, ...prev]);
-    setNewEmail(""); setNewName(""); setShowCreate(false); setCreating(false);
+    try {
+      const rec = await base44.entities.PachaCoins.create({
+        user_email: newEmail.trim(),
+        user_name: newName.trim() || newEmail.trim(),
+        coins: 0,
+        total_earned: 0,
+        tickets_count: 0,
+      });
+      setProfiles(prev => [rec, ...prev]);
+      setNewEmail(""); setNewName(""); setShowCreate(false);
+    } catch {
+      /* silent */
+    } finally {
+      setCreating(false);
+    }
   };
 
   const filtered = profiles.filter(p =>

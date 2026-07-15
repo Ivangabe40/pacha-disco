@@ -56,7 +56,7 @@ export default function Admin() {
     base44.entities.Artist.list(),
     ]).then(([events, artists]) => {
     setStats({ events: events.length, artists: artists.length });
-    });
+    }).catch(() => {});
   }, [user]);
 
   if (authLoading) return (

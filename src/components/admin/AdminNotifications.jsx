@@ -48,8 +48,7 @@ export default function AdminNotifications() {
     base44.entities.NewsletterSubscriber.filter({ is_active: true })
       .then(data => {
         setSubscribers(data);
-        setLoading(false);
-      });
+      }).catch(() => {}).finally(() => setLoading(false));
   }, []);
 
   const handleSelectTemplate = (tpl) => {
@@ -64,21 +63,24 @@ export default function AdminNotifications() {
     if (!subject.trim() || !body.trim() || subscribers.length === 0) return;
     setSending(true);
     setSent(false);
-
-    let count = 0;
-    for (const sub of subscribers) {
-      await base44.integrations.Core.SendEmail({
-        to: sub.email,
-        subject: subject,
-        body: body.replace(/\n/g, "<br>"),
-        from_name: "Pachá Night Club",
-      });
-      count++;
+    try {
+      let count = 0;
+      for (const sub of subscribers) {
+        await base44.integrations.Core.SendEmail({
+          to: sub.email,
+          subject: subject,
+          body: body.replace(/\n/g, "<br>"),
+          from_name: "Pachá Night Club",
+        });
+        count++;
+      }
+      setSentCount(count);
+      setSent(true);
+    } catch {
+      /* silent */
+    } finally {
+      setSending(false);
     }
-
-    setSentCount(count);
-    setSending(false);
-    setSent(true);
   };
 
   const activeCount = subscribers.length;

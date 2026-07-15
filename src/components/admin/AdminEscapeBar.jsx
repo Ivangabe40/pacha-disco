@@ -16,7 +16,7 @@ export default function AdminEscapeBar() {
   const [form, setForm] = useState(emptyForm);
   const [showHidden, setShowHidden] = useState(false);
 
-  const load = () => base44.entities.EscapeBarEvent.list("-date").then(d => { setEvents(d); setLoading(false); });
+  const load = () => base44.entities.EscapeBarEvent.list("-date").then(d => { setEvents(d); }).catch(() => {}).finally(() => setLoading(false));
   useEffect(() => { load(); }, []);
 
   const handlePhoto = async (e, isEdit = false) => {

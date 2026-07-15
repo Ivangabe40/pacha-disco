@@ -44,8 +44,7 @@ export default function AdminConfiguracion() {
         if (map[key]) values[key] = map[key].value;
       });
       setForm(values);
-      setLoading(false);
-    });
+    }).catch(() => {}).finally(() => setLoading(false));
   }, []);
 
   const handleSave = async () => {

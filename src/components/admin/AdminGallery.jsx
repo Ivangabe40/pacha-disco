@@ -10,24 +10,29 @@ export default function AdminGallery() {
   const [caption, setCaption] = useState("");
   const [eventName, setEventName] = useState("");
 
-  const load = () => base44.entities.GalleryPhoto.list("-created_date").then(d => { setPhotos(d); setLoading(false); });
+  const load = () => base44.entities.GalleryPhoto.list("-created_date").then(d => { setPhotos(d); }).catch(() => {}).finally(() => setLoading(false));
   useEffect(() => { load(); }, []);
 
   const handleUpload = async (files) => {
     setUploading(true);
-    for (const file of files) {
-      const { file_url } = await base44.integrations.Core.UploadFile({ file });
-      await base44.entities.GalleryPhoto.create({
-        photo_url: file_url,
-        caption,
-        event_name: eventName,
-        date: new Date().toISOString().slice(0, 10),
-      });
+    try {
+      for (const file of files) {
+        const { file_url } = await base44.integrations.Core.UploadFile({ file });
+        await base44.entities.GalleryPhoto.create({
+          photo_url: file_url,
+          caption,
+          event_name: eventName,
+          date: new Date().toISOString().slice(0, 10),
+        });
+      }
+      setCaption("");
+      setEventName("");
+      load();
+    } catch {
+      /* silent */
+    } finally {
+      setUploading(false);
     }
-    setCaption("");
-    setEventName("");
-    setUploading(false);
-    load();
   };
 
   const handleDelete = async (id) => {

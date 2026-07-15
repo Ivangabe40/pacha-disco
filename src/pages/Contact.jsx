@@ -14,7 +14,7 @@ export default function Contact() {
     setError("");
     try {
       await base44.integrations.Core.SendEmail({
-        to: "contacto@pachadisco.base44.app",
+        to: "contacto@pachadisco.com.ar",
         subject: `Consulta web - ${form.name}`,
         body: `Nombre: ${form.name}\nEmail: ${form.email}\n\nMensaje:\n${form.message}`
       });
@@ -37,8 +37,8 @@ export default function Contact() {
         </p>
 
         <div className="flex flex-col gap-4 mb-10">
-          <a href="mailto:contacto@pachadisco.base44.app" className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors">
-            <Mail size={18} className="text-red-500" /> contacto@pachadisco.base44.app
+          <a href="mailto:contacto@pachadisco.com.ar" className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors">
+            <Mail size={18} className="text-red-500" /> contacto@pachadisco.com.ar
           </a>
           <a href="https://wa.me/5493468546935" target="_blank" rel="noopener noreferrer"
             className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors">

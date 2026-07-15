@@ -12,7 +12,7 @@ export default function AdminPromotions() {
   const [editing, setEditing] = useState(null);
   const [uploading, setUploading] = useState(false);
 
-  const load = () => base44.entities.Promotion.list("-created_date").then(setPromos);
+  const load = () => base44.entities.Promotion.list("-created_date").then(setPromos).catch(() => {});
   useEffect(() => { load(); }, []);
 
   const handleImage = async (e) => {

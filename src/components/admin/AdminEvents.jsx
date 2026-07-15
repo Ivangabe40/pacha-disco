@@ -19,7 +19,7 @@ export default function AdminEvents() {
   const [uploading, setUploading] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  const load = () => base44.entities.Event.list("-date").then(d => { setEvents(d); setLoading(false); });
+  const load = () => base44.entities.Event.list("-date").then(d => { setEvents(d); }).catch(() => {}).finally(() => setLoading(false));
   useEffect(() => { load(); }, []);
 
   const openNew = () => { setForm(emptyEvent); setEditing(null); setShowForm(true); };

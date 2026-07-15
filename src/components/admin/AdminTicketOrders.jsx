@@ -11,13 +11,18 @@ export default function AdminTicketOrders() {
   const [statusFilter, setStatusFilter] = useState("all");
 
   const load = async () => {
-    const [orderData, eventData] = await Promise.all([
-      base44.entities.TicketOrder.list("-created_date"),
-      base44.entities.Event.list("-date")
-    ]);
-    setOrders(orderData);
-    setEvents(eventData);
-    setLoading(false);
+    try {
+      const [orderData, eventData] = await Promise.all([
+        base44.entities.TicketOrder.list("-created_date"),
+        base44.entities.Event.list("-date")
+      ]);
+      setOrders(orderData);
+      setEvents(eventData);
+    } catch {
+      /* silent */
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => { load(); }, []);

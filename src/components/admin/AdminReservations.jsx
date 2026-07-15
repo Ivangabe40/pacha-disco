@@ -24,10 +24,15 @@ function RequestRow({ item, type, onUpdate }) {
 
   const update = async (status) => {
     setUpdating(true);
-    const entity = type === "vip" ? base44.entities.VIPReservation : base44.entities.PrivateEventRequest;
-    await entity.update(item.id, { status });
-    onUpdate();
-    setUpdating(false);
+    try {
+      const entity = type === "vip" ? base44.entities.VIPReservation : base44.entities.PrivateEventRequest;
+      await entity.update(item.id, { status });
+      onUpdate();
+    } catch {
+      /* silent */
+    } finally {
+      setUpdating(false);
+    }
   };
 
   const isPending = item.status === "pendiente";
@@ -129,13 +134,18 @@ export default function AdminReservations() {
 
   const load = async () => {
     setLoading(true);
-    const [vip, priv] = await Promise.all([
-      base44.entities.VIPReservation.list("-created_date"),
-      base44.entities.PrivateEventRequest.list("-created_date"),
-    ]);
-    setVipList(vip);
-    setPrivateList(priv);
-    setLoading(false);
+    try {
+      const [vip, priv] = await Promise.all([
+        base44.entities.VIPReservation.list("-created_date"),
+        base44.entities.PrivateEventRequest.list("-created_date"),
+      ]);
+      setVipList(vip);
+      setPrivateList(priv);
+    } catch {
+      /* silent */
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => { load(); }, []);

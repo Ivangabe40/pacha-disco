@@ -12,7 +12,7 @@ export default function AdminGalleryAlbums() {
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
 
-  const load = () => base44.entities.GalleryAlbum.list("-created_date").then(d => { setAlbums(d); setLoading(false); });
+  const load = () => base44.entities.GalleryAlbum.list("-created_date").then(d => { setAlbums(d); }).catch(() => {}).finally(() => setLoading(false));
   useEffect(() => { load(); }, []);
 
   const openNew = () => { setForm({ title: "", link: "", cover_url: "" }); setEditing(null); setShowForm(true); };

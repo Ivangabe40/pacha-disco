@@ -22,8 +22,7 @@ export default function AdminMenu() {
   const loadItems = () => {
     base44.entities.MenuItem.list("sort_order").then(data => {
       setItems(data);
-      setLoading(false);
-    });
+    }).catch(() => {}).finally(() => setLoading(false));
   };
 
   const openNew = () => { setForm(empty); setEditing(null); setShowForm(true); };
