@@ -4,7 +4,7 @@ import { Instagram, MessageCircle, Globe, CalendarDays, Tag } from "lucide-react
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 import PullToRefresh from "@/components/PullToRefresh";
-import EscapeBarGamePromo from "@/components/EscapeBarGamePromo";
+
 
 export default function EscapeBar() {
   const [events, setEvents] = useState([]);
@@ -170,9 +170,27 @@ export default function EscapeBar() {
         }
       </section>
 
-      {/* JUEGO OFICIAL */}
+      {/* JUEGOS */}
       <div className="max-w-5xl mx-auto px-4 md:px-8 mb-10 md:mb-12">
-        <EscapeBarGamePromo />
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          {/* Ping Pong — Edición Especial Día del Amigo */}
+          <a href="https://ndtxpingo.base44.app" target="_blank" rel="noopener noreferrer"
+            className="group block rounded-2xl overflow-hidden transition-transform duration-300 hover:scale-[1.02]"
+            style={{ border: "2px solid rgba(201,168,76,0.4)", boxShadow: "0 0 40px rgba(201,168,76,0.15)" }}>
+            <img src="https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/b6dc194d3_1784153829764.png"
+              alt="Amigos Pong — Edición Especial Día del Amigo"
+              className="w-full h-auto object-cover" />
+          </a>
+
+          {/* Escape Bar — Juego Oficial */}
+          <a href="https://escapegame.base44.app" target="_blank" rel="noopener noreferrer"
+            className="group block rounded-2xl overflow-hidden transition-transform duration-300 hover:scale-[1.02]"
+            style={{ border: "2px solid rgba(201,168,76,0.4)", boxShadow: "0 0 40px rgba(201,168,76,0.15)" }}>
+            <img src="https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/3823abd47_1784152969857.png"
+              alt="Escape Bar — Juego Oficial"
+              className="w-full h-auto object-cover" />
+          </a>
+        </div>
       </div>
 
       {/* CONTACT FOOTER */}
