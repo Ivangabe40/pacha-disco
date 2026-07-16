@@ -7,6 +7,7 @@ export default function PromotionPopup() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    if (sessionStorage.getItem("pacha_promo_seen")) return;
     base44.entities.Promotion.filter({ is_active: true }, "-created_date", 1).then(data => {
       if (data.length > 0) {
         setPromo(data[0]);
@@ -15,47 +16,64 @@ export default function PromotionPopup() {
     }).catch(() => {});
   }, []);
 
+  const close = () => {
+    setVisible(false);
+    sessionStorage.setItem("pacha_promo_seen", "1");
+  };
+
   if (!visible || !promo) return null;
 
+  const isVideo = !!promo.video_url;
+  const hasImage = !!promo.image_url;
+  const hasContent = promo.description || promo.button_url;
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4"
+    <div className="fixed inset-0 z-[60] flex items-center justify-center p-4"
       style={{ background: "rgba(0,0,0,0.85)", backdropFilter: "blur(6px)" }}
-      onClick={() => setVisible(false)}>
+      onClick={close}>
       <div className="relative rounded-2xl overflow-hidden shadow-2xl"
-        style={{ border: "1px solid rgba(116,172,223,0.3)", background: "#0f0f0f", width: "min(360px, 90vw)", maxHeight: "90vh", display: "flex", flexDirection: "column" }}
+        style={{
+          border: "1px solid rgba(116,172,223,0.3)",
+          background: "#0f0f0f",
+          width: "min(330px, 88vw)",
+          maxHeight: "80vh",
+          display: "flex",
+          flexDirection: "column",
+        }}
         onClick={e => e.stopPropagation()}>
         {/* Close */}
-        <button onClick={() => setVisible(false)}
-          className="absolute top-3 right-3 z-10 w-8 h-8 flex items-center justify-center rounded-full transition-all"
-          style={{ background: "rgba(0,0,0,0.6)", border: "1px solid rgba(255,255,255,0.1)" }}>
-          <X size={14} className="text-white" />
+        <button onClick={close}
+          className="absolute top-2.5 right-2.5 z-10 w-9 h-9 flex items-center justify-center rounded-full transition-all active:scale-90"
+          style={{ background: "rgba(0,0,0,0.7)", border: "1px solid rgba(255,255,255,0.15)" }}>
+          <X size={16} className="text-white" />
         </button>
 
-        {/* Video o imagen */}
-        {promo.video_url ? (
-          <div style={{ flex: "1 1 auto", minHeight: 0, overflow: "hidden" }}>
+        {/* Media */}
+        {isVideo ? (
+          <div style={{ flex: "1 1 auto", minHeight: 0, overflow: "hidden", maxHeight: hasContent ? "52vh" : "70vh" }}>
             <video src={promo.video_url} autoPlay muted loop playsInline
-              className="w-full h-full object-cover" style={{ maxHeight: "75vh" }} />
+              className="w-full h-full object-cover" />
           </div>
-        ) : promo.image_url && (
-          <div style={{ flex: "1 1 auto", minHeight: 0, overflow: "hidden", aspectRatio: "9/16", maxHeight: "75vh" }}>
-            <img src={promo.image_url} alt={promo.title}
+        ) : hasImage && (
+          <div style={{ flex: "1 1 auto", minHeight: 0, overflow: "hidden", maxHeight: hasContent ? "52vh" : "70vh" }}>
+            <img src={promo.image_url} alt={promo.title || "Promoción"}
               className="w-full h-full object-cover object-center" style={{ display: "block" }} />
           </div>
         )}
 
         {/* Content */}
-        {(promo.description || promo.button_url) && (
-          <div className="p-5">
+        {hasContent && (
+          <div className="px-5 py-4 shrink-0">
+            {promo.title && (
+              <h3 className="text-white font-bold text-sm mb-1.5" style={{ fontFamily: "'Playfair Display', serif" }}>{promo.title}</h3>
+            )}
             {promo.description && (
-              <p className="text-sm text-gray-300 mb-4 leading-relaxed">{promo.description}</p>
+              <p className="text-xs text-gray-400 mb-3 leading-relaxed">{promo.description}</p>
             )}
             {promo.button_url && (
-              <a href={promo.button_url} target="_blank" rel="noopener noreferrer"
-                className="block w-full text-center py-3 rounded-xl font-bold text-sm tracking-widest uppercase transition-all"
-                style={{ background: "linear-gradient(135deg,#75AADB,#92C8F0)", color: "#fff" }}
-                onMouseEnter={e => e.currentTarget.style.transform = "translateY(-2px)"}
-                onMouseLeave={e => e.currentTarget.style.transform = "translateY(0)"}>
+              <a href={promo.button_url} target="_blank" rel="noopener noreferrer" onClick={close}
+                className="block w-full text-center py-2.5 rounded-xl font-bold text-xs tracking-widest uppercase transition-all active:scale-95"
+                style={{ background: "linear-gradient(135deg,#75AADB,#92C8F0)", color: "#fff" }}>
                 {promo.button_label || "Ver más"}
               </a>
             )}
