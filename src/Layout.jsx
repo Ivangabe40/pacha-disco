@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { Menu, X, Instagram, Facebook, MessageCircle, MapPin, ChevronLeft, Coins } from "lucide-react";
 import MobileBottomBar from "@/components/MobileBottomBar";
 
-const ROOT_ROUTES = new Set(["/", "/Home", "/Artists", "/Gallery", "/Menu", "/About", "/PrivateEvents", "/VIPReservations", "/Contact", "/Admin", "/configuracion", "/gestor-menu", "/TicketSales", "/payment/success", "/payment/pending", "/payment/failure"]);
+const ROOT_ROUTES = new Set(["/", "/Home", "/Artists", "/Gallery", "/Menu", "/About", "/PrivateEvents", "/VIPReservations", "/Contact", "/Admin", "/configuracion", "/gestor-menu", "/TicketSales", "/MisEntradas", "/payment/success", "/payment/pending", "/payment/failure"]);
 
 const LOGO_RED = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/7c4e34300_1783489304034.png";
 
@@ -198,6 +198,7 @@ export default function Layout({ children, currentPageName }) {
             <div className="text-center md:text-right">
               <div className="flex flex-wrap justify-center gap-3 md:gap-4 mb-1">
                 <Link to={createPageUrl("About")} className="text-gray-500 hover:text-gray-300 text-xs transition-colors">Sobre Nosotros</Link>
+                <Link to={createPageUrl("MisEntradas")} className="text-gray-500 hover:text-gray-300 text-xs transition-colors">Mis Entradas</Link>
                 <Link to={createPageUrl("Contact")} className="text-gray-500 hover:text-gray-300 text-xs transition-colors">Contacto</Link>
                 <Link to={createPageUrl("Admin")} className="text-gray-700 hover:text-gray-500 text-xs transition-colors">Panel Admin</Link>
               </div>

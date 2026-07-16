@@ -102,7 +102,7 @@ export default function PaymentPending() {
           {checking ? "Verificando..." : "Verificar estado del pago"}
         </button>
 
-        <Link to={createPageUrl("MisCuenta")}>
+        <Link to={createPageUrl("MisEntradas")}>
           <button className="w-full py-3 rounded-xl text-sm text-gray-500"
             style={{ border: "1px solid #333" }}>
             Ver mis entradas más tarde

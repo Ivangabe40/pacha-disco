@@ -12,6 +12,7 @@ import EscapeBar from './pages/EscapeBar';
 import VIPReservations from './pages/VIPReservations';
 import Contact from './pages/Contact';
 import MisCuenta from './pages/MisCuenta';
+import MisEntradas from './pages/MisEntradas';
 import QRPage from './pages/QRPage';
 import Configuracion from './pages/Configuracion';
 import GestorMenu from './pages/GestorMenu';
@@ -90,6 +91,7 @@ const AuthenticatedApp = () => {
         <Route path="/VIPReservations" element={<LayoutWrapper currentPageName="VIPReservations"><VIPReservations /></LayoutWrapper>} />
         <Route path="/Contact" element={<LayoutWrapper currentPageName="Contact"><Contact /></LayoutWrapper>} />
         <Route path="/MisCuenta" element={<LayoutWrapper currentPageName="MisCuenta"><MisCuenta /></LayoutWrapper>} />
+        <Route path="/MisEntradas" element={<LayoutWrapper currentPageName="MisEntradas"><MisEntradas /></LayoutWrapper>} />
         <Route path="/EscapeBar" element={<LayoutWrapper currentPageName="EscapeBar"><EscapeBar /></LayoutWrapper>} />
         <Route path="/QR" element={<LayoutWrapper currentPageName="QRPage"><QRPage /></LayoutWrapper>} />
         <Route path="/configuracion" element={<LayoutWrapper currentPageName="Configuracion"><Configuracion /></LayoutWrapper>} />

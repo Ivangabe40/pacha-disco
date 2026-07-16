@@ -105,7 +105,7 @@ export default function PaymentSuccess() {
               style={{ background: "linear-gradient(135deg, #C9A84C 0%, #E8C97A 50%, #C9A84C 100%)", color: "#0A0A0A" }}>
               <RefreshCw size={15} /> Verificar estado del pago
             </button>
-            <Link to={createPageUrl("MisCuenta")}>
+            <Link to={createPageUrl("MisEntradas")}>
               <button className="w-full py-3 rounded-xl text-sm text-gray-500"
                 style={{ border: "1px solid #333" }}>
                 Ver mis entradas más tarde
@@ -136,7 +136,7 @@ export default function PaymentSuccess() {
               ))}
             </div>
 
-            <Link to={createPageUrl("MisCuenta")}>
+            <Link to={createPageUrl("MisEntradas")}>
               <button className="w-full py-3.5 rounded-xl font-bold text-sm mb-3"
                 style={{ background: "linear-gradient(135deg, #C9A84C 0%, #E8C97A 50%, #C9A84C 100%)", color: "#0A0A0A" }}>
                 Ver mis entradas
