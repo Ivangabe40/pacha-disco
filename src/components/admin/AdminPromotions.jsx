@@ -19,40 +19,46 @@ export default function AdminPromotions() {
     const file = e.target.files[0];
     if (!file) return;
     setUploading("image");
-    const { file_url } = await base44.integrations.Core.UploadFile({ file });
-    setForm(f => ({ ...f, image_url: file_url }));
-    setUploading(false);
+    try {
+      const { file_url } = await base44.integrations.Core.UploadFile({ file });
+      setForm(f => ({ ...f, image_url: file_url }));
+    } catch { alert("Error al subir la imagen"); }
+    finally { setUploading(false); }
   };
 
   const handleVideo = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
     setUploading("video");
-    const { file_url } = await base44.integrations.Core.UploadFile({ file });
-    setForm(f => ({ ...f, video_url: file_url }));
-    setUploading(false);
+    try {
+      const { file_url } = await base44.integrations.Core.UploadFile({ file });
+      setForm(f => ({ ...f, video_url: file_url }));
+    } catch { alert("Error al subir el video"); }
+    finally { setUploading(false); }
   };
 
   const save = async () => {
-    if (editing) {
-      await base44.entities.Promotion.update(editing, form);
-    } else {
-      await base44.entities.Promotion.create(form);
-    }
-    setForm(EMPTY);
-    setEditing(null);
-    setShowForm(false);
-    load();
+    try {
+      if (editing) {
+        await base44.entities.Promotion.update(editing, form);
+      } else {
+        await base44.entities.Promotion.create(form);
+      }
+      setForm(EMPTY);
+      setEditing(null);
+      setShowForm(false);
+      load();
+    } catch { alert("Error al guardar la promoción"); }
   };
 
   const remove = async (id) => {
-    await base44.entities.Promotion.delete(id);
-    load();
+    try { await base44.entities.Promotion.delete(id); load(); }
+    catch { alert("Error al eliminar la promoción"); }
   };
 
   const toggleActive = async (promo) => {
-    await base44.entities.Promotion.update(promo.id, { is_active: !promo.is_active });
-    load();
+    try { await base44.entities.Promotion.update(promo.id, { is_active: !promo.is_active }); load(); }
+    catch { /* silent */ }
   };
 
   const edit = (p) => {

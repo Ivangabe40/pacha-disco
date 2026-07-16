@@ -19,29 +19,35 @@ export default function AdminEscapeBar() {
   const load = () => base44.entities.EscapeBarEvent.list("-date").then(d => { setEvents(d); }).catch(() => {}).finally(() => setLoading(false));
   useEffect(() => { load(); }, []);
 
-  const handlePhoto = async (e, isEdit = false) => {
+  const handlePhoto = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
     setUploading(true);
-    const { file_url } = await base44.integrations.Core.UploadFile({ file });
-    setForm(f => ({ ...f, photo_url: file_url }));
-    setUploading(false);
+    try {
+      const { file_url } = await base44.integrations.Core.UploadFile({ file });
+      setForm(f => ({ ...f, photo_url: file_url }));
+    } catch { alert("Error al subir la foto"); }
+    finally { setUploading(false); }
   };
 
   const handleCreate = async (e) => {
     e.preventDefault();
-    await base44.entities.EscapeBarEvent.create(form);
-    setForm(emptyForm);
-    setShowForm(false);
-    load();
+    try {
+      await base44.entities.EscapeBarEvent.create(form);
+      setForm(emptyForm);
+      setShowForm(false);
+      load();
+    } catch { alert("Error al crear el evento"); }
   };
 
   const handleUpdate = async (e) => {
     e.preventDefault();
-    await base44.entities.EscapeBarEvent.update(editingId, form);
-    setEditingId(null);
-    setForm(emptyForm);
-    load();
+    try {
+      await base44.entities.EscapeBarEvent.update(editingId, form);
+      setEditingId(null);
+      setForm(emptyForm);
+      load();
+    } catch { alert("Error al guardar los cambios"); }
   };
 
   const startEdit = (ev) => {
@@ -54,13 +60,13 @@ export default function AdminEscapeBar() {
 
   const handleDelete = async (id) => {
     if (!confirm("¿Eliminar este evento?")) return;
-    await base44.entities.EscapeBarEvent.delete(id);
-    load();
+    try { await base44.entities.EscapeBarEvent.delete(id); load(); }
+    catch { alert("Error al eliminar el evento"); }
   };
 
   const toggleField = async (ev, field) => {
-    await base44.entities.EscapeBarEvent.update(ev.id, { [field]: !ev[field] });
-    load();
+    try { await base44.entities.EscapeBarEvent.update(ev.id, { [field]: !ev[field] }); load(); }
+    catch { /* silent */ }
   };
 
   const visible = events.filter(e => !e.is_hidden);

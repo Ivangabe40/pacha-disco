@@ -33,72 +33,78 @@ export default function AdminMenu() {
     if (!form.name || !form.price || !form.category) return;
     setSaving(true);
     const data = { ...form, price: parseFloat(form.price) };
-    if (editing) {
-      await base44.entities.MenuItem.update(editing, data);
-    } else {
-      await base44.entities.MenuItem.create(data);
-    }
-    setSaving(false);
-    closeForm();
-    loadItems();
+    try {
+      if (editing) {
+        await base44.entities.MenuItem.update(editing, data);
+      } else {
+        await base44.entities.MenuItem.create(data);
+      }
+      closeForm();
+      loadItems();
+    } catch { alert("Error al guardar el producto"); }
+    finally { setSaving(false); }
   };
 
   const handleDelete = async (id) => {
     if (!confirm("¿Eliminar este producto?")) return;
-    await base44.entities.MenuItem.delete(id);
-    loadItems();
+    try { await base44.entities.MenuItem.delete(id); loadItems(); }
+    catch { alert("Error al eliminar el producto"); }
   };
 
   const toggleAvailable = async (item) => {
-    await base44.entities.MenuItem.update(item.id, { is_available: !item.is_available });
-    loadItems();
+    try { await base44.entities.MenuItem.update(item.id, { is_available: !item.is_available }); loadItems(); }
+    catch { /* silent */ }
   };
 
   const toggleFeatured = async (item) => {
-    await base44.entities.MenuItem.update(item.id, { is_featured: !item.is_featured });
-    loadItems();
+    try { await base44.entities.MenuItem.update(item.id, { is_featured: !item.is_featured }); loadItems(); }
+    catch { /* silent */ }
   };
 
   const handleImportExcel = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
     setImporting(true);
-    const { file_url } = await base44.integrations.Core.UploadFile({ file });
-    const result = await base44.integrations.Core.ExtractDataFromUploadedFile({
-      file_url,
-      json_schema: {
-        type: "object",
-        properties: {
-          items: {
-            type: "array",
+    try {
+      const { file_url } = await base44.integrations.Core.UploadFile({ file });
+      const result = await base44.integrations.Core.ExtractDataFromUploadedFile({
+        file_url,
+        json_schema: {
+          type: "object",
+          properties: {
             items: {
-              type: "object",
-              properties: {
-                name: { type: "string" },
-                description: { type: "string" },
-                price: { type: "number" },
-                category: { type: "string" },
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  name: { type: "string" },
+                  description: { type: "string" },
+                  price: { type: "number" },
+                  category: { type: "string" },
+                }
               }
             }
           }
         }
+      });
+      if (result.status === "success" && result.output?.items?.length) {
+        const toCreate = result.output.items.map((item, idx) => ({
+          name: item.name || "Sin nombre",
+          description: item.description || "",
+          price: parseFloat(item.price) || 0,
+          category: CATEGORIES.includes(item.category) ? item.category : "Tragos Clásicos",
+          is_available: true,
+          is_featured: false,
+          sort_order: idx,
+        }));
+        await base44.entities.MenuItem.bulkCreate(toCreate);
+        loadItems();
       }
-    });
-    if (result.status === "success" && result.output?.items?.length) {
-      const toCreate = result.output.items.map((item, idx) => ({
-        name: item.name || "Sin nombre",
-        description: item.description || "",
-        price: parseFloat(item.price) || 0,
-        category: CATEGORIES.includes(item.category) ? item.category : "Tragos Clásicos",
-        is_available: true,
-        is_featured: false,
-        sort_order: idx,
-      }));
-      await base44.entities.MenuItem.bulkCreate(toCreate);
-      loadItems();
+    } catch { alert("Error al importar el archivo"); }
+    finally {
+      setImporting(false);
+      e.target.value = "";
     }
-    setImporting(false);
-    e.target.value = "";
   };
 
   const categories = [...new Set(items.map(i => i.category))];

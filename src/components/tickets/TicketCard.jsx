@@ -8,11 +8,12 @@ export default function TicketCard({ ticket, index }) {
   const [qrDataUrl, setQrDataUrl] = useState("");
 
   useEffect(() => {
+    if (!ticket.ticket_code) return;
     QRCode.toDataURL(ticket.ticket_code, {
       width: 200,
       margin: 1,
       color: { dark: "#000000", light: "#ffffff" },
-    }).then(setQrDataUrl);
+    }).then(setQrDataUrl).catch(() => {});
   }, [ticket.ticket_code]);
 
   const eventDate = ticket.event_date

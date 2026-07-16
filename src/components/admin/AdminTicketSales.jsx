@@ -55,8 +55,8 @@ export default function AdminTicketSales() {
       setSavedId(eventId);
       setTimeout(() => setSavedId(null), 2000);
       load();
-    } catch {}
-    setSavingId(null);
+    } catch { alert("Error al guardar los cambios"); }
+    finally { setSavingId(null); }
   };
 
   const updateEdit = (eventId, field, value) => {

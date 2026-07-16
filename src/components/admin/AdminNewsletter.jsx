@@ -27,8 +27,10 @@ export default function AdminNewsletter() {
   };
 
   const handleDelete = async (id) => {
-    await base44.entities.NewsletterSubscriber.update(id, { is_active: false });
-    setSubscribers(prev => prev.filter(s => s.id !== id));
+    try {
+      await base44.entities.NewsletterSubscriber.update(id, { is_active: false });
+      setSubscribers(prev => prev.filter(s => s.id !== id));
+    } catch { alert("Error al eliminar el suscriptor"); }
   };
 
   const handleSend = async (e) => {

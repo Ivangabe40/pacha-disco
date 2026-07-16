@@ -17,27 +17,31 @@ export default function AdminNovedades() {
     const file = e.target.files[0];
     if (!file) return;
     setUploading(true);
-    const { file_url } = await base44.integrations.Core.UploadFile({ file });
-    setForm(f => ({ ...f, image_url: file_url }));
-    setUploading(false);
+    try {
+      const { file_url } = await base44.integrations.Core.UploadFile({ file });
+      setForm(f => ({ ...f, image_url: file_url }));
+    } catch { alert("Error al subir la imagen"); }
+    finally { setUploading(false); }
   };
 
   const handleSave = async () => {
     if (!form.title || !form.image_url) return;
-    await base44.entities.NovedadBanner.create(form);
-    setForm({ title: "", image_url: "", link: "", description: "", is_active: true });
-    setShowForm(false);
-    load();
+    try {
+      await base44.entities.NovedadBanner.create(form);
+      setForm({ title: "", image_url: "", link: "", description: "", is_active: true });
+      setShowForm(false);
+      load();
+    } catch { alert("Error al guardar la novedad"); }
   };
 
   const toggleActive = async (item) => {
-    await base44.entities.NovedadBanner.update(item.id, { is_active: !item.is_active });
-    load();
+    try { await base44.entities.NovedadBanner.update(item.id, { is_active: !item.is_active }); load(); }
+    catch { /* silent */ }
   };
 
   const handleDelete = async (item) => {
-    await base44.entities.NovedadBanner.delete(item.id);
-    load();
+    try { await base44.entities.NovedadBanner.delete(item.id); load(); }
+    catch { alert("Error al eliminar la novedad"); }
   };
 
   return (

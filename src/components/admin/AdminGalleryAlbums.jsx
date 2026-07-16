@@ -21,28 +21,32 @@ export default function AdminGalleryAlbums() {
   const handleImageUpload = async (file) => {
     if (!file) return;
     setUploading(true);
-    const { file_url } = await base44.integrations.Core.UploadFile({ file });
-    setForm(f => ({ ...f, cover_url: file_url }));
-    setUploading(false);
+    try {
+      const { file_url } = await base44.integrations.Core.UploadFile({ file });
+      setForm(f => ({ ...f, cover_url: file_url }));
+    } catch { alert("Error al subir la imagen"); }
+    finally { setUploading(false); }
   };
 
   const save = async () => {
     if (!form.title.trim() || !form.link.trim()) return;
     setSaving(true);
-    if (editing) {
-      await base44.entities.GalleryAlbum.update(editing, form);
-    } else {
-      await base44.entities.GalleryAlbum.create(form);
-    }
-    setSaving(false);
-    setShowForm(false);
-    load();
+    try {
+      if (editing) {
+        await base44.entities.GalleryAlbum.update(editing, form);
+      } else {
+        await base44.entities.GalleryAlbum.create(form);
+      }
+      setShowForm(false);
+      load();
+    } catch { alert("Error al guardar el álbum"); }
+    finally { setSaving(false); }
   };
 
   const remove = async (id) => {
     if (!window.confirm("¿Eliminar este álbum?")) return;
-    await base44.entities.GalleryAlbum.delete(id);
-    load();
+    try { await base44.entities.GalleryAlbum.delete(id); load(); }
+    catch { alert("Error al eliminar el álbum"); }
   };
 
   return (

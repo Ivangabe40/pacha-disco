@@ -58,6 +58,7 @@ export default function PaymentSuccess() {
   }, [checkOrder]);
 
   const handleRefresh = () => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
     pollCount.current = 0;
     setStillProcessing(false);
     setLoading(true);

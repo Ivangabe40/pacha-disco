@@ -21,22 +21,26 @@ export default function AdminArtists() {
 
   const handlePhoto = async (file) => {
     setUploading(true);
-    const { file_url } = await base44.integrations.Core.UploadFile({ file });
-    setForm(f => ({ ...f, photo_url: file_url }));
-    setUploading(false);
+    try {
+      const { file_url } = await base44.integrations.Core.UploadFile({ file });
+      setForm(f => ({ ...f, photo_url: file_url }));
+    } catch { alert("Error al subir la foto"); }
+    finally { setUploading(false); }
   };
 
   const handleSave = async () => {
-    if (editing) await base44.entities.Artist.update(editing.id, form);
-    else await base44.entities.Artist.create(form);
-    setShowForm(false);
-    load();
+    try {
+      if (editing) await base44.entities.Artist.update(editing.id, form);
+      else await base44.entities.Artist.create(form);
+      setShowForm(false);
+      load();
+    } catch { alert("Error al guardar el artista"); }
   };
 
   const handleDelete = async (id) => {
     if (!window.confirm("¿Eliminar este artista?")) return;
-    await base44.entities.Artist.delete(id);
-    load();
+    try { await base44.entities.Artist.delete(id); load(); }
+    catch { alert("Error al eliminar el artista"); }
   };
 
   return (

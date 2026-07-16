@@ -29,9 +29,11 @@ export default function AdminConfiguracion() {
     const file = e.target.files[0];
     if (!file) return;
     setUploadingGameImg(true);
-    const { file_url } = await base44.integrations.Core.UploadFile({ file });
-    setForm(f => ({ ...f, game_image_url: file_url }));
-    setUploadingGameImg(false);
+    try {
+      const { file_url } = await base44.integrations.Core.UploadFile({ file });
+      setForm(f => ({ ...f, game_image_url: file_url }));
+    } catch { alert("Error al subir la imagen"); }
+    finally { setUploadingGameImg(false); }
   };
 
   useEffect(() => {
@@ -49,22 +51,24 @@ export default function AdminConfiguracion() {
 
   const handleSave = async () => {
     setSaving(true);
-    const newMap = { ...configMap };
-    for (const key of Object.keys(form)) {
-      const existing = newMap[key];
-      const value = form[key];
-      if (existing && existing.value === value) continue;
-      if (existing) {
-        await base44.entities.SiteConfig.update(existing.id, { key, value });
-      } else {
-        const created = await base44.entities.SiteConfig.create({ key, value });
-        newMap[key] = created;
+    try {
+      const newMap = { ...configMap };
+      for (const key of Object.keys(form)) {
+        const existing = newMap[key];
+        const value = form[key];
+        if (existing && existing.value === value) continue;
+        if (existing) {
+          await base44.entities.SiteConfig.update(existing.id, { key, value });
+        } else {
+          const created = await base44.entities.SiteConfig.create({ key, value });
+          newMap[key] = created;
+        }
       }
-    }
-    setConfigMap(newMap);
-    setSaving(false);
-    setSaved(true);
-    setTimeout(() => setSaved(false), 2500);
+      setConfigMap(newMap);
+      setSaved(true);
+      setTimeout(() => setSaved(false), 2500);
+    } catch { alert("Error al guardar la configuración"); }
+    finally { setSaving(false); }
   };
 
   if (loading) return (

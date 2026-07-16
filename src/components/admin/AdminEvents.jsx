@@ -29,24 +29,30 @@ export default function AdminEvents() {
 
   const handleFlyer = async (file) => {
     setUploading(true);
-    const { file_url } = await base44.integrations.Core.UploadFile({ file });
-    setForm(f => ({ ...f, flyer_url: file_url }));
-    setUploading(false);
+    try {
+      const { file_url } = await base44.integrations.Core.UploadFile({ file });
+      setForm(f => ({ ...f, flyer_url: file_url }));
+    } catch { alert("Error al subir el flyer"); }
+    finally { setUploading(false); }
   };
 
   const handleVideo = async (file) => {
     setUploadingVideo(true);
-    const { file_url } = await base44.integrations.Core.UploadFile({ file });
-    setForm(f => ({ ...f, video_url: file_url }));
-    setUploadingVideo(false);
+    try {
+      const { file_url } = await base44.integrations.Core.UploadFile({ file });
+      setForm(f => ({ ...f, video_url: file_url }));
+    } catch { alert("Error al subir el video"); }
+    finally { setUploadingVideo(false); }
   };
 
   const [uploadingBg, setUploadingBg] = useState(false);
   const handleBackground = async (file) => {
     setUploadingBg(true);
-    const { file_url } = await base44.integrations.Core.UploadFile({ file });
-    setForm(f => ({ ...f, background_url: file_url }));
-    setUploadingBg(false);
+    try {
+      const { file_url } = await base44.integrations.Core.UploadFile({ file });
+      setForm(f => ({ ...f, background_url: file_url }));
+    } catch { alert("Error al subir la imagen de fondo"); }
+    finally { setUploadingBg(false); }
   };
 
   const handleSave = async () => {
@@ -56,24 +62,30 @@ export default function AdminEvents() {
       ticket_price_door: form.ticket_price_door ? Number(form.ticket_price_door) : null,
       capacity: form.capacity ? Number(form.capacity) : null,
     };
-    if (editing) {
-      await base44.entities.Event.update(editing.id, data);
-    } else {
-      await base44.entities.Event.create(data);
-    }
-    setShowForm(false);
-    load();
+    try {
+      if (editing) {
+        await base44.entities.Event.update(editing.id, data);
+      } else {
+        await base44.entities.Event.create(data);
+      }
+      setShowForm(false);
+      load();
+    } catch { alert("Error al guardar el evento"); }
   };
 
   const handleDelete = async (id) => {
     if (!window.confirm("¿Eliminar este evento?")) return;
-    await base44.entities.Event.delete(id);
-    load();
+    try {
+      await base44.entities.Event.delete(id);
+      load();
+    } catch { alert("Error al eliminar el evento"); }
   };
 
   const toggleFeatured = async (event) => {
-    await base44.entities.Event.update(event.id, { is_featured: !event.is_featured });
-    load();
+    try {
+      await base44.entities.Event.update(event.id, { is_featured: !event.is_featured });
+      load();
+    } catch { /* silent */ }
   };
 
   return (
