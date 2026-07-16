@@ -24,6 +24,7 @@ export default function TicketSales() {
       const available = data.filter(e =>
         new Date(e.date) >= new Date() &&
         e.status === "activo" &&
+        e.tickets_enabled !== false &&
         e.ticket_price && e.ticket_price > 0
       );
       setEvents(available);
