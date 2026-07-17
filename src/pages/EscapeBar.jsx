@@ -40,11 +40,11 @@ export default function EscapeBar() {
     <div style={{ background: "#070707", minHeight: "100vh" }}>
 
       {/* ESCAPE OPEN STAGE — BANNER PRINCIPAL */}
-      <Link to={createPageUrl("OpenStage")} className="block relative overflow-hidden group" style={{ minHeight: "320px", maxHeight: "520px" }}>
-        <img src={headerImg} alt="Escape Open Stage — Convocatoria abierta" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(7,7,7,0.2) 0%, rgba(7,7,7,0.5) 100%)" }} />
-        <div className="relative z-10 flex flex-col items-center justify-end text-center px-4 py-8 md:py-12" style={{ minHeight: "320px" }}>
-          <div className="flex items-center gap-2 px-7 py-3 rounded-lg text-sm md:text-base font-black tracking-wider uppercase transition-all group-hover:gap-3 group-hover:scale-105"
+      <Link to={createPageUrl("OpenStage")} className="block relative overflow-hidden group">
+        <img src={headerImg} alt="Escape Open Stage — Convocatoria abierta" className="w-full h-auto block transition-transform duration-700 group-hover:scale-[1.02]" />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(7,7,7,0) 0%, rgba(7,7,7,0.35) 70%, rgba(7,7,7,0.65) 100%)" }} />
+        <div className="absolute bottom-0 left-0 right-0 z-10 flex flex-col items-center text-center px-4 py-5 md:py-7">
+          <div className="flex items-center gap-2 px-6 py-3 rounded-lg text-sm md:text-base font-black tracking-wider uppercase transition-all group-hover:gap-3 group-hover:scale-105"
             style={{ background: "linear-gradient(135deg, #D4AF37, #BF953F)", color: "#070707", boxShadow: "0 4px 30px rgba(212,175,55,0.4)" }}>
             <Mic size={18} /> Postular mi proyecto <ChevronRight size={18} />
           </div>

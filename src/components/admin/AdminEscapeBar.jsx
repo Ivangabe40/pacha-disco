@@ -195,7 +195,7 @@ export default function AdminEscapeBar() {
           <h3 className="text-sm font-bold text-white uppercase tracking-wider">Imagen de Header — Escape Bar</h3>
         </div>
         <p className="text-xs text-gray-500 mb-3">Esta imagen aparece como banner principal arriba de todo en la página de Escape Bar.</p>
-        <ImageSizeHint size="800×600 px" ratio="4:3" note="Móvil (vertical). Recomendado: 800px de ancho × 600px de alto. Formato horizontal/apaisado." />
+        <ImageSizeHint size="1200×675 px" ratio="16:9" note="Formato horizontal/apaisado. La imagen se muestra completa en móvil sin recortes." />
         <div className="flex flex-col sm:flex-row gap-4 mt-3">
           <div className="relative rounded-lg overflow-hidden flex-shrink-0" style={{ width: "160px", height: "120px", border: "1px solid #333" }}>
             <img src={headerImg} alt="Header preview" className="w-full h-full object-cover" />
