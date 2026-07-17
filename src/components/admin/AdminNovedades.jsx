@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
-import { Plus, Trash2, Eye, EyeOff, Upload, ExternalLink } from "lucide-react";
+import { Plus, Trash2, Eye, EyeOff, Upload, ExternalLink, Pencil, X } from "lucide-react";
 import ImageSizeHint from "./ImageSizeHint";
 
 export default function AdminNovedades() {
@@ -8,6 +8,7 @@ export default function AdminNovedades() {
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState({ title: "", image_url: "", link: "", description: "", is_active: true });
   const [uploading, setUploading] = useState(false);
+  const [editingId, setEditingId] = useState(null);
 
   const load = () => base44.entities.NovedadBanner.list("-created_date").then(setItems).catch(() => {});
 
@@ -24,14 +25,30 @@ export default function AdminNovedades() {
     finally { setUploading(false); }
   };
 
+  const resetForm = () => {
+    setForm({ title: "", image_url: "", link: "", description: "", is_active: true });
+    setEditingId(null);
+    setShowForm(false);
+  };
+
   const handleSave = async () => {
     if (!form.title || !form.image_url) return;
     try {
-      await base44.entities.NovedadBanner.create(form);
-      setForm({ title: "", image_url: "", link: "", description: "", is_active: true });
-      setShowForm(false);
+      if (editingId) {
+        await base44.entities.NovedadBanner.update(editingId, form);
+      } else {
+        await base44.entities.NovedadBanner.create(form);
+      }
+      resetForm();
       load();
     } catch { alert("Error al guardar la novedad"); }
+  };
+
+  const handleEdit = (item) => {
+    setEditingId(item.id);
+    setForm({ title: item.title || "", image_url: item.image_url || "", link: item.link || "", description: item.description || "", is_active: item.is_active });
+    setShowForm(true);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const toggleActive = async (item) => {
@@ -50,17 +67,18 @@ export default function AdminNovedades() {
         <h2 className="text-xl font-bold text-white" style={{ fontFamily: "'Playfair Display', serif" }}>
           Banners de Novedades
         </h2>
-        <button onClick={() => setShowForm(!showForm)}
+        <button onClick={() => editingId ? resetForm() : setShowForm(!showForm)}
           className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-bold"
-          style={{ background: "#75AADB", color: "#fff" }}>
-          <Plus size={14} /> Nuevo
+          style={{ background: editingId ? "#222" : "#75AADB", color: editingId ? "#888" : "#fff" }}>
+          {editingId ? <X size={14} /> : <Plus size={14} />} {editingId ? "Cancelar edición" : (showForm ? "Cancelar" : "Nuevo")}
         </button>
       </div>
 
       <p className="text-gray-500 text-xs mb-6">Solo se muestra 1 banner activo a la vez (el más reciente).</p>
 
       {showForm && (
-        <div className="rounded-xl p-4 sm:p-5 mb-6 space-y-4" style={{ background: "#111", border: "1px solid #222" }}>
+        <div className="rounded-xl p-4 sm:p-5 mb-6 space-y-4" style={{ background: "#111", border: `1px solid ${editingId ? "rgba(116,172,223,0.4)" : "#222"}` }}>
+          {editingId && <p className="text-xs font-bold uppercase tracking-wider" style={{ color: "#75AADB" }}>Editando novedad existente</p>}
           <input
             value={form.title}
             onChange={e => setForm(f => ({ ...f, title: e.target.value }))}
@@ -111,7 +129,7 @@ export default function AdminNovedades() {
               style={{ background: "#75AADB", color: "#fff" }}>
               Guardar
             </button>
-            <button onClick={() => setShowForm(false)}
+            <button onClick={resetForm}
               className="px-6 py-2.5 rounded-lg text-sm font-bold"
               style={{ background: "#222", color: "#888" }}>
               Cancelar
@@ -136,6 +154,12 @@ export default function AdminNovedades() {
               )}
             </div>
             <div className="flex items-center gap-1 sm:gap-2 shrink-0">
+              <button onClick={() => handleEdit(item)}
+                className="w-8 h-8 flex items-center justify-center rounded-lg transition-all"
+                style={{ background: "rgba(116,172,223,0.1)" }}
+                title="Editar">
+                <Pencil size={13} style={{ color: "#75AADB" }} />
+              </button>
               <button onClick={() => toggleActive(item)}
                 className="w-8 h-8 flex items-center justify-center rounded-lg transition-all"
                 style={{ background: item.is_active ? "rgba(34,197,94,0.15)" : "rgba(255,255,255,0.05)" }}>
