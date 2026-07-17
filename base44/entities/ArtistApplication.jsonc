@@ -1,0 +1,408 @@
+{
+  "name": "ArtistApplication",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": [
+        "nueva",
+        "pendiente_revision",
+        "material_incompleto",
+        "en_evaluacion",
+        "preseleccionada",
+        "contactada",
+        "entrevista",
+        "fecha_propuesta",
+        "confirmada",
+        "en_espera",
+        "no_seleccionada",
+        "presentacion_realizada",
+        "cancelada"
+      ],
+      "default": "nueva",
+      "description": "Estado interno de la postulaci\u00f3n"
+    },
+    "contact_name": {
+      "type": "string",
+      "description": "Nombre y apellido del contacto"
+    },
+    "artistic_name": {
+      "type": "string",
+      "description": "Nombre art\u00edstico o del proyecto"
+    },
+    "email": {
+      "type": "string",
+      "description": "Correo electr\u00f3nico"
+    },
+    "whatsapp": {
+      "type": "string",
+      "description": "N\u00famero de WhatsApp"
+    },
+    "city": {
+      "type": "string",
+      "description": "Ciudad o localidad"
+    },
+    "province": {
+      "type": "string",
+      "description": "Provincia"
+    },
+    "contact_age": {
+      "type": "number",
+      "description": "Edad del responsable"
+    },
+    "instagram_user": {
+      "type": "string",
+      "description": "Usuario de Instagram"
+    },
+    "project_type": {
+      "type": "string",
+      "enum": [
+        "solista",
+        "duo",
+        "banda",
+        "dj",
+        "productor",
+        "instrumentista",
+        "otro"
+      ],
+      "description": "Tipo de proyecto"
+    },
+    "member_count": {
+      "type": "number",
+      "description": "Cantidad de integrantes"
+    },
+    "members": {
+      "type": "string",
+      "description": "Nombre de los integrantes",
+      "maxLength": 2000
+    },
+    "musical_genre": {
+      "type": "string",
+      "description": "G\u00e9nero o estilo musical principal"
+    },
+    "secondary_genres": {
+      "type": "string",
+      "description": "G\u00e9neros secundarios"
+    },
+    "repertoire_type": {
+      "type": "string",
+      "enum": [
+        "propia",
+        "covers",
+        "ambas"
+      ],
+      "description": "Tipo de repertorio"
+    },
+    "project_description": {
+      "type": "string",
+      "description": "Descripci\u00f3n del proyecto",
+      "maxLength": 3000
+    },
+    "formation_year": {
+      "type": "number",
+      "description": "A\u00f1o de formaci\u00f3n o inicio"
+    },
+    "live_experience": {
+      "type": "string",
+      "description": "Experiencia previa en vivo",
+      "maxLength": 2000
+    },
+    "performance_duration": {
+      "type": "string",
+      "description": "Duraci\u00f3n aproximada de la presentaci\u00f3n"
+    },
+    "song_count": {
+      "type": "number",
+      "description": "Cantidad estimada de canciones o temas"
+    },
+    "content_language": {
+      "type": "string",
+      "description": "Idioma principal de las canciones"
+    },
+    "is_all_ages": {
+      "type": "boolean",
+      "description": "\u00bfEl contenido es apto para todo p\u00fablico?"
+    },
+    "explicit_content": {
+      "type": "boolean",
+      "description": "\u00bfLa presentaci\u00f3n incluye contenido expl\u00edcito?"
+    },
+    "instagram_url": {
+      "type": "string",
+      "description": "Enlace a Instagram"
+    },
+    "spotify_url": {
+      "type": "string",
+      "description": "Enlace a Spotify"
+    },
+    "youtube_url": {
+      "type": "string",
+      "description": "Enlace a YouTube"
+    },
+    "soundcloud_url": {
+      "type": "string",
+      "description": "Enlace a SoundCloud"
+    },
+    "tiktok_url": {
+      "type": "string",
+      "description": "Enlace a TikTok"
+    },
+    "website_url": {
+      "type": "string",
+      "description": "Enlace a p\u00e1gina web"
+    },
+    "live_video_url": {
+      "type": "string",
+      "description": "Enlace a presentaci\u00f3n en vivo"
+    },
+    "drive_folder_url": {
+      "type": "string",
+      "description": "Enlace a carpeta de Google Drive"
+    },
+    "profile_images": {
+      "type": "string",
+      "description": "URLs de fotograf\u00edas del proyecto (separadas por coma)"
+    },
+    "press_kit_file": {
+      "type": "string",
+      "description": "URL del dossier o press kit"
+    },
+    "technical_rider_file": {
+      "type": "string",
+      "description": "URL del rider t\u00e9cnico adjunto"
+    },
+    "owns_instruments": {
+      "type": "string",
+      "enum": [
+        "si",
+        "no",
+        "parcialmente",
+        "asesoramiento"
+      ],
+      "description": "\u00bfCuentan con instrumentos propios?"
+    },
+    "owns_microphones": {
+      "type": "string",
+      "enum": [
+        "si",
+        "no",
+        "parcialmente",
+        "asesoramiento"
+      ],
+      "description": "\u00bfCuentan con micr\u00f3fonos?"
+    },
+    "owns_amplifiers": {
+      "type": "string",
+      "enum": [
+        "si",
+        "no",
+        "parcialmente",
+        "asesoramiento"
+      ],
+      "description": "\u00bfCuentan con amplificadores?"
+    },
+    "owns_console": {
+      "type": "string",
+      "enum": [
+        "si",
+        "no",
+        "parcialmente",
+        "asesoramiento"
+      ],
+      "description": "\u00bfCuentan con consola propia?"
+    },
+    "owns_controller": {
+      "type": "string",
+      "enum": [
+        "si",
+        "no",
+        "parcialmente",
+        "asesoramiento"
+      ],
+      "description": "\u00bfCuentan con computadora o controladora?"
+    },
+    "has_sound_engineer": {
+      "type": "string",
+      "enum": [
+        "si",
+        "no",
+        "parcialmente",
+        "asesoramiento"
+      ],
+      "description": "\u00bfCuentan con operador de sonido?"
+    },
+    "needs_technical_assistance": {
+      "type": "string",
+      "enum": [
+        "si",
+        "no",
+        "parcialmente",
+        "asesoramiento"
+      ],
+      "description": "\u00bfNecesitan asistencia t\u00e9cnica del espacio?"
+    },
+    "required_microphones": {
+      "type": "number",
+      "description": "Cantidad de micr\u00f3fonos necesarios"
+    },
+    "required_audio_inputs": {
+      "type": "number",
+      "description": "Cantidad de entradas de audio necesarias"
+    },
+    "connection_type": {
+      "type": "string",
+      "description": "Tipo de conexiones utilizadas"
+    },
+    "stage_space": {
+      "type": "string",
+      "description": "Espacio aproximado requerido sobre el escenario"
+    },
+    "setup_time": {
+      "type": "string",
+      "description": "Tiempo estimado de armado"
+    },
+    "soundcheck_time": {
+      "type": "string",
+      "description": "Tiempo estimado de prueba de sonido"
+    },
+    "technical_requirements": {
+      "type": "string",
+      "description": "Necesidades t\u00e9cnicas especiales",
+      "maxLength": 3000
+    },
+    "available_dates": {
+      "type": "string",
+      "description": "Viernes disponibles"
+    },
+    "available_time": {
+      "type": "string",
+      "description": "Horario aproximado disponible"
+    },
+    "has_transport": {
+      "type": "boolean",
+      "description": "\u00bfPueden trasladarse por sus propios medios?"
+    },
+    "date_restrictions": {
+      "type": "string",
+      "description": "\u00bfTienen restricciones de fechas?"
+    },
+    "confirmation_notice": {
+      "type": "string",
+      "description": "Con cu\u00e1nta anticipaci\u00f3n necesitan confirmar"
+    },
+    "available_soundcheck": {
+      "type": "boolean",
+      "description": "\u00bfDisponibles para prueba de sonido previa?"
+    },
+    "promotional_availability": {
+      "type": "boolean",
+      "description": "\u00bfDisponibles para acciones promocionales?"
+    },
+    "social_followers": {
+      "type": "string",
+      "description": "Cantidad aproximada de seguidores en redes"
+    },
+    "estimated_audience": {
+      "type": "number",
+      "description": "Promedio estimado de p\u00fablico que podr\u00eda acompa\u00f1ar"
+    },
+    "willing_to_promote": {
+      "type": "boolean",
+      "description": "\u00bfDispuestos a promocionar la fecha en sus redes?"
+    },
+    "can_generate_content": {
+      "type": "boolean",
+      "description": "\u00bfPueden generar contenido previo al evento?"
+    },
+    "authorizes_media_use": {
+      "type": "boolean",
+      "description": "\u00bfAutorizan el uso de im\u00e1genes y fragmentos audiovisuales?"
+    },
+    "promotion_plan": {
+      "type": "string",
+      "description": "C\u00f3mo promocionar\u00edan su participaci\u00f3n",
+      "maxLength": 2000
+    },
+    "motivation": {
+      "type": "string",
+      "description": "\u00bfPor qu\u00e9 te gustar\u00eda presentarte en Escape Bar?",
+      "maxLength": 3000
+    },
+    "project_differential": {
+      "type": "string",
+      "description": "\u00bfQu\u00e9 diferencia a tu propuesta musical?",
+      "maxLength": 2000
+    },
+    "expected_experience": {
+      "type": "string",
+      "description": "\u00bfQu\u00e9 experiencia te gustar\u00eda generar en el p\u00fablico?",
+      "maxLength": 2000
+    },
+    "additional_info": {
+      "type": "string",
+      "description": "\u00bfHay algo m\u00e1s que debamos conocer sobre el proyecto?",
+      "maxLength": 3000
+    },
+    "accepted_terms_truthful": {
+      "type": "boolean",
+      "description": "Confirmo que la informaci\u00f3n proporcionada es verdadera"
+    },
+    "accepted_no_guarantee": {
+      "type": "boolean",
+      "description": "Comprendo que completar el formulario no garantiza una fecha"
+    },
+    "accepted_contact": {
+      "type": "boolean",
+      "description": "Autorizo a Pacha Disco a contactarme por email o WhatsApp"
+    },
+    "accepted_material_use": {
+      "type": "boolean",
+      "description": "Acepto que el material enviado sea utilizado para evaluar la propuesta"
+    },
+    "accepted_members_auth": {
+      "type": "boolean",
+      "description": "Declaro tener autorizaci\u00f3n de los integrantes del proyecto"
+    },
+    "accepted_bases": {
+      "type": "boolean",
+      "description": "He le\u00eddo y acepto las bases de la convocatoria"
+    },
+    "internal_notes": {
+      "type": "string",
+      "description": "Notas internas del administrador",
+      "maxLength": 5000
+    },
+    "reviewed_by": {
+      "type": "string",
+      "description": "Qui\u00e9n realiz\u00f3 la revisi\u00f3n"
+    },
+    "reviewed_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Fecha y hora de revisi\u00f3n"
+    },
+    "proposed_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Posible fecha propuesta"
+    },
+    "final_decision": {
+      "type": "string",
+      "description": "Decisi\u00f3n final"
+    },
+    "is_favorite": {
+      "type": "boolean",
+      "default": false,
+      "description": "Proyecto destacado/favorito"
+    }
+  },
+  "required": [
+    "contact_name",
+    "artistic_name",
+    "email",
+    "whatsapp",
+    "city",
+    "province",
+    "musical_genre"
+  ]
+}
