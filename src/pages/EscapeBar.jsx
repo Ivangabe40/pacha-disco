@@ -7,7 +7,7 @@ import { format } from "date-fns";
 import { es } from "date-fns/locale";
 import PullToRefresh from "@/components/PullToRefresh";
 
-const OPEN_STAGE_IMG = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/38f0b41f7_generated_image.png";
+const OPEN_STAGE_IMG = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/e19167309_file_000000007dd0720eaf818bd4d5f39d02.png";
 
 
 export default function EscapeBar() {
@@ -35,6 +35,18 @@ export default function EscapeBar() {
   return (
     <PullToRefresh onRefresh={loadEvents}>
     <div style={{ background: "#070707", minHeight: "100vh" }}>
+
+      {/* ESCAPE OPEN STAGE — BANNER PRINCIPAL */}
+      <Link to={createPageUrl("OpenStage")} className="block relative overflow-hidden group" style={{ minHeight: "320px", maxHeight: "520px" }}>
+        <img src={OPEN_STAGE_IMG} alt="Escape Open Stage — Convocatoria abierta" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(7,7,7,0.2) 0%, rgba(7,7,7,0.5) 100%)" }} />
+        <div className="relative z-10 flex flex-col items-center justify-end text-center px-4 py-8 md:py-12" style={{ minHeight: "320px" }}>
+          <div className="flex items-center gap-2 px-7 py-3 rounded-lg text-sm md:text-base font-black tracking-wider uppercase transition-all group-hover:gap-3 group-hover:scale-105"
+            style={{ background: "linear-gradient(135deg, #D4AF37, #BF953F)", color: "#070707", boxShadow: "0 4px 30px rgba(212,175,55,0.4)" }}>
+            <Mic size={18} /> Postular mi proyecto <ChevronRight size={18} />
+          </div>
+        </div>
+      </Link>
 
       {/* HERO HEADER */}
       <div className="relative overflow-hidden py-16 md:py-20 px-4 text-center"

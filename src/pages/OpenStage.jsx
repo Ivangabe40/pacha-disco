@@ -4,7 +4,7 @@ import { createPageUrl } from "@/utils";
 import { Mic, Music, Users, Headphones, Sparkles, Disc3, Radio, Volume2, ChevronRight, CheckCircle2, Instagram, ArrowRight } from "lucide-react";
 import OpenStageForm from "@/components/openstage/OpenStageForm";
 
-const HERO_IMG = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/38f0b41f7_generated_image.png";
+const HERO_IMG = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/e19167309_file_000000007dd0720eaf818bd4d5f39d02.png";
 
 const ARTIST_CARDS = [
   { icon: Mic, label: "Solistas" },
