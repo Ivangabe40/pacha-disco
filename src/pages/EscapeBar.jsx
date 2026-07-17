@@ -7,12 +7,12 @@ import { format } from "date-fns";
 import { es } from "date-fns/locale";
 import PullToRefresh from "@/components/PullToRefresh";
 
-const OPEN_STAGE_IMG = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/e19167309_file_000000007dd0720eaf818bd4d5f39d02.png";
-
+const DEFAULT_OPEN_STAGE_IMG = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/e19167309_file_000000007dd0720eaf818bd4d5f39d02.png";
 
 export default function EscapeBar() {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [headerImg, setHeaderImg] = useState(DEFAULT_OPEN_STAGE_IMG);
 
   const loadEvents = useCallback(async () => {
     try {
@@ -27,6 +27,9 @@ export default function EscapeBar() {
 
   useEffect(() => {
     loadEvents();
+    base44.entities.SiteConfig.filter({ key: "escapebar_header_image" })
+      .then(res => { if (res[0]?.value) setHeaderImg(res[0].value); })
+      .catch(() => {});
   }, [loadEvents]);
 
   const featured = events.find((e) => e.is_featured) || events[0];
@@ -38,7 +41,7 @@ export default function EscapeBar() {
 
       {/* ESCAPE OPEN STAGE — BANNER PRINCIPAL */}
       <Link to={createPageUrl("OpenStage")} className="block relative overflow-hidden group" style={{ minHeight: "320px", maxHeight: "520px" }}>
-        <img src={OPEN_STAGE_IMG} alt="Escape Open Stage — Convocatoria abierta" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+        <img src={headerImg} alt="Escape Open Stage — Convocatoria abierta" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
         <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(7,7,7,0.2) 0%, rgba(7,7,7,0.5) 100%)" }} />
         <div className="relative z-10 flex flex-col items-center justify-end text-center px-4 py-8 md:py-12" style={{ minHeight: "320px" }}>
           <div className="flex items-center gap-2 px-7 py-3 rounded-lg text-sm md:text-base font-black tracking-wider uppercase transition-all group-hover:gap-3 group-hover:scale-105"
@@ -191,7 +194,7 @@ export default function EscapeBar() {
         <Link to={createPageUrl("OpenStage")} className="group block rounded-2xl overflow-hidden relative transition-transform duration-300 hover:scale-[1.01]"
           style={{ border: "1px solid rgba(116,172,223,0.3)", boxShadow: "0 0 40px rgba(116,172,223,0.1)" }}>
           <div className="relative" style={{ minHeight: "200px" }}>
-            <img src={OPEN_STAGE_IMG} alt="Escape Open Stage" className="absolute inset-0 w-full h-full object-cover" />
+            <img src={headerImg} alt="Escape Open Stage" className="absolute inset-0 w-full h-full object-cover" />
             <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, rgba(7,7,7,0.9) 0%, rgba(7,7,7,0.6) 50%, rgba(7,7,7,0.3) 100%)" }} />
             <div className="relative z-10 p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
               <div>
