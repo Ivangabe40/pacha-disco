@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
-import { Sparkles, X } from "lucide-react";
+import { X } from "lucide-react";
 
 export default function NovedadBanner() {
   const [novedad, setNovedad] = useState(null);
@@ -31,13 +31,6 @@ export default function NovedadBanner() {
       </button>
 
       <Wrapper {...wrapperProps} className="block relative overflow-hidden cursor-pointer group">
-        {/* Label */}
-        <div className="absolute top-3 left-3 z-10 flex items-center gap-1.5 px-3 py-1.5 rounded-full"
-          style={{ background: "rgba(116,172,223,0.9)", backdropFilter: "blur(8px)" }}>
-          <Sparkles size={12} className="text-white" />
-          <span className="text-white text-xs font-bold tracking-widest uppercase">Novedad</span>
-        </div>
-
         {/* Image */}
         <img
           src={novedad.image_url}
