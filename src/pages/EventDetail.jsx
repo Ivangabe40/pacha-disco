@@ -81,7 +81,7 @@ export default function EventDetail() {
     if (event.flyer_url) setOG("og:image", event.flyer_url);
 
     // Cleanup: restaurar title original al salir
-    return () => { document.title = "Pachá Night Club"; };
+    return () => { document.title = "Pachá Night Club | Discoteca en Corral de Bustos, Córdoba"; };
   }, [event]);
 
   if (loading) return (

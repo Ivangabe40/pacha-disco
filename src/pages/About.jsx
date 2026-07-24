@@ -69,7 +69,7 @@ export default function About() {
           <div className="relative w-full" style={{ height: "250px" }}>
             <iframe
               title="Ubicación Pachá"
-              src="https://www.google.com/maps?q=-33.0077,-60.6635&hl=es&z=16&output=embed"
+              src="https://www.google.com/maps?q=-33.2833,-62.1833&hl=es&z=16&output=embed"
               width="100%"
               height="100%"
               style={{ border: 0, filter: "invert(90%) hue-rotate(180deg) saturate(0.8)" }}

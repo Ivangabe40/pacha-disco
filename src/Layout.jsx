@@ -1,10 +1,10 @@
 import { Link, useLocation } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { useState, useEffect } from "react";
-import { Menu, X, Instagram, Facebook, MessageCircle, MapPin, ChevronLeft, Coins } from "lucide-react";
+import { Menu, X, Instagram, Facebook, MessageCircle, MapPin, ChevronLeft } from "lucide-react";
 import MobileBottomBar from "@/components/MobileBottomBar";
 
-const ROOT_ROUTES = new Set(["/", "/Home", "/Artists", "/Gallery", "/Menu", "/About", "/PrivateEvents", "/VIPReservations", "/Contact", "/Admin", "/configuracion", "/gestor-menu", "/TicketSales", "/MisEntradas", "/payment/success", "/payment/pending", "/payment/failure"]);
+const ROOT_ROUTES = new Set(["/", "/Home", "/Artists", "/Gallery", "/Menu", "/About", "/PrivateEvents", "/VIPReservations", "/Contact", "/Admin", "/configuracion", "/gestor-menu", "/TicketSales", "/MisEntradas", "/EscapeBar", "/OpenStage", "/MisCuenta", "/QR", "/payment/success", "/payment/pending", "/payment/failure"]);
 
 const LOGO_RED = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/6ecd577f7_file_00000000d89c820e8ae4cce82ce72506.png";
 

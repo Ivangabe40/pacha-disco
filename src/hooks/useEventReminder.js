@@ -12,7 +12,11 @@ function getReminders() {
 }
 
 function saveReminders(reminders) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(reminders));
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(reminders));
+  } catch {
+    // localStorage may be unavailable (private browsing, quota exceeded)
+  }
 }
 
 export function useEventReminder(event) {
