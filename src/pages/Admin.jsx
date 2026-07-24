@@ -18,7 +18,7 @@ import AdminTicketOrders from "@/components/admin/AdminTicketOrders";
 import AdminTicketSales from "@/components/admin/AdminTicketSales";
 import { Calendar, Music, Camera, Wine, Megaphone, Crown, Mail, Bell, GlassWater, Sparkles, Settings, ShoppingBag, Ticket, LogOut, Mic } from "lucide-react";
 
-const LOGO_RED = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/7c4e34300_1783489304034.png";
+const LOGO_RED = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/6ecd577f7_file_00000000d89c820e8ae4cce82ce72506.png";
 
 const tabs = [
   { id: "events", label: "Eventos", icon: Calendar },

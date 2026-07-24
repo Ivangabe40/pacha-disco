@@ -1,6 +1,6 @@
 import { base44 } from '@/api/base44Client';
 
-const LOGO_GOLD = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/7c4e34300_1783489304034.png";
+const LOGO_GOLD = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/6ecd577f7_file_00000000d89c820e8ae4cce82ce72506.png";
 
 export default function About() {
   return (
