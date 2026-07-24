@@ -9,12 +9,12 @@ export default function HeroEvent({ event }) {
   const date = new Date(event.date);
 
   return (
-    <div className="relative w-full overflow-hidden scanlines" style={{ minHeight: "100vh" }}>
+    <div className="relative w-full overflow-hidden scanlines" style={{ minHeight: "100vh", background: "#070707" }}>
       {/* Background video or image */}
       {event.video_url ? (
         <video
           src={event.video_url}
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-contain md:object-cover"
           style={{ filter: "brightness(0.3) saturate(1.2)" }}
           autoPlay loop muted playsInline
         />
@@ -22,7 +22,7 @@ export default function HeroEvent({ event }) {
         <img
           src={event.background_url || event.flyer_url}
           alt={event.title}
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-contain md:object-cover"
           style={{ filter: "brightness(0.25) saturate(1.2)" }}
         />
       ) : (
