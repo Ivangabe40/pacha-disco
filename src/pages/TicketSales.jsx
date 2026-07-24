@@ -151,7 +151,7 @@ export default function TicketSales() {
               {event.genres && (
                 <div className="flex items-center gap-2 px-3 py-2 rounded-lg"
                   style={{ background: "#1a1a1a", border: "1px solid #2a2a2a" }}>
-                  <Music size={14} style={{ color: "#75AADB" }} />
+                  <Music size={14} style={{ color: "#FF0000" }} />
                   <span className="text-sm text-gray-300">{event.genres}</span>
                 </div>
               )}

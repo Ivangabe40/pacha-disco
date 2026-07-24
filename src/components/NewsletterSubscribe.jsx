@@ -52,7 +52,7 @@ export default function NewsletterSubscribe() {
   return (
     <div>
       <div className="flex items-center gap-2 mb-3">
-        <Mail size={14} className="text-sky-400" />
+        <Mail size={14} className="text-red-500" />
         <span className="text-xs font-semibold tracking-widest uppercase text-gray-400">Recibí novedades</span>
       </div>
       <form onSubmit={handleSubmit} className="flex flex-col gap-2">
@@ -61,7 +61,7 @@ export default function NewsletterSubscribe() {
           placeholder="Tu nombre (opcional)"
           value={name}
           onChange={e => setName(e.target.value)}
-          className="w-full px-3 py-2 text-xs rounded-lg text-gray-200 placeholder-gray-600 outline-none focus:ring-1 focus:ring-sky-400"
+          className="w-full px-3 py-2 text-xs rounded-lg text-gray-200 placeholder-gray-600 outline-none focus:ring-1 focus:ring-red-500"
           style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}
         />
         <div className="flex gap-2">
@@ -71,14 +71,14 @@ export default function NewsletterSubscribe() {
             value={email}
             onChange={e => setEmail(e.target.value)}
             required
-            className="flex-1 min-w-0 px-3 py-2 text-xs rounded-lg text-gray-200 placeholder-gray-600 outline-none focus:ring-1 focus:ring-sky-400"
+            className="flex-1 min-w-0 px-3 py-2 text-xs rounded-lg text-gray-200 placeholder-gray-600 outline-none focus:ring-1 focus:ring-red-500"
             style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}
           />
           <button
             type="submit"
             disabled={status === "loading"}
             className="px-4 py-2 rounded-lg text-xs font-bold text-white shrink-0 transition-all"
-            style={{ background: "linear-gradient(135deg, #75AADB, #92C8F0)" }}
+            style={{ background: "linear-gradient(135deg, #FF0000, #FF6666)" }}
           >
             {status === "loading" ? <Loader2 size={13} className="animate-spin" /> : "Suscribir"}
           </button>

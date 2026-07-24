@@ -181,7 +181,7 @@ export default function AdminEvents() {
                   <div className="relative">
                     <img src={form.flyer_url} alt="flyer" className="h-20 rounded-lg object-cover" />
                     <button onClick={() => setForm({ ...form, flyer_url: "" })}
-                      className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-sky-500 text-white flex items-center justify-center text-xs">
+                      className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-red-500 text-white flex items-center justify-center text-xs">
                       <X size={10} />
                     </button>
                   </div>
@@ -195,7 +195,7 @@ export default function AdminEvents() {
               <p className="text-xs text-gray-600 mb-3">Se muestra como fondo del hero en el inicio. Si no se carga, se usa el flyer como respaldo.</p>
               <div className="flex items-start gap-4">
                 <label className="cursor-pointer flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium"
-                  style={{ border: "1px solid #75AADB", color: "#75AADB" }}>
+                  style={{ border: "1px solid #FF0000", color: "#FF0000" }}>
                   <Upload size={14} />
                   {uploadingBg ? "Subiendo..." : form.background_url ? "Cambiar fondo" : "Subir fondo"}
                   <input type="file" accept="image/*" className="hidden"
@@ -205,7 +205,7 @@ export default function AdminEvents() {
                   <div className="relative">
                     <img src={form.background_url} alt="background" className="h-20 w-32 rounded-lg object-cover" />
                     <button onClick={() => setForm({ ...form, background_url: "" })}
-                      className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-sky-500 text-white flex items-center justify-center text-xs">
+                      className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-red-500 text-white flex items-center justify-center text-xs">
                       <X size={10} />
                     </button>
                   </div>
@@ -218,7 +218,7 @@ export default function AdminEvents() {
               <ImageSizeHint size="1080×1920" ratio="9:16" note="formato vertical · máx. 10MB" />
               <div className="flex items-start gap-4">
                 <label className="cursor-pointer flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium"
-                  style={{ border: "1px solid #75AADB", color: "#75AADB" }}>
+                  style={{ border: "1px solid #FF0000", color: "#FF0000" }}>
                   <Upload size={14} />
                   {uploadingVideo ? "Subiendo..." : "Subir video"}
                   <input type="file" accept="video/*" className="hidden"
@@ -228,7 +228,7 @@ export default function AdminEvents() {
                   <div className="relative">
                     <video src={form.video_url} className="h-20 rounded-lg object-cover" muted />
                     <button onClick={() => setForm({ ...form, video_url: "" })}
-                      className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-sky-500 text-white flex items-center justify-center text-xs">
+                      className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-red-500 text-white flex items-center justify-center text-xs">
                       <X size={10} />
                     </button>
                   </div>
@@ -273,7 +273,7 @@ export default function AdminEvents() {
                 <div className="flex items-center gap-2 flex-wrap">
                   <h4 className="text-white font-semibold truncate">{event.title}</h4>
                   {event.is_featured && <span className="text-xs px-2 py-0.5 rounded" style={{ background: "rgba(201,168,76,0.2)", color: "#C9A84C" }}>Destacado</span>}
-                  <span className={`text-xs px-2 py-0.5 rounded capitalize ${event.status === "activo" ? "bg-green-900/30 text-green-400" : event.status === "agotado" ? "bg-sky-900/30 text-sky-300" : "bg-gray-900/30 text-gray-400"}`}>
+                  <span className={`text-xs px-2 py-0.5 rounded capitalize ${event.status === "activo" ? "bg-green-900/30 text-green-400" : event.status === "agotado" ? "bg-red-900/30 text-red-300" : "bg-gray-900/30 text-gray-400"}`}>
                     {event.status}
                   </span>
                 </div>
@@ -291,7 +291,7 @@ export default function AdminEvents() {
                 <button onClick={() => openEdit(event)} className="p-2 rounded-lg hover:bg-gray-800 text-gray-400 hover:text-white transition-colors">
                   <Pencil size={15} />
                 </button>
-                <button onClick={() => handleDelete(event.id)} className="p-2 rounded-lg hover:bg-sky-900/30 text-gray-600 hover:text-sky-300 transition-colors">
+                <button onClick={() => handleDelete(event.id)} className="p-2 rounded-lg hover:bg-red-900/30 text-gray-600 hover:text-red-300 transition-colors">
                   <Trash2 size={15} />
                 </button>
               </div>

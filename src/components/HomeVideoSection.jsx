@@ -17,16 +17,16 @@ export default function HomeVideoSection() {
     <section className="relative w-full" style={{ background: "#070707" }}>
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-10 md:py-16">
         <div className="flex items-center gap-4 mb-6 md:mb-8">
-          <div className="w-1 h-10 rounded-full" style={{ background: "linear-gradient(#75AADB, #4A8BC2)" }} />
+          <div className="w-1 h-10 rounded-full" style={{ background: "linear-gradient(#FF0000, #CC0000)" }} />
           <div>
-            <p className="text-xs tracking-widest uppercase mb-0.5" style={{ color: "#75AADB" }}>Próximamente</p>
+            <p className="text-xs tracking-widest uppercase mb-0.5" style={{ color: "#FF0000" }}>Próximamente</p>
             <h2 className="text-2xl md:text-4xl font-black text-white uppercase" style={{ fontFamily: "'Playfair Display', serif" }}>
               Lo que se viene
             </h2>
           </div>
         </div>
         <div className="relative rounded-xl overflow-hidden w-full"
-          style={{ border: "1px solid rgba(116,172,223,0.25)", boxShadow: "0 0 60px rgba(116,172,223,0.12)" }}>
+          style={{ border: "1px solid rgba(255,0,0,0.25)", boxShadow: "0 0 60px rgba(255,0,0,0.12)" }}>
           <video
             src={videoUrl}
             autoPlay

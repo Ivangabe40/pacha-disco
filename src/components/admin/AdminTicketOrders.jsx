@@ -69,7 +69,7 @@ export default function AdminTicketOrders() {
           <div className="text-xs text-gray-500">Recaudación total</div>
         </div>
         <div className="p-4 rounded-xl" style={{ background: "#111", border: "1px solid #222" }}>
-          <Package size={16} style={{ color: "#75AADB" }} />
+          <Package size={16} style={{ color: "#FF0000" }} />
           <div className="text-2xl font-bold text-white mt-1">{stockInfo.reduce((s, e) => s + e.remaining, 0)}</div>
           <div className="text-xs text-gray-500">Stock restante</div>
         </div>

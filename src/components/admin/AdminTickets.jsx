@@ -40,7 +40,7 @@ export default function AdminTickets() {
     if (s === "confirmado") return <CheckCircle size={14} className="text-green-400" />;
     if (s === "pendiente") return <Clock size={14} className="text-yellow-400" />;
     if (s === "usado") return <CheckCircle size={14} className="text-blue-400" />;
-    return <XCircle size={14} className="text-sky-300" />;
+    return <XCircle size={14} className="text-red-300" />;
   };
 
   return (
@@ -108,9 +108,9 @@ export default function AdminTickets() {
                     <td className="px-4 py-3">
                       {t.status === "pendiente" && (
                         <button onClick={() => handleDelete(t)} disabled={deletingId === t.id}
-                          className="p-1.5 rounded-lg transition-colors hover:bg-sky-900/30"
+                          className="p-1.5 rounded-lg transition-colors hover:bg-red-900/30"
                           title="Eliminar pedido sin confirmar">
-                          <Trash2 size={14} className={deletingId === t.id ? "text-gray-600" : "text-sky-400"} />
+                          <Trash2 size={14} className={deletingId === t.id ? "text-gray-600" : "text-red-500"} />
                         </button>
                       )}
                     </td>
@@ -146,8 +146,8 @@ export default function AdminTickets() {
                     </span>
                     {t.status === "pendiente" && (
                       <button onClick={() => handleDelete(t)} disabled={deletingId === t.id}
-                        className="p-1.5 rounded-lg transition-colors hover:bg-sky-900/30">
-                        <Trash2 size={14} className={deletingId === t.id ? "text-gray-600" : "text-sky-400"} />
+                        className="p-1.5 rounded-lg transition-colors hover:bg-red-900/30">
+                        <Trash2 size={14} className={deletingId === t.id ? "text-gray-600" : "text-red-500"} />
                       </button>
                     )}
                   </div>

@@ -31,10 +31,10 @@ export default function HeroEvent({ event }) {
 
       {/* Gradient overlays */}
       <div className="absolute inset-0" style={{ background: "linear-gradient(to top, #070707 0%, rgba(7,7,7,0.6) 50%, rgba(7,7,7,0.2) 100%)" }} />
-      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 20% 80%, rgba(116,172,223,0.12) 0%, transparent 60%)" }} />
+      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 20% 80%, rgba(255,0,0,0.12) 0%, transparent 60%)" }} />
 
       {/* Red top accent line */}
-      <div className="absolute top-0 left-0 right-0 h-0.5" style={{ background: "linear-gradient(90deg, transparent, #75AADB 30%, #75AADB 70%, transparent)" }} />
+      <div className="absolute top-0 left-0 right-0 h-0.5" style={{ background: "linear-gradient(90deg, transparent, #FF0000 30%, #FF0000 70%, transparent)" }} />
 
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8 flex flex-col justify-end h-full pb-20 md:pb-24" style={{ minHeight: "100vh" }}>
@@ -42,16 +42,16 @@ export default function HeroEvent({ event }) {
 
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6"
-            style={{ background: "rgba(116,172,223,0.15)", border: "1px solid rgba(116,172,223,0.4)" }}>
-            <Zap size={12} fill="#75AADB" style={{ color: "#75AADB" }} />
-            <span className="text-xs font-bold tracking-widest uppercase" style={{ color: "#75AADB" }}>
+            style={{ background: "rgba(255,0,0,0.15)", border: "1px solid rgba(255,0,0,0.4)" }}>
+            <Zap size={12} fill="#FF0000" style={{ color: "#FF0000" }} />
+            <span className="text-xs font-bold tracking-widest uppercase" style={{ color: "#FF0000" }}>
               Próximo Evento
             </span>
           </div>
 
           {/* Title */}
           <h1 className="text-3xl sm:text-5xl md:text-8xl font-black text-white mb-4 md:mb-6 leading-none uppercase tracking-tight"
-            style={{ fontFamily: "'Playfair Display', serif", textShadow: "0 0 60px rgba(116,172,223,0.3)" }}>
+            style={{ fontFamily: "'Playfair Display', serif", textShadow: "0 0 60px rgba(255,0,0,0.3)" }}>
             {event.title}
           </h1>
 
@@ -59,7 +59,7 @@ export default function HeroEvent({ event }) {
           <div className="flex flex-wrap gap-2 md:gap-4 mb-6 md:mb-8">
             <div className="flex items-center gap-1.5 px-3 md:px-4 py-1.5 md:py-2 rounded-full"
               style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}>
-              <Calendar size={14} style={{ color: "#75AADB" }} />
+              <Calendar size={14} style={{ color: "#FF0000" }} />
               <span className="text-xs md:text-sm text-gray-300 capitalize">
                 {format(date, "EEEE d 'de' MMMM", { locale: es })}
               </span>

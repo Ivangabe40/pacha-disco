@@ -96,7 +96,7 @@ export default function Gallery() {
                 whileInView="visible"
                 viewport={{ once: true, margin: "-60px" }}
                 whileHover={{ y: -6, transition: { duration: 0.25 } }}
-                onMouseEnter={e => e.currentTarget.style.borderColor = "rgba(116,172,223,0.45)"}
+                onMouseEnter={e => e.currentTarget.style.borderColor = "rgba(255,0,0,0.45)"}
                 onMouseLeave={e => e.currentTarget.style.borderColor = "#222"}
               >
                 {/* Cover */}
@@ -116,11 +116,11 @@ export default function Gallery() {
                   {/* Hover overlay */}
                   <div
                     className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-350"
-                    style={{ background: "rgba(116,172,223,0.13)", backdropFilter: "blur(1px)" }}
+                    style={{ background: "rgba(255,0,0,0.13)", backdropFilter: "blur(1px)" }}
                   >
                     <motion.div
                       className="w-13 h-13 rounded-full flex items-center justify-center"
-                      style={{ background: "rgba(116,172,223,0.92)", width: 52, height: 52 }}
+                      style={{ background: "rgba(255,0,0,0.92)", width: 52, height: 52 }}
                       initial={{ scale: 0.7, opacity: 0 }}
                       whileInView={{ scale: 1, opacity: 1 }}
                     >
@@ -132,7 +132,7 @@ export default function Gallery() {
                 {/* Title bar */}
                 <div className="px-5 py-4 flex items-center justify-between gap-3">
                   <p className="text-white font-semibold text-sm leading-snug">{album.title}</p>
-                  <ExternalLink size={13} className="text-gray-600 group-hover:text-sky-400 transition-colors shrink-0" />
+                  <ExternalLink size={13} className="text-gray-600 group-hover:text-red-500 transition-colors shrink-0" />
                 </div>
               </motion.a>
             ))}

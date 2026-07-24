@@ -156,13 +156,13 @@ export default function OpenStageForm({ onSuccess }) {
             <div className="flex items-center gap-2">
               <div className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold transition-all"
                 style={{
-                  background: i < step ? "rgba(34,197,94,0.15)" : i === step ? "#75AADB" : "#1a1a1a",
+                  background: i < step ? "rgba(34,197,94,0.15)" : i === step ? "#FF0000" : "#1a1a1a",
                   color: i < step ? "#22c55e" : i === step ? "#fff" : "#555",
-                  border: i === step ? "1px solid #75AADB" : "1px solid #2a2a2a",
+                  border: i === step ? "1px solid #FF0000" : "1px solid #2a2a2a",
                 }}>
                 {i < step ? <Check size={13} /> : i + 1}
               </div>
-              <span className="text-xs hidden md:inline" style={{ color: i === step ? "#75AADB" : "#555" }}>{s.label}</span>
+              <span className="text-xs hidden md:inline" style={{ color: i === step ? "#FF0000" : "#555" }}>{s.label}</span>
             </div>
             {i < STEPS.length - 1 && <div className="w-4 md:w-8 h-px mx-1" style={{ background: i < step ? "rgba(34,197,94,0.3)" : "#1a1a1a" }} />}
           </div>
@@ -250,11 +250,11 @@ export default function OpenStageForm({ onSuccess }) {
           </Field>
           <div className="flex gap-6">
             <label className="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" checked={form.is_all_ages} onChange={e => set("is_all_ages", e.target.checked)} className="w-4 h-4 accent-sky-500" />
+              <input type="checkbox" checked={form.is_all_ages} onChange={e => set("is_all_ages", e.target.checked)} className="w-4 h-4 accent-red-500" />
               <span className="text-sm text-gray-300">Apto para todo público</span>
             </label>
             <label className="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" checked={form.explicit_content} onChange={e => set("explicit_content", e.target.checked)} className="w-4 h-4 accent-sky-500" />
+              <input type="checkbox" checked={form.explicit_content} onChange={e => set("explicit_content", e.target.checked)} className="w-4 h-4 accent-red-500" />
               <span className="text-sm text-gray-300">Incluye contenido explícito</span>
             </label>
           </div>
@@ -360,15 +360,15 @@ export default function OpenStageForm({ onSuccess }) {
           </div>
           <div className="flex flex-col gap-3 pt-2">
             <label className="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" checked={form.has_transport} onChange={e => set("has_transport", e.target.checked)} className="w-4 h-4 accent-sky-500" />
+              <input type="checkbox" checked={form.has_transport} onChange={e => set("has_transport", e.target.checked)} className="w-4 h-4 accent-red-500" />
               <span className="text-sm text-gray-300">¿Pueden trasladarse al establecimiento por sus propios medios?</span>
             </label>
             <label className="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" checked={form.available_soundcheck} onChange={e => set("available_soundcheck", e.target.checked)} className="w-4 h-4 accent-sky-500" />
+              <input type="checkbox" checked={form.available_soundcheck} onChange={e => set("available_soundcheck", e.target.checked)} className="w-4 h-4 accent-red-500" />
               <span className="text-sm text-gray-300">¿Disponibles para realizar prueba de sonido previa?</span>
             </label>
             <label className="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" checked={form.promotional_availability} onChange={e => set("promotional_availability", e.target.checked)} className="w-4 h-4 accent-sky-500" />
+              <input type="checkbox" checked={form.promotional_availability} onChange={e => set("promotional_availability", e.target.checked)} className="w-4 h-4 accent-red-500" />
               <span className="text-sm text-gray-300">¿Disponibles para participar en acciones promocionales?</span>
             </label>
           </div>
@@ -386,15 +386,15 @@ export default function OpenStageForm({ onSuccess }) {
           </div>
           <div className="flex flex-col gap-3">
             <label className="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" checked={form.willing_to_promote} onChange={e => set("willing_to_promote", e.target.checked)} className="w-4 h-4 accent-sky-500" />
+              <input type="checkbox" checked={form.willing_to_promote} onChange={e => set("willing_to_promote", e.target.checked)} className="w-4 h-4 accent-red-500" />
               <span className="text-sm text-gray-300">¿Dispuestos a promocionar la fecha en sus redes?</span>
             </label>
             <label className="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" checked={form.can_generate_content} onChange={e => set("can_generate_content", e.target.checked)} className="w-4 h-4 accent-sky-500" />
+              <input type="checkbox" checked={form.can_generate_content} onChange={e => set("can_generate_content", e.target.checked)} className="w-4 h-4 accent-red-500" />
               <span className="text-sm text-gray-300">¿Pueden generar contenido previo al evento?</span>
             </label>
             <label className="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" checked={form.authorizes_media_use} onChange={e => set("authorizes_media_use", e.target.checked)} className="w-4 h-4 accent-sky-500" />
+              <input type="checkbox" checked={form.authorizes_media_use} onChange={e => set("authorizes_media_use", e.target.checked)} className="w-4 h-4 accent-red-500" />
               <span className="text-sm text-gray-300">¿Autorizan a Pacha Disco a utilizar imágenes y fragmentos audiovisuales de la presentación para difusión?</span>
             </label>
           </div>
@@ -438,7 +438,7 @@ export default function OpenStageForm({ onSuccess }) {
               { k: "accepted_bases", l: "He leído y acepto las bases de la convocatoria." },
             ].map(({ k, l }) => (
               <label key={k} className="flex items-start gap-3 cursor-pointer p-3 rounded-lg" style={{ background: form[k] ? "rgba(34,197,94,0.05)" : "transparent", border: `1px solid ${errors[k] ? "#ef4444" : "#2a2a2a"}` }}>
-                <input type="checkbox" checked={form[k]} onChange={e => set(k, e.target.checked)} className="w-4 h-4 mt-0.5 accent-sky-500 shrink-0" />
+                <input type="checkbox" checked={form[k]} onChange={e => set(k, e.target.checked)} className="w-4 h-4 mt-0.5 accent-red-500 shrink-0" />
                 <span className="text-sm text-gray-300">{l}</span>
               </label>
             ))}
@@ -456,13 +456,13 @@ export default function OpenStageForm({ onSuccess }) {
         {step < STEPS.length - 1 ? (
           <button onClick={next}
             className="flex items-center gap-1.5 px-6 py-2.5 rounded-lg text-sm font-bold text-white transition-all"
-            style={{ background: "#75AADB" }}>
+            style={{ background: "#FF0000" }}>
             Continuar <ChevronRight size={16} />
           </button>
         ) : (
           <button onClick={handleSubmit} disabled={submitting}
             className="flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-bold text-white transition-all"
-            style={{ background: submitting ? "#333" : "linear-gradient(135deg, #75AADB, #4A8BC2)" }}>
+            style={{ background: submitting ? "#333" : "linear-gradient(135deg, #FF0000, #CC0000)" }}>
             {submitting ? <><Loader2 size={16} className="animate-spin" /> Enviando...</> : <><Check size={16} /> ENVIAR POSTULACIÓN</>}
           </button>
         )}

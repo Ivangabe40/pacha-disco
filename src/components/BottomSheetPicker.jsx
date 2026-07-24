@@ -76,7 +76,7 @@ export default function BottomSheetPicker({ open, onClose, options, value, onCha
                       <p className="text-white font-semibold text-sm">{opt.label}</p>
                       {opt.desc && <p className="text-gray-500 text-xs mt-0.5 truncate">{opt.desc}</p>}
                     </div>
-                    {isSelected && <Check size={16} style={{ color: "#75AADB" }} />}
+                    {isSelected && <Check size={16} style={{ color: "#FF0000" }} />}
                   </button>
                 );
               })}

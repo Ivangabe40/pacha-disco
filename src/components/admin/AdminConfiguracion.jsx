@@ -83,8 +83,8 @@ export default function AdminConfiguracion() {
     <div>
       <div className="flex items-center gap-3 mb-6">
         <div className="w-10 h-10 rounded-xl flex items-center justify-center"
-          style={{ background: "rgba(116,170,219,0.15)", border: "1px solid rgba(116,170,219,0.3)" }}>
-          <Settings size={18} style={{ color: "#75AADB" }} />
+          style={{ background: "rgba(255,0,0,0.15)", border: "1px solid rgba(255,0,0,0.3)" }}>
+          <Settings size={18} style={{ color: "#FF0000" }} />
         </div>
         <div>
           <h2 className="text-xl font-bold text-white" style={{ fontFamily: "'Playfair Display', serif" }}>Configuración del Sitio</h2>
@@ -94,7 +94,7 @@ export default function AdminConfiguracion() {
 
       <div className="space-y-6">
         {/* Club Info */}
-        <Section icon={Building2} title="Información del Club" color="#75AADB">
+        <Section icon={Building2} title="Información del Club" color="#FF0000">
           <Field label="Nombre del Club">
             <input value={form.club_name} onChange={e => setForm({ ...form, club_name: e.target.value })}
               placeholder="Pachá Night Club"
@@ -127,7 +127,7 @@ export default function AdminConfiguracion() {
         </Section>
 
         {/* Visual Preferences */}
-        <Section icon={Palette} title="Preferencias Visuales" color="#75AADB">
+        <Section icon={Palette} title="Preferencias Visuales" color="#FF0000">
           <Toggle label="Mostrar video en la página de inicio" description="Sección de video promocional"
             value={form.show_home_video === "true"}
             onChange={v => setForm({ ...form, show_home_video: v ? "true" : "false" })} />
@@ -179,7 +179,7 @@ export default function AdminConfiguracion() {
         <div className="flex justify-end pt-2">
           <button onClick={handleSave} disabled={saving}
             className="flex items-center gap-2 px-6 py-3 rounded-xl text-white text-sm font-bold transition-all"
-            style={{ background: saved ? "#22c55e" : "#75AADB", opacity: saving ? 0.7 : 1 }}>
+            style={{ background: saved ? "#22c55e" : "#FF0000", opacity: saving ? 0.7 : 1 }}>
             {saving ? <Loader2 size={16} className="animate-spin" /> : saved ? <Check size={16} /> : <Save size={16} />}
             {saving ? "Guardando..." : saved ? "¡Guardado!" : "Guardar cambios"}
           </button>
@@ -222,7 +222,7 @@ function Toggle({ label, description, value, onChange }) {
       </div>
       <button onClick={() => onChange(!value)}
         className="w-11 h-6 rounded-full transition-all relative shrink-0"
-        style={{ background: value ? "#75AADB" : "#2a2a2a" }}>
+        style={{ background: value ? "#FF0000" : "#2a2a2a" }}>
         <span className="absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white transition-all"
           style={{ transform: value ? "translateX(20px)" : "translateX(0)" }} />
       </button>

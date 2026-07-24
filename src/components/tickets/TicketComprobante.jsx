@@ -40,7 +40,7 @@ export default function TicketComprobante({ ticket, onClose }) {
         <div className="flex items-center justify-between mb-4">
           <button onClick={handleDownloadPDF}
             className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold text-white"
-            style={{ background: "#75AADB" }}>
+            style={{ background: "#FF0000" }}>
             <Download size={15} /> Descargar PDF
           </button>
           <button onClick={onClose} className="text-gray-500 hover:text-white transition-colors p-2">
@@ -51,7 +51,7 @@ export default function TicketComprobante({ ticket, onClose }) {
         {/* Comprobante visual */}
         <div ref={comprobanteRef} className="rounded-2xl overflow-hidden" style={{ background: "#111", border: "1px solid #2a2a2a" }}>
           {/* Header rojo */}
-          <div className="px-6 py-5 flex items-center justify-between" style={{ background: "linear-gradient(135deg, #75AADB 0%, #9B0013 100%)" }}>
+          <div className="px-6 py-5 flex items-center justify-between" style={{ background: "linear-gradient(135deg, #FF0000 0%, #9B0013 100%)" }}>
             <img src={LOGO} alt="Pachá" className="h-12 object-contain rounded-full" />
             <div className="text-right">
               <p className="text-white/70 text-xs uppercase tracking-wider">Entrada</p>

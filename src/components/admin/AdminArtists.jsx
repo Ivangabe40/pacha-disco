@@ -105,7 +105,7 @@ export default function AdminArtists() {
                   <div className="relative">
                     <img src={form.photo_url} alt="foto" className="h-16 w-16 rounded-full object-cover" />
                     <button onClick={() => setForm({ ...form, photo_url: "" })}
-                      className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-sky-500 text-white flex items-center justify-center">
+                      className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-red-500 text-white flex items-center justify-center">
                       <X size={10} />
                     </button>
                   </div>
@@ -144,7 +144,7 @@ export default function AdminArtists() {
               </div>
               <div className="flex gap-1">
                 <button onClick={() => openEdit(artist)} className="p-2 rounded hover:bg-gray-800 text-gray-400 hover:text-white transition-colors"><Pencil size={14} /></button>
-                <button onClick={() => handleDelete(artist.id)} className="p-2 rounded hover:bg-sky-900/30 text-gray-600 hover:text-sky-300 transition-colors"><Trash2 size={14} /></button>
+                <button onClick={() => handleDelete(artist.id)} className="p-2 rounded hover:bg-red-900/30 text-gray-600 hover:text-red-300 transition-colors"><Trash2 size={14} /></button>
               </div>
             </div>
           ))}

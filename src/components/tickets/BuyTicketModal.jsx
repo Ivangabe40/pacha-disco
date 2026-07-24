@@ -171,7 +171,7 @@ export default function BuyTicketModal({ event, onClose }) {
               </div>
 
               {buyError && (
-                <p className="text-sky-400 text-xs px-1">{buyError}</p>
+                <p className="text-red-500 text-xs px-1">{buyError}</p>
               )}
 
               <div className="flex gap-3">

@@ -169,13 +169,13 @@ export default function AdminReservations() {
             <button key={t.id} onClick={() => setActiveTab(t.id)}
               className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all"
               style={activeTab === t.id
-                ? { background: "rgba(116,172,223,0.12)", color: "#75AADB", border: "1px solid rgba(116,172,223,0.35)" }
+                ? { background: "rgba(255,0,0,0.12)", color: "#FF0000", border: "1px solid rgba(255,0,0,0.35)" }
                 : { background: "#111", color: "#666", border: "1px solid #1e1e1e" }}>
               <Icon size={14} />
               {t.label}
               {t.pending > 0 && (
                 <span className="px-1.5 py-0.5 rounded-full text-xs font-black"
-                  style={{ background: "#75AADB", color: "#fff", minWidth: "18px", textAlign: "center" }}>
+                  style={{ background: "#FF0000", color: "#fff", minWidth: "18px", textAlign: "center" }}>
                   {t.pending}
                 </span>
               )}
@@ -204,7 +204,7 @@ export default function AdminReservations() {
       {/* Content */}
       {loading ? (
         <div className="flex items-center justify-center py-20">
-          <div className="w-8 h-8 rounded-full animate-spin" style={{ border: "2px solid #1a1a1a", borderTop: "2px solid #75AADB" }} />
+          <div className="w-8 h-8 rounded-full animate-spin" style={{ border: "2px solid #1a1a1a", borderTop: "2px solid #FF0000" }} />
         </div>
       ) : currentList.length === 0 ? (
         <div className="text-center py-16 text-gray-600">

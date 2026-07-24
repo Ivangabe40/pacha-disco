@@ -48,7 +48,7 @@ export default function AdminHomeVideo() {
   return (
     <div className="p-6 rounded-2xl" style={{ background: "#111", border: "1px solid #333" }}>
       <div className="flex items-center gap-3 mb-5">
-        <Video size={18} style={{ color: "#75AADB" }} />
+        <Video size={18} style={{ color: "#FF0000" }} />
         <h3 className="text-white font-bold text-lg" style={{ fontFamily: "'Playfair Display', serif" }}>
           Video "Lo que se viene" — Home
         </h3>
@@ -62,7 +62,7 @@ export default function AdminHomeVideo() {
             controls
             muted
             className="w-full rounded-xl"
-            style={{ maxHeight: "280px", objectFit: "cover", border: "1px solid rgba(116,172,223,0.2)" }}
+            style={{ maxHeight: "280px", objectFit: "cover", border: "1px solid rgba(255,0,0,0.2)" }}
           />
           <p className="text-xs text-gray-500 mt-2 truncate">{videoUrl}</p>
         </div>
@@ -75,7 +75,7 @@ export default function AdminHomeVideo() {
 
       <div className="flex gap-3 flex-wrap">
         <label className="cursor-pointer flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold"
-          style={{ background: "rgba(116,172,223,0.12)", border: "1px solid rgba(116,172,223,0.4)", color: "#75AADB" }}>
+          style={{ background: "rgba(255,0,0,0.12)", border: "1px solid rgba(255,0,0,0.4)", color: "#FF0000" }}>
           <Upload size={14} />
           {uploading ? "Subiendo..." : videoUrl ? "Cambiar video" : "Subir video"}
           <input type="file" accept="video/*" className="hidden"

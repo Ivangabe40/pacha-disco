@@ -84,8 +84,8 @@ export default function AdminScanner() {
     <div className="max-w-md mx-auto space-y-6">
       <div className="flex items-center gap-3">
         <div className="w-10 h-10 rounded-xl flex items-center justify-center"
-          style={{ background: "rgba(116,172,223,0.15)", border: "1px solid rgba(116,172,223,0.3)" }}>
-          <ScanLine size={18} style={{ color: "#75AADB" }} />
+          style={{ background: "rgba(255,0,0,0.15)", border: "1px solid rgba(255,0,0,0.3)" }}>
+          <ScanLine size={18} style={{ color: "#FF0000" }} />
         </div>
         <div>
           <h2 className="text-xl font-bold text-white" style={{ fontFamily: "'Playfair Display', serif" }}>Escáner de Entradas</h2>
@@ -96,13 +96,13 @@ export default function AdminScanner() {
       {/* Resultado */}
       {result && (
         <div className="rounded-2xl overflow-hidden" style={{
-          border: `1px solid ${result.status === "valid" ? "#22c55e" : result.status === "used" ? "#f59e0b" : "#75AADB"}`,
-          background: result.status === "valid" ? "rgba(34,197,94,0.05)" : result.status === "used" ? "rgba(245,158,11,0.05)" : "rgba(116,172,223,0.05)"
+          border: `1px solid ${result.status === "valid" ? "#22c55e" : result.status === "used" ? "#f59e0b" : "#FF0000"}`,
+          background: result.status === "valid" ? "rgba(34,197,94,0.05)" : result.status === "used" ? "rgba(245,158,11,0.05)" : "rgba(255,0,0,0.05)"
         }}>
           <div className="p-5 flex items-start gap-4">
             {result.status === "valid" && <CheckCircle size={40} className="flex-shrink-0 mt-1" style={{ color: "#22c55e" }} />}
             {result.status === "used" && <XCircle size={40} className="flex-shrink-0 mt-1" style={{ color: "#f59e0b" }} />}
-            {result.status === "not_found" && <XCircle size={40} className="flex-shrink-0 mt-1" style={{ color: "#75AADB" }} />}
+            {result.status === "not_found" && <XCircle size={40} className="flex-shrink-0 mt-1" style={{ color: "#FF0000" }} />}
 
             <div className="flex-1">
               {result.status === "valid" && (
@@ -171,8 +171,8 @@ export default function AdminScanner() {
           ) : (
             <div className="p-8 flex flex-col items-center gap-4">
               <div className="w-20 h-20 rounded-2xl flex items-center justify-center"
-                style={{ background: "rgba(116,172,223,0.1)", border: "2px dashed rgba(116,172,223,0.3)" }}>
-                <ScanLine size={36} style={{ color: "#75AADB" }} />
+                style={{ background: "rgba(255,0,0,0.1)", border: "2px dashed rgba(255,0,0,0.3)" }}>
+                <ScanLine size={36} style={{ color: "#FF0000" }} />
               </div>
               <div className="text-center">
                 <p className="text-white font-semibold mb-1">Escáner QR</p>
@@ -180,7 +180,7 @@ export default function AdminScanner() {
               </div>
               <button onClick={startScanner}
                 className="px-8 py-3 rounded-xl font-bold text-white text-sm"
-                style={{ background: "linear-gradient(135deg, #75AADB 0%, #ff1a35 100%)" }}>
+                style={{ background: "linear-gradient(135deg, #FF0000 0%, #ff1a35 100%)" }}>
                 Abrir Cámara
               </button>
             </div>
@@ -202,7 +202,7 @@ export default function AdminScanner() {
             />
             <button type="submit" disabled={loading || !manualCode.trim()}
               className="px-4 py-2.5 rounded-xl text-white text-sm font-bold"
-              style={{ background: "#75AADB", opacity: !manualCode.trim() ? 0.5 : 1 }}>
+              style={{ background: "#FF0000", opacity: !manualCode.trim() ? 0.5 : 1 }}>
               {loading ? "..." : "Validar"}
             </button>
           </form>

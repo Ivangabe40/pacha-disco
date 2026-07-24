@@ -18,7 +18,7 @@ const LEVELS = [
   { name: "Regular", min: 100, max: 299, color: "#8888FF", bg: "rgba(136,136,255,0.1)", icon: "⭐" },
   { name: "VIP", min: 300, max: 699, color: "#C9A84C", bg: "rgba(201,168,76,0.1)", icon: "👑" },
   { name: "Platinum", min: 700, max: 1499, color: "#E8E8FF", bg: "rgba(232,232,255,0.1)", icon: "💎" },
-  { name: "Pachá Elite", min: 1500, max: Infinity, color: "#75AADB", bg: "rgba(116,172,223,0.1)", icon: "🔴" },
+  { name: "Pachá Elite", min: 1500, max: Infinity, color: "#FF0000", bg: "rgba(255,0,0,0.1)", icon: "🔴" },
 ];
 
 const REWARDS = [
@@ -93,20 +93,20 @@ export default function MisCuenta() {
 
   if (loading) return (
     <div className="min-h-screen flex items-center justify-center" style={{ background: "#070707" }}>
-      <div className="w-10 h-10 rounded-full animate-spin" style={{ border: "2px solid #1a1a1a", borderTop: "2px solid #75AADB" }} />
+      <div className="w-10 h-10 rounded-full animate-spin" style={{ border: "2px solid #1a1a1a", borderTop: "2px solid #FF0000" }} />
     </div>
   );
 
   if (!user) return (
     <div className="min-h-screen flex flex-col items-center justify-center gap-6 px-4" style={{ background: "#070707" }}>
-      <Coins size={48} style={{ color: "#75AADB", opacity: 0.5 }} />
+      <Coins size={48} style={{ color: "#FF0000", opacity: 0.5 }} />
       <div className="text-center">
         <h2 className="text-2xl font-bold text-white mb-2" style={{ fontFamily: "'Playfair Display', serif" }}>Inicia sesión</h2>
         <p className="text-gray-500 text-sm">Necesitás una cuenta para ver tus Pachá Coins</p>
       </div>
       <button onClick={() => base44.auth.redirectToLogin(window.location.href)}
         className="px-6 py-3 rounded-lg text-sm font-bold text-white"
-        style={{ background: "#75AADB" }}>
+        style={{ background: "#FF0000" }}>
         Iniciar Sesión
       </button>
     </div>
@@ -142,9 +142,9 @@ export default function MisCuenta() {
 
         {/* Coins + Level Card */}
         <div className="rounded-2xl p-6 text-center relative overflow-hidden"
-          style={{ background: "linear-gradient(135deg, #0f0f0f, #1a1010)", border: "1px solid rgba(116,172,223,0.2)" }}>
+          style={{ background: "linear-gradient(135deg, #0f0f0f, #1a1010)", border: "1px solid rgba(255,0,0,0.2)" }}>
           <div className="absolute inset-0 opacity-5"
-            style={{ background: "radial-gradient(circle at 70% 30%, #75AADB, transparent 60%)" }} />
+            style={{ background: "radial-gradient(circle at 70% 30%, #FF0000, transparent 60%)" }} />
 
           <div className="text-5xl mb-1">{level.icon}</div>
           <div className="text-5xl font-black text-white mt-2 mb-1"
@@ -191,7 +191,7 @@ export default function MisCuenta() {
         {/* How to earn */}
         <div className="rounded-xl p-4" style={{ background: "#0d0d0d", border: "1px solid #1a1a1a" }}>
           <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-3 flex items-center gap-2">
-            <Zap size={12} style={{ color: "#75AADB" }} /> Cómo ganar coins
+            <Zap size={12} style={{ color: "#FF0000" }} /> Cómo ganar coins
           </p>
           <div className="space-y-2">
             {[
@@ -210,7 +210,7 @@ export default function MisCuenta() {
         {/* Rewards */}
         <div>
           <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-3 flex items-center gap-2">
-            <Gift size={12} style={{ color: "#75AADB" }} /> Canjear beneficios
+            <Gift size={12} style={{ color: "#FF0000" }} /> Canjear beneficios
           </p>
 
           {redeemSuccess && (

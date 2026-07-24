@@ -90,8 +90,8 @@ export default function AdminNotifications() {
       {/* Header */}
       <div className="flex items-center gap-3">
         <div className="w-10 h-10 rounded-xl flex items-center justify-center"
-          style={{ background: "rgba(116,172,223,0.12)", border: "1px solid rgba(116,172,223,0.3)" }}>
-          <Bell size={18} style={{ color: "#75AADB" }} />
+          style={{ background: "rgba(255,0,0,0.12)", border: "1px solid rgba(255,0,0,0.3)" }}>
+          <Bell size={18} style={{ color: "#FF0000" }} />
         </div>
         <div>
           <h2 className="text-white font-bold text-lg" style={{ fontFamily: "'Playfair Display', serif" }}>
@@ -129,7 +129,7 @@ export default function AdminNotifications() {
               {TEMPLATES.map(tpl => (
                 <button key={tpl.id} onClick={() => handleSelectTemplate(tpl)}
                   className="w-full text-left px-4 py-3 text-sm font-medium transition-colors hover:bg-white/5"
-                  style={{ color: selectedTemplate.id === tpl.id ? "#75AADB" : "#aaa", borderBottom: "1px solid #1a1a1a" }}>
+                  style={{ color: selectedTemplate.id === tpl.id ? "#FF0000" : "#aaa", borderBottom: "1px solid #1a1a1a" }}>
                   {tpl.label}
                 </button>
               ))}
@@ -170,7 +170,7 @@ export default function AdminNotifications() {
         disabled={sending || !subject.trim() || !body.trim() || activeCount === 0}
         className="w-full flex items-center justify-center gap-2 py-4 rounded-xl font-bold text-sm tracking-wider uppercase transition-all"
         style={{
-          background: sending || !subject.trim() || !body.trim() ? "#1a1a1a" : "linear-gradient(135deg, #75AADB, #ff1a35)",
+          background: sending || !subject.trim() || !body.trim() ? "#1a1a1a" : "linear-gradient(135deg, #FF0000, #ff1a35)",
           color: sending || !subject.trim() || !body.trim() ? "#444" : "#fff",
           cursor: sending ? "not-allowed" : "pointer",
         }}>
@@ -202,7 +202,7 @@ export default function AdminNotifications() {
           { icon: Tag, label: "Evento especial", desc: "DJ invitado, temática o noche temática" },
         ].map(({ icon: Icon, label, desc }) => (
           <div key={label} className="flex items-start gap-2.5">
-            <Icon size={14} style={{ color: "#75AADB", marginTop: 2 }} />
+            <Icon size={14} style={{ color: "#FF0000", marginTop: 2 }} />
             <div>
               <span className="text-gray-300 text-xs font-semibold">{label}: </span>
               <span className="text-gray-600 text-xs">{desc}</span>

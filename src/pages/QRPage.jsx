@@ -3,7 +3,7 @@ import QRCode from "qrcode";
 import { Download, ExternalLink } from "lucide-react";
 
 const APP_URL = "https://pachadisco.base44.app/";
-const LOGO_RED = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/7c4e34300_1783489304034.png";
+const LOGO_RED = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/6ecd577f7_file_00000000d89c820e8ae4cce82ce72506.png";
 
 export default function QRPage() {
   const [qrDataUrl, setQrDataUrl] = useState(null);
@@ -30,9 +30,9 @@ export default function QRPage() {
       <div className="max-w-sm w-full text-center">
         {/* Logo */}
         <img src={LOGO_RED} alt="Pachá" className="h-14 w-auto object-contain mx-auto mb-6"
-          style={{ filter: "drop-shadow(0 0 12px rgba(116,172,223,0.5))" }} />
+          style={{ filter: "drop-shadow(0 0 12px rgba(255,0,0,0.5))" }} />
 
-        <p className="text-xs tracking-widest uppercase mb-1" style={{ color: "#75AADB" }}>
+        <p className="text-xs tracking-widest uppercase mb-1" style={{ color: "#FF0000" }}>
           Escaneá para entrar
         </p>
         <h1 className="text-2xl font-black text-white uppercase mb-6" style={{ fontFamily: "'Playfair Display', serif" }}>
@@ -43,8 +43,8 @@ export default function QRPage() {
         <div className="relative inline-block p-5 rounded-2xl"
           style={{
             background: "linear-gradient(135deg, #0f0f0f, #1a1010)",
-            border: "1px solid rgba(116,172,223,0.25)",
-            boxShadow: "0 0 50px rgba(116,172,223,0.15)",
+            border: "1px solid rgba(255,0,0,0.25)",
+            boxShadow: "0 0 50px rgba(255,0,0,0.15)",
           }}>
           {qrDataUrl ? (
             <div className="relative">
@@ -59,7 +59,7 @@ export default function QRPage() {
           ) : (
             <div className="w-64 h-64 flex items-center justify-center">
               <div className="w-10 h-10 rounded-full animate-spin"
-                style={{ border: "2px solid #1a1a1a", borderTop: "2px solid #75AADB" }} />
+                style={{ border: "2px solid #1a1a1a", borderTop: "2px solid #FF0000" }} />
             </div>
           )}
         </div>
@@ -71,7 +71,7 @@ export default function QRPage() {
           <button onClick={handleDownload}
             className="w-full py-3 rounded-xl text-sm font-bold flex items-center justify-center gap-2 transition-all"
             style={{
-              background: "linear-gradient(135deg, #75AADB 0%, #ff1a35 50%, #75AADB 100%)",
+              background: "linear-gradient(135deg, #FF0000 0%, #ff1a35 50%, #FF0000 100%)",
               color: "#fff",
             }}>
             <Download size={16} /> Descargar QR

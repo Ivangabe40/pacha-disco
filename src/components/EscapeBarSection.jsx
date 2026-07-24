@@ -96,7 +96,7 @@ export default function EscapeBarSection() {
                     </h3>
                     {featured.promo &&
                 <div className="flex items-center gap-1.5 mb-2">
-                        <Tag size={12} style={{ color: "#75AADB" }} />
+                        <Tag size={12} style={{ color: "#FF0000" }} />
                         <span className="text-sm font-bold" style={{ color: "#E8C97A" }}>{featured.promo}</span>
                       </div>
                 }

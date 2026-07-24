@@ -24,7 +24,7 @@ function Unit({ value, label }) {
   return (
     <div className="flex flex-col items-center">
       <div className="relative w-12 h-12 md:w-16 md:h-16 flex items-center justify-center rounded-xl font-black text-xl md:text-3xl text-white"
-        style={{ background: "rgba(116,172,223,0.12)", border: "1px solid rgba(116,172,223,0.3)", fontVariantNumeric: "tabular-nums" }}>
+        style={{ background: "rgba(255,0,0,0.12)", border: "1px solid rgba(255,0,0,0.3)", fontVariantNumeric: "tabular-nums" }}>
         {String(value).padStart(2, "0")}
       </div>
       <span className="text-xs text-gray-500 uppercase tracking-widest mt-1">{label}</span>

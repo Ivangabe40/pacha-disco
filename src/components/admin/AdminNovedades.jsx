@@ -69,7 +69,7 @@ export default function AdminNovedades() {
         </h2>
         <button onClick={() => editingId ? resetForm() : setShowForm(!showForm)}
           className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-bold"
-          style={{ background: editingId ? "#222" : "#75AADB", color: editingId ? "#888" : "#fff" }}>
+          style={{ background: editingId ? "#222" : "#FF0000", color: editingId ? "#888" : "#fff" }}>
           {editingId ? <X size={14} /> : <Plus size={14} />} {editingId ? "Cancelar edición" : (showForm ? "Cancelar" : "Nuevo")}
         </button>
       </div>
@@ -77,8 +77,8 @@ export default function AdminNovedades() {
       <p className="text-gray-500 text-xs mb-6">Solo se muestra 1 banner activo a la vez (el más reciente).</p>
 
       {showForm && (
-        <div className="rounded-xl p-4 sm:p-5 mb-6 space-y-4" style={{ background: "#111", border: `1px solid ${editingId ? "rgba(116,172,223,0.4)" : "#222"}` }}>
-          {editingId && <p className="text-xs font-bold uppercase tracking-wider" style={{ color: "#75AADB" }}>Editando novedad existente</p>}
+        <div className="rounded-xl p-4 sm:p-5 mb-6 space-y-4" style={{ background: "#111", border: `1px solid ${editingId ? "rgba(255,0,0,0.4)" : "#222"}` }}>
+          {editingId && <p className="text-xs font-bold uppercase tracking-wider" style={{ color: "#FF0000" }}>Editando novedad existente</p>}
           <input
             value={form.title}
             onChange={e => setForm(f => ({ ...f, title: e.target.value }))}
@@ -126,7 +126,7 @@ export default function AdminNovedades() {
           <div className="flex gap-3">
             <button onClick={handleSave}
               className="px-6 py-2.5 rounded-lg text-sm font-bold"
-              style={{ background: "#75AADB", color: "#fff" }}>
+              style={{ background: "#FF0000", color: "#fff" }}>
               Guardar
             </button>
             <button onClick={resetForm}
@@ -156,9 +156,9 @@ export default function AdminNovedades() {
             <div className="flex items-center gap-1 sm:gap-2 shrink-0">
               <button onClick={() => handleEdit(item)}
                 className="w-8 h-8 flex items-center justify-center rounded-lg transition-all"
-                style={{ background: "rgba(116,172,223,0.1)" }}
+                style={{ background: "rgba(255,0,0,0.1)" }}
                 title="Editar">
-                <Pencil size={13} style={{ color: "#75AADB" }} />
+                <Pencil size={13} style={{ color: "#FF0000" }} />
               </button>
               <button onClick={() => toggleActive(item)}
                 className="w-8 h-8 flex items-center justify-center rounded-lg transition-all"
@@ -167,8 +167,8 @@ export default function AdminNovedades() {
               </button>
               <button onClick={() => handleDelete(item)}
                 className="w-8 h-8 flex items-center justify-center rounded-lg"
-                style={{ background: "rgba(116,172,223,0.1)" }}>
-                <Trash2 size={14} style={{ color: "#75AADB" }} />
+                style={{ background: "rgba(255,0,0,0.1)" }}>
+                <Trash2 size={14} style={{ color: "#FF0000" }} />
               </button>
             </div>
           </div>

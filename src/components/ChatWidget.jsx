@@ -3,7 +3,7 @@ import { base44 } from "@/api/base44Client";
 import { MessageCircle, X, Send, Loader2, Bot } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 
-const LOGO = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/7c4e34300_1783489304034.png";
+const LOGO = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/6ecd577f7_file_00000000d89c820e8ae4cce82ce72506.png";
 
 export default function ChatWidget() {
   const [open, setOpen] = useState(false);
@@ -63,8 +63,8 @@ export default function ChatWidget() {
         onClick={() => setOpen(o => !o)}
         className="fixed right-4 z-50 w-14 h-14 md:w-16 md:h-16 rounded-2xl flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-110 md:bottom-6"
         style={{
-          background: "linear-gradient(135deg,#75AADB,#92C8F0)",
-          boxShadow: "0 4px 28px rgba(116,172,223,0.6)",
+          background: "linear-gradient(135deg,#FF0000,#FF6666)",
+          boxShadow: "0 4px 28px rgba(255,0,0,0.6)",
           border: "2px solid rgba(255,255,255,0.15)",
           bottom: "calc(56px + env(safe-area-inset-bottom, 0px) + 12px)"
         }}>
@@ -76,12 +76,12 @@ export default function ChatWidget() {
             {/* Cabeza */}
             <rect x="12" y="18" width="40" height="28" rx="8" fill="white" fillOpacity="0.95"/>
             {/* Ojos */}
-            <circle cx="23" cy="30" r="4.5" fill="#75AADB"/>
-            <circle cx="41" cy="30" r="4.5" fill="#75AADB"/>
+            <circle cx="23" cy="30" r="4.5" fill="#FF0000"/>
+            <circle cx="41" cy="30" r="4.5" fill="#FF0000"/>
             <circle cx="24.5" cy="28.5" r="1.5" fill="white"/>
             <circle cx="42.5" cy="28.5" r="1.5" fill="white"/>
             {/* Boca */}
-            <rect x="22" y="38" width="20" height="4" rx="2" fill="#75AADB" fillOpacity="0.7"/>
+            <rect x="22" y="38" width="20" height="4" rx="2" fill="#FF0000" fillOpacity="0.7"/>
             {/* Cuerpo */}
             <rect x="20" y="48" width="24" height="10" rx="5" fill="white" fillOpacity="0.4"/>
           </svg>
@@ -94,7 +94,7 @@ export default function ChatWidget() {
           style={{
             height: "520px",
             background: "#0f0f0f",
-            border: "1px solid rgba(116,172,223,0.25)",
+            border: "1px solid rgba(255,0,0,0.25)",
             bottom: "calc(56px + env(safe-area-inset-bottom, 0px) + 68px)"
           }}>
 
@@ -112,7 +112,7 @@ export default function ChatWidget() {
           <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3" style={{ scrollbarWidth: "none" }}>
             {authError && (
               <div className="text-center py-8 px-4">
-                <Bot size={32} className="mx-auto mb-3" style={{ color: "#75AADB", opacity: 0.5 }} />
+                <Bot size={32} className="mx-auto mb-3" style={{ color: "#FF0000", opacity: 0.5 }} />
                 <p className="text-gray-300 text-sm font-semibold mb-1">¡Hola! Soy el asistente de Pachá.</p>
                 <p className="text-gray-500 text-xs mb-4">Para chatear conmigo necesitás iniciar sesión, o podés contactarnos directamente por WhatsApp.</p>
                 <a
@@ -127,7 +127,7 @@ export default function ChatWidget() {
             )}
             {!authError && visibleMessages.length === 0 && !loading && (
               <div className="text-center py-8">
-                <Bot size={32} className="mx-auto mb-3" style={{ color: "#75AADB", opacity: 0.5 }} />
+                <Bot size={32} className="mx-auto mb-3" style={{ color: "#FF0000", opacity: 0.5 }} />
                 <p className="text-gray-400 text-sm">¡Hola! Soy el asistente de Pachá.</p>
                 <p className="text-gray-600 text-xs mt-1">Preguntame sobre eventos, entradas, tragos o reservas 🎶</p>
               </div>
@@ -140,7 +140,7 @@ export default function ChatWidget() {
                     : "text-gray-200"
                 }`}
                   style={msg.role === "user"
-                    ? { background: "linear-gradient(135deg,#75AADB,#92C8F0)" }
+                    ? { background: "linear-gradient(135deg,#FF0000,#FF6666)" }
                     : { background: "#1a1a1a", border: "1px solid #252525" }}>
                   {msg.role === "assistant"
                     ? <ReactMarkdown className="prose prose-invert prose-sm max-w-none [&>*:first-child]:mt-0 [&>*:last-child]:mb-0">{msg.content}</ReactMarkdown>
@@ -173,7 +173,7 @@ export default function ChatWidget() {
                 />
                 <button onClick={send} disabled={!input.trim() || loading}
                   className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 transition-all"
-                  style={{ background: input.trim() && !loading ? "#75AADB" : "#1a1a1a" }}>
+                  style={{ background: input.trim() && !loading ? "#FF0000" : "#1a1a1a" }}>
                   <Send size={14} className="text-white" />
                 </button>
               </div>

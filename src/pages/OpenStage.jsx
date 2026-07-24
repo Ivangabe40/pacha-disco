@@ -45,7 +45,7 @@ export default function OpenStage() {
       if (metaDesc) metaDesc.setAttribute("content", "Pachá es la discoteca más exclusiva de Corral de Bustos. Eventos, fiestas privadas, cumpleaños y entradas anticipadas. Solo para mayores de 18 años.");
       if (ogTitle) ogTitle.setAttribute("content", "Pachá Night Club | Discoteca en Corral de Bustos, Córdoba");
       if (ogDesc) ogDesc.setAttribute("content", "La discoteca más exclusiva de Corral de Bustos. Eventos, fiestas privadas, cumpleaños y entradas anticipadas. Solo para mayores de 18.");
-      if (ogImage) ogImage.setAttribute("content", "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/7c4e34300_1783489304034.png");
+      if (ogImage) ogImage.setAttribute("content", "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/6ecd577f7_file_00000000d89c820e8ae4cce82ce72506.png");
     };
   }, []);
 
@@ -76,7 +76,7 @@ export default function OpenStage() {
           <div className="flex flex-col sm:flex-row gap-3">
             <button onClick={scrollToForm}
               className="flex items-center gap-2 px-8 py-3.5 rounded-lg text-sm font-black tracking-wider uppercase transition-all hover:scale-105"
-              style={{ background: "linear-gradient(135deg, #75AADB, #4A8BC2)", color: "#fff", boxShadow: "0 4px 30px rgba(116,172,223,0.4)" }}>
+              style={{ background: "linear-gradient(135deg, #FF0000, #CC0000)", color: "#fff", boxShadow: "0 4px 30px rgba(255,0,0,0.4)" }}>
               <Mic size={16} /> Postular mi proyecto
             </button>
             <a href="#info" className="flex items-center gap-2 px-8 py-3.5 rounded-lg text-sm font-bold tracking-wider uppercase transition-all"
@@ -128,7 +128,7 @@ export default function OpenStage() {
 
       {/* BLOQUE 1 — Presentación */}
       <section id="info" className="max-w-4xl mx-auto px-4 py-12 md:py-20 text-center">
-        <p className="text-xs uppercase tracking-[0.4em] mb-4" style={{ color: "#75AADB" }}>La convocatoria</p>
+        <p className="text-xs uppercase tracking-[0.4em] mb-4" style={{ color: "#FF0000" }}>La convocatoria</p>
         <h2 className="text-3xl md:text-4xl font-black text-white mb-4 uppercase" style={{ fontFamily: "'Playfair Display', serif" }}>
           Escape Open Stage
         </h2>
@@ -144,7 +144,7 @@ export default function OpenStage() {
         </div>
         <button onClick={scrollToForm}
           className="mt-8 flex items-center gap-2 mx-auto px-8 py-3.5 rounded-lg text-sm font-black tracking-wider uppercase transition-all hover:scale-105"
-          style={{ background: "linear-gradient(135deg, #75AADB, #4A8BC2)", color: "#fff" }}>
+          style={{ background: "linear-gradient(135deg, #FF0000, #CC0000)", color: "#fff" }}>
           Quiero participar <ChevronRight size={16} />
         </button>
       </section>
@@ -178,14 +178,14 @@ export default function OpenStage() {
       <section className="py-12 md:py-16 px-4" style={{ background: "linear-gradient(180deg, #070707 0%, #0d0a04 100%)" }}>
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-10">
-            <p className="text-xs uppercase tracking-[0.4em] mb-3" style={{ color: "#75AADB" }}>Paso a paso</p>
+            <p className="text-xs uppercase tracking-[0.4em] mb-3" style={{ color: "#FF0000" }}>Paso a paso</p>
             <h2 className="text-2xl md:text-3xl font-bold text-white uppercase" style={{ fontFamily: "'Playfair Display', serif" }}>¿Cómo funciona?</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
             {STEPS.map((s, i) => (
               <div key={s.num} className="relative p-5 rounded-xl" style={{ background: "#0f0f0f", border: "1px solid #1e1e1e" }}>
                 <div className="w-10 h-10 rounded-full flex items-center justify-center text-lg font-black mb-3"
-                  style={{ background: "linear-gradient(135deg, #75AADB, #4A8BC2)", color: "#fff" }}>
+                  style={{ background: "linear-gradient(135deg, #FF0000, #CC0000)", color: "#fff" }}>
                   {s.num}
                 </div>
                 <h3 className="text-white font-bold text-sm mb-2">{s.title}</h3>
@@ -215,7 +215,7 @@ export default function OpenStage() {
             <p className="text-gray-400 mb-8 max-w-md mx-auto">Postulate ahora y sé parte de las noches de los viernes en Escape Bar.</p>
             <button onClick={scrollToForm}
               className="flex items-center gap-2 mx-auto px-10 py-4 rounded-lg text-base font-black tracking-wider uppercase transition-all hover:scale-105"
-              style={{ background: "linear-gradient(135deg, #75AADB, #4A8BC2)", color: "#fff", boxShadow: "0 4px 40px rgba(116,172,223,0.4)" }}>
+              style={{ background: "linear-gradient(135deg, #FF0000, #CC0000)", color: "#fff", boxShadow: "0 4px 40px rgba(255,0,0,0.4)" }}>
               <Mic size={18} /> Postular mi proyecto
             </button>
           </div>

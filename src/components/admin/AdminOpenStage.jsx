@@ -5,7 +5,7 @@ import { format } from "date-fns";
 import { es } from "date-fns/locale";
 
 const STATUSES = [
-  { value: "nueva", label: "Nueva", color: "#75AADB" },
+  { value: "nueva", label: "Nueva", color: "#FF0000" },
   { value: "pendiente_revision", label: "Pendiente de revisión", color: "#C9A84C" },
   { value: "material_incompleto", label: "Material incompleto", color: "#ef4444" },
   { value: "en_evaluacion", label: "En evaluación", color: "#8888FF" },
@@ -142,7 +142,7 @@ export default function AdminOpenStage() {
       {/* Stats */}
       <div className="grid grid-cols-3 md:grid-cols-6 gap-2 mb-6">
         <StatCard label="Total" value={stats.total} color="#fff" />
-        <StatCard label="Nuevas" value={stats.nuevas} color="#75AADB" />
+        <StatCard label="Nuevas" value={stats.nuevas} color="#FF0000" />
         <StatCard label="Pendientes" value={stats.pendientes} color="#C9A84C" />
         <StatCard label="Preselec." value={stats.preseleccionadas} color="#a855f7" />
         <StatCard label="Confirm." value={stats.confirmadas} color="#22c55e" />
@@ -173,7 +173,7 @@ export default function AdminOpenStage() {
       {/* List */}
       {loading ? (
         <div className="flex justify-center py-20">
-          <div className="w-8 h-8 rounded-full animate-spin" style={{ border: "2px solid #1a1a1a", borderTop: "2px solid #75AADB" }} />
+          <div className="w-8 h-8 rounded-full animate-spin" style={{ border: "2px solid #1a1a1a", borderTop: "2px solid #FF0000" }} />
         </div>
       ) : filtered.length === 0 ? (
         <div className="text-center py-16 text-gray-600">
@@ -254,7 +254,7 @@ export default function AdminOpenStage() {
                   className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold transition-colors" style={{ background: "rgba(37,211,102,0.1)", color: "#22c55e", border: "1px solid rgba(37,211,102,0.3)" }}>
                   <MessageCircle size={13} /> WhatsApp
                 </a>
-                <a href={`mailto:${selected.email}`} className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold transition-colors" style={{ background: "rgba(116,172,223,0.1)", color: "#75AADB", border: "1px solid rgba(116,172,223,0.3)" }}>
+                <a href={`mailto:${selected.email}`} className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold transition-colors" style={{ background: "rgba(255,0,0,0.1)", color: "#FF0000", border: "1px solid rgba(255,0,0,0.3)" }}>
                   <Mail size={13} /> Email
                 </a>
                 <button onClick={() => updateApp(selected.id, { is_favorite: !selected.is_favorite })}
@@ -317,7 +317,7 @@ export default function AdminOpenStage() {
                   <div className="flex flex-wrap gap-2">
                     {links(selected).map(l => (
                       <a key={l.label} href={l.url} target="_blank" rel="noopener noreferrer"
-                        className="flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors hover:bg-white/5" style={{ background: "#111", color: "#75AADB", border: "1px solid #2a2a2a" }}>
+                        className="flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors hover:bg-white/5" style={{ background: "#111", color: "#FF0000", border: "1px solid #2a2a2a" }}>
                         <ExternalLink size={11} /> {l.label}
                       </a>
                     ))}

@@ -135,7 +135,7 @@ export default function EscapeBar() {
                     </h3>
                     {featured.promo &&
                 <div className="flex items-center gap-2 mb-3">
-                        <Tag size={13} style={{ color: "#75AADB" }} />
+                        <Tag size={13} style={{ color: "#FF0000" }} />
                         <span className="text-sm font-bold" style={{ color: "#E8C97A" }}>{featured.promo}</span>
                       </div>
                 }
@@ -173,7 +173,7 @@ export default function EscapeBar() {
                       </h3>
                       {ev.promo &&
                 <div className="flex items-center gap-1.5 mb-2">
-                          <Tag size={11} style={{ color: "#75AADB" }} />
+                          <Tag size={11} style={{ color: "#FF0000" }} />
                           <span className="text-xs font-semibold" style={{ color: "#E8C97A" }}>{ev.promo}</span>
                         </div>
                 }
@@ -192,20 +192,20 @@ export default function EscapeBar() {
       {/* ESCAPE OPEN STAGE */}
       <div className="max-w-5xl mx-auto px-4 md:px-8 mb-10 md:mb-12">
         <Link to={createPageUrl("OpenStage")} className="group block rounded-2xl overflow-hidden relative transition-transform duration-300 hover:scale-[1.01]"
-          style={{ border: "1px solid rgba(116,172,223,0.3)", boxShadow: "0 0 40px rgba(116,172,223,0.1)" }}>
+          style={{ border: "1px solid rgba(255,0,0,0.3)", boxShadow: "0 0 40px rgba(255,0,0,0.1)" }}>
           <div className="relative" style={{ minHeight: "200px" }}>
             <img src={headerImg} alt="Escape Open Stage" className="absolute inset-0 w-full h-full object-cover" />
             <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, rgba(7,7,7,0.9) 0%, rgba(7,7,7,0.6) 50%, rgba(7,7,7,0.3) 100%)" }} />
             <div className="relative z-10 p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
               <div>
-                <p className="text-xs uppercase tracking-[0.3em] mb-2" style={{ color: "#75AADB" }}>Convocatoria abierta</p>
+                <p className="text-xs uppercase tracking-[0.3em] mb-2" style={{ color: "#FF0000" }}>Convocatoria abierta</p>
                 <h3 className="text-2xl md:text-3xl font-black text-white mb-2 uppercase" style={{ fontFamily: "'Playfair Display', serif" }}>
                   ¿Querés tocar en Escape?
                 </h3>
                 <p className="text-sm text-gray-300 max-w-md">Postulate para presentar tu música los viernes en Escape Bar by Pacha. Solistas, bandas, DJs y productores bienvenidos.</p>
               </div>
               <div className="flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-black tracking-wider uppercase transition-all group-hover:gap-3 shrink-0"
-                style={{ background: "linear-gradient(135deg, #75AADB, #4A8BC2)", color: "#fff" }}>
+                style={{ background: "linear-gradient(135deg, #FF0000, #CC0000)", color: "#fff" }}>
                 <Mic size={16} /> Postular <ChevronRight size={16} />
               </div>
             </div>

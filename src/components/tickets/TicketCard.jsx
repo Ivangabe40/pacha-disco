@@ -23,7 +23,7 @@ export default function TicketCard({ ticket, index }) {
   return (
     <div className="rounded-2xl overflow-hidden" style={{ background: "#111", border: "1px solid #2a2a2a" }}>
       <div className="px-5 py-4 flex items-center justify-between"
-        style={{ background: "linear-gradient(135deg, #75AADB 0%, #4A8BC2 100%)" }}>
+        style={{ background: "linear-gradient(135deg, #FF0000 0%, #CC0000 100%)" }}>
         <div className="flex items-center gap-2">
           <TicketIcon size={18} className="text-white" />
           <span className="text-white font-bold text-sm">Entrada #{index + 1}</span>

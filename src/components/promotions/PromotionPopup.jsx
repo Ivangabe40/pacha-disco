@@ -33,7 +33,7 @@ export default function PromotionPopup() {
       onClick={close}>
       <div className="relative rounded-2xl overflow-hidden shadow-2xl"
         style={{
-          border: "1px solid rgba(116,172,223,0.3)",
+          border: "1px solid rgba(255,0,0,0.3)",
           background: "#0f0f0f",
           width: "min(330px, 88vw)",
           maxHeight: "80vh",
@@ -73,7 +73,7 @@ export default function PromotionPopup() {
             {promo.button_url && (
               <a href={promo.button_url} target="_blank" rel="noopener noreferrer" onClick={close}
                 className="block w-full text-center py-2.5 rounded-xl font-bold text-xs tracking-widest uppercase transition-all active:scale-95"
-                style={{ background: "linear-gradient(135deg,#75AADB,#92C8F0)", color: "#fff" }}>
+                style={{ background: "linear-gradient(135deg,#FF0000,#FF6666)", color: "#fff" }}>
                 {promo.button_label || "Ver más"}
               </a>
             )}

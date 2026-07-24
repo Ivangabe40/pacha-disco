@@ -102,7 +102,7 @@ export default function AdminTicketSales() {
           <div className="text-xs text-gray-500">Pagos pendientes</div>
         </div>
         <div className="p-4 rounded-xl" style={{ background: "#111", border: "1px solid #222" }}>
-          <Package size={16} style={{ color: "#75AADB" }} />
+          <Package size={16} style={{ color: "#FF0000" }} />
           <div className="text-2xl font-bold text-white mt-1">
             {events.filter(e => e.tickets_enabled !== false && e.ticket_price > 0 && e.status === "activo").length}
           </div>
@@ -205,7 +205,7 @@ export default function AdminTicketSales() {
                   <button onClick={() => handleSave(event.id)} disabled={isSaving}
                     className="flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-bold transition-all"
                     style={{
-                      background: isSaved ? "#22c55e" : isSaving ? "#333" : "#75AADB",
+                      background: isSaved ? "#22c55e" : isSaving ? "#333" : "#FF0000",
                       color: "#fff",
                       opacity: isSaving ? 0.7 : 1,
                     }}>

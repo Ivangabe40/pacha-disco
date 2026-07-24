@@ -297,7 +297,7 @@ export default function AdminEscapeBar() {
                         <Pencil size={15} className="text-gray-600" />
                       </button>
                       <button onClick={() => handleDelete(ev.id)} title="Eliminar"
-                        className="p-1.5 rounded-lg hover:bg-sky-400/10 transition-colors">
+                        className="p-1.5 rounded-lg hover:bg-red-400/10 transition-colors">
                         <Trash2 size={15} className="text-gray-600" />
                       </button>
                     </div>
