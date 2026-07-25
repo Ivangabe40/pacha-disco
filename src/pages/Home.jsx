@@ -83,7 +83,7 @@ export default function Home() {
               <div className="flex items-center gap-4 mb-8 md:mb-12">
                 <div className="w-1 h-10 rounded-full" style={{ background: "linear-gradient(#FF0000, #CC0000)" }} />
                 <div>
-                  <p className="text-xs tracking-widest uppercase mb-0.5" style={{ color: "#FF0000" }}>Agenda</p>
+                  <p className="text-xs tracking-widest uppercase mb-0.5 font-condensed" style={{ color: "#FF0000" }}>Agenda</p>
                   <h2 className="text-2xl md:text-4xl font-black text-white uppercase" style={{ fontFamily: "'Playfair Display', serif" }}>
                     Próximos Eventos
                   </h2>
@@ -104,7 +104,7 @@ export default function Home() {
           {/* GRACIAS POR ESTAR */}
           <section className="py-12 md:py-24 px-4" style={{ background: "#070707" }}>
             <div className="max-w-2xl mx-auto text-center">
-              <p className="text-xs tracking-widest uppercase mb-3" style={{ color: "#FF0000" }}>Nuestro equipo</p>
+              <p className="text-xs tracking-widest uppercase mb-3 font-condensed" style={{ color: "#FF0000" }}>Nuestro equipo</p>
               <h2 className="text-2xl md:text-5xl font-black text-white uppercase mb-8 md:mb-10"
                 style={{ fontFamily: "'Playfair Display', serif", textShadow: "0 0 40px rgba(255,0,0,0.3)" }}>
                 ¡Gracias por estar!

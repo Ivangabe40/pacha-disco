@@ -46,7 +46,7 @@ export default function HeroEvent({ event }) {
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6"
               style={{ background: "rgba(255,0,0,0.15)", border: "1px solid rgba(255,0,0,0.4)" }}>
               <Zap size={12} fill="#FF0000" style={{ color: "#FF0000" }} />
-              <span className="text-xs font-bold tracking-widest uppercase" style={{ color: "#FF0000" }}>
+              <span className="text-xs font-bold tracking-widest uppercase font-condensed" style={{ color: "#FF0000" }}>
                 Próximo Evento
               </span>
             </div>
@@ -62,19 +62,19 @@ export default function HeroEvent({ event }) {
               <div className="flex items-center gap-1.5 px-3 md:px-4 py-1.5 md:py-2 rounded-full"
                 style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}>
                 <Calendar size={14} style={{ color: "#FF0000" }} />
-                <span className="text-xs md:text-sm text-gray-300 capitalize">
+                <span className="text-xs md:text-sm text-gray-300 capitalize font-condensed">
                   {format(date, "EEEE d 'de' MMMM", { locale: es })}
                 </span>
               </div>
               <div className="flex items-center gap-1.5 px-3 md:px-4 py-1.5 md:py-2 rounded-full"
                 style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}>
-                <span className="text-xs md:text-sm text-gray-300">{format(date, "HH:mm")}hs</span>
+                <span className="text-xs md:text-sm text-gray-300 font-condensed">{format(date, "HH:mm")}hs</span>
               </div>
               {event.genres && (
                 <div className="flex items-center gap-1.5 px-3 md:px-4 py-1.5 md:py-2 rounded-full"
                   style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}>
                   <Music size={14} style={{ color: "#C9A84C" }} />
-                  <span className="text-xs md:text-sm text-gray-300">{event.genres}</span>
+                  <span className="text-xs md:text-sm text-gray-300 font-condensed">{event.genres}</span>
                 </div>
               )}
             </div>
@@ -89,7 +89,7 @@ export default function HeroEvent({ event }) {
             {/* CTA */}
             <div className="flex flex-wrap gap-4 items-center">
               <Link to={createPageUrl(`EventDetail?id=${event.id}`)}>
-                <button className="flex items-center gap-2 md:gap-3 px-6 md:px-8 py-3 md:py-4 rounded-2xl font-bold tracking-wider uppercase transition-all hover:-translate-y-0.5 text-sm md:text-base"
+                <button className="flex items-center gap-2 md:gap-3 px-6 md:px-8 py-3 md:py-4 rounded-2xl font-bold tracking-wider uppercase transition-all hover:-translate-y-0.5 text-sm md:text-base font-condensed"
                   style={{
                     background: "linear-gradient(135deg, #C9A84C 0%, #E8C97A 50%, #C9A84C 100%)",
                     color: "#0A0A0A",
