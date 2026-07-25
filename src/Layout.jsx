@@ -3,6 +3,7 @@ import { createPageUrl } from "@/utils";
 import { useState, useEffect } from "react";
 import { Menu, X, Instagram, Facebook, MessageCircle, MapPin, ChevronLeft } from "lucide-react";
 import MobileBottomBar from "@/components/MobileBottomBar";
+import { useImageOptimization } from "@/hooks/useImageOptimization";
 
 const ROOT_ROUTES = new Set(["/", "/Home", "/Artists", "/Gallery", "/Menu", "/About", "/PrivateEvents", "/VIPReservations", "/Contact", "/Admin", "/configuracion", "/gestor-menu", "/TicketSales", "/MisEntradas", "/EscapeBar", "/OpenStage", "/MisCuenta", "/QR", "/payment/success", "/payment/pending", "/payment/failure"]);
 
@@ -24,6 +25,8 @@ export default function Layout({ children, currentPageName }) {
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const isSubRoute = !ROOT_ROUTES.has(location.pathname);
+
+  useImageOptimization([location.pathname]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
