@@ -51,23 +51,23 @@ export default function PrivateEvents() {
     setSendError("");
     try {
       const { base44 } = await import("@/api/base44Client");
-      await Promise.all([
-        base44.entities.PrivateEventRequest.create({
-          name: form.name,
-          email: form.email,
-          phone: form.phone,
-          event_type: form.eventType,
-          date: form.date,
-          guests: form.guests ? Number(form.guests) : undefined,
-          message: form.message,
-          status: "pendiente"
-        }),
-        base44.integrations.Core.SendEmail({
+      await base44.entities.PrivateEventRequest.create({
+        name: form.name,
+        email: form.email,
+        phone: form.phone,
+        event_type: form.eventType,
+        date: form.date,
+        guests: form.guests ? Number(form.guests) : undefined,
+        message: form.message,
+        status: "pendiente"
+      });
+      try {
+        await base44.integrations.Core.SendEmail({
           to: "contacto@pachadisco.com.ar",
           subject: `Consulta Evento Privado - ${form.eventType || "Sin especificar"}`,
           body: `Nombre: ${form.name}\nEmail: ${form.email}\nTeléfono: ${form.phone}\nTipo de evento: ${form.eventType}\nFecha tentativa: ${form.date}\nCantidad de invitados: ${form.guests}\n\nMensaje:\n${form.message}`
-        })
-      ]);
+        });
+      } catch { /* email failure shouldn't block success — entity already saved */ }
       setSent(true);
     } catch {
       setSendError("Ocurrió un error al enviar. Intentá nuevamente.");

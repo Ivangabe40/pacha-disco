@@ -178,8 +178,8 @@ export default function BuyTicketModal({ event, onClose }) {
                 <button onClick={() => setStep(1)} className="flex-1 py-3 rounded-xl text-gray-400 font-medium"
                   style={{ border: "1px solid #333" }}>Volver</button>
                 <button onClick={handleBuy}
-                  disabled={!form.buyer_name || !form.buyer_email || loading}
-                  className="flex-2 flex-grow py-3 rounded-xl font-semibold tracking-wider uppercase flex items-center justify-center gap-2"
+                disabled={!form.buyer_name || !form.buyer_email || loading}
+                className="flex-grow py-3 rounded-xl font-semibold tracking-wider uppercase flex items-center justify-center gap-2"
                   style={(!form.buyer_name || !form.buyer_email)
                     ? { background: "#333", color: "#666", cursor: "not-allowed" }
                     : { background: "linear-gradient(135deg, #C9A84C 0%, #E8C97A 50%, #C9A84C 100%)", color: "#0A0A0A" }}>

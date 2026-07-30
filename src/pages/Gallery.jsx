@@ -105,7 +105,7 @@ export default function Gallery() {
                     <img
                       src={album.cover_url}
                       alt={album.title}
-                      className="w-full h-full object-cover transition-transform duration-600 group-hover:scale-108"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                       style={{ transition: "transform 0.6s ease" }}
                     />
                   ) : (
@@ -115,11 +115,11 @@ export default function Gallery() {
                   )}
                   {/* Hover overlay */}
                   <div
-                    className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-350"
+                    className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                     style={{ background: "rgba(255,0,0,0.13)", backdropFilter: "blur(1px)" }}
                   >
                     <motion.div
-                      className="w-13 h-13 rounded-full flex items-center justify-center"
+                      className="w-14 h-14 rounded-full flex items-center justify-center"
                       style={{ background: "rgba(255,0,0,0.92)", width: 52, height: 52 }}
                       initial={{ scale: 0.7, opacity: 0 }}
                       whileInView={{ scale: 1, opacity: 1 }}
