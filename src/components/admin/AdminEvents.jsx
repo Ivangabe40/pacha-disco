@@ -23,7 +23,7 @@ export default function AdminEvents() {
   useEffect(() => { load(); }, []);
 
   const openNew = () => { setForm(emptyEvent); setEditing(null); setShowForm(true); };
-  const openEdit = (e) => { setForm({ ...e, ticket_price: e.ticket_price || "", ticket_price_door: e.ticket_price_door || "", capacity: e.capacity || "", background_url: e.background_url || "" }); setEditing(e); setShowForm(true); };
+  const openEdit = (e) => { setForm({ title: e.title || "", date: e.date || "", description: e.description || "", genres: e.genres || "", djs: e.djs || "", ticket_price: e.ticket_price || "", ticket_price_door: e.ticket_price_door || "", capacity: e.capacity || "", flyer_url: e.flyer_url || "", background_url: e.background_url || "", video_url: e.video_url || "", status: e.status || "activo", is_featured: e.is_featured || false }); setEditing(e); setShowForm(true); };
 
   const [uploadingVideo, setUploadingVideo] = useState(false);
 

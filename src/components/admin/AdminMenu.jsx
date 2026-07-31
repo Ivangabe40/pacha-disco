@@ -26,7 +26,7 @@ export default function AdminMenu() {
   };
 
   const openNew = () => { setForm(empty); setEditing(null); setShowForm(true); };
-  const openEdit = (item) => { setForm({ ...item, price: item.price.toString() }); setEditing(item.id); setShowForm(true); };
+  const openEdit = (item) => { setForm({ name: item.name || "", description: item.description || "", price: item.price != null ? item.price.toString() : "", category: item.category || "Tragos Clásicos", is_available: item.is_available !== false, is_featured: item.is_featured || false, sort_order: item.sort_order || 0 }); setEditing(item.id); setShowForm(true); };
   const closeForm = () => { setShowForm(false); setEditing(null); setForm(empty); };
 
   const handleSave = async () => {

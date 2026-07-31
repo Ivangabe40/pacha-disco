@@ -17,7 +17,7 @@ export default function AdminArtists() {
   useEffect(() => { load(); }, []);
 
   const openNew = () => { setForm(emptyArtist); setEditing(null); setShowForm(true); };
-  const openEdit = (a) => { setForm(a); setEditing(a); setShowForm(true); };
+  const openEdit = (a) => { setForm({ name: a.name || "", genre: a.genre || "", bio: a.bio || "", photo_url: a.photo_url || "", instagram: a.instagram || "", soundcloud: a.soundcloud || "", is_resident: a.is_resident || false }); setEditing(a); setShowForm(true); };
 
   const handlePhoto = async (file) => {
     setUploading(true);
