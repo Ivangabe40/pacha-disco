@@ -9,6 +9,7 @@ export default function AdminNewsletter() {
   const [body, setBody] = useState("");
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
+  const [sentCount, setSentCount] = useState(0);
 
   useEffect(() => {
     loadSubscribers();
@@ -37,26 +38,24 @@ export default function AdminNewsletter() {
     e.preventDefault();
     if (!subject || !body || subscribers.length === 0) return;
     setSending(true);
-    try {
-      await Promise.all(
-        subscribers.map(s =>
-          base44.integrations.Core.SendEmail({
-            from_name: "Pachá Night Club",
-            to: s.email,
-            subject,
-            body: s.name ? `Hola ${s.name}!\n\n${body}\n\n---\nPachá Night Club` : `${body}\n\n---\nPachá Night Club`
-          })
-        )
-      );
-      setSent(true);
-      setSubject("");
-      setBody("");
-      setTimeout(() => setSent(false), 4000);
-    } catch {
-      /* silent */
-    } finally {
-      setSending(false);
+    let count = 0;
+    for (const s of subscribers) {
+      try {
+        await base44.integrations.Core.SendEmail({
+          from_name: "Pachá Night Club",
+          to: s.email,
+          subject,
+          body: s.name ? `Hola ${s.name}!\n\n${body}\n\n---\nPachá Night Club` : `${body}\n\n---\nPachá Night Club`
+        });
+        count++;
+      } catch { /* skip individual failures */ }
     }
+    setSentCount(count);
+    setSent(true);
+    setSubject("");
+    setBody("");
+    setTimeout(() => setSent(false), 4000);
+    setSending(false);
   };
 
   return (
@@ -98,7 +97,7 @@ export default function AdminNewsletter() {
           {sent && (
             <div className="flex items-center gap-2 mb-4 p-3 rounded-lg" style={{ background: "rgba(34,197,94,0.1)", border: "1px solid rgba(34,197,94,0.2)" }}>
               <CheckCircle2 size={16} className="text-green-400" />
-              <span className="text-green-400 text-sm">¡Enviado a {subscribers.length} suscriptores!</span>
+              <span className="text-green-400 text-sm">¡Enviado a {sentCount} de {subscribers.length} suscriptores!</span>
             </div>
           )}
 
