@@ -9,7 +9,6 @@ import { checkEventReminders } from "@/hooks/useEventReminder";
 import PastEventsCarousel from "@/components/events/PastEventsCarousel";
 import NewsletterSubscribe from "@/components/NewsletterSubscribe";
 import HomeVideoSection from "@/components/HomeVideoSection";
-import EscapeBarSection from "@/components/EscapeBarSection";
 import NovedadBanner from "@/components/NovedadBanner";
 import PullToRefresh from "@/components/PullToRefresh";
 
@@ -134,9 +133,6 @@ export default function Home() {
               </p>
             </div>
           </section>
-
-          {/* ESCAPE BAR */}
-          <EscapeBarSection />
 
           {/* NEWSLETTER */}
           <div className="max-w-7xl mx-auto px-4 md:px-8 py-12 md:py-16 pb-24 md:pb-16">

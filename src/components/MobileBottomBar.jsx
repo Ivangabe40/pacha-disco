@@ -1,12 +1,11 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { Home, Calendar, Wine, Crown, GlassWater } from "lucide-react";
+import { Home, Calendar, Wine, Crown } from "lucide-react";
 import { useTabHistory } from "@/components/TabHistoryProvider";
 
 const tabs = [
   { label: "Inicio", icon: Home, path: "/" },
   { label: "Eventos", icon: Calendar, path: "/Home" },
   { label: "Carta", icon: Wine, path: "/Menu" },
-  { label: "Bar", icon: GlassWater, path: "/EscapeBar" },
   { label: "VIP", icon: Crown, path: "/VIPReservations" },
 ];
 

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
-import { Save, Check, Instagram, Facebook, MessageCircle, Palette, Building2, Loader2, Settings, Gamepad2, Upload } from "lucide-react";
+import { Save, Check, Instagram, Facebook, MessageCircle, Palette, Building2, Loader2, Settings } from "lucide-react";
 
 const CONFIG_DEFAULTS = {
   club_name: "",
@@ -9,12 +9,7 @@ const CONFIG_DEFAULTS = {
   social_tiktok: "",
   social_whatsapp: "",
   show_home_video: "true",
-  show_escape_bar: "true",
   show_newsletter: "true",
-  game_title: "Juego Oficial de ESCAPE BAR",
-  game_subtitle: "Versión Demo",
-  game_image_url: "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/1d508d84f_1783909062220.png",
-  game_link: "https://escapegame.base44.app/",
 };
 
 export default function AdminConfiguracion() {
@@ -23,18 +18,6 @@ export default function AdminConfiguracion() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
-  const [uploadingGameImg, setUploadingGameImg] = useState(false);
-
-  const handleGameImage = async (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-    setUploadingGameImg(true);
-    try {
-      const { file_url } = await base44.integrations.Core.UploadFile({ file });
-      setForm(f => ({ ...f, game_image_url: file_url }));
-    } catch { alert("Error al subir la imagen"); }
-    finally { setUploadingGameImg(false); }
-  };
 
   useEffect(() => {
     base44.entities.SiteConfig.list().then(data => {
@@ -131,48 +114,9 @@ export default function AdminConfiguracion() {
           <Toggle label="Mostrar video en la página de inicio" description="Sección de video promocional"
             value={form.show_home_video === "true"}
             onChange={v => setForm({ ...form, show_home_video: v ? "true" : "false" })} />
-          <Toggle label="Mostrar sección Escape Bar" description="Vista previa del bar en el inicio"
-            value={form.show_escape_bar === "true"}
-            onChange={v => setForm({ ...form, show_escape_bar: v ? "true" : "false" })} />
           <Toggle label="Mostrar formulario de newsletter" description="Suscripción al boletín"
             value={form.show_newsletter === "true"}
             onChange={v => setForm({ ...form, show_newsletter: v ? "true" : "false" })} />
-        </Section>
-
-        {/* Juego Oficial */}
-        <Section icon={Gamepad2} title="Juego Oficial de Escape Bar" color="#C9A84C">
-          <Field label="Título del juego">
-            <input value={form.game_title} onChange={e => setForm({ ...form, game_title: e.target.value })}
-              placeholder="Juego Oficial de ESCAPE BAR"
-              className="w-full px-4 py-3 rounded-xl text-white text-sm outline-none" style={inputStyle} />
-          </Field>
-          <Field label="Subtítulo (ej: Versión Demo)">
-            <input value={form.game_subtitle} onChange={e => setForm({ ...form, game_subtitle: e.target.value })}
-              placeholder="Versión Demo"
-              className="w-full px-4 py-3 rounded-xl text-white text-sm outline-none" style={inputStyle} />
-          </Field>
-          <Field label="Link de acceso al juego">
-            <input value={form.game_link} onChange={e => setForm({ ...form, game_link: e.target.value })}
-              placeholder="https://escapegame.base44.app/"
-              className="w-full px-4 py-3 rounded-xl text-white text-sm outline-none" style={inputStyle} />
-          </Field>
-          <Field label="Imagen del juego">
-            <div className="flex flex-col sm:flex-row gap-3 items-start">
-              {form.game_image_url &&
-                <img src={form.game_image_url} alt="Juego" className="w-full sm:w-40 h-auto rounded-lg object-cover"
-                  style={{ border: "1px solid #333" }} />
-              }
-              <label className="flex items-center gap-2 px-4 py-3 rounded-xl text-white text-sm font-medium cursor-pointer transition-all"
-                style={{ background: uploadingGameImg ? "#444" : "#1a1a1a", border: "1px solid #333" }}>
-                {uploadingGameImg ? <Loader2 size={15} className="animate-spin" /> : <Upload size={15} />}
-                {uploadingGameImg ? "Subiendo..." : "Subir imagen"}
-                <input type="file" accept="image/*" onChange={handleGameImage} className="hidden" />
-              </label>
-            </div>
-            <input value={form.game_image_url} onChange={e => setForm({ ...form, game_image_url: e.target.value })}
-              placeholder="https://..."
-              className="w-full px-4 py-3 rounded-xl text-white text-sm outline-none mt-2" style={inputStyle} />
-          </Field>
         </Section>
 
         {/* Save button */}

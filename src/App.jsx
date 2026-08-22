@@ -8,8 +8,6 @@ import PageNotFound from './lib/PageNotFound';
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import UserNotRegisteredError from '@/components/UserNotRegisteredError';
 import PrivateEvents from './pages/PrivateEvents';
-import EscapeBar from './pages/EscapeBar';
-import OpenStage from './pages/OpenStage';
 import VIPReservations from './pages/VIPReservations';
 import Contact from './pages/Contact';
 import MisCuenta from './pages/MisCuenta';
@@ -93,8 +91,6 @@ const AuthenticatedApp = () => {
         <Route path="/Contact" element={<LayoutWrapper currentPageName="Contact"><Contact /></LayoutWrapper>} />
         <Route path="/MisCuenta" element={<LayoutWrapper currentPageName="MisCuenta"><MisCuenta /></LayoutWrapper>} />
         <Route path="/MisEntradas" element={<LayoutWrapper currentPageName="MisEntradas"><MisEntradas /></LayoutWrapper>} />
-        <Route path="/EscapeBar" element={<LayoutWrapper currentPageName="EscapeBar"><EscapeBar /></LayoutWrapper>} />
-        <Route path="/OpenStage" element={<LayoutWrapper currentPageName="OpenStage"><OpenStage /></LayoutWrapper>} />
         <Route path="/QR" element={<LayoutWrapper currentPageName="QRPage"><QRPage /></LayoutWrapper>} />
         <Route path="/configuracion" element={<LayoutWrapper currentPageName="Configuracion"><Configuracion /></LayoutWrapper>} />
         <Route path="/gestor-menu" element={<LayoutWrapper currentPageName="GestorMenu"><GestorMenu /></LayoutWrapper>} />

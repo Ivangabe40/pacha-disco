@@ -10,13 +10,11 @@ import AdminPromotions from "@/components/admin/AdminPromotions";
 import AdminReservations from "@/components/admin/AdminReservations";
 import AdminNewsletter from "@/components/admin/AdminNewsletter";
 import AdminNotifications from "@/components/admin/AdminNotifications";
-import AdminEscapeBar from "@/components/admin/AdminEscapeBar";
-import AdminOpenStage from "@/components/admin/AdminOpenStage";
 import AdminNovedades from "@/components/admin/AdminNovedades";
 import AdminConfiguracion from "@/components/admin/AdminConfiguracion";
 import AdminTicketOrders from "@/components/admin/AdminTicketOrders";
 import AdminTicketSales from "@/components/admin/AdminTicketSales";
-import { Calendar, Music, Camera, Wine, Megaphone, Crown, Mail, Bell, GlassWater, Sparkles, Settings, ShoppingBag, Ticket, LogOut, Mic } from "lucide-react";
+import { Calendar, Music, Camera, Wine, Megaphone, Crown, Mail, Bell, Sparkles, Settings, ShoppingBag, Ticket, LogOut } from "lucide-react";
 
 const LOGO_RED = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/6ecd577f7_file_00000000d89c820e8ae4cce82ce72506.png";
 
@@ -31,8 +29,6 @@ const tabs = [
   { id: "reservations", label: "Reservas", icon: Crown },
   { id: "newsletter", label: "Newsletter", icon: Mail },
   { id: "notifications", label: "Notif.", icon: Bell },
-  { id: "escapebar", label: "Escape Bar", icon: GlassWater },
-  { id: "openstage", label: "Open Stage", icon: Mic },
   { id: "novedades", label: "Novedades", icon: Sparkles },
   { id: "config", label: "Config", icon: Settings },
 ];
@@ -127,8 +123,6 @@ export default function Admin() {
         {activeTab === "reservations" && <AdminReservations />}
         {activeTab === "newsletter" && <AdminNewsletter />}
         {activeTab === "notifications" && <AdminNotifications />}
-        {activeTab === "escapebar" && <AdminEscapeBar />}
-        {activeTab === "openstage" && <AdminOpenStage />}
         {activeTab === "novedades" && <AdminNovedades />}
         {activeTab === "config" && <AdminConfiguracion />}
         {activeTab === "menu" && (
