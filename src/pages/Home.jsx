@@ -11,6 +11,7 @@ import NewsletterSubscribe from "@/components/NewsletterSubscribe";
 import HomeVideoSection from "@/components/HomeVideoSection";
 import NovedadBanner from "@/components/NovedadBanner";
 import PullToRefresh from "@/components/PullToRefresh";
+import GoogleReviewInvite from "@/components/GoogleReviewInvite";
 
 export default function Home() {
   const [events, setEvents] = useState([]);
@@ -133,6 +134,9 @@ export default function Home() {
               </p>
             </div>
           </section>
+
+          {/* GOOGLE REVIEW INVITE */}
+          <GoogleReviewInvite />
 
           {/* NEWSLETTER */}
           <div className="max-w-7xl mx-auto px-4 md:px-8 py-12 md:py-16 pb-24 md:pb-16">

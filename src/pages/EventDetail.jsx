@@ -6,6 +6,7 @@ import { es } from "date-fns/locale";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { useEventReminder } from "@/hooks/useEventReminder";
+import GoogleReviewInvite from "@/components/GoogleReviewInvite";
 
 export default function EventDetail() {
   const [event, setEvent] = useState(null);
@@ -217,6 +218,9 @@ export default function EventDetail() {
           </div>
         </div>
       </div>
+
+      {/* GOOGLE REVIEW INVITE */}
+      <GoogleReviewInvite />
 
     </div>);
 
