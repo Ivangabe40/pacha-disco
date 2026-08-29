@@ -3,8 +3,10 @@ import { base44 } from "@/api/base44Client";
 import HeroEvent from "@/components/events/HeroEvent";
 import EventCard from "@/components/events/EventCard";
 import PromotionPopup from "@/components/promotions/PromotionPopup";
-import { Calendar } from "lucide-react";
+import { Calendar, ArrowRight } from "lucide-react";
 import UpcomingEventsBanner from "@/components/events/UpcomingEventsBanner";
+import { Link } from "react-router-dom";
+import { createPageUrl } from "@/utils";
 import { checkEventReminders } from "@/hooks/useEventReminder";
 import PastEventsCarousel from "@/components/events/PastEventsCarousel";
 import NewsletterSubscribe from "@/components/NewsletterSubscribe";
@@ -66,40 +68,31 @@ export default function Home() {
           {/* COUNTDOWN BANNERS — solo si hay próximos eventos */}
           {upcoming.length > 0 && <UpcomingEventsBanner events={upcoming} />}
 
-          {noUpcoming ? (
-            /* Sin próximos eventos: carrusel ocupa todo el espacio hero */
-            past.length > 0 ? (
-              <PastEventsCarousel events={past} />
-            ) : (
-              <div className="text-center py-24 md:py-40">
-                <Calendar size={48} className="mx-auto mb-4" style={{ color: "#FF0000", opacity: 0.3 }} />
-                <p className="text-gray-500 text-lg">Próximamente nuevos eventos</p>
-                <p className="text-gray-700 text-sm mt-2 tracking-wider uppercase">Seguinos en redes para enterarte primero</p>
-              </div>
-            )
-          ) : (
-            /* Con próximos eventos: grilla + carrusel de pasados abajo */
-            <section className="max-w-7xl mx-auto px-4 md:px-8 py-12 md:py-24">
-              <div className="flex items-center gap-4 mb-8 md:mb-12">
-                <div className="w-1 h-10 rounded-full" style={{ background: "linear-gradient(#FF0000, #CC0000)" }} />
-                <div>
-                  <p className="text-xs tracking-widest uppercase mb-0.5 font-condensed" style={{ color: "#FF0000" }}>Agenda</p>
-                  <h2 className="text-2xl md:text-4xl font-black text-white uppercase" style={{ fontFamily: "'Playfair Display', serif" }}>
-                    Próximos Eventos
-                  </h2>
-                </div>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5">
-                {upcoming.map(event => <EventCard key={event.id} event={event} />)}
-              </div>
-              {past.length > 0 && (
-                <div className="mt-12 md:mt-20">
-                  <div className="h-px w-full mb-4" style={{ background: "linear-gradient(90deg, transparent, rgba(255,0,0,0.15), transparent)" }} />
-                  <PastEventsCarousel events={past} />
-                </div>
-              )}
+          {/* CTA: ver todos los eventos */}
+          {upcoming.length > 0 && (
+            <section className="max-w-7xl mx-auto px-4 md:px-8 py-8 md:py-12 text-center">
+              <Link to={createPageUrl("Eventos")}
+                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-xs md:text-sm font-black tracking-widest uppercase transition-all group"
+                style={{ border: "1px solid rgba(255,0,0,0.5)", color: "#fff", background: "rgba(255,0,0,0.06)" }}>
+                Ver todos los eventos
+                <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
+              </Link>
             </section>
           )}
+
+          {/* CARRUSEL DE PASADOS */}
+          {noUpcoming && past.length === 0 ? (
+            <div className="text-center py-24 md:py-40">
+              <Calendar size={48} className="mx-auto mb-4" style={{ color: "#FF0000", opacity: 0.3 }} />
+              <p className="text-gray-500 text-lg">Próximamente nuevos eventos</p>
+              <p className="text-gray-700 text-sm mt-2 tracking-wider uppercase">Seguinos en redes para enterarte primero</p>
+            </div>
+          ) : past.length > 0 ? (
+            <section className="max-w-7xl mx-auto px-4 md:px-8 py-8 md:py-12">
+              <div className="h-px w-full mb-6 md:mb-8" style={{ background: "linear-gradient(90deg, transparent, rgba(255,0,0,0.15), transparent)" }} />
+              <PastEventsCarousel events={past} />
+            </section>
+          ) : null}
 
           {/* GRACIAS POR ESTAR */}
           <section className="py-12 md:py-24 px-4" style={{ background: "#070707" }}>

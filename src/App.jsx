@@ -8,6 +8,7 @@ import PageNotFound from './lib/PageNotFound';
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import UserNotRegisteredError from '@/components/UserNotRegisteredError';
 import PrivateEvents from './pages/PrivateEvents';
+import Eventos from './pages/Eventos';
 import VIPReservations from './pages/VIPReservations';
 import Contact from './pages/Contact';
 import MisCuenta from './pages/MisCuenta';
@@ -95,6 +96,7 @@ const AuthenticatedApp = () => {
         <Route path="/configuracion" element={<LayoutWrapper currentPageName="Configuracion"><Configuracion /></LayoutWrapper>} />
         <Route path="/gestor-menu" element={<LayoutWrapper currentPageName="GestorMenu"><GestorMenu /></LayoutWrapper>} />
         <Route path="/TicketSales" element={<LayoutWrapper currentPageName="TicketSales"><TicketSales /></LayoutWrapper>} />
+        <Route path="/Eventos" element={<LayoutWrapper currentPageName="Eventos"><Eventos /></LayoutWrapper>} />
         <Route path="/payment/success" element={<LayoutWrapper currentPageName="PaymentSuccess"><PaymentSuccess /></LayoutWrapper>} />
         <Route path="/payment/pending" element={<LayoutWrapper currentPageName="PaymentPending"><PaymentPending /></LayoutWrapper>} />
         <Route path="/payment/failure" element={<LayoutWrapper currentPageName="PaymentFailure"><PaymentFailure /></LayoutWrapper>} />
