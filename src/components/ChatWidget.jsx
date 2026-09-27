@@ -116,7 +116,7 @@ export default function ChatWidget() {
                 <p className="text-gray-300 text-sm font-semibold mb-1">¡Hola! Soy el asistente de Pachá.</p>
                 <p className="text-gray-500 text-xs mb-4">Para chatear conmigo necesitás iniciar sesión, o podés contactarnos directamente por WhatsApp.</p>
                 <a
-                  href="https://wa.me/5493468536935"
+                  href="https://wa.me/5493468546935"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-white text-xs font-semibold"

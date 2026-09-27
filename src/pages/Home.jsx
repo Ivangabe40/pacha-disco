@@ -13,6 +13,7 @@ import { getEventPhase } from "@/lib/eventDisplay";
 import NewsletterSubscribe from "@/components/NewsletterSubscribe";
 import HomeVideoSection from "@/components/HomeVideoSection";
 import NovedadBanner from "@/components/NovedadBanner";
+import OperationInfo from "@/components/OperationInfo";
 import PullToRefresh from "@/components/PullToRefresh";
 import GoogleReviewInvite from "@/components/GoogleReviewInvite";
 
@@ -62,6 +63,9 @@ export default function Home() {
 
           {/* HERO — solo si hay próximos eventos */}
           {featured && <HeroEvent event={featured} />}
+
+          {/* OPERACIÓN ACTUAL — información permanente */}
+          <OperationInfo />
 
           {/* VIDEO SECTION — Lo que se viene (dinámico desde SiteConfig) */}
           <HomeVideoSection />

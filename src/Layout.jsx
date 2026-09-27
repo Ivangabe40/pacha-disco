@@ -141,7 +141,7 @@ export default function Layout({ children, currentPageName }) {
             <div className="flex flex-col items-center md:items-start gap-2">
               <img src={LOGO_RED} alt="Pachá" className="h-14 w-auto object-contain"
               style={{ filter: "drop-shadow(0 0 10px rgba(255,0,0,0.4))" }} />
-              <p className="text-gray-600 text-xs tracking-widest uppercase">Pachá Night Club · Exclusivo Mayores</p>
+              <p className="text-gray-600 text-xs tracking-widest uppercase">Pachá Night Club · Exclusivo Mayores de 25</p>
               <a href="https://maps.app.goo.gl/outiaSZFTh14BhGK8" target="_blank" rel="noopener noreferrer"
               className="flex items-center gap-1.5 text-gray-600 hover:text-gray-400 text-xs transition-colors mt-1">
                 <MapPin size={11} /> Ver en Google Maps
@@ -163,7 +163,7 @@ export default function Layout({ children, currentPageName }) {
               onMouseLeave={(e) => e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"}>
                 <Facebook size={15} className="text-gray-500" />
               </a>
-              <a href="https://wa.me/5493468536935" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"
+              <a href="https://wa.me/5493468546935" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"
               className="w-9 h-9 flex items-center justify-center rounded-full transition-all"
               style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}
               onMouseEnter={(e) => e.currentTarget.style.borderColor = "rgba(37,211,102,0.5)"}
