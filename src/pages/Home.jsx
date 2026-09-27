@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { checkEventReminders } from "@/hooks/useEventReminder";
 import PastEventsCarousel from "@/components/events/PastEventsCarousel";
+import { getEventPhase } from "@/lib/eventDisplay";
 import NewsletterSubscribe from "@/components/NewsletterSubscribe";
 import HomeVideoSection from "@/components/HomeVideoSection";
 import NovedadBanner from "@/components/NovedadBanner";
@@ -35,8 +36,8 @@ export default function Home() {
     loadEvents();
   }, [loadEvents]);
 
-  const upcoming = events.filter(e => new Date(e.date) >= new Date());
-  const past = events.filter(e => new Date(e.date) < new Date());
+  const upcoming = events.filter(e => ["proximo", "vigente"].includes(getEventPhase(e)));
+  const past = events.filter(e => ["finalizado", "cancelado"].includes(getEventPhase(e)));
   const featured = upcoming.find(e => e.is_featured) || upcoming[0];
 
   if (loading) return (

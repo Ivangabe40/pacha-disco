@@ -4,8 +4,7 @@ import EventCard from "@/components/events/EventCard";
 import PastEventsCarousel from "@/components/events/PastEventsCarousel";
 import { Calendar } from "lucide-react";
 import PullToRefresh from "@/components/PullToRefresh";
-import { Link } from "react-router-dom";
-import { createPageUrl } from "@/utils";
+import { getEventPhase } from "@/lib/eventDisplay";
 
 export default function Eventos() {
   const [events, setEvents] = useState([]);
@@ -24,8 +23,8 @@ export default function Eventos() {
 
   useEffect(() => { loadEvents(); }, [loadEvents]);
 
-  const upcoming = events.filter(e => new Date(e.date) >= new Date());
-  const past = events.filter(e => new Date(e.date) < new Date());
+  const upcoming = events.filter(e => ["proximo", "vigente"].includes(getEventPhase(e)));
+  const past = events.filter(e => ["finalizado", "cancelado"].includes(getEventPhase(e)));
 
   if (loading) return (
     <div className="min-h-screen flex items-center justify-center" style={{ background: "#070707" }}>
@@ -54,7 +53,7 @@ export default function Eventos() {
               </div>
             </div>
             <p className="text-gray-500 text-sm md:text-base mt-4 max-w-xl leading-relaxed">
-              Toda la agenda de Pachá en un solo lugar. Entradas anticipadas, reservas VIP y más.
+              Toda la agenda de Pachá en un solo lugar.
             </p>
           </section>
 
@@ -79,14 +78,6 @@ export default function Eventos() {
             </section>
           )}
 
-          {/* CTA entradas */}
-          <section className="max-w-2xl mx-auto px-4 py-12 md:py-16 text-center">
-            <Link to={createPageUrl("TicketSales")}
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-sm md:text-base font-black tracking-widest uppercase transition-all"
-              style={{ background: "linear-gradient(135deg, #FF0000, #FF6666)", color: "#fff", boxShadow: "0 4px 30px rgba(255,0,0,0.3)" }}>
-              Comprar Entradas
-            </Link>
-          </section>
         </div>
       </PullToRefresh>
     </div>

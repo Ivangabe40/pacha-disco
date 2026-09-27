@@ -116,7 +116,7 @@ export default function ChatWidget() {
                 <p className="text-gray-300 text-sm font-semibold mb-1">¡Hola! Soy el asistente de Pachá.</p>
                 <p className="text-gray-500 text-xs mb-4">Para chatear conmigo necesitás iniciar sesión, o podés contactarnos directamente por WhatsApp.</p>
                 <a
-                  href="https://wa.me/5493468546935"
+                  href="https://wa.me/5493468536935"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-white text-xs font-semibold"
@@ -129,7 +129,7 @@ export default function ChatWidget() {
               <div className="text-center py-8">
                 <Bot size={32} className="mx-auto mb-3" style={{ color: "#FF0000", opacity: 0.5 }} />
                 <p className="text-gray-400 text-sm">¡Hola! Soy el asistente de Pachá.</p>
-                <p className="text-gray-600 text-xs mt-1">Preguntame sobre eventos, entradas, tragos o reservas 🎶</p>
+                <p className="text-gray-600 text-xs mt-1">Preguntame sobre eventos, la carta, promos o cómo llegar 🎶</p>
               </div>
             )}
             {visibleMessages.map((msg, i) => (

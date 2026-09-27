@@ -22,10 +22,10 @@ export default function About() {
             Ubicado en el corazón de la ciudad, Pachá Night Club es el destino de entretenimiento nocturno más exclusivo de la región. Nuestra propuesta abarca múltiples géneros musicales — reggaeton, electrónica, pop, cumbia y los grandes clásicos — para que cada visitante encuentre su ritmo.
           </p>
           <p className="text-gray-400 text-base leading-relaxed mb-4">
-            Pensado para mayores de 18 años que buscan vivir la noche con estilo, Pachá ofrece mesas VIP, sectores privados, barra exclusiva y eventos especiales con artistas y DJs de primer nivel. La plataforma digital fue diseñada y desarrollada por <strong className="text-white">NDTX Universe</strong> para brindar la mejor experiencia tanto online como presencial.
+            Pensado para mayores de 25 años que buscan vivir la noche con estilo, Pachá ofrece eventos especiales con artistas y DJs de primer nivel. La plataforma digital fue diseñada y desarrollada por <strong className="text-white">NDTX Universe</strong> para brindar la mejor experiencia tanto online como presencial.
           </p>
           <p className="text-gray-400 text-base leading-relaxed">
-            Ya sea que vengas a bailar, a celebrar un cumpleaños, un evento corporativo o simplemente a disfrutar de la mejor música en vivo, en Pachá siempre encontrás el ambiente ideal. Reservá tu lugar, comprá tus entradas anticipadas y viví la noche como merece ser vivida.
+            Ya sea que vengas a bailar, a celebrar un cumpleaños, un evento corporativo o simplemente a disfrutar de la mejor música en vivo, en Pachá siempre encontrás el ambiente ideal. Viví la noche como merece ser vivida.
           </p>
         </div>
       </div>
@@ -91,7 +91,7 @@ export default function About() {
         {/* Contact */}
         <div className="text-center p-6 md:p-10 rounded-2xl" style={{ background: "#111", border: "1px solid #222" }}>
           <h2 className="text-3xl font-bold text-white mb-4" style={{ fontFamily: "'Playfair Display', serif" }}>Contacto</h2>
-          <p className="text-gray-400 mb-6">Para reservas VIP, eventos privados o prensa:</p>
+          <p className="text-gray-400 mb-6">Para eventos privados, prensa o consultas:</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="mailto:damianrodriguez432@gmail.com"
              className="px-8 py-3 rounded-xl font-semibold text-sm tracking-wider uppercase"
@@ -103,7 +103,7 @@ export default function About() {
              style={{ border: "1px solid #C9A84C", color: "#C9A84C" }}>
              @pachaoficialok
             </a>
-            <a href="https://wa.me/5493468546935" target="_blank" rel="noopener noreferrer"
+            <a href="https://wa.me/5493468536935" target="_blank" rel="noopener noreferrer"
             className="px-8 py-3 rounded-xl font-semibold text-sm tracking-wider uppercase"
             style={{ border: "1px solid #25D366", color: "#25D366" }}>
             WhatsApp

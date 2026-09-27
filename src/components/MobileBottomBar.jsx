@@ -1,12 +1,11 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { Home, Calendar, Wine, Crown } from "lucide-react";
+import { Home, Calendar, Wine } from "lucide-react";
 import { useTabHistory } from "@/components/TabHistoryProvider";
 
 const tabs = [
   { label: "Inicio", icon: Home, path: "/" },
   { label: "Eventos", icon: Calendar, path: "/Eventos" },
   { label: "Carta", icon: Wine, path: "/Menu" },
-  { label: "VIP", icon: Crown, path: "/VIPReservations" },
 ];
 
 export default function MobileBottomBar() {
@@ -37,7 +36,7 @@ export default function MobileBottomBar() {
         const isActive =
           path === "/"
             ? location.pathname === "/" || location.pathname === "/Home"
-            : location.pathname === path || (path === "/Eventos" && location.pathname === "/Eventos");
+            : location.pathname === path;
         return (
           <button
             key={path}

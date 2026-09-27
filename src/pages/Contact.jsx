@@ -33,16 +33,16 @@ export default function Contact() {
           Contacto
         </h1>
         <p className="text-gray-400 mb-10 text-lg">
-          ¿Tenés consultas, querés reservar una mesa VIP o contactarnos por un evento privado? Escribinos.
+          ¿Tenés consultas o querés contactarnos? Escribinos.
         </p>
 
         <div className="flex flex-col gap-4 mb-10">
           <a href="mailto:contacto@pachadisco.com.ar" className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors">
             <Mail size={18} className="text-red-500" /> contacto@pachadisco.com.ar
           </a>
-          <a href="https://wa.me/5493468546935" target="_blank" rel="noopener noreferrer"
+          <a href="https://wa.me/5493468536935" target="_blank" rel="noopener noreferrer"
             className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors">
-            <MessageCircle size={18} className="text-green-500" /> WhatsApp: +54 9 3468 546935
+            <MessageCircle size={18} className="text-green-500" /> WhatsApp: +54 9 3468 536935
           </a>
           <a href="https://www.instagram.com/pachaoficialok" target="_blank" rel="noopener noreferrer"
             className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors">

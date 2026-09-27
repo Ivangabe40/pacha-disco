@@ -12,12 +12,10 @@ const LOGO_RED = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b11
 const navLinks = [
 { label: "Inicio", page: "Home" },
 { label: "Eventos", page: "Eventos" },
-{ label: "Entradas", page: "TicketSales" },
 { label: "Galería", page: "Gallery" },
 { label: "Carta", page: "Menu" },
 { label: "Nosotros", page: "About" },
-{ label: "Eventos Privados", page: "PrivateEvents" },
-{ label: "Reservas VIP", page: "VIPReservations" }];
+{ label: "Eventos Privados", page: "PrivateEvents" }];
 
 
 export default function Layout({ children, currentPageName }) {
@@ -165,7 +163,7 @@ export default function Layout({ children, currentPageName }) {
               onMouseLeave={(e) => e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"}>
                 <Facebook size={15} className="text-gray-500" />
               </a>
-              <a href="https://wa.me/5493468546935" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"
+              <a href="https://wa.me/5493468536935" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"
               className="w-9 h-9 flex items-center justify-center rounded-full transition-all"
               style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}
               onMouseEnter={(e) => e.currentTarget.style.borderColor = "rgba(37,211,102,0.5)"}

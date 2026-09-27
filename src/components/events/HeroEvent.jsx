@@ -3,10 +3,11 @@ import { createPageUrl } from "@/utils";
 import { Calendar, Music, Zap } from "lucide-react";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
+import { getDisplayDate } from "@/lib/eventDisplay";
 
 export default function HeroEvent({ event }) {
   if (!event) return null;
-  const date = new Date(event.date);
+  const date = getDisplayDate(event);
 
   return (
     <div className="relative w-full overflow-hidden scanlines md:min-h-screen" style={{ background: "#070707" }}>
