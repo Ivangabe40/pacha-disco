@@ -92,7 +92,7 @@ export default function PachiChatWidget() {
         <button
           onClick={handleOpen}
           aria-label="Abrir chat de Pachi"
-          className="fixed z-50 flex items-center gap-2 pl-3.5 pr-4 py-3 rounded-full shadow-lg transition-all active:scale-95 hover:scale-105 bottom-[calc(68px+env(safe-area-inset-bottom,0px))] right-4 md:bottom-6 md:right-6"
+          className="fixed z-50 flex items-center gap-2 pl-3.5 pr-4 py-3 rounded-full shadow-lg transition-all active:scale-95 hover:scale-105 bottom-[calc(68px_+_env(safe-area-inset-bottom,0px))] right-4 md:bottom-6 md:right-6"
           style={{ background: "linear-gradient(135deg, #FF0000, #CC0000)" }}
         >
           <MessageCircle size={18} className="text-white" />
@@ -103,7 +103,7 @@ export default function PachiChatWidget() {
       {/* Panel de conversación */}
       {open && (
         <div
-          className="fixed z-[70] flex flex-col rounded-2xl overflow-hidden shadow-2xl left-3 right-3 bottom-[calc(68px+env(safe-area-inset-bottom,0px))] h-[min(560px,72vh)] md:left-auto md:right-6 md:bottom-6 md:w-[380px]"
+          className="fixed z-[70] flex flex-col rounded-2xl overflow-hidden shadow-2xl left-3 right-3 bottom-[calc(68px_+_env(safe-area-inset-bottom,0px))] h-[min(560px,72vh)] md:left-auto md:right-6 md:bottom-6 md:w-[380px]"
           style={{ background: "#0d0d0d", border: "1px solid rgba(255,0,0,0.3)" }}
         >
           {/* Header */}
