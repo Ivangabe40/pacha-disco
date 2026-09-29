@@ -3,6 +3,7 @@ import { createPageUrl } from "@/utils";
 import { useState, useEffect } from "react";
 import { Menu, X, Instagram, Facebook, MessageCircle, MapPin, ChevronLeft } from "lucide-react";
 import MobileBottomBar from "@/components/MobileBottomBar";
+import PachiChatWidget from "@/components/pachi/PachiChatWidget";
 import { useImageOptimization } from "@/hooks/useImageOptimization";
 
 const ROOT_ROUTES = new Set(["/", "/Home", "/Eventos", "/Artists", "/Gallery", "/Menu", "/About", "/VIPReservations", "/Contact", "/Admin", "/configuracion", "/gestor-menu", "/TicketSales", "/MisEntradas", "/MisCuenta", "/QR", "/payment/success", "/payment/pending", "/payment/failure"]);
@@ -129,6 +130,9 @@ export default function Layout({ children, currentPageName }) {
       </main>
 
       <MobileBottomBar />
+
+      {/* Asistente Pachi — chat público (oculto en páginas administrativas) */}
+      <PachiChatWidget />
 
       {/* FOOTER */}
       <footer className="py-10 md:py-14 px-4" style={{ background: "#050505", borderTop: "1px solid rgba(255,0,0,0.15)", position: "relative", zIndex: 1 }}>
