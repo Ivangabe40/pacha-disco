@@ -7,7 +7,6 @@ import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-route
 import PageNotFound from './lib/PageNotFound';
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import UserNotRegisteredError from '@/components/UserNotRegisteredError';
-import PrivateEvents from './pages/PrivateEvents';
 import Eventos from './pages/Eventos';
 import VIPReservations from './pages/VIPReservations';
 import Contact from './pages/Contact';
@@ -87,7 +86,6 @@ const AuthenticatedApp = () => {
             }
           />
         ))}
-        <Route path="/PrivateEvents" element={<LayoutWrapper currentPageName="PrivateEvents"><PrivateEvents /></LayoutWrapper>} />
         <Route path="/VIPReservations" element={<LayoutWrapper currentPageName="VIPReservations"><VIPReservations /></LayoutWrapper>} />
         <Route path="/Contact" element={<LayoutWrapper currentPageName="Contact"><Contact /></LayoutWrapper>} />
         <Route path="/MisCuenta" element={<LayoutWrapper currentPageName="MisCuenta"><MisCuenta /></LayoutWrapper>} />

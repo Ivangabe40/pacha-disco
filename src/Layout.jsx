@@ -5,7 +5,7 @@ import { Menu, X, Instagram, Facebook, MessageCircle, MapPin, ChevronLeft } from
 import MobileBottomBar from "@/components/MobileBottomBar";
 import { useImageOptimization } from "@/hooks/useImageOptimization";
 
-const ROOT_ROUTES = new Set(["/", "/Home", "/Eventos", "/Artists", "/Gallery", "/Menu", "/About", "/PrivateEvents", "/VIPReservations", "/Contact", "/Admin", "/configuracion", "/gestor-menu", "/TicketSales", "/MisEntradas", "/MisCuenta", "/QR", "/payment/success", "/payment/pending", "/payment/failure"]);
+const ROOT_ROUTES = new Set(["/", "/Home", "/Eventos", "/Artists", "/Gallery", "/Menu", "/About", "/VIPReservations", "/Contact", "/Admin", "/configuracion", "/gestor-menu", "/TicketSales", "/MisEntradas", "/MisCuenta", "/QR", "/payment/success", "/payment/pending", "/payment/failure"]);
 
 const LOGO_RED = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/6ecd577f7_file_00000000d89c820e8ae4cce82ce72506.png";
 
@@ -14,8 +14,7 @@ const navLinks = [
 { label: "Eventos", page: "Eventos" },
 { label: "Galería", page: "Gallery" },
 { label: "Carta", page: "Menu" },
-{ label: "Nosotros", page: "About" },
-{ label: "Eventos Privados", page: "PrivateEvents" }];
+{ label: "Nosotros", page: "About" }];
 
 
 export default function Layout({ children, currentPageName }) {
