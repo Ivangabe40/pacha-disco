@@ -33,7 +33,7 @@
       ]
     }
   ],
-  "model": "claude_opus_4_6",
+  "model": "automatic",
   "whatsapp_greeting": "Hola! Soy Pachi, de Pacha Disco. En qu\u00e9 podemos ayudarte hoy?",
   "memory_config": {
     "enabled": true,
