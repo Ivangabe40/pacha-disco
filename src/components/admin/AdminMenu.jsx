@@ -2,9 +2,9 @@ import { useState, useEffect, useRef } from "react";
 import { base44 } from "@/api/base44Client";
 import { Plus, Pencil, Trash2, Star, X, Check, Wine, Upload, Loader2 } from "lucide-react";
 
-const CATEGORIES = ["Tragos Clásicos", "Tragos de la Casa", "Shots", "Cervezas", "Vinos & Espumantes", "Sin Alcohol", "Combos"];
+const CATEGORIES = ["Sin Alcohol", "Vodkas", "Vermuts", "Cervezas", "Gin", "Clásicos", "Whiskies", "Bottle Service", "Espumosos", "Sugerencias Verano"];
 
-const empty = { name: "", description: "", price: "", category: "Tragos Clásicos", is_available: true, is_featured: false, sort_order: 0 };
+const empty = { name: "", description: "", price: "", category: "Clásicos", is_available: true, is_featured: false, sort_order: 0 };
 
 export default function AdminMenu() {
   const [items, setItems] = useState([]);

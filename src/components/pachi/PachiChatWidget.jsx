@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import { base44 } from "@/api/base44Client";
-import { X, Send, MessageCircle, RotateCcw } from "lucide-react";
+import { X, Send, Bot, RotateCcw } from "lucide-react";
 import PachiMessageBubble from "./PachiMessageBubble";
 
 const AGENT_NAME = "pacha_assistant";
@@ -91,12 +91,13 @@ export default function PachiChatWidget() {
       {!open && (
         <button
           onClick={handleOpen}
-          aria-label="Abrir chat de Pachi"
-          className="fixed z-50 flex items-center gap-2 pl-3.5 pr-4 py-3 rounded-full shadow-lg transition-all active:scale-95 hover:scale-105 bottom-[calc(68px_+_env(safe-area-inset-bottom,0px))] right-4 md:bottom-6 md:right-6"
-          style={{ background: "linear-gradient(135deg, #FF0000, #CC0000)" }}
+          aria-label="Abrir chat de Pachi Bot"
+          className="fixed z-50 flex items-center gap-2 pl-3.5 pr-4 py-3 rounded-full transition-all active:scale-95 hover:scale-105 bottom-[calc(68px_+_env(safe-area-inset-bottom,0px))] right-4 md:bottom-6 md:right-6"
+          style={{ background: "linear-gradient(135deg, #FF0000, #CC0000)", boxShadow: "0 4px 24px rgba(255,0,0,0.5)" }}
         >
-          <MessageCircle size={18} className="text-white" />
-          <span className="text-white text-xs font-bold tracking-widest uppercase font-condensed">Pachi</span>
+          <span className="absolute inset-0 rounded-full animate-ping opacity-20" style={{ background: "#FF0000" }} />
+          <Bot size={18} className="text-white relative" />
+          <span className="text-white text-xs font-bold tracking-widest uppercase font-condensed relative">Pachi Bot</span>
         </button>
       )}
 
@@ -112,7 +113,7 @@ export default function PachiChatWidget() {
             <div className="flex items-center gap-2.5">
               <div className="w-2 h-2 rounded-full" style={{ background: "#22c55e", boxShadow: "0 0 8px rgba(34,197,94,0.7)" }} />
               <div>
-                <p className="text-white text-sm font-bold" style={{ fontFamily: "'Playfair Display', serif" }}>Pachi</p>
+                <p className="text-white text-sm font-bold" style={{ fontFamily: "'Playfair Display', serif" }}>Pachi Bot</p>
                 <p className="text-gray-500 text-xs font-condensed tracking-wide">Asistente de Pacha Disco</p>
               </div>
             </div>

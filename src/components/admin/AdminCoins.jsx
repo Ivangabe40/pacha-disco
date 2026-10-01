@@ -36,8 +36,10 @@ export default function AdminCoins() {
   };
 
   const handleAdjust = async (profile, delta) => {
-    const newCoins = Math.max(0, profile.coins + delta);
-    const newTotal = delta > 0 ? (profile.total_earned || 0) + delta : (profile.total_earned || 0);
+    const n = Number(delta);
+    if (!Number.isFinite(n) || n < 1) return;
+    const newCoins = Math.max(0, profile.coins + n);
+    const newTotal = n > 0 ? (profile.total_earned || 0) + n : (profile.total_earned || 0);
     try {
       await base44.entities.PachaCoins.update(profile.id, {
         coins: newCoins,
@@ -178,7 +180,7 @@ export default function AdminCoins() {
                       <input
                         type="number"
                         value={amount}
-                        onChange={e => setAmount(Number(e.target.value))}
+                        onChange={e => setAmount(e.target.value === "" ? "" : Number(e.target.value))}
                         min={1}
                         className="w-24 px-2 py-1.5 rounded-lg text-sm text-white text-center outline-none"
                         style={{ background: "#0d0d0d", border: "1px solid #333" }}
