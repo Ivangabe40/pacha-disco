@@ -7,7 +7,6 @@ import { es } from "date-fns/locale";
 
 const emptyEvent = {
   title: "", date: "", description: "", genres: "", djs: "",
-  ticket_price: "", ticket_price_door: "", capacity: "",
   flyer_url: "", background_url: "", video_url: "", status: "activo", is_featured: false
 };
 
@@ -23,7 +22,7 @@ export default function AdminEvents() {
   useEffect(() => { load(); }, []);
 
   const openNew = () => { setForm(emptyEvent); setEditing(null); setShowForm(true); };
-  const openEdit = (e) => { setForm({ title: e.title || "", date: e.date || "", description: e.description || "", genres: e.genres || "", djs: e.djs || "", ticket_price: e.ticket_price || "", ticket_price_door: e.ticket_price_door || "", capacity: e.capacity || "", flyer_url: e.flyer_url || "", background_url: e.background_url || "", video_url: e.video_url || "", status: e.status || "activo", is_featured: e.is_featured || false }); setEditing(e); setShowForm(true); };
+  const openEdit = (e) => { setForm({ title: e.title || "", date: e.date || "", description: e.description || "", genres: e.genres || "", djs: e.djs || "", flyer_url: e.flyer_url || "", background_url: e.background_url || "", video_url: e.video_url || "", status: e.status || "activo", is_featured: e.is_featured || false }); setEditing(e); setShowForm(true); };
 
   const [uploadingVideo, setUploadingVideo] = useState(false);
 
@@ -58,9 +57,6 @@ export default function AdminEvents() {
   const handleSave = async () => {
     const data = {
       ...form,
-      ticket_price: form.ticket_price ? Number(form.ticket_price) : null,
-      ticket_price_door: form.ticket_price_door ? Number(form.ticket_price_door) : null,
-      capacity: form.capacity ? Number(form.capacity) : null,
     };
     try {
       if (editing) {
@@ -140,24 +136,6 @@ export default function AdminEvents() {
               <input value={form.djs} onChange={e => setForm({ ...form, djs: e.target.value })}
                 className="w-full px-4 py-2.5 rounded-xl text-white text-sm outline-none"
                 style={{ background: "#1a1a1a", border: "1px solid #333" }} placeholder="DJ 1, DJ 2..." />
-            </div>
-            <div>
-              <label className="text-xs text-gray-400 uppercase tracking-wider block mb-1">Precio anticipada ($)</label>
-              <input type="number" value={form.ticket_price} onChange={e => setForm({ ...form, ticket_price: e.target.value })}
-                className="w-full px-4 py-2.5 rounded-xl text-white text-sm outline-none"
-                style={{ background: "#1a1a1a", border: "1px solid #333" }} placeholder="2000" />
-            </div>
-            <div>
-              <label className="text-xs text-gray-400 uppercase tracking-wider block mb-1">Precio en puerta ($)</label>
-              <input type="number" value={form.ticket_price_door} onChange={e => setForm({ ...form, ticket_price_door: e.target.value })}
-                className="w-full px-4 py-2.5 rounded-xl text-white text-sm outline-none"
-                style={{ background: "#1a1a1a", border: "1px solid #333" }} placeholder="3000" />
-            </div>
-            <div>
-              <label className="text-xs text-gray-400 uppercase tracking-wider block mb-1">Capacidad</label>
-              <input type="number" value={form.capacity} onChange={e => setForm({ ...form, capacity: e.target.value })}
-                className="w-full px-4 py-2.5 rounded-xl text-white text-sm outline-none"
-                style={{ background: "#1a1a1a", border: "1px solid #333" }} placeholder="500" />
             </div>
             <div className="md:col-span-2">
               <label className="text-xs text-gray-400 uppercase tracking-wider block mb-1">Descripción</label>
@@ -279,8 +257,6 @@ export default function AdminEvents() {
                 </div>
                 <p className="text-gray-500 text-sm mt-0.5">
                   {event.date ? format(new Date(event.date), "d MMM yyyy HH:mm", { locale: es }) : ""}
-                  {event.ticket_price && ` · $${event.ticket_price.toLocaleString()}`}
-                  {event.tickets_sold ? ` · ${event.tickets_sold} vendidas` : ""}
                 </p>
               </div>
               <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">

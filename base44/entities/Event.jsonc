@@ -35,28 +35,6 @@
       "type": "string",
       "description": "DJs / artistas del evento"
     },
-    "ticket_price": {
-      "type": "number",
-      "description": "Precio entrada anticipada"
-    },
-    "ticket_price_door": {
-      "type": "number",
-      "description": "Precio en puerta"
-    },
-    "capacity": {
-      "type": "number",
-      "description": "Capacidad m\u00e1xima"
-    },
-    "tickets_sold": {
-      "type": "number",
-      "default": 0,
-      "description": "Entradas vendidas"
-    },
-    "tickets_enabled": {
-      "type": "boolean",
-      "default": true,
-      "description": "Venta de entradas habilitada para este evento"
-    },
     "status": {
       "type": "string",
       "enum": [

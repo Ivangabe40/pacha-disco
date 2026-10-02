@@ -1,7 +1,7 @@
 import { createContext, useContext, useRef, useEffect, useCallback } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-const TAB_ROOTS = ["/", "/Home", "/Menu", "/VIPReservations"];
+const TAB_ROOTS = ["/", "/Home", "/Menu"];
 
 const TabHistoryContext = createContext(null);
 

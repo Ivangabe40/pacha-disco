@@ -4,13 +4,6 @@ import { Bell, Send, Users, Zap, PartyPopper, Tag, CheckCircle2, Loader2, Chevro
 
 const TEMPLATES = [
   {
-    id: "lista",
-    label: "🎟️ Apertura de Lista",
-    icon: "🎟️",
-    subject: "¡La lista está abierta! — Pachá Night Club",
-    body: "¡Buenas noticias! La lista para el próximo evento en Pachá ya está disponible. Aprovechá el precio anticipado y asegurá tu lugar antes de que se agote.\n\n🔗 Compra tu entrada en: [LINK_ENTRADAS]\n\nNos vemos en la pista,\nEl equipo de Pachá 🔴",
-  },
-  {
     id: "evento",
     label: "🎉 Evento Especial",
     icon: "🎉",
@@ -195,8 +188,7 @@ export default function AdminNotifications() {
         <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-3">Casos de Uso</p>
         {[
           { icon: Zap, label: "Promo relámpago", desc: "Descuento o combo solo por las próximas 2 hs" },
-          { icon: PartyPopper, label: "Apertura de lista", desc: "Avisá cuando se habilitan entradas anticipadas" },
-          { icon: Tag, label: "Evento especial", desc: "DJ invitado, temática o noche temática" },
+          { icon: PartyPopper, label: "Evento especial", desc: "DJ invitado, temática o noche temática" },
         ].map(({ icon: Icon, label, desc }) => (
           <div key={label} className="flex items-start gap-2.5">
             <Icon size={14} style={{ color: "#FF0000", marginTop: 2 }} />

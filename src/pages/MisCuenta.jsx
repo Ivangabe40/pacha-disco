@@ -24,9 +24,6 @@ const LEVELS = [
 const REWARDS = [
   { coins: 100, label: "Shot de bienvenida", icon: "🥃", desc: "1 shot a elección en barra" },
   { coins: 250, label: "2x1 en tragos", icon: "🍹", desc: "Válido por una noche" },
-  { coins: 500, label: "Entrada gratis", icon: "🎟️", desc: "Para el próximo evento" },
-  { coins: 800, label: "Mesa VIP", icon: "👑", desc: "Acceso prioritario a mesa VIP" },
-  { coins: 1500, label: "Noche Elite", icon: "💎", desc: "Botella + mesa VIP + lista de acompañantes" },
 ];
 
 function getLevel(coins) {
@@ -117,7 +114,7 @@ export default function MisCuenta() {
       <Coins size={48} style={{ color: "#C9A84C", opacity: 0.5 }} />
       <div className="text-center">
         <h2 className="text-2xl font-bold text-white mb-2" style={{ fontFamily: "'Playfair Display', serif" }}>Todavía no tenés coins</h2>
-        <p className="text-gray-500 text-sm max-w-xs">Comprá una entrada a un evento de Pachá y comenzá a acumular Pachá Coins automáticamente.</p>
+        <p className="text-gray-500 text-sm max-w-xs">Asistí a eventos de Pachá y el equipo acreditará tus Pachá Coins.</p>
       </div>
     </div>
   );
@@ -195,9 +192,7 @@ export default function MisCuenta() {
           </p>
           <div className="space-y-2">
             {[
-              { label: "Entrada anticipada", coins: "+100 coins" },
-              { label: "Entrada en puerta", coins: "+50 coins" },
-              { label: "Reserva VIP", coins: "+200 coins" },
+              { label: "Asistencia a eventos", coins: "Acreditado por el staff" },
             ].map(({ label, coins }) => (
               <div key={label} className="flex items-center justify-between">
                 <span className="text-gray-400 text-sm">{label}</span>

@@ -7,26 +7,20 @@ import AdminGalleryAlbums from "@/components/admin/AdminGalleryAlbums";
 import AdminMenu from "@/components/admin/AdminMenu";
 import MenuQR from "@/components/admin/MenuQR";
 import AdminPromotions from "@/components/admin/AdminPromotions";
-import AdminReservations from "@/components/admin/AdminReservations";
 import AdminNewsletter from "@/components/admin/AdminNewsletter";
 import AdminNotifications from "@/components/admin/AdminNotifications";
 import AdminNovedades from "@/components/admin/AdminNovedades";
 import AdminConfiguracion from "@/components/admin/AdminConfiguracion";
-import AdminTicketOrders from "@/components/admin/AdminTicketOrders";
-import AdminTicketSales from "@/components/admin/AdminTicketSales";
-import { Calendar, Music, Camera, Wine, Megaphone, Crown, Mail, Bell, Sparkles, Settings, ShoppingBag, Ticket, LogOut } from "lucide-react";
+import { Calendar, Music, Camera, Wine, Megaphone, Mail, Bell, Sparkles, Settings, LogOut } from "lucide-react";
 
 const LOGO_RED = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/6ecd577f7_file_00000000d89c820e8ae4cce82ce72506.png";
 
 const tabs = [
   { id: "events", label: "Eventos", icon: Calendar },
-  { id: "tickets", label: "Entradas", icon: Ticket },
-  { id: "orders", label: "Órdenes", icon: ShoppingBag },
   { id: "artists", label: "Artistas", icon: Music },
   { id: "gallery", label: "Galería", icon: Camera },
   { id: "menu", label: "Carta", icon: Wine },
   { id: "promos", label: "Promos", icon: Megaphone },
-  { id: "reservations", label: "Reservas", icon: Crown },
   { id: "newsletter", label: "Newsletter", icon: Mail },
   { id: "notifications", label: "Notif.", icon: Bell },
   { id: "novedades", label: "Novedades", icon: Sparkles },
@@ -36,22 +30,15 @@ const tabs = [
 export default function Admin() {
   const [authed, setAuthed] = useState(isAdminAuthenticated());
   const [activeTab, setActiveTab] = useState("events");
-  const [stats, setStats] = useState({ events: 0, artists: 0, orders: 0, revenue: 0 });
+  const [stats, setStats] = useState({ events: 0, artists: 0 });
 
   useEffect(() => {
     if (!authed) return;
     Promise.all([
       base44.entities.Event.list(),
       base44.entities.Artist.list(),
-      base44.entities.TicketOrder.list("-created_date"),
-    ]).then(([events, artists, orders]) => {
-      const approved = orders.filter(o => o.status === "approved");
-      setStats({
-        events: events.length,
-        artists: artists.length,
-        orders: orders.length,
-        revenue: approved.reduce((s, o) => s + (o.total || 0), 0),
-      });
+    ]).then(([events, artists]) => {
+      setStats({ events: events.length, artists: artists.length });
     }).catch(() => {});
   }, [authed]);
 
@@ -80,11 +67,9 @@ export default function Admin() {
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-4 gap-2 pb-3">
+          <div className="grid grid-cols-2 gap-2 pb-3">
             {[
               { label: "Eventos", value: stats.events, color: "#C9A84C" },
-              { label: "Órdenes", value: stats.orders, color: "#009ee3" },
-              { label: "Recaud.", value: `$${stats.revenue.toLocaleString()}`, color: "#22c55e" },
               { label: "Artistas", value: stats.artists, color: "#8888FF" },
             ].map(s => (
               <div key={s.label} className="p-2 md:p-3 rounded-xl text-center" style={{ background: "#111", border: "1px solid #222" }}>
@@ -115,12 +100,9 @@ export default function Admin() {
       {/* Tab Content */}
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-8">
         {activeTab === "events" && <AdminEvents />}
-        {activeTab === "tickets" && <AdminTicketSales />}
-        {activeTab === "orders" && <AdminTicketOrders />}
         {activeTab === "artists" && <AdminArtists />}
         {activeTab === "gallery" && <AdminGalleryAlbums />}
         {activeTab === "promos" && <AdminPromotions />}
-        {activeTab === "reservations" && <AdminReservations />}
         {activeTab === "newsletter" && <AdminNewsletter />}
         {activeTab === "notifications" && <AdminNotifications />}
         {activeTab === "novedades" && <AdminNovedades />}

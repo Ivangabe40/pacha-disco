@@ -6,7 +6,7 @@ import MobileBottomBar from "@/components/MobileBottomBar";
 import PachiChatWidget from "@/components/pachi/PachiChatWidget";
 import { useImageOptimization } from "@/hooks/useImageOptimization";
 
-const ROOT_ROUTES = new Set(["/", "/Home", "/Eventos", "/Artists", "/Gallery", "/Menu", "/About", "/VIPReservations", "/Contact", "/Admin", "/configuracion", "/gestor-menu", "/TicketSales", "/MisEntradas", "/MisCuenta", "/QR", "/payment/success", "/payment/pending", "/payment/failure"]);
+const ROOT_ROUTES = new Set(["/", "/Home", "/Eventos", "/Artists", "/Gallery", "/Menu", "/About", "/Contact", "/Admin", "/configuracion", "/gestor-menu", "/MisCuenta", "/QR"]);
 
 const LOGO_RED = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/6ecd577f7_file_00000000d89c820e8ae4cce82ce72506.png";
 
@@ -203,7 +203,6 @@ export default function Layout({ children, currentPageName }) {
             <div className="text-center md:text-right">
               <div className="flex flex-wrap justify-center gap-3 md:gap-4 mb-1">
                 <Link to={createPageUrl("About")} className="text-gray-500 hover:text-gray-300 text-xs transition-colors">Sobre Nosotros</Link>
-                <Link to={createPageUrl("MisEntradas")} className="text-gray-500 hover:text-gray-300 text-xs transition-colors">Mis Entradas</Link>
                 <Link to={createPageUrl("Contact")} className="text-gray-500 hover:text-gray-300 text-xs transition-colors">Contacto</Link>
                 <Link to={createPageUrl("Admin")} className="text-gray-700 hover:text-gray-500 text-xs transition-colors">Panel Admin</Link>
               </div>

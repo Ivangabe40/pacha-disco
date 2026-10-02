@@ -8,17 +8,11 @@ import PageNotFound from './lib/PageNotFound';
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import UserNotRegisteredError from '@/components/UserNotRegisteredError';
 import Eventos from './pages/Eventos';
-import VIPReservations from './pages/VIPReservations';
 import Contact from './pages/Contact';
 import MisCuenta from './pages/MisCuenta';
-import MisEntradas from './pages/MisEntradas';
 import QRPage from './pages/QRPage';
 import Configuracion from './pages/Configuracion';
 import GestorMenu from './pages/GestorMenu';
-import TicketSales from './pages/TicketSales';
-import PaymentSuccess from './pages/PaymentSuccess';
-import PaymentPending from './pages/PaymentPending';
-import PaymentFailure from './pages/PaymentFailure';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ThemeProvider } from 'next-themes';
 import { TabHistoryProvider } from '@/components/TabHistoryProvider';
@@ -86,18 +80,12 @@ const AuthenticatedApp = () => {
             }
           />
         ))}
-        <Route path="/VIPReservations" element={<LayoutWrapper currentPageName="VIPReservations"><VIPReservations /></LayoutWrapper>} />
         <Route path="/Contact" element={<LayoutWrapper currentPageName="Contact"><Contact /></LayoutWrapper>} />
         <Route path="/MisCuenta" element={<LayoutWrapper currentPageName="MisCuenta"><MisCuenta /></LayoutWrapper>} />
-        <Route path="/MisEntradas" element={<LayoutWrapper currentPageName="MisEntradas"><MisEntradas /></LayoutWrapper>} />
         <Route path="/QR" element={<LayoutWrapper currentPageName="QRPage"><QRPage /></LayoutWrapper>} />
         <Route path="/configuracion" element={<LayoutWrapper currentPageName="Configuracion"><Configuracion /></LayoutWrapper>} />
         <Route path="/gestor-menu" element={<LayoutWrapper currentPageName="GestorMenu"><GestorMenu /></LayoutWrapper>} />
-        <Route path="/TicketSales" element={<LayoutWrapper currentPageName="TicketSales"><TicketSales /></LayoutWrapper>} />
         <Route path="/Eventos" element={<LayoutWrapper currentPageName="Eventos"><Eventos /></LayoutWrapper>} />
-        <Route path="/payment/success" element={<LayoutWrapper currentPageName="PaymentSuccess"><PaymentSuccess /></LayoutWrapper>} />
-        <Route path="/payment/pending" element={<LayoutWrapper currentPageName="PaymentPending"><PaymentPending /></LayoutWrapper>} />
-        <Route path="/payment/failure" element={<LayoutWrapper currentPageName="PaymentFailure"><PaymentFailure /></LayoutWrapper>} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </AnimatePresence>
