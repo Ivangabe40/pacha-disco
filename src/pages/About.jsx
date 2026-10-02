@@ -22,7 +22,7 @@ export default function About() {
             Ubicado en el corazón de la ciudad, Pachá Night Club es el destino de entretenimiento nocturno más exclusivo de la región. Nuestra propuesta abarca múltiples géneros musicales — reggaeton, electrónica, pop, cumbia y los grandes clásicos — para que cada visitante encuentre su ritmo.
           </p>
           <p className="text-gray-400 text-base leading-relaxed mb-4">
-            Pensado para mayores de 25 años que buscan vivir la noche con estilo, Pachá ofrece eventos especiales con artistas y DJs de primer nivel. La plataforma digital fue diseñada y desarrollada por <strong className="text-white">NDTX Universe</strong> para brindar la mejor experiencia tanto online como presencial.
+            Pensado para mayores de 25 años que buscan vivir la noche con estilo, Pachá ofrece eventos especiales con artistas y DJs de primer nivel.
           </p>
           <p className="text-gray-400 text-base leading-relaxed">
             Ya sea que vengas a bailar, a celebrar un cumpleaños, un evento corporativo o simplemente a disfrutar de la mejor música en vivo, en Pachá siempre encontrás el ambiente ideal. Viví la noche como merece ser vivida.
