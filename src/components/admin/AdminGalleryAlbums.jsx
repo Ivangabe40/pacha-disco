@@ -16,7 +16,7 @@ export default function AdminGalleryAlbums() {
   useEffect(() => { load(); }, []);
 
   const openNew = () => { setForm({ title: "", link: "", cover_url: "" }); setEditing(null); setShowForm(true); };
-  const openEdit = (a) => { setForm({ title: a.title, link: a.link, cover_url: a.cover_url || "" }); setEditing(a.id); setShowForm(true); };
+  const openEdit = (a) => { setForm({ title: a.title || "", link: a.link || "", cover_url: a.cover_url || "" }); setEditing(a.id); setShowForm(true); };
 
   const handleImageUpload = async (file) => {
     if (!file) return;

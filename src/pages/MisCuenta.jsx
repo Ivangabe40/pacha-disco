@@ -146,7 +146,7 @@ export default function MisCuenta() {
           <div className="text-5xl mb-1">{level.icon}</div>
           <div className="text-5xl font-black text-white mt-2 mb-1"
             style={{ fontFamily: "'Playfair Display', serif", color: level.color }}>
-            {profile.coins.toLocaleString()}
+            {(profile.coins || 0).toLocaleString()}
           </div>
           <p className="text-gray-500 text-sm mb-4">Pachá Coins disponibles</p>
 

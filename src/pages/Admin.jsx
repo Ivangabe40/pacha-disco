@@ -11,6 +11,7 @@ import AdminNewsletter from "@/components/admin/AdminNewsletter";
 import AdminNotifications from "@/components/admin/AdminNotifications";
 import AdminNovedades from "@/components/admin/AdminNovedades";
 import AdminConfiguracion from "@/components/admin/AdminConfiguracion";
+import AdminHomeVideo from "@/components/admin/AdminHomeVideo";
 import { Calendar, Music, Camera, Wine, Megaphone, Mail, Bell, Sparkles, Settings, LogOut } from "lucide-react";
 
 const LOGO_RED = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/6ecd577f7_file_00000000d89c820e8ae4cce82ce72506.png";
@@ -106,7 +107,12 @@ export default function Admin() {
         {activeTab === "newsletter" && <AdminNewsletter />}
         {activeTab === "notifications" && <AdminNotifications />}
         {activeTab === "novedades" && <AdminNovedades />}
-        {activeTab === "config" && <AdminConfiguracion />}
+        {activeTab === "config" && (
+          <div className="space-y-6">
+            <AdminHomeVideo />
+            <AdminConfiguracion />
+          </div>
+        )}
         {activeTab === "menu" && (
           <div className="grid md:grid-cols-3 gap-6">
             <div className="md:col-span-2"><AdminMenu /></div>

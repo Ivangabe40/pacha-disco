@@ -6,8 +6,12 @@ export default function HomeVideoSection() {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    base44.entities.SiteConfig.filter({ key: "home_video_url" }).then(data => {
-      if (data.length > 0 && data[0].value) setVideoUrl(data[0].value);
+    Promise.all([
+      base44.entities.SiteConfig.filter({ key: "home_video_url" }),
+      base44.entities.SiteConfig.filter({ key: "show_home_video" }),
+    ]).then(([video, toggle]) => {
+      const enabled = toggle.length === 0 || toggle[0].value !== "false";
+      if (enabled && video.length > 0 && video[0].value) setVideoUrl(video[0].value);
     }).catch(() => {}).finally(() => setLoaded(true));
   }, []);
 

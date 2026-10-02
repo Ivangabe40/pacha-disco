@@ -249,7 +249,7 @@ export default function AdminMenu() {
                 </div>
               </div>
               <div className="text-sm font-black shrink-0" style={{ color: "#C9A84C" }}>
-                ${item.price.toLocaleString()}
+                ${(item.price || 0).toLocaleString()}
               </div>
               <div className="flex items-center gap-1 shrink-0">
                 <button onClick={() => toggleAvailable(item)}

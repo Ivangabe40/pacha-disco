@@ -125,7 +125,7 @@ export default function Menu() {
                       </div>
                       {item.description && <p className="text-gray-500 text-xs">{item.description}</p>}
                     </div>
-                    <div className="text-lg font-black shrink-0" style={{ color: "#FF0000" }}>${item.price.toLocaleString()}</div>
+                    <div className="text-lg font-black shrink-0" style={{ color: "#FF0000" }}>${(item.price || 0).toLocaleString()}</div>
                   </div>
                 ))}
               </div>
@@ -179,7 +179,7 @@ export default function Menu() {
                         {item.description && <p className="text-gray-600 text-xs mt-0.5">{item.description}</p>}
                       </div>
                       <div className="shrink-0 text-sm font-black tabular-nums" style={{ color: "#C9A84C" }}>
-                        ${item.price.toLocaleString()}
+                        ${(item.price || 0).toLocaleString()}
                       </div>
                     </div>
                   ))}
