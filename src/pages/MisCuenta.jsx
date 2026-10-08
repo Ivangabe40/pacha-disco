@@ -59,12 +59,16 @@ export default function MisCuenta() {
     if (!profile || profile.coins < reward.coins) return;
     setRedeeming(reward.coins);
     const newCoins = profile.coins - reward.coins;
+    const originalCoins = profile.coins;
+    // Optimistic UI: deduct immediately
+    setProfile(prev => ({ ...prev, coins: newCoins }));
     try {
       await base44.entities.PachaCoins.update(profile.id, { coins: newCoins });
-      setProfile(prev => ({ ...prev, coins: newCoins }));
       setRedeemSuccess(reward.label);
       setTimeout(() => setRedeemSuccess(null), 4000);
     } catch {
+      // Revert on failure
+      setProfile(prev => ({ ...prev, coins: originalCoins }));
       setRedeemError("No se pudo canjear. Intentá nuevamente.");
       setTimeout(() => setRedeemError(null), 4000);
     } finally {

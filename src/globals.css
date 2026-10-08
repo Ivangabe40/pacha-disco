@@ -123,6 +123,13 @@ h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
 /* next-themes: synchronize dark theme with system settings */
 html { color-scheme: dark; }
 
+/* iOS WebView: prevent auto-zoom on input focus (font < 16px triggers zoom) */
+@media (max-width: 767px) {
+  input, textarea, select {
+    font-size: 16px !important;
+  }
+}
+
 /* Force dark shadcn variables at root to maintain nightclub aesthetic */
 :root {
   --background: 0 0% 3.9%;
