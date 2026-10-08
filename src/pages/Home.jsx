@@ -16,6 +16,7 @@ import NovedadBanner from "@/components/NovedadBanner";
 import OperationInfo from "@/components/OperationInfo";
 import PullToRefresh from "@/components/PullToRefresh";
 import GoogleReviewInvite from "@/components/GoogleReviewInvite";
+import InstagramFollow from "@/components/InstagramFollow";
 
 export default function Home() {
   const [events, setEvents] = useState([]);
@@ -132,6 +133,9 @@ export default function Home() {
               </p>
             </div>
           </section>
+
+          {/* INSTAGRAM — SEGUINOS */}
+          <InstagramFollow />
 
           {/* GOOGLE REVIEW INVITE */}
           <GoogleReviewInvite />
