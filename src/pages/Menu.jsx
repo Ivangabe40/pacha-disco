@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
-import { Wine, Star, Tag, ExternalLink, ChevronRight, Sparkles } from "lucide-react";
+import MenuCategorySection from "@/components/menu/MenuCategorySection";
+import { Wine, Star, Tag, ExternalLink, Sparkles } from "lucide-react";
 
 const CATEGORY_ORDER = [
   "Sin Alcohol", "Vodkas", "Vermuts", "Cervezas", "Gin",
@@ -26,7 +27,6 @@ export default function Menu() {
   const [items, setItems] = useState([]);
   const [promos, setPromos] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [activeCategory, setActiveCategory] = useState("all");
   const [activeTab, setActiveTab] = useState(TAB_MENU);
 
   useEffect(() => {
@@ -42,16 +42,6 @@ export default function Menu() {
   const available = items.filter(i => i.is_available !== false);
   const categories = CATEGORY_ORDER.filter(cat => available.some(i => i.category === cat));
   const featured = available.filter(i => i.is_featured);
-
-  const filtered = activeCategory === "all"
-    ? available
-    : available.filter(i => i.category === activeCategory);
-
-  const grouped = categories.reduce((acc, cat) => {
-    const catItems = filtered.filter(i => i.category === cat);
-    if (catItems.length > 0) acc[cat] = catItems;
-    return acc;
-  }, {});
 
   if (loading) return (
     <div className="min-h-screen flex items-center justify-center" style={{ background: "#070707" }}>
@@ -131,62 +121,19 @@ export default function Menu() {
             </section>
           )}
 
-          {/* Category Filter */}
-          <div className="max-w-2xl mx-auto px-4 mb-6">
-            <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
-              <button
-                onClick={() => setActiveCategory("all")}
-                className="shrink-0 px-4 py-2 rounded-full text-xs font-bold tracking-wider uppercase transition-all"
-                style={activeCategory === "all"
-                  ? { background: "#FF0000", color: "#fff" }
-                  : { background: "#1a1a1a", color: "#666", border: "1px solid #2a2a2a" }}>
-                Todos
-              </button>
-              {categories.map(cat => (
-                <button
-                  key={cat}
-                  onClick={() => setActiveCategory(cat)}
-                  className="shrink-0 px-4 py-2 rounded-full text-xs font-bold tracking-wider transition-all"
-                  style={activeCategory === cat
-                    ? { background: "#FF0000", color: "#fff" }
-                    : { background: "#1a1a1a", color: "#666", border: "1px solid #2a2a2a" }}>
-                  {CATEGORY_ICONS[cat]} {cat}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Menu Items */}
-          <div className="max-w-2xl mx-auto px-4 pb-20 space-y-8">
-            {Object.entries(grouped).map(([category, catItems]) => (
-              <div key={category}>
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="text-xl">{CATEGORY_ICONS[category]}</span>
-                  <h2 className="text-sm font-black text-white uppercase tracking-widest"
-                    style={{ fontFamily: "'Playfair Display', serif", letterSpacing: "0.15em" }}>
-                    {category}
-                  </h2>
-                  <div className="flex-1 h-px" style={{ background: "linear-gradient(90deg, rgba(255,0,0,0.4), transparent)" }} />
-                </div>
-                <div className="rounded-xl overflow-hidden" style={{ border: "1px solid #1a1a1a" }}>
-                  {catItems.map((item, idx) => (
-                    <div key={item.id}
-                      className="flex items-center justify-between gap-3 py-3.5 px-4"
-                      style={{ borderBottom: idx < catItems.length - 1 ? "1px solid #111" : "none", background: idx % 2 === 0 ? "#0d0d0d" : "#0a0a0a" }}>
-                      <div className="flex-1 min-w-0">
-                        <span className="text-white font-medium text-sm leading-tight">{item.name}</span>
-                        {item.description && <p className="text-gray-600 text-xs mt-0.5">{item.description}</p>}
-                      </div>
-                      <div className="shrink-0 text-sm font-black tabular-nums" style={{ color: "#C9A84C" }}>
-                        ${(item.price || 0).toLocaleString()}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
+          {/* Categorías desplegables */}
+          <div className="max-w-2xl mx-auto px-4 pb-20 space-y-4">
+            {categories.map((cat, idx) => (
+              <MenuCategorySection
+                key={cat}
+                category={cat}
+                icon={CATEGORY_ICONS[cat]}
+                items={available.filter(i => i.category === cat)}
+                defaultOpen={idx === 0}
+              />
             ))}
 
-            {Object.keys(grouped).length === 0 && (
+            {categories.length === 0 && (
               <div className="text-center py-20 text-gray-600">
                 <Wine size={40} className="mx-auto mb-3 opacity-30" />
                 <p>No hay productos disponibles</p>
