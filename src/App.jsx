@@ -11,6 +11,7 @@ import Eventos from './pages/Eventos';
 import Contact from './pages/Contact';
 import MisCuenta from './pages/MisCuenta';
 import QRPage from './pages/QRPage';
+import CartaQR from './pages/CartaQR';
 import Configuracion from './pages/Configuracion';
 import GestorMenu from './pages/GestorMenu';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -83,6 +84,7 @@ const AuthenticatedApp = () => {
         <Route path="/Contact" element={<LayoutWrapper currentPageName="Contact"><Contact /></LayoutWrapper>} />
         <Route path="/MisCuenta" element={<LayoutWrapper currentPageName="MisCuenta"><MisCuenta /></LayoutWrapper>} />
         <Route path="/QR" element={<LayoutWrapper currentPageName="QRPage"><QRPage /></LayoutWrapper>} />
+        <Route path="/qr-carta" element={<LayoutWrapper currentPageName="CartaQR"><CartaQR /></LayoutWrapper>} />
         <Route path="/configuracion" element={<LayoutWrapper currentPageName="Configuracion"><Configuracion /></LayoutWrapper>} />
         <Route path="/gestor-menu" element={<LayoutWrapper currentPageName="GestorMenu"><GestorMenu /></LayoutWrapper>} />
         <Route path="/Eventos" element={<LayoutWrapper currentPageName="Eventos"><Eventos /></LayoutWrapper>} />

@@ -4,7 +4,7 @@ import { Wine, Star, Tag, ExternalLink, ChevronRight, Sparkles } from "lucide-re
 
 const CATEGORY_ORDER = [
   "Sin Alcohol", "Vodkas", "Vermuts", "Cervezas", "Gin",
-  "Clásicos", "Whiskies", "Bottle Service", "Espumosos", "Sugerencias Verano"
+  "Clásicos", "Whiskies", "Bottle Service", "Espumosos"
 ];
 
 const CATEGORY_ICONS = {
@@ -17,7 +17,6 @@ const CATEGORY_ICONS = {
   "Whiskies": "🥃",
   "Bottle Service": "🍾",
   "Espumosos": "🥂",
-  "Sugerencias Verano": "☀️",
 };
 
 const TAB_MENU = "menu";

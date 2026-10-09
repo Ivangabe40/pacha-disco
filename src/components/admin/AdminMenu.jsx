@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { base44 } from "@/api/base44Client";
 import { Plus, Pencil, Trash2, Star, X, Check, Wine, Upload, Loader2 } from "lucide-react";
 
-const CATEGORIES = ["Sin Alcohol", "Vodkas", "Vermuts", "Cervezas", "Gin", "Clásicos", "Whiskies", "Bottle Service", "Espumosos", "Sugerencias Verano"];
+const CATEGORIES = ["Sin Alcohol", "Vodkas", "Vermuts", "Cervezas", "Gin", "Clásicos", "Whiskies", "Bottle Service", "Espumosos"];
 
 const empty = { name: "", description: "", price: "", category: "Clásicos", is_available: true, is_featured: false, sort_order: 0 };
 
