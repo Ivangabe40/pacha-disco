@@ -17,6 +17,7 @@ import OperationInfo from "@/components/OperationInfo";
 import PullToRefresh from "@/components/PullToRefresh";
 import GoogleReviewInvite from "@/components/GoogleReviewInvite";
 import InstagramFollow from "@/components/InstagramFollow";
+import HalloweenDecor from "@/components/HalloweenDecor";
 
 export default function Home() {
   const [events, setEvents] = useState([]);
@@ -58,7 +59,9 @@ export default function Home() {
     <div style={{ background: "#070707" }}>
       <PromotionPopup />
       <PullToRefresh onRefresh={loadEvents}>
-        <div style={{ background: "#070707", minHeight: "100vh" }}>
+        <div className="relative" style={{ background: "#070707", minHeight: "100vh" }}>
+          <HalloweenDecor />
+
           {/* BANNER NOVEDAD */}
           <NovedadBanner />
 
