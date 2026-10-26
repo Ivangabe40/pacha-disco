@@ -3,7 +3,7 @@ import QRCode from "qrcode";
 import { Download, ExternalLink } from "lucide-react";
 
 const APP_URL = "https://pachadisco.base44.app/";
-const LOGO_RED = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/6ecd577f7_file_00000000d89c820e8ae4cce82ce72506.png";
+const LOGO_RED = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/54165d896_file_0000000090c081f4a8b9ff606c8a8ed8.png";
 
 export default function QRPage() {
   const [qrDataUrl, setQrDataUrl] = useState(null);
@@ -29,7 +29,7 @@ export default function QRPage() {
     <div className="min-h-screen flex items-center justify-center px-4 py-12" style={{ background: "#070707" }}>
       <div className="max-w-sm w-full text-center">
         {/* Logo */}
-        <img src={LOGO_RED} alt="Pachá" className="h-14 w-auto object-contain mx-auto mb-6"
+        <img src={LOGO_RED} alt="Pachá" className="h-16 w-16 rounded-full object-cover mx-auto mb-6"
           style={{ filter: "drop-shadow(0 0 12px rgba(255,0,0,0.5))" }} />
 
         <p className="text-xs tracking-widest uppercase mb-1" style={{ color: "#FF0000" }}>
@@ -51,8 +51,8 @@ export default function QRPage() {
               <img src={qrDataUrl} alt="QR Pachá" className="w-64 h-64 object-contain rounded-lg" />
               {/* Logo overlay center */}
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <div className="rounded-lg overflow-hidden" style={{ background: "#F0EBE3", padding: 6 }}>
-                  <img src={LOGO_RED} alt="Pachá" className="h-12 w-auto object-contain" />
+                <div className="rounded-full overflow-hidden" style={{ background: "#F0EBE3", padding: 5 }}>
+                  <img src={LOGO_RED} alt="Pachá" className="h-11 w-11 rounded-full object-cover" />
                 </div>
               </div>
             </div>

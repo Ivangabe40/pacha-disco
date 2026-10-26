@@ -14,7 +14,7 @@ import AdminConfiguracion from "@/components/admin/AdminConfiguracion";
 import AdminHomeVideo from "@/components/admin/AdminHomeVideo";
 import { Calendar, Music, Camera, Wine, Megaphone, Mail, Bell, Sparkles, Settings, LogOut } from "lucide-react";
 
-const LOGO_RED = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/6ecd577f7_file_00000000d89c820e8ae4cce82ce72506.png";
+const LOGO_RED = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/54165d896_file_0000000090c081f4a8b9ff606c8a8ed8.png";
 
 const tabs = [
   { id: "events", label: "Eventos", icon: Calendar },
@@ -57,7 +57,7 @@ export default function Admin() {
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           <div className="flex items-center justify-between gap-3 py-3">
             <div className="flex items-center gap-3 min-w-0">
-              <img src={LOGO_RED} alt="Pachá Admin" className="h-10 object-contain" />
+              <img src={LOGO_RED} alt="Pachá Admin" className="h-10 w-10 rounded-full object-cover" />
               <h1 className="text-white font-bold text-base md:text-lg truncate" style={{ fontFamily: "'Playfair Display', serif" }}>Panel Admin</h1>
             </div>
             <button onClick={handleLogout}

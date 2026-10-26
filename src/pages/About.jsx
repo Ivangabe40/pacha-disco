@@ -1,6 +1,6 @@
 import { base44 } from '@/api/base44Client';
 
-const LOGO_GOLD = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/6ecd577f7_file_00000000d89c820e8ae4cce82ce72506.png";
+const LOGO_GOLD = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/54165d896_file_0000000090c081f4a8b9ff606c8a8ed8.png";
 
 export default function About() {
   return (
@@ -9,7 +9,7 @@ export default function About() {
       <div className="relative py-20 md:py-32 px-4 overflow-hidden">
         <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, rgba(201,168,76,0.07) 0%, transparent 70%)" }} />
         <div className="relative z-10 max-w-3xl mx-auto text-center">
-          <img src={LOGO_GOLD} alt="Pachá" className="h-44 mx-auto mb-8 object-contain"
+          <img src={LOGO_GOLD} alt="Pachá" className="h-44 w-44 mx-auto mb-8 rounded-full object-cover"
             style={{ filter: "drop-shadow(0 0 20px rgba(255,0,0,0.7)) drop-shadow(0 0 50px rgba(255,0,0,0.4))" }} />
           <h1 className="text-4xl md:text-7xl font-bold text-white mb-6" style={{ fontFamily: "'Playfair Display', serif" }}>
             Nuestra Historia
