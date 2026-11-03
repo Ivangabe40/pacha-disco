@@ -23,46 +23,63 @@ export default function MobileBottomBar() {
 
   return (
     <nav
-      className="md:hidden fixed bottom-0 left-0 right-0 z-50 flex items-center justify-around"
+      className="md:hidden fixed bottom-0 left-0 right-0 z-50"
       style={{
         background: "rgba(7,7,7,0.97)",
         borderTop: "1px solid rgba(255,0,0,0.2)",
         backdropFilter: "blur(20px)",
         paddingBottom: "env(safe-area-inset-bottom, 0px)",
-        height: "calc(56px + env(safe-area-inset-bottom, 0px))",
+        height: "calc(68px + env(safe-area-inset-bottom, 0px))",
       }}
     >
-      {tabs.map(({ label, icon: Icon, path }) => {
-        const isActive =
-          path === "/"
-            ? location.pathname === "/" || location.pathname === "/Home"
-            : location.pathname === path;
-        return (
-          <button
-            key={path}
-            onClick={() => handleTabClick(path)}
-            className="flex flex-col items-center justify-center gap-1 flex-1 h-full"
-            style={{
-              userSelect: "none",
-              WebkitTapHighlightColor: "transparent",
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-            }}
-          >
-            <Icon
-              size={20}
-              style={{ color: isActive ? "#FF0000" : "#555", transition: "color 0.2s" }}
-            />
-            <span
-              className="text-xs font-semibold tracking-wider"
-              style={{ color: isActive ? "#FF0000" : "#555", transition: "color 0.2s" }}
+      <div className="flex items-stretch h-full px-3 gap-2">
+        {tabs.map(({ label, icon: Icon, path }) => {
+          const isActive =
+            path === "/"
+              ? location.pathname === "/" || location.pathname === "/Home"
+              : location.pathname === path;
+          return (
+            <button
+              key={path}
+              onClick={() => handleTabClick(path)}
+              aria-label={label}
+              aria-current={isActive ? "page" : undefined}
+              className="flex flex-col items-center justify-center gap-1.5 flex-1 my-1.5 rounded-2xl active:scale-[0.96] transition-transform"
+              style={{
+                userSelect: "none",
+                WebkitTapHighlightColor: "transparent",
+                background: isActive ? "rgba(255,0,0,0.08)" : "transparent",
+                border: "none",
+                cursor: "pointer",
+                touchAction: "manipulation",
+              }}
             >
-              {label}
-            </span>
-          </button>
-        );
-      })}
+              <span
+                className="flex items-center justify-center rounded-full"
+                style={{
+                  width: 42,
+                  height: 26,
+                  background: isActive ? "rgba(255,0,0,0.16)" : "transparent",
+                  boxShadow: isActive ? "0 0 16px rgba(255,0,0,0.35)" : "none",
+                  transition: "background 0.2s, box-shadow 0.2s",
+                }}
+              >
+                <Icon
+                  size={23}
+                  strokeWidth={isActive ? 2.4 : 1.9}
+                  style={{ color: isActive ? "#FF3B30" : "#6b6b6b", transition: "color 0.2s" }}
+                />
+              </span>
+              <span
+                className="text-[11px] font-semibold uppercase tracking-[0.12em] leading-none"
+                style={{ color: isActive ? "#FF3B30" : "#777", transition: "color 0.2s" }}
+              >
+                {label}
+              </span>
+            </button>
+          );
+        })}
+      </div>
     </nav>
   );
 }

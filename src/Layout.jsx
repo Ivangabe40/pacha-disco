@@ -124,7 +124,7 @@ export default function Layout({ children, currentPageName }) {
       </nav>
 
       {/* PAGE CONTENT — add bottom padding on mobile for the bottom bar */}
-      <main className="flex-1" style={{ paddingBottom: "calc(56px + env(safe-area-inset-bottom, 0px))", position: "relative", zIndex: 1 }}>
+      <main className="flex-1" style={{ paddingBottom: "calc(68px + env(safe-area-inset-bottom, 0px))", position: "relative", zIndex: 1 }}>
         <style>{`@media(min-width:768px){main{padding-bottom:0!important}}`}</style>
         {children}
       </main>
