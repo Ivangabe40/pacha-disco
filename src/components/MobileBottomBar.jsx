@@ -29,10 +29,9 @@ export default function MobileBottomBar() {
         borderTop: "1px solid rgba(255,0,0,0.2)",
         backdropFilter: "blur(20px)",
         paddingBottom: "env(safe-area-inset-bottom, 0px)",
-        height: "calc(68px + env(safe-area-inset-bottom, 0px))",
       }}
     >
-      <div className="flex items-stretch h-full px-3 gap-2">
+      <div className="grid grid-cols-3 gap-1 px-2" style={{ height: 68 }}>
         {tabs.map(({ label, icon: Icon, path }) => {
           const isActive =
             path === "/"
@@ -44,7 +43,7 @@ export default function MobileBottomBar() {
               onClick={() => handleTabClick(path)}
               aria-label={label}
               aria-current={isActive ? "page" : undefined}
-              className="flex flex-col items-center justify-center gap-1.5 flex-1 my-1.5 rounded-2xl active:scale-[0.96] transition-transform"
+              className="flex flex-col items-center justify-center gap-1 min-w-0 h-full rounded-2xl active:scale-[0.96] transition-transform"
               style={{
                 userSelect: "none",
                 WebkitTapHighlightColor: "transparent",
@@ -52,27 +51,28 @@ export default function MobileBottomBar() {
                 border: "none",
                 cursor: "pointer",
                 touchAction: "manipulation",
+                padding: 0,
               }}
             >
               <span
-                className="flex items-center justify-center rounded-full"
+                className="flex items-center justify-center rounded-full shrink-0"
                 style={{
-                  width: 42,
-                  height: 26,
+                  width: 40,
+                  height: 24,
                   background: isActive ? "rgba(255,0,0,0.16)" : "transparent",
-                  boxShadow: isActive ? "0 0 16px rgba(255,0,0,0.35)" : "none",
+                  boxShadow: isActive ? "0 0 14px rgba(255,0,0,0.3)" : "none",
                   transition: "background 0.2s, box-shadow 0.2s",
                 }}
               >
                 <Icon
-                  size={23}
+                  size={22}
                   strokeWidth={isActive ? 2.4 : 1.9}
-                  style={{ color: isActive ? "#FF3B30" : "#6b6b6b", transition: "color 0.2s" }}
+                  style={{ color: isActive ? "#FF3B30" : "#7a7a7a", transition: "color 0.2s" }}
                 />
               </span>
               <span
-                className="text-[11px] font-semibold uppercase tracking-[0.12em] leading-none"
-                style={{ color: isActive ? "#FF3B30" : "#777", transition: "color 0.2s" }}
+                className="block text-[11px] font-semibold uppercase tracking-[0.06em] leading-[14px] whitespace-nowrap"
+                style={{ color: isActive ? "#FF3B30" : "#8a8a8a", transition: "color 0.2s" }}
               >
                 {label}
               </span>
