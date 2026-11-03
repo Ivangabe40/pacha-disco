@@ -17,7 +17,7 @@ import OperationInfo from "@/components/OperationInfo";
 import PullToRefresh from "@/components/PullToRefresh";
 import GoogleReviewInvite from "@/components/GoogleReviewInvite";
 import InstagramFollow from "@/components/InstagramFollow";
-import HalloweenDecor from "@/components/HalloweenDecor";
+import EscapeExperience from "@/components/EscapeExperience";
 
 export default function Home() {
   const [events, setEvents] = useState([]);
@@ -60,8 +60,6 @@ export default function Home() {
       <PromotionPopup />
       <PullToRefresh onRefresh={loadEvents}>
         <div className="relative" style={{ background: "#070707", minHeight: "100vh" }}>
-          <HalloweenDecor />
-
           {/* BANNER NOVEDAD */}
           <NovedadBanner />
 
@@ -70,6 +68,9 @@ export default function Home() {
 
           {/* OPERACIÓN ACTUAL — información permanente */}
           <OperationInfo />
+
+          {/* ESCAPE EXPERIENCE — celebraciones privadas */}
+          <EscapeExperience />
 
           {/* VIDEO SECTION — Lo que se viene (dinámico desde SiteConfig) */}
           <HomeVideoSection />
