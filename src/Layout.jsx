@@ -131,8 +131,8 @@ export default function Layout({ children, currentPageName }) {
 
       <MobileBottomBar />
 
-      {/* Asistente Pachi — chat público (oculto temporalmente) */}
-      {/* <PachiChatWidget /> */}
+      {/* Asistente Pachi — chat público */}
+      <PachiChatWidget />
 
       {/* FOOTER */}
       <footer className="pt-10 pb-28 md:py-14 px-4" style={{ background: "#050505", borderTop: "1px solid rgba(255,0,0,0.15)", position: "relative", zIndex: 1 }}>
