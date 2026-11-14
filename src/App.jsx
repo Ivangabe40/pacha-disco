@@ -14,6 +14,7 @@ import QRPage from './pages/QRPage';
 import CartaQR from './pages/CartaQR';
 import Configuracion from './pages/Configuracion';
 import GestorMenu from './pages/GestorMenu';
+import Pachi from './pages/Pachi';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ThemeProvider } from 'next-themes';
 import { TabHistoryProvider } from '@/components/TabHistoryProvider';
@@ -88,6 +89,7 @@ const AuthenticatedApp = () => {
         <Route path="/configuracion" element={<LayoutWrapper currentPageName="Configuracion"><Configuracion /></LayoutWrapper>} />
         <Route path="/gestor-menu" element={<LayoutWrapper currentPageName="GestorMenu"><GestorMenu /></LayoutWrapper>} />
         <Route path="/Eventos" element={<LayoutWrapper currentPageName="Eventos"><Eventos /></LayoutWrapper>} />
+        <Route path="/pachi" element={<Pachi />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </AnimatePresence>

@@ -1,77 +1,23 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { base44 } from "@/api/base44Client";
 import { X, Send, Bot, RotateCcw } from "lucide-react";
 import PachiMessageBubble from "./PachiMessageBubble";
+import usePachiChat, { PACHI_GREETING, PACHI_SUGGESTIONS } from "@/hooks/usePachiChat";
 
-const AGENT_NAME = "pacha_assistant";
-const GREETING = "Hola, soy Pachi. ¿Qué querés saber de Pacha?";
-const SUGGESTIONS = ["¿Cuánto sale la entrada?", "¿Qué hay este sábado?", "¿Dónde están?", "¿Hay alguna promo?"];
-const HIDDEN_PREFIXES = ["/Admin", "/configuracion", "/gestor-menu", "/QR", "/MisCuenta"];
+const HIDDEN_PREFIXES = ["/Admin", "/configuracion", "/gestor-menu", "/QR", "/MisCuenta", "/pachi"];
 
 export default function PachiChatWidget() {
   const location = useLocation();
   const [open, setOpen] = useState(false);
-  const [conversation, setConversation] = useState(null);
-  const [messages, setMessages] = useState([]);
-  const [input, setInput] = useState("");
-  const [busy, setBusy] = useState(false);
-  const [failed, setFailed] = useState(null); // 'start' | 'send' | null
-  const [lastText, setLastText] = useState("");
-  const scrollRef = useRef(null);
-  const inputRef = useRef(null);
+  const { conversation, messages, input, setInput, busy, failed, sendMessage, retry, scrollRef, inputRef } =
+    usePachiChat(open);
 
   const isHidden = HIDDEN_PREFIXES.some((p) => location.pathname.startsWith(p));
 
   useEffect(() => {
-    if (!conversation?.id) return;
-    const unsubscribe = base44.agents.subscribeToConversation(conversation.id, (data) => {
-      setMessages(data.messages);
-      const last = data.messages[data.messages.length - 1];
-      if (last && last.role === "assistant") {
-        setBusy(false);
-        setFailed(null);
-      }
-    });
-    return unsubscribe;
-  }, [conversation?.id]);
-
-  useEffect(() => {
     const el = scrollRef.current;
-    if (el) el.scrollTop = el.scrollHeight;
-  }, [messages, busy, open, failed]);
-
-  const startConversation = async () => {
-    setBusy(true);
-    setFailed(null);
-    try {
-      const conv = await base44.agents.createConversation({ agent_name: AGENT_NAME });
-      setConversation(conv);
-    } catch {
-      setFailed("start");
-    }
-    setBusy(false);
-  };
-
-  const handleOpen = () => {
-    setOpen(true);
-    if (!conversation && !failed) startConversation();
-  };
-
-  const sendMessage = async (text) => {
-    const content = text.trim();
-    if (!content || busy || !conversation) return;
-    setLastText(content);
-    setInput("");
-    setBusy(true);
-    setFailed(null);
-    try {
-      await base44.agents.addMessage(conversation, { role: "user", content });
-    } catch {
-      setBusy(false);
-      setFailed("send");
-    }
-  };
+    if (el && open) el.scrollTop = el.scrollHeight;
+  }, [open]);
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
@@ -82,7 +28,7 @@ export default function PachiChatWidget() {
 
   if (isHidden) return null;
 
-  const showMessages = messages.length > 0 ? messages : [{ role: "assistant", content: GREETING }];
+  const showMessages = messages.length > 0 ? messages : [{ role: "assistant", content: PACHI_GREETING }];
   const showSuggestions = messages.length === 0;
 
   return (
@@ -90,7 +36,7 @@ export default function PachiChatWidget() {
       {/* Botón flotante */}
       {!open && (
         <button
-          onClick={handleOpen}
+          onClick={() => setOpen(true)}
           aria-label="Abrir chat de Pachi Bot"
           className="fixed z-50 flex items-center gap-2 pl-3.5 pr-4 py-3 rounded-full transition-all active:scale-95 hover:scale-105 bottom-[calc(78px_+_env(safe-area-inset-bottom,0px))] left-4 md:bottom-6 md:left-6"
           style={{ background: "linear-gradient(135deg, #FF0000, #CC0000)", boxShadow: "0 4px 24px rgba(255,0,0,0.5)" }}
@@ -146,7 +92,7 @@ export default function PachiChatWidget() {
                   {failed === "start" ? "No se pudo conectar con Pachi." : "No se pudo enviar el mensaje."}
                 </p>
                 <button
-                  onClick={() => (failed === "start" ? startConversation() : sendMessage(lastText))}
+                  onClick={retry}
                   className="flex items-center gap-1.5 text-xs font-bold tracking-widest uppercase font-condensed text-gray-300 hover:text-white transition-colors">
                   <RotateCcw size={13} /> Reintentar
                 </button>
@@ -157,7 +103,7 @@ export default function PachiChatWidget() {
           {/* Sugerencias */}
           {showSuggestions && !failed && (
             <div className="flex flex-wrap gap-2 px-3.5 pb-2 shrink-0">
-              {SUGGESTIONS.map((s) => (
+              {PACHI_SUGGESTIONS.map((s) => (
                 <button key={s} onClick={() => sendMessage(s)} disabled={busy || !conversation}
                   className="text-xs text-gray-300 px-3 py-1.5 rounded-full transition-colors disabled:opacity-40 hover:text-white"
                   style={{ border: "1px solid rgba(255,255,255,0.12)", background: "rgba(255,255,255,0.03)" }}>
