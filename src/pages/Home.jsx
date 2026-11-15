@@ -18,6 +18,7 @@ import PullToRefresh from "@/components/PullToRefresh";
 import GoogleReviewInvite from "@/components/GoogleReviewInvite";
 import InstagramFollow from "@/components/InstagramFollow";
 import EscapeExperience from "@/components/EscapeExperience";
+import IntroVideoOverlay from "@/components/IntroVideoOverlay";
 
 export default function Home() {
   const [events, setEvents] = useState([]);
@@ -57,6 +58,7 @@ export default function Home() {
 
   return (
     <div style={{ background: "#070707" }}>
+      <IntroVideoOverlay />
       <PromotionPopup />
       <PullToRefresh onRefresh={loadEvents}>
         <div className="relative" style={{ background: "#070707", minHeight: "100vh" }}>
