@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
-import { Bell, Send, Users, Zap, PartyPopper, Tag, CheckCircle2, Loader2, ChevronDown } from "lucide-react";
+import { Bell, Send, Users, Zap, PartyPopper, CheckCircle2, Loader2, ChevronDown } from "lucide-react";
 
 const TEMPLATES = [
   {

@@ -19,7 +19,7 @@ export default function AdminNovedades() {
     if (!file) return;
     setUploading(true);
     try {
-      const { file_url } = await base44.integrations.Core.UploadFile({ file });
+      const { file_url } = await base44.integrations.Core.UploadPublicFile({ file });
       setForm(f => ({ ...f, image_url: file_url }));
     } catch { alert("Error al subir la imagen"); }
     finally { setUploading(false); }

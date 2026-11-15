@@ -29,7 +29,7 @@ export default function AdminEvents() {
   const handleFlyer = async (file) => {
     setUploading(true);
     try {
-      const { file_url } = await base44.integrations.Core.UploadFile({ file });
+      const { file_url } = await base44.integrations.Core.UploadPublicFile({ file });
       setForm(f => ({ ...f, flyer_url: file_url }));
     } catch { alert("Error al subir el flyer"); }
     finally { setUploading(false); }
@@ -38,7 +38,7 @@ export default function AdminEvents() {
   const handleVideo = async (file) => {
     setUploadingVideo(true);
     try {
-      const { file_url } = await base44.integrations.Core.UploadFile({ file });
+      const { file_url } = await base44.integrations.Core.UploadPublicFile({ file });
       setForm(f => ({ ...f, video_url: file_url }));
     } catch { alert("Error al subir el video"); }
     finally { setUploadingVideo(false); }
@@ -48,16 +48,18 @@ export default function AdminEvents() {
   const handleBackground = async (file) => {
     setUploadingBg(true);
     try {
-      const { file_url } = await base44.integrations.Core.UploadFile({ file });
+      const { file_url } = await base44.integrations.Core.UploadPublicFile({ file });
       setForm(f => ({ ...f, background_url: file_url }));
     } catch { alert("Error al subir la imagen de fondo"); }
     finally { setUploadingBg(false); }
   };
 
   const handleSave = async () => {
-    const data = {
-      ...form,
-    };
+    if (!form.title.trim() || !form.date) {
+      alert("Completá el nombre y la fecha del evento");
+      return;
+    }
+    const data = { ...form };
     try {
       if (editing) {
         await base44.entities.Event.update(editing.id, data);

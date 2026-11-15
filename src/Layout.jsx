@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { useState, useEffect } from "react";
-import { Menu, X, Instagram, Facebook, MessageCircle, MapPin, ChevronLeft } from "lucide-react";
+import { Menu, X, Instagram, MessageCircle, MapPin, ChevronLeft } from "lucide-react";
 import MobileBottomBar from "@/components/MobileBottomBar";
 import PachiChatWidget from "@/components/pachi/PachiChatWidget";
 import { useImageOptimization } from "@/hooks/useImageOptimization";
@@ -158,13 +158,6 @@ export default function Layout({ children, currentPageName }) {
               onMouseEnter={(e) => e.currentTarget.style.borderColor = "rgba(255,0,0,0.5)"}
               onMouseLeave={(e) => e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"}>
                 <Instagram size={15} className="text-gray-500" />
-              </a>
-              <a href="#" aria-label="Facebook"
-              className="w-9 h-9 flex items-center justify-center rounded-full transition-all"
-              style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}
-              onMouseEnter={(e) => e.currentTarget.style.borderColor = "rgba(255,0,0,0.5)"}
-              onMouseLeave={(e) => e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"}>
-                <Facebook size={15} className="text-gray-500" />
               </a>
               <a href="https://wa.me/5493468546935" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"
               className="w-9 h-9 flex items-center justify-center rounded-full transition-all"

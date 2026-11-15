@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { base44 } from "@/api/base44Client";
 import HeroEvent from "@/components/events/HeroEvent";
-import EventCard from "@/components/events/EventCard";
 import PromotionPopup from "@/components/promotions/PromotionPopup";
 import { Calendar, ArrowRight } from "lucide-react";
 import UpcomingEventsBanner from "@/components/events/UpcomingEventsBanner";

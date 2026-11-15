@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
-import { Plus, Trash2, Upload, X } from "lucide-react";
+import { Trash2, Upload } from "lucide-react";
 import ImageSizeHint from "./ImageSizeHint";
 
 export default function AdminGallery() {
@@ -17,7 +17,7 @@ export default function AdminGallery() {
     setUploading(true);
     try {
       for (const file of files) {
-        const { file_url } = await base44.integrations.Core.UploadFile({ file });
+        const { file_url } = await base44.integrations.Core.UploadPublicFile({ file });
         await base44.entities.GalleryPhoto.create({
           photo_url: file_url,
           caption,

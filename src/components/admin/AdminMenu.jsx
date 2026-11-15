@@ -26,7 +26,7 @@ export default function AdminMenu() {
   };
 
   const openNew = () => { setForm(empty); setEditing(null); setShowForm(true); };
-  const openEdit = (item) => { setForm({ name: item.name || "", description: item.description || "", price: item.price != null ? item.price.toString() : "", category: item.category || "Tragos Clásicos", is_available: item.is_available !== false, is_featured: item.is_featured || false, sort_order: item.sort_order || 0 }); setEditing(item.id); setShowForm(true); };
+  const openEdit = (item) => { setForm({ name: item.name || "", description: item.description || "", price: item.price != null ? item.price.toString() : "", category: item.category || "Clásicos", is_available: item.is_available !== false, is_featured: item.is_featured || false, sort_order: item.sort_order || 0 }); setEditing(item.id); setShowForm(true); };
   const closeForm = () => { setShowForm(false); setEditing(null); setForm(empty); };
 
   const handleSave = async () => {
@@ -66,7 +66,7 @@ export default function AdminMenu() {
     if (!file) return;
     setImporting(true);
     try {
-      const { file_url } = await base44.integrations.Core.UploadFile({ file });
+      const { file_url } = await base44.integrations.Core.UploadPublicFile({ file });
       const result = await base44.integrations.Core.ExtractDataFromUploadedFile({
         file_url,
         json_schema: {
@@ -92,7 +92,7 @@ export default function AdminMenu() {
           name: item.name || "Sin nombre",
           description: item.description || "",
           price: parseFloat(item.price) || 0,
-          category: CATEGORIES.includes(item.category) ? item.category : "Tragos Clásicos",
+          category: CATEGORIES.includes(item.category) ? item.category : "Clásicos",
           is_available: true,
           is_featured: false,
           sort_order: idx,

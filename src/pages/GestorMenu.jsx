@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
 import AdminMenu from "@/components/admin/AdminMenu";
 import MenuQR from "@/components/admin/MenuQR";
-import { ShieldOff, Wine, Loader2 } from "lucide-react";
+import { ShieldOff, Wine } from "lucide-react";
 
 export default function GestorMenu() {
   const [user, setUser] = useState(null);

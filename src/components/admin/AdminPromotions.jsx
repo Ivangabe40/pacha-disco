@@ -20,7 +20,7 @@ export default function AdminPromotions() {
     if (!file) return;
     setUploading("image");
     try {
-      const { file_url } = await base44.integrations.Core.UploadFile({ file });
+      const { file_url } = await base44.integrations.Core.UploadPublicFile({ file });
       setForm(f => ({ ...f, image_url: file_url }));
     } catch { alert("Error al subir la imagen"); }
     finally { setUploading(false); }
@@ -31,7 +31,7 @@ export default function AdminPromotions() {
     if (!file) return;
     setUploading("video");
     try {
-      const { file_url } = await base44.integrations.Core.UploadFile({ file });
+      const { file_url } = await base44.integrations.Core.UploadPublicFile({ file });
       setForm(f => ({ ...f, video_url: file_url }));
     } catch { alert("Error al subir el video"); }
     finally { setUploading(false); }

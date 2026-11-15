@@ -22,7 +22,7 @@ export default function AdminHomeVideo() {
 
   const handleUpload = async (file) => {
     setUploading(true);
-    const { file_url } = await base44.integrations.Core.UploadFile({ file });
+    const { file_url } = await base44.integrations.Core.UploadPublicFile({ file });
     setVideoUrl(file_url);
     await save(file_url);
     setUploading(false);

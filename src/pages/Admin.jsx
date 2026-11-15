@@ -36,10 +36,10 @@ export default function Admin() {
   useEffect(() => {
     if (!authed) return;
     Promise.all([
-      base44.entities.Event.list(),
-      base44.entities.Artist.list(),
+      base44.entities.Event.count({}),
+      base44.entities.Artist.count({}),
     ]).then(([events, artists]) => {
-      setStats({ events: events.length, artists: artists.length });
+      setStats({ events, artists });
     }).catch(() => {});
   }, [authed]);
 

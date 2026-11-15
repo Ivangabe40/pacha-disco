@@ -60,6 +60,5 @@ export function useImageOptimization(deps = []) {
       window.removeEventListener('resize', onScroll);
       observer.disconnect();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
 }

@@ -22,7 +22,7 @@ export default function AdminArtists() {
   const handlePhoto = async (file) => {
     setUploading(true);
     try {
-      const { file_url } = await base44.integrations.Core.UploadFile({ file });
+      const { file_url } = await base44.integrations.Core.UploadPublicFile({ file });
       setForm(f => ({ ...f, photo_url: file_url }));
     } catch { alert("Error al subir la foto"); }
     finally { setUploading(false); }

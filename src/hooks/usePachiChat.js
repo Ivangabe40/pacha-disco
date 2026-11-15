@@ -55,7 +55,6 @@ export default function usePachiChat(autoStart = false) {
 
   useEffect(() => {
     if (autoStart && !startedRef.current) startConversation();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [autoStart]);
 
   const sendMessage = async (text) => {
