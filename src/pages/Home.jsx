@@ -129,7 +129,7 @@ export default function Home() {
                   <img
                     src="https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/1cf2e2e4d_IMG-20260614-WA00172.jpg"
                     alt="El equipo de Pachá"
-                    className="w-full h-auto object-cover"
+                    className="w-full aspect-[4/3] object-cover"
                   />
                 </div>
               </div>

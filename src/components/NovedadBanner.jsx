@@ -35,7 +35,7 @@ export default function NovedadBanner() {
         <img
           src={novedad.image_url}
           alt={novedad.title}
-          className="w-full h-auto object-contain md:h-[400px] md:object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+          className="w-full aspect-[4/5] object-cover md:aspect-auto md:h-[400px] transition-transform duration-500 group-hover:scale-[1.02]"
         />
 
         {/* Title overlay */}

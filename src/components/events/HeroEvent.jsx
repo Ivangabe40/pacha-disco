@@ -12,21 +12,25 @@ export default function HeroEvent({ event }) {
   return (
     <div className="relative w-full overflow-hidden scanlines md:min-h-screen" style={{ background: "#070707" }}>
       {/* Background video or image */}
-      {/* Mobile: in-flow so it sets container height (no empty gaps) | Desktop: absolute fill */}
+      {/* Mobile: marco de proporción fija, la imagen llena el 100% | Desktop: absolute fill */}
       {event.video_url ? (
-        <video
-          src={event.video_url}
-          className="w-full h-auto block object-contain md:absolute md:inset-0 md:h-full md:object-cover"
-          style={{ filter: "brightness(0.3) saturate(1.2)" }}
-          autoPlay loop muted playsInline
-        />
+        <div className="relative w-full aspect-[3/4] md:absolute md:inset-0 md:aspect-auto md:h-full">
+          <video
+            src={event.video_url}
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{ filter: "brightness(0.3) saturate(1.2)" }}
+            autoPlay loop muted playsInline
+          />
+        </div>
       ) : (event.background_url || event.flyer_url) ? (
-        <img
-          src={event.background_url || event.flyer_url}
-          alt={event.title}
-          className="w-full h-auto block object-contain md:absolute md:inset-0 md:h-full md:object-cover"
-          style={{ filter: "brightness(0.25) saturate(1.2)" }}
-        />
+        <div className="relative w-full aspect-[3/4] md:absolute md:inset-0 md:aspect-auto md:h-full">
+          <img
+            src={event.background_url || event.flyer_url}
+            alt={event.title}
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{ filter: "brightness(0.25) saturate(1.2)" }}
+          />
+        </div>
       ) : (
         <div className="w-full md:absolute md:inset-0" style={{ background: "radial-gradient(ellipse at center, #1a0005 0%, #070707 70%)", minHeight: "60vh" }} />
       )}

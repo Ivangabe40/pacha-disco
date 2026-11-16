@@ -165,9 +165,13 @@ export default function EventDetail() {
           {/* Left: Flyer / Video */}
           <div className="md:col-span-1">
             {event.video_url ?
-            <video src={event.video_url} className="w-full rounded-2xl shadow-2xl" autoPlay loop muted playsInline /> :
+            <div className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl">
+              <video src={event.video_url} className="absolute inset-0 w-full h-full object-cover" autoPlay loop muted playsInline />
+            </div> :
             event.flyer_url ?
-            <img src={event.flyer_url} alt={event.title} className="w-full rounded-2xl shadow-2xl" /> :
+            <div className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl">
+              <img src={event.flyer_url} alt={event.title} className="absolute inset-0 w-full h-full object-cover" />
+            </div> :
             null}
           </div>
 

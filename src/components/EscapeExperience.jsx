@@ -23,13 +23,13 @@ export default function EscapeExperience() {
 
         <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
           {/* FLYER */}
-          <div className="mx-auto w-full max-w-sm">
-            <div className="rounded-2xl overflow-hidden"
+          <div className="mx-auto w-full md:max-w-sm">
+            <div className="relative w-full aspect-[4/5] rounded-2xl overflow-hidden"
               style={{
                 border: "1px solid rgba(201,168,76,0.45)",
                 boxShadow: "0 0 60px rgba(201,168,76,0.12), 0 0 120px rgba(255,69,0,0.08)",
               }}>
-              <img src={FLYER} alt="Escape Experience by Pachá" className="w-full h-auto block" loading="lazy" />
+              <img src={FLYER} alt="Escape Experience by Pachá" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
             </div>
           </div>
 
