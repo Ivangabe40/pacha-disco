@@ -3,6 +3,7 @@ import { createPageUrl } from "@/utils";
 import { useState, useEffect } from "react";
 import { Menu, X, Instagram, MessageCircle, MapPin, ChevronLeft } from "lucide-react";
 import MobileBottomBar from "@/components/MobileBottomBar";
+import PachiChatWidget from "@/components/pachi/PachiChatWidget";
 import { useImageOptimization } from "@/hooks/useImageOptimization";
 
 const ROOT_ROUTES = new Set(["/", "/Home", "/Eventos", "/Artists", "/Gallery", "/Menu", "/About", "/Contact", "/Admin", "/configuracion", "/gestor-menu", "/MisCuenta", "/QR"]);
@@ -127,6 +128,8 @@ export default function Layout({ children, currentPageName }) {
         <style>{`@media(min-width:768px){main{padding-bottom:0!important}}`}</style>
         {children}
       </main>
+
+      <PachiChatWidget />
 
       <MobileBottomBar />
 
