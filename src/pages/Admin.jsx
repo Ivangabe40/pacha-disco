@@ -14,7 +14,7 @@ import AdminConfiguracion from "@/components/admin/AdminConfiguracion";
 import AdminHomeVideo from "@/components/admin/AdminHomeVideo";
 import { Calendar, Music, Camera, Wine, Megaphone, Mail, Bell, Sparkles, Settings, LogOut } from "lucide-react";
 
-const LOGO_RED = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/54165d896_file_0000000090c081f4a8b9ff606c8a8ed8.png";
+const LOGO_RED = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/dbb6d658e_pacha-logo-nuevo.png";
 
 const tabs = [
   { id: "events", label: "Eventos", icon: Calendar },

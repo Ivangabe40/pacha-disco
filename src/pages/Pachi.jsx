@@ -3,7 +3,7 @@ import { ChevronLeft, Send, RotateCcw } from "lucide-react";
 import PachiMessageBubble from "@/components/pachi/PachiMessageBubble";
 import usePachiChat, { PACHI_GREETING, PACHI_SUGGESTIONS } from "@/hooks/usePachiChat";
 
-const LOGO_RED = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/54165d896_file_0000000090c081f4a8b9ff606c8a8ed8.png";
+const LOGO_RED = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/dbb6d658e_pacha-logo-nuevo.png";
 
 export default function Pachi() {
   const { conversation, messages, input, setInput, busy, failed, sendMessage, retry, scrollRef, inputRef } =
