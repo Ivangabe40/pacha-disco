@@ -6,6 +6,7 @@ import MobileBottomBar from "@/components/MobileBottomBar";
 import PachiChatWidget from "@/components/pachi/PachiChatWidget";
 import { useImageOptimization } from "@/hooks/useImageOptimization";
 import { trackConversion } from "@/lib/adsConversion";
+import { useAuth } from "@/lib/AuthContext";
 
 const ROOT_ROUTES = new Set(["/", "/Home", "/Eventos", "/Escape", "/Gallery", "/Menu", "/About", "/Contact", "/Admin", "/configuracion", "/gestor-menu", "/MisCuenta", "/QR"]);
 
@@ -25,6 +26,8 @@ export default function Layout({ children, currentPageName }) {
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const { user } = useAuth();
+  const isAdmin = user?.role === "admin";
   const isSubRoute = !ROOT_ROUTES.has(location.pathname);
 
   useImageOptimization([location.pathname]);
@@ -95,6 +98,7 @@ export default function Layout({ children, currentPageName }) {
                 {l.label}
               </Link>
             )}
+            {isAdmin && <Link to="/Admin" className="nav-link text-xs font-semibold tracking-widest uppercase pb-0.5">Administrar</Link>}
           </div>
 
           {/* Desktop CTA */}
@@ -121,7 +125,7 @@ export default function Layout({ children, currentPageName }) {
                 {l.label}
               </Link>
           )}
-
+            {isAdmin && <Link to="/Admin" onClick={() => setMenuOpen(false)} className="text-sm font-semibold tracking-widest uppercase py-2 text-red-400">Panel de administración</Link>}
           </div>
         }
       </nav>
