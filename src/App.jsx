@@ -21,6 +21,7 @@ const Configuracion = lazy(() => import('./pages/Configuracion'));
 const GestorMenu = lazy(() => import('./pages/GestorMenu'));
 const Pachi = lazy(() => import('./pages/Pachi'));
 import { ThemeProvider } from 'next-themes';
+import PachiChatWidget from '@/components/pachi/PachiChatWidget';
 import { TabHistoryProvider } from '@/components/TabHistoryProvider';
 
 const { Pages, Layout, mainPage } = pagesConfig;
@@ -72,8 +73,9 @@ const AuthenticatedApp = () => {
     }
   }
 
-  // Render the main app
+  // El chat persiste al cambiar de sección: evita perder la conversación.
   return (
+    <>
     <AnimatePresence mode="wait" initial={false}>
       <Suspense fallback={<RouteFallback />}>
       <Routes location={location} key={location.pathname}>
@@ -106,6 +108,8 @@ const AuthenticatedApp = () => {
       </Routes>
       </Suspense>
     </AnimatePresence>
+    <PachiChatWidget />
+    </>
   );
 };
 
