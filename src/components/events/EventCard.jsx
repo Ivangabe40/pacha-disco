@@ -25,6 +25,7 @@ export default function EventCard({ event }) {
           <img
             src={event.flyer_url}
             alt={event.title}
+            loading="lazy" decoding="async"
             className="w-full h-full object-contain" style={{ background: "#0b0b0b" }}
           />
         ) : (
