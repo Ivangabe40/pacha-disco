@@ -74,7 +74,7 @@ export default function PastEventsCarousel({ events }) {
                     style={{ border: "1px solid #1e1e1e" }}>
                     <div className="relative aspect-[3/4]" style={{ background: "#0b0b0b" }}>
                     {event.flyer_url ? (
-                      <img src={event.flyer_url} alt={event.title}
+                      <img src={event.flyer_url} alt={event.title} loading="lazy" decoding="async"
                         className="w-full h-full object-contain"
                         />
                     ) : (
