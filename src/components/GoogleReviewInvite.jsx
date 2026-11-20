@@ -7,7 +7,7 @@ export default function GoogleReviewInvite() {
   const handleLeave = (e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)"; };
 
   return (
-    <section className="py-10 md:py-14 px-4" style={{ background: "#070707" }}>
+    <section className="py-6 md:py-8 px-4" style={{ background: "#070707" }}>
       <div className="max-w-2xl mx-auto text-center">
         <a
           href={REVIEW_URL}
