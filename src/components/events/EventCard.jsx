@@ -18,7 +18,7 @@ export default function EventCard({ event }) {
         {event.video_url ? (
           <video
             src={event.video_url}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-contain" style={{ background: "#0b0b0b" }}
             autoPlay loop muted playsInline
           />
         ) : event.flyer_url ? (
