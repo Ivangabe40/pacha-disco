@@ -8,7 +8,8 @@ export const PACHI_SUGGESTIONS = [
   "¿Cuánto sale la entrada?",
   "¿Qué hay este sábado?",
   "¿Dónde están?",
-  "¿Hay alguna promo?",
+  "¿Hay alguna promo vigente?",
+  "¿Qué es Escape Experience?",
 ];
 
 export default function usePachiChat(autoStart = false) {
