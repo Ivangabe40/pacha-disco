@@ -29,6 +29,12 @@ export function getEventPhase(event, now = new Date()) {
   return "proximo";
 }
 
+// 23:59 es un marcador administrativo de fecha, no una hora anunciable.
+export function hasConfirmedEventTime(event) {
+  const raw = new Date(event?.date);
+  return !isNaN(raw.getTime()) && !(raw.getHours() === 23 && raw.getMinutes() === 59);
+}
+
 export const PHASE_LABELS = {
   proximo: "Próximo",
   vigente: "Esta noche",
