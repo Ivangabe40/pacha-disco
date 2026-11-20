@@ -41,7 +41,7 @@ export default function Escape() {
                   boxShadow: "0 0 60px rgba(201,168,76,0.14), 0 0 120px rgba(255,69,0,0.08)",
                 }}
               >
-                <img src={FLYER} alt="Escape Experience by Pachá" className="absolute inset-0 w-full h-full object-cover" />
+                <img src={FLYER} alt="Escape Experience by Pachá" className="absolute inset-0 w-full h-full object-contain" style={{ background: "#0b0906" }} />
               </div>
             </div>
 
