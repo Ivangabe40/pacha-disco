@@ -58,7 +58,7 @@ export default function Eventos() {
           </section>
 
           {upcoming.length === 0 ? (
-            <div className="text-center py-24 md:py-40">
+            <div className="text-center py-12 md:py-20">
               <Calendar size={48} className="mx-auto mb-4" style={{ color: "#FF0000", opacity: 0.3 }} />
               <p className="text-gray-500 text-lg">Próximamente nuevos eventos</p>
               <p className="text-gray-700 text-sm mt-2 tracking-wider uppercase">Seguinos en redes para enterarte primero</p>
