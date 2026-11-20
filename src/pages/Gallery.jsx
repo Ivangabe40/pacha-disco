@@ -113,6 +113,7 @@ export default function Gallery() {
                     <img
                       src={safeMediaUrl(album.cover_url)}
                       alt={album.title}
+                      loading="lazy" decoding="async"
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                       style={{ transition: "transform 0.6s ease" }}
                     />
