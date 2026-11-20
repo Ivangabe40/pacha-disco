@@ -1,11 +1,10 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight, Calendar } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export default function PastEventsCarousel({ events }) {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "start" });
-  const autoplayRef = useRef(null);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollSnaps, setScrollSnaps] = useState([]);
 
@@ -15,14 +14,11 @@ export default function PastEventsCarousel({ events }) {
 
   useEffect(() => {
     if (!emblaApi) return;
+    const syncSelection = () => setSelectedIndex(emblaApi.selectedScrollSnap());
     setScrollSnaps(emblaApi.scrollSnapList());
-    emblaApi.on("select", () => setSelectedIndex(emblaApi.selectedScrollSnap()));
-
-    autoplayRef.current = setInterval(() => {
-      emblaApi.scrollNext();
-    }, 4000);
-
-    return () => clearInterval(autoplayRef.current);
+    syncSelection();
+    emblaApi.on("select", syncSelection);
+    return () => emblaApi.off("select", syncSelection);
   }, [emblaApi]);
 
   if (!events || events.length === 0) return null;
@@ -33,7 +29,7 @@ export default function PastEventsCarousel({ events }) {
   };
 
   return (
-    <section className="py-12 md:py-24 px-4 md:px-8" style={{ background: "#070707" }}>
+    <section className="py-4 md:py-8 px-0 md:px-4" style={{ background: "#070707" }}>
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="flex items-center justify-between mb-8 md:mb-10">
@@ -74,12 +70,13 @@ export default function PastEventsCarousel({ events }) {
                 className="flex-none w-[80vw] sm:w-[45vw] md:w-[30vw] lg:w-[22vw] xl:w-[18vw]"
                 style={{ minWidth: 0 }}>
                 <Link to={`/EventDetail?id=${event.id}`}>
-                  <div className="relative aspect-[3/4] rounded-xl overflow-hidden group cursor-pointer"
+                  <div className="relative rounded-xl overflow-hidden group cursor-pointer"
                     style={{ border: "1px solid #1e1e1e" }}>
+                    <div className="relative aspect-[3/4]" style={{ background: "#0b0b0b" }}>
                     {event.flyer_url ? (
                       <img src={event.flyer_url} alt={event.title}
                         className="w-full h-full object-contain"
-                        style={{ filter: "brightness(0.85) saturate(1)" }} />
+                        />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center"
                         style={{ background: "linear-gradient(135deg, #111 0%, #1a1a1a 100%)" }}>
@@ -88,7 +85,7 @@ export default function PastEventsCarousel({ events }) {
                     )}
 
                     {/* Gradient overlay */}
-                    <div className="absolute inset-0 transition-opacity duration-300"
+                    <div className="hidden"
                       style={{
                         background: "linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.3) 50%, transparent 100%)"
                       }} />
@@ -97,8 +94,10 @@ export default function PastEventsCarousel({ events }) {
                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                       style={{ background: "linear-gradient(135deg, rgba(255,0,0,0.08) 0%, transparent 60%)" }} />
 
-                    {/* Content */}
-                    <div className="absolute bottom-0 left-0 right-0 p-4">
+                    </div>
+
+                    {/* Texto separado del flyer para no tapar cartelería */}
+                    <div className="p-4 min-h-[108px]" style={{ background: "#101010" }}>
                       {event.genres && (
                         <p className="text-xs tracking-widest uppercase mb-1.5 font-medium"
                           style={{ color: "#FF0000" }}>
@@ -131,10 +130,16 @@ export default function PastEventsCarousel({ events }) {
         </div>
 
         {/* Dots */}
-        {scrollSnaps.length > 1 && (
-          <div className="flex justify-center gap-2 mt-8">
+        {scrollSnaps.length > 8 ? (
+          <div className="text-center text-xs text-gray-500 mt-4" aria-live="polite">
+            Edición {selectedIndex + 1} de {scrollSnaps.length}
+          </div>
+        ) : scrollSnaps.length > 1 ? (
+          <div className="flex justify-center gap-2 mt-5">
             {scrollSnaps.map((_, i) => (
               <button key={i} onClick={() => scrollTo(i)}
+                aria-label={`Ir a la edición ${i + 1}`}
+                aria-current={i === selectedIndex ? "true" : undefined}
                 className="rounded-full transition-all duration-300"
                 style={{
                   width: i === selectedIndex ? "24px" : "6px",
@@ -143,7 +148,7 @@ export default function PastEventsCarousel({ events }) {
                 }} />
             ))}
           </div>
-        )}
+        ) : null}
 
         {/* Mobile arrows */}
         <div className="flex sm:hidden justify-center gap-4 mt-6">
