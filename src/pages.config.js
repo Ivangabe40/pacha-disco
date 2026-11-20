@@ -54,7 +54,6 @@ import __Layout from './Layout.jsx';
 // Páginas no críticas con carga diferida
 const About = lazy(() => import('./pages/About'));
 const Admin = lazy(() => import('./pages/Admin'));
-const Artists = lazy(() => import('./pages/Artists'));
 const EventDetail = lazy(() => import('./pages/EventDetail'));
 const Gallery = lazy(() => import('./pages/Gallery'));
 const Menu = lazy(() => import('./pages/Menu'));
@@ -63,7 +62,6 @@ const Menu = lazy(() => import('./pages/Menu'));
 export const PAGES = {
     "About": About,
     "Admin": Admin,
-    "Artists": Artists,
     "EventDetail": EventDetail,
     "Gallery": Gallery,
     "Home": Home,
