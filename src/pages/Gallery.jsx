@@ -16,11 +16,12 @@ const fadeUp = {
 export default function Gallery() {
   const [albums, setAlbums] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState(false);
 
   useEffect(() => {
     base44.entities.GalleryAlbum.list("-created_date").then(data => {
       setAlbums(data);
-    }).catch(() => {}).finally(() => setLoading(false));
+    }).catch(() => setLoadError(true)).finally(() => setLoading(false));
   }, []);
 
   return (
@@ -75,6 +76,11 @@ export default function Gallery() {
         {loading ? (
           <div className="flex justify-center py-12">
             <div className="w-10 h-10 rounded-full border-2 border-t-yellow-500 border-gray-800 animate-spin" />
+          </div>
+        ) : loadError ? (
+          <div role="alert" className="text-center py-12 text-gray-300 text-sm">
+            No se pudo cargar la galería.
+            <button onClick={() => window.location.reload()} className="ml-2 underline text-red-400">Reintentar</button>
           </div>
         ) : albums.length === 0 ? (
           <div className="text-center py-12">
