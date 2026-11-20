@@ -9,13 +9,15 @@ import { getEventPhase } from "@/lib/eventDisplay";
 export default function Eventos() {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState(false);
 
   const loadEvents = useCallback(async () => {
+    setLoadError(false);
     try {
       const data = await base44.entities.Event.list("-date");
       setEvents(data);
     } catch {
-      // silent
+      setLoadError(true);
     } finally {
       setLoading(false);
     }
@@ -59,10 +61,10 @@ export default function Eventos() {
           </section>
 
           {upcoming.length === 0 ? (
-            <div className="text-center py-12 md:py-20">
+            <div role={loadError ? "alert" : undefined} className="text-center py-12 md:py-20">
               <Calendar size={48} className="mx-auto mb-4" style={{ color: "#FF0000", opacity: 0.3 }} />
-              <p className="text-gray-500 text-lg">Próximamente nuevos eventos</p>
-              <p className="text-gray-700 text-sm mt-2 tracking-wider uppercase">Seguinos en redes para enterarte primero</p>
+              <p className="text-gray-500 text-lg">{loadError ? "No se pudo cargar la agenda." : "Próximamente nuevos eventos"}</p>
+              {loadError ? <button onClick={loadEvents} className="text-red-400 text-sm mt-3 underline">Reintentar</button> : <p className="text-gray-700 text-sm mt-2 tracking-wider uppercase">Seguinos en redes para enterarte primero</p>}
             </div>
           ) : (
             <section className="max-w-7xl mx-auto px-4 md:px-8 py-6 md:py-12">
