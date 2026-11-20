@@ -11,10 +11,31 @@ export default function HeroEvent({ event }) {
 
   return (
     <div className="relative w-full overflow-hidden scanlines md:min-h-screen" style={{ background: "#070707" }}>
+      {/* Móvil: flyer íntegro, sin overlays ni recortes. */}
+      <div className="md:hidden px-4 pt-4">
+        <div className="mx-auto w-full max-w-[480px] aspect-[4/5] max-h-[70dvh] rounded-2xl overflow-hidden"
+          style={{ background: "#0e0e0e", border: "1px solid #292929" }}>
+          {event.flyer_url ? (
+            <img src={event.flyer_url} alt={`Flyer completo: ${event.title}`}
+              className="w-full h-full object-contain" fetchPriority="high" />
+          ) : event.video_url ? (
+            <video src={event.video_url} className="w-full h-full object-contain"
+              autoPlay loop muted playsInline />
+          ) : event.background_url ? (
+            <img src={event.background_url} alt={event.title}
+              className="w-full h-full object-contain" />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center">
+              <Music size={40} className="text-red-700" />
+            </div>
+          )}
+        </div>
+      </div>
+      {/* Fondo cinematográfico exclusivo de escritorio */}
       {/* Background video or image */}
       {/* Mobile: marco de proporción fija, la imagen llena el 100% | Desktop: absolute fill */}
       {event.video_url ? (
-        <div className="relative w-full aspect-[3/4] md:absolute md:inset-0 md:aspect-auto md:h-full">
+        <div className="hidden md:block md:absolute md:inset-0 md:h-full">
           <video
             src={event.video_url}
             className="absolute inset-0 w-full h-full object-cover"
@@ -23,7 +44,7 @@ export default function HeroEvent({ event }) {
           />
         </div>
       ) : (event.background_url || event.flyer_url) ? (
-        <div className="relative w-full aspect-[3/4] md:absolute md:inset-0 md:aspect-auto md:h-full">
+        <div className="hidden md:block md:absolute md:inset-0 md:h-full">
           <img
             src={event.background_url || event.flyer_url}
             alt={event.title}
@@ -32,23 +53,23 @@ export default function HeroEvent({ event }) {
           />
         </div>
       ) : (
-        <div className="w-full md:absolute md:inset-0" style={{ background: "radial-gradient(ellipse at center, #1a0005 0%, #070707 70%)", minHeight: "60vh" }} />
+        <div className="hidden md:block md:absolute md:inset-0" style={{ background: "radial-gradient(ellipse at center, #1a0005 0%, #070707 70%)", minHeight: "60vh" }} />
       )}
 
       {/* Gradient overlays */}
-      <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(to top, #070707 0%, rgba(7,7,7,0.6) 50%, rgba(7,7,7,0.2) 100%)" }} />
-      <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 20% 80%, rgba(255,0,0,0.12) 0%, transparent 60%)" }} />
+      <div className="hidden md:block absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(to top, #070707 0%, rgba(7,7,7,0.6) 50%, rgba(7,7,7,0.2) 100%)" }} />
+      <div className="hidden md:block absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 20% 80%, rgba(255,0,0,0.12) 0%, transparent 60%)" }} />
 
       {/* Red top accent line */}
       <div className="absolute top-0 left-0 right-0 h-0.5 z-10" style={{ background: "linear-gradient(90deg, transparent, #FF0000 30%, #FF0000 70%, transparent)" }} />
 
       {/* Content */}
-      <div className="absolute bottom-0 left-0 right-0 z-10 pb-8 md:pb-24">
+      <div className="relative z-10 py-6 md:py-0 md:absolute md:bottom-0 md:left-0 md:right-0 md:pb-24">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           <div className="max-w-3xl">
 
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6"
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-4 md:mb-6"
               style={{ background: "rgba(255,0,0,0.15)", border: "1px solid rgba(255,0,0,0.4)" }}>
               <Zap size={12} fill="#FF0000" style={{ color: "#FF0000" }} />
               <span className="text-xs font-bold tracking-widest uppercase font-condensed" style={{ color: "#FF0000" }}>
@@ -110,7 +131,7 @@ export default function HeroEvent({ event }) {
       </div>
 
       {/* Bottom fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-16 pointer-events-none"
+      <div className="hidden md:block absolute bottom-0 left-0 right-0 h-16 pointer-events-none"
         style={{ background: "linear-gradient(to top, #070707, transparent)" }} />
     </div>
   );
