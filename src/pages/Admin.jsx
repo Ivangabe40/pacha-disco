@@ -2,20 +2,18 @@ import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
 import AdminGate from "@/components/admin/AdminGate";
 import AdminEvents from "@/components/admin/AdminEvents";
-import AdminArtists from "@/components/admin/AdminArtists";
 import AdminGalleryAlbums from "@/components/admin/AdminGalleryAlbums";
 import AdminMenu from "@/components/admin/AdminMenu";
 import MenuQR from "@/components/admin/MenuQR";
 import AdminPromotions from "@/components/admin/AdminPromotions";
 import AdminNovedades from "@/components/admin/AdminNovedades";
 import AdminConfiguracion from "@/components/admin/AdminConfiguracion";
-import { Calendar, Music, Camera, Wine, Megaphone, Sparkles, Settings, LogOut } from "lucide-react";
+import { Calendar, Camera, Wine, Megaphone, Sparkles, Settings, LogOut } from "lucide-react";
 
 const LOGO_RED = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/dbb6d658e_pacha-logo-nuevo.png";
 
 const tabs = [
   { id: "events", label: "Eventos", icon: Calendar },
-  { id: "artists", label: "Artistas", icon: Music },
   { id: "gallery", label: "Galería", icon: Camera },
   { id: "menu", label: "Carta", icon: Wine },
   { id: "promos", label: "Promos", icon: Megaphone },
@@ -26,18 +24,17 @@ const tabs = [
 export default function Admin() {
   const [activeTab, setActiveTab] = useState("events");
   const [stats, setStats] = useState({
-    events: 0, artists: 0, albums: 0, menu: 0, promos: 0,
+    events: 0, albums: 0, menu: 0, promos: 0,
   });
 
   useEffect(() => {
     Promise.all([
       base44.entities.Event.count({}),
-      base44.entities.Artist.count({}),
       base44.entities.GalleryAlbum.count({}),
       base44.entities.MenuItem.count({}),
       base44.entities.Promotion.count({}),
-    ]).then(([events, artists, albums, menu, promos]) => {
-      setStats({ events, artists, albums, menu, promos });
+    ]).then(([events, albums, menu, promos]) => {
+      setStats({ events, albums, menu, promos });
     }).catch(() => {});
   }, []);
 
@@ -64,10 +61,9 @@ export default function Admin() {
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2 pb-3">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pb-3">
             {[
               { label: "Eventos", value: stats.events, color: "#C9A84C" },
-              { label: "Artistas", value: stats.artists, color: "#8888FF" },
               { label: "Álbumes", value: stats.albums, color: "#22c55e" },
               { label: "Carta", value: stats.menu, color: "#f97316" },
               { label: "Promos", value: stats.promos, color: "#ec4899" },
@@ -100,7 +96,6 @@ export default function Admin() {
       {/* Tab Content */}
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-8">
         {activeTab === "events" && <AdminEvents />}
-        {activeTab === "artists" && <AdminArtists />}
         {activeTab === "gallery" && <AdminGalleryAlbums />}
         {activeTab === "promos" && <AdminPromotions />}
         {activeTab === "novedades" && <AdminNovedades />}
