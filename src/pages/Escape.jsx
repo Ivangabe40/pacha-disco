@@ -23,7 +23,7 @@ export default function Escape() {
     <div style={{ background: "#070707" }}>
       {/* HERO */}
       <section
-        className="relative px-4 pt-10 pb-14 md:pt-16 md:pb-20"
+        className="relative px-4 pt-7 pb-10 md:pt-16 md:pb-16"
         style={{ background: "radial-gradient(circle at 50% 0%, rgba(201,168,76,0.14), transparent 60%), linear-gradient(180deg, #070707 0%, #0b0906 100%)" }}
       >
         <div className="max-w-6xl mx-auto">
@@ -33,7 +33,7 @@ export default function Escape() {
 
           <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             {/* FLYER */}
-            <div className="mx-auto w-full max-w-[280px] md:max-w-sm">
+            <div className="mx-auto w-full max-w-[360px] md:max-w-sm">
               <div
                 className="relative w-full aspect-[4/5] rounded-2xl overflow-hidden"
                 style={{
