@@ -3,7 +3,7 @@ import { format } from "date-fns";
 import { es } from "date-fns/locale";
 import { ChevronRight } from "lucide-react";
 import CountdownTimer from "./CountdownTimer";
-import { getDisplayDate } from "@/lib/eventDisplay";
+import { getDisplayDate, hasConfirmedEventTime } from "@/lib/eventDisplay";
 
 export default function UpcomingEventsBanner({ events }) {
   // Show up to 3 upcoming events
@@ -38,14 +38,16 @@ export default function UpcomingEventsBanner({ events }) {
               <h3 className="text-white font-bold text-sm md:text-xl leading-tight truncate"
             style={{ fontFamily: "'Playfair Display', serif" }}>{event.title}</h3>
               <p className="text-gray-500 text-xs md:text-sm mt-0.5 capitalize truncate md:truncate-none">
-                {format(getDisplayDate(event), "EEEE d 'de' MMMM · HH:mm 'hs'", { locale: es })}
+                {format(getDisplayDate(event), hasConfirmedEventTime(event) ? "EEEE d 'de' MMMM · HH:mm 'hs'" : "EEEE d 'de' MMMM", { locale: es })}
               </p>
             </div>
 
             {/* Countdown */}
-            <div className="shrink-0 hidden md:block">
-              <CountdownTimer targetDate={event.date} />
-            </div>
+            {hasConfirmedEventTime(event) && (
+              <div className="shrink-0 hidden md:block">
+                <CountdownTimer targetDate={event.date} />
+              </div>
+            )}
 
             {/* CTA */}
             <div className="shrink-0">
