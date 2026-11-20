@@ -26,8 +26,9 @@ export default function usePachiChat(autoStart = false) {
   useEffect(() => {
     if (!conversation?.id) return;
     const unsubscribe = base44.agents.subscribeToConversation(conversation.id, (data) => {
-      setMessages(data.messages);
-      const last = data.messages[data.messages.length - 1];
+      const nextMessages = Array.isArray(data?.messages) ? data.messages : [];
+      setMessages(nextMessages);
+      const last = nextMessages[nextMessages.length - 1];
       if (last && last.role === "assistant") {
         setBusy(false);
         setFailed(null);
