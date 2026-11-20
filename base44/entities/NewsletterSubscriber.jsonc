@@ -15,6 +15,10 @@
       "default": true,
       "description": "Suscripci\u00f3n activa"
     },
+    "source": {
+      "type": "string",
+      "description": "Origen y fecha de consentimiento registrados por el servidor"
+    },
     "description": {
       "type": "string",
       "description": "Notas sobre el suscriptor",
@@ -25,21 +29,15 @@
     "email"
   ],
   "rls": {
-    "create": null,
     "read": {
-      "$or": [
-        {
-          "created_by_id": "{{user.id}}"
-        },
-        {
-          "data.email": "{{user.email}}"
-        },
-        {
-          "user_condition": {
-            "role": "admin"
-          }
-        }
-      ]
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
     },
     "update": {
       "user_condition": {
