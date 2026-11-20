@@ -1,0 +1,94 @@
+{
+  "snapshot": "PACHA_DISCO_BACKUP_FROZEN_2026-11-20",
+  "app": {
+    "name": "Pacha Disco",
+    "id": "69ad4033370fdc9f9fe8b117",
+    "status": "ready",
+    "main_commit": "291193b0c6c87299b511f6ebe647d9ea39c5a962"
+  },
+  "github": {
+    "repository": "Ivangabe40/pacha-disco",
+    "visibility": "private",
+    "default_branch": "main",
+    "backup_branch": "backup/frozen-2026-11-20",
+    "backup_branch_exists": true,
+    "alternate_branch": "b44/6aff92cb18213f06c6a4db64"
+  },
+  "base44_branches": [
+    {
+      "name": "main",
+      "id": null,
+      "file_count": 144,
+      "commit": "291193b0c6c87299b511f6ebe647d9ea39c5a962"
+    },
+    {
+      "name": "modernizacion-builder-nov2026",
+      "id": "6aff92cb18213f06c6a4db64",
+      "github_mirror": "b44/6aff92cb18213f06c6a4db64",
+      "file_count": 147
+    }
+  ],
+  "branch_differences": {
+    "extra_in_modernizacion": [
+      "src/components/EscapeExperience.jsx",
+      "src/components/HomeVideoSection.jsx",
+      "src/components/IntroVideoOverlay.jsx",
+      "src/components/NewsletterSubscribe.jsx",
+      "src/components/admin/AdminGallery.jsx",
+      "src/components/admin/AdminHomeVideo.jsx",
+      "src/components/admin/AdminLogin.jsx",
+      "src/components/admin/AdminNewsletter.jsx",
+      "src/components/admin/AdminNotifications.jsx",
+      "src/components/admin/AdminOverview.jsx",
+      "src/components/admin/AdminPrivateRequests.jsx",
+      "src/components/ui/alert-dialog.jsx",
+      "src/lib/safeHttpUrl.js",
+      "src/pages/Artists.jsx"
+    ],
+    "extra_in_main": [
+      "base44/entities/PachaCoins.jsonc",
+      "base44/functions/extractMenuItems/entry.ts",
+      "src/archives/Artists.jsx",
+      "src/components/admin/AdminGate.jsx",
+      "src/components/admin/AdminSelect.jsx",
+      "src/hooks/useAdminAuth.js",
+      "src/lib/adsConversion.js",
+      "src/lib/safeUrl.js",
+      "src/lib/uploadFile.js",
+      "src/pages/Escape.jsx",
+      "src/types/globals.d.ts"
+    ]
+  },
+  "entities": {
+    "Event": 28,
+    "Promotion": 6,
+    "SiteConfig": 26,
+    "MenuItem": 69,
+    "Artist": 0,
+    "GalleryAlbum": 11,
+    "GalleryPhoto": 1,
+    "PachaCoins": 0,
+    "NewsletterSubscriber": 2,
+    "PrivateEventRequest": 0,
+    "NovedadBanner": 0,
+    "User": 8
+  },
+  "total_records": 151,
+  "backend_functions": [
+    {
+      "name": "extractMenuItems",
+      "entry": "main.ts",
+      "file_paths": [
+        "main.ts"
+      ]
+    }
+  ],
+  "assets_status": "Truncated on Base44 inventory endpoint; binary assets not included in this GitHub backup branch. Asset references inside data and source are preserved.",
+  "checkpoints_status": "Truncated on Base44 checkpoint-list endpoint; existing checkpoints remain in Base44 history.",
+  "secrets_status": "Not exported, by design. Recreate environment variables, API secrets and OAuth authorizations in the destination platform.",
+  "warnings": [
+    "Private repository only: User and NewsletterSubscriber data are included and contain personal information.",
+    "Do not make this repository public.",
+    "Do not merge the two app branches without reviewing the documented differences."
+  ]
+}
