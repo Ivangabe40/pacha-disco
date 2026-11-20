@@ -3,7 +3,6 @@ import { createPageUrl } from "@/utils";
 import { useState, useEffect } from "react";
 import { Menu, X, Instagram, MessageCircle, MapPin, ChevronLeft } from "lucide-react";
 import MobileBottomBar from "@/components/MobileBottomBar";
-import PachiChatWidget from "@/components/pachi/PachiChatWidget";
 import { useImageOptimization } from "@/hooks/useImageOptimization";
 import { trackConversion } from "@/lib/adsConversion";
 import { useAuth } from "@/lib/AuthContext";
@@ -134,8 +133,6 @@ export default function Layout({ children, currentPageName }) {
       <main className="flex-1" style={{ position: "relative", zIndex: 1 }}>
         {children}
       </main>
-
-      <PachiChatWidget />
 
       <MobileBottomBar />
 
