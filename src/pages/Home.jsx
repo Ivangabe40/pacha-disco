@@ -18,14 +18,16 @@ import InstagramFollow from "@/components/InstagramFollow";
 export default function Home() {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState(false);
 
   const loadEvents = useCallback(async () => {
+    setLoadError(false);
     try {
       const data = await base44.entities.Event.list("-date");
       setEvents(data);
       checkEventReminders(data);
     } catch {
-      // silent fail — loading will be cleared in finally
+      setLoadError(true);
     } finally {
       setLoading(false);
     }
@@ -57,6 +59,11 @@ export default function Home() {
       <PromotionPopup />
       <PullToRefresh onRefresh={loadEvents}>
         <div className="relative" style={{ background: "#070707" }}>
+          {loadError && (
+            <div role="alert" className="max-w-3xl mx-auto mx-4 sm:mx-auto my-5 p-4 text-center rounded-xl text-gray-200 text-sm" style={{ background: "#171717", border: "1px solid #555" }}>
+              No se pudo actualizar la agenda. <button onClick={loadEvents} className="underline text-red-400 ml-2">Reintentar</button>
+            </div>
+          )}
           {/* BANNER NOVEDAD */}
           <NovedadBanner />
 
@@ -82,7 +89,7 @@ export default function Home() {
           )}
 
           {/* CARRUSEL DE PASADOS */}
-          {noUpcoming && past.length === 0 ? (
+          {noUpcoming && past.length === 0 && !loadError ? (
             <div className="text-center py-12 md:py-20">
               <Calendar size={48} className="mx-auto mb-4" style={{ color: "#FF0000", opacity: 0.3 }} />
               <p className="text-gray-500 text-lg">Próximamente nuevos eventos</p>
