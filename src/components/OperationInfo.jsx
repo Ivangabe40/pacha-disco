@@ -1,8 +1,7 @@
 import { Calendar, Clock, Ticket, ShieldCheck, CreditCard, MessageCircle } from "lucide-react";
 import { trackConversion } from "@/lib/adsConversion";
 
-// Información PERMANENTE de operación de Pacha Disco.
-// Fuente de verdad única; Pachi Bot consulta lo mismo vía SiteConfig.
+// Datos operativos visibles en el sitio. Mantenerlos sincronizados con SiteConfig, fuente dinámica consultada por Pachi Bot.
 export const WHATSAPP_URL = "https://wa.me/5493468546935";
 
 const items = [
