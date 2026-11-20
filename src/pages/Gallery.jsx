@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
 import { Camera, ExternalLink, ImageIcon } from "lucide-react";
 import { motion } from "framer-motion";
+import { safeExternalUrl } from "@/lib/safeUrl";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -82,12 +83,13 @@ export default function Gallery() {
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-7">
-            {albums.map((album, i) => (
-              <motion.a
+            {albums.map((album, i) => {
+              const link = safeExternalUrl(album.link);
+              const Card = link ? motion.a : motion.div;
+              return (
+              <Card
                 key={album.id}
-                href={album.link}
-                target="_blank"
-                rel="noopener noreferrer"
+                {...(link ? { href: link, target: "_blank", rel: "noopener noreferrer" } : {})}
                 className="group block rounded-2xl overflow-hidden"
                 style={{ background: "#111", border: "1px solid #222", boxShadow: "0 6px 30px rgba(0,0,0,0.5)" }}
                 custom={i}
@@ -134,8 +136,9 @@ export default function Gallery() {
                   <p className="text-white font-semibold text-sm leading-snug">{album.title}</p>
                   <ExternalLink size={13} className="text-gray-600 group-hover:text-red-500 transition-colors shrink-0" />
                 </div>
-              </motion.a>
-            ))}
+              </Card>
+              );
+            })}
           </div>
         )}
       </div>

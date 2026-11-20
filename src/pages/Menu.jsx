@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
 import MenuCategorySection from "@/components/menu/MenuCategorySection";
 import { Wine, Star, Tag, ExternalLink, Sparkles } from "lucide-react";
+import { safeExternalUrl } from "@/lib/safeUrl";
 
 const CATEGORY_ORDER = [
   "Sin Alcohol", "Vodkas", "Vermuts", "Cervezas", "Gin",
@@ -22,6 +23,18 @@ const CATEGORY_ICONS = {
 
 const TAB_MENU = "menu";
 const TAB_PROMOS = "promos";
+
+function PromoButton({ promo }) {
+  const url = safeExternalUrl(promo.button_url);
+  if (!url) return null;
+  return (
+    <a href={url} target="_blank" rel="noopener noreferrer"
+      className="shrink-0 flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold tracking-wider uppercase transition-all"
+      style={{ background: "rgba(255,0,0,0.12)", color: "#FF0000", border: "1px solid rgba(255,0,0,0.3)" }}>
+      {promo.button_label || "Ver más"} <ExternalLink size={11} />
+    </a>
+  );
+}
 
 export default function Menu() {
   const [items, setItems] = useState([]);
@@ -180,13 +193,7 @@ export default function Menu() {
                         <p className="text-gray-400 text-sm leading-relaxed">{promo.description}</p>
                       )}
                     </div>
-                    {promo.button_url && (
-                      <a href={promo.button_url} target="_blank" rel="noopener noreferrer"
-                        className="shrink-0 flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold tracking-wider uppercase transition-all"
-                        style={{ background: "rgba(255,0,0,0.12)", color: "#FF0000", border: "1px solid rgba(255,0,0,0.3)" }}>
-                        {promo.button_label || "Ver más"} <ExternalLink size={11} />
-                      </a>
-                    )}
+                    <PromoButton promo={promo} />
                   </div>
                 </div>
               ))}

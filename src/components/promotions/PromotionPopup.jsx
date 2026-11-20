@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
 import { X } from "lucide-react";
+import { safeExternalUrl } from "@/lib/safeUrl";
 
 export default function PromotionPopup() {
   const [promo, setPromo] = useState(null);
@@ -25,7 +26,8 @@ export default function PromotionPopup() {
 
   const isVideo = !!promo.video_url;
   const hasImage = !!promo.image_url;
-  const hasContent = promo.description || promo.button_url;
+  const safeButtonUrl = safeExternalUrl(promo.button_url);
+  const hasContent = promo.description || safeButtonUrl;
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center p-4"
@@ -70,8 +72,8 @@ export default function PromotionPopup() {
             {promo.description && (
               <p className="text-xs text-gray-400 mb-3 leading-relaxed">{promo.description}</p>
             )}
-            {promo.button_url && (
-              <a href={promo.button_url} target="_blank" rel="noopener noreferrer" onClick={close}
+            {safeButtonUrl && (
+              <a href={safeButtonUrl} target="_blank" rel="noopener noreferrer" onClick={close}
                 className="block w-full text-center py-2.5 rounded-xl font-bold text-xs tracking-widest uppercase transition-all active:scale-95"
                 style={{ background: "linear-gradient(135deg,#FF0000,#FF6666)", color: "#fff" }}>
                 {promo.button_label || "Ver más"}

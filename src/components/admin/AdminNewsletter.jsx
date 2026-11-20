@@ -38,24 +38,22 @@ export default function AdminNewsletter() {
     e.preventDefault();
     if (!subject || !body || subscribers.length === 0) return;
     setSending(true);
-    let count = 0;
-    for (const s of subscribers) {
-      try {
-        await base44.integrations.Core.SendEmail({
-          from_name: "Pachá Night Club",
-          to: s.email,
-          subject,
-          body: s.name ? `Hola ${s.name}!\n\n${body}\n\n---\nPachá Night Club` : `${body}\n\n---\nPachá Night Club`
-        });
-        count++;
-      } catch { /* skip individual failures */ }
+    try {
+      const { data } = await base44.functions.invoke("sendSubscriberEmail", {
+        subject,
+        body,
+        personalized: true,
+      });
+      setSentCount(data?.sent || 0);
+      setSent(true);
+      setSubject("");
+      setBody("");
+      setTimeout(() => setSent(false), 4000);
+    } catch {
+      alert("Error al enviar el email masivo");
+    } finally {
+      setSending(false);
     }
-    setSentCount(count);
-    setSent(true);
-    setSubject("");
-    setBody("");
-    setTimeout(() => setSent(false), 4000);
-    setSending(false);
   };
 
   return (

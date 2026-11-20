@@ -56,21 +56,19 @@ export default function AdminNotifications() {
     if (!subject.trim() || !body.trim() || subscribers.length === 0) return;
     setSending(true);
     setSent(false);
-    let count = 0;
-    for (const sub of subscribers) {
-      try {
-        await base44.integrations.Core.SendEmail({
-          to: sub.email,
-          subject: subject,
-          body: body.replace(/\n/g, "<br>"),
-          from_name: "Pachá Night Club",
-        });
-        count++;
-      } catch { /* skip individual failures */ }
+    try {
+      const { data } = await base44.functions.invoke("sendSubscriberEmail", {
+        subject,
+        body,
+        personalized: false,
+      });
+      setSentCount(data?.sent || 0);
+      setSent(true);
+    } catch {
+      alert("Error al enviar la notificación");
+    } finally {
+      setSending(false);
     }
-    setSentCount(count);
-    setSent(true);
-    setSending(false);
   };
 
   const activeCount = subscribers.length;

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
 import { X } from "lucide-react";
+import { safeExternalUrl } from "@/lib/safeUrl";
 
 export default function NovedadBanner() {
   const [novedad, setNovedad] = useState(null);
@@ -14,9 +15,10 @@ export default function NovedadBanner() {
 
   if (!novedad || dismissed) return null;
 
-  const Wrapper = novedad.link ? "a" : "div";
-  const wrapperProps = novedad.link
-    ? { href: novedad.link, target: "_blank", rel: "noopener noreferrer" }
+  const safeLink = safeExternalUrl(novedad.link);
+  const Wrapper = safeLink ? "a" : "div";
+  const wrapperProps = safeLink
+    ? { href: safeLink, target: "_blank", rel: "noopener noreferrer" }
     : {};
 
   return (

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
-import AdminLogin, { isAdminAuthenticated, adminLogout } from "@/components/admin/AdminLogin";
+import AdminGate from "@/components/admin/AdminGate";
 import AdminEvents from "@/components/admin/AdminEvents";
 import AdminArtists from "@/components/admin/AdminArtists";
 import AdminGalleryAlbums from "@/components/admin/AdminGalleryAlbums";
@@ -29,28 +29,24 @@ const tabs = [
 ];
 
 export default function Admin() {
-  const [authed, setAuthed] = useState(isAdminAuthenticated());
   const [activeTab, setActiveTab] = useState("events");
   const [stats, setStats] = useState({ events: 0, artists: 0 });
 
   useEffect(() => {
-    if (!authed) return;
     Promise.all([
       base44.entities.Event.count({}),
       base44.entities.Artist.count({}),
     ]).then(([events, artists]) => {
       setStats({ events, artists });
     }).catch(() => {});
-  }, [authed]);
-
-  if (!authed) return <AdminLogin onSuccess={() => setAuthed(true)} />;
+  }, []);
 
   const handleLogout = () => {
-    adminLogout();
-    setAuthed(false);
+    base44.auth.logout("/");
   };
 
   return (
+    <AdminGate>
     <div style={{ background: "#0A0A0A", minHeight: "100vh" }}>
       {/* Admin Header */}
       <div className="sticky top-14 md:top-16 z-40 border-b" style={{ background: "#080808", borderColor: "#1a1a1a" }}>
@@ -121,5 +117,6 @@ export default function Admin() {
         )}
       </div>
     </div>
+    </AdminGate>
   );
 }

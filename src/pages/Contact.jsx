@@ -13,10 +13,10 @@ export default function Contact() {
     setSending(true);
     setError("");
     try {
-      await base44.integrations.Core.SendEmail({
-        to: "contacto@pachadisco.com.ar",
-        subject: `Consulta web - ${form.name}`,
-        body: `Nombre: ${form.name}\nEmail: ${form.email}\n\nMensaje:\n${form.message}`
+      await base44.functions.invoke("sendContactMessage", {
+        name: form.name,
+        email: form.email,
+        message: form.message,
       });
       setSent(true);
     } catch {

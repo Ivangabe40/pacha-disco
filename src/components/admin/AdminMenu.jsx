@@ -67,28 +67,9 @@ export default function AdminMenu() {
     setImporting(true);
     try {
       const { file_url } = await base44.integrations.Core.UploadPublicFile({ file });
-      const result = await base44.integrations.Core.ExtractDataFromUploadedFile({
-        file_url,
-        json_schema: {
-          type: "object",
-          properties: {
-            items: {
-              type: "array",
-              items: {
-                type: "object",
-                properties: {
-                  name: { type: "string" },
-                  description: { type: "string" },
-                  price: { type: "number" },
-                  category: { type: "string" },
-                }
-              }
-            }
-          }
-        }
-      });
-      if (result.status === "success" && result.output?.items?.length) {
-        const toCreate = result.output.items.map((item, idx) => ({
+      const { data } = await base44.functions.invoke("extractMenuItems", { file_url });
+      if (data?.items?.length) {
+        const toCreate = data.items.map((item, idx) => ({
           name: item.name || "Sin nombre",
           description: item.description || "",
           price: parseFloat(item.price) || 0,
