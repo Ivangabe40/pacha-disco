@@ -177,7 +177,7 @@ export default function Menu() {
                   style={{ background: "#0f0f0f", border: "1px solid rgba(255,0,0,0.2)" }}>
                   {safeMediaUrl(promo.image_url) && (
                     <div className="w-full aspect-[4/5] sm:aspect-video relative overflow-hidden">
-                      <img src={safeMediaUrl(promo.image_url)} alt={promo.title}
+                      <img src={safeMediaUrl(promo.image_url)} alt={promo.title} loading="lazy" decoding="async"
                         className="w-full h-full object-contain" style={{ background: "#0b0b0b" }} />
                       <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%)" }} />
                       <div className="absolute top-3 left-3">
