@@ -56,8 +56,9 @@ export default function PachiChatWidget() {
       {/* Panel de conversación */}
       {open && (
         <div
-          className="fixed z-[70] flex flex-col rounded-2xl overflow-hidden shadow-2xl left-3 right-3 bottom-[calc(78px_+_env(safe-area-inset-bottom,0px))] h-[min(560px,72vh)] md:right-auto md:left-6 md:bottom-6 md:w-[380px]"
-          style={{ background: "#0d0d0d", border: "1px solid rgba(255,0,0,0.3)" }}
+          role="dialog" aria-label="Chat con Pachi Bot" aria-modal="false"
+          className="fixed z-[70] flex flex-col rounded-2xl overflow-hidden shadow-2xl left-3 right-3 bottom-[calc(78px_+_env(safe-area-inset-bottom,0px))] md:right-auto md:left-6 md:bottom-6 md:w-[380px]"
+          style={{ background: "#0d0d0d", border: "1px solid rgba(255,0,0,0.3)", height: "min(560px, calc(100dvh - 108px))" }}
         >
           {/* Header */}
           <div className="flex items-center justify-between px-4 py-3 shrink-0"
