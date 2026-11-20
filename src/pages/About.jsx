@@ -17,16 +17,16 @@ export default function About() {
           </h1>
           <div className="w-24 h-px mx-auto mb-8" style={{ background: "linear-gradient(to right, transparent, #C9A84C, transparent)" }}></div>
           <p className="text-gray-300 text-base md:text-lg leading-relaxed mb-6">
-            Pachá es más que un club. Es una experiencia. Desde sus puertas hasta la pista, cada detalle está diseñado para crear noches que no se olvidan.
+            Pacha Disco es una discoteca independiente de Corral de Bustos, Córdoba. Un espacio de encuentro para compartir música, eventos y noches especiales.
           </p>
           <p className="text-gray-400 text-base leading-relaxed mb-4">
-            Ubicado en el corazón de la ciudad, Pachá Night Club es el destino de entretenimiento nocturno más exclusivo de la región. Nuestra propuesta abarca múltiples géneros musicales — reggaeton, electrónica, pop, cumbia y los grandes clásicos — para que cada visitante encuentre su ritmo.
+            La propuesta musical recorre distintos géneros, entre ellos reggaetón, electrónica, pop, cumbia y grandes clásicos. La programación se comunica a través de nuestros canales oficiales y de la sección Eventos.
           </p>
           <p className="text-gray-400 text-base leading-relaxed mb-4">
-            Pensado para mayores de 25 años que buscan vivir la noche con estilo, Pachá ofrece eventos especiales con artistas y DJs de primer nivel.
+            Pacha Disco abre habitualmente los sábados y está dirigido a mayores de 25 años. Los artistas y DJs de cada fecha se anuncian en la información del evento correspondiente.
           </p>
           <p className="text-gray-400 text-base leading-relaxed">
-            Ya sea que vengas a bailar, a celebrar un cumpleaños, un evento corporativo o simplemente a disfrutar de la mejor música en vivo, en Pachá siempre encontrás el ambiente ideal. Viví la noche como merece ser vivida.
+            Además de su programación habitual, Escape Experience by Pacha presenta una propuesta para cumpleaños, graduaciones, aniversarios, eventos empresariales, fiestas privadas y celebraciones especiales. Las consultas y presupuestos se realizan por WhatsApp.
           </p>
         </div>
       </div>
@@ -70,7 +70,7 @@ export default function About() {
           <div className="relative w-full" style={{ height: "250px" }}>
             <iframe
               title="Ubicación Pachá"
-              src="https://www.google.com/maps?q=-33.2833,-62.1833&hl=es&z=16&output=embed"
+              src="https://www.google.com/maps?q=Av.+Italia+378,+Corral+de+Bustos,+C%C3%B3rdoba,+Argentina&hl=es&z=16&output=embed"
               width="100%"
               height="100%"
               style={{ border: 0, filter: "invert(90%) hue-rotate(180deg) saturate(0.8)" }}
@@ -80,7 +80,7 @@ export default function About() {
             />
           </div>
           <div className="px-6 py-4 flex items-center justify-between" style={{ background: "#111" }}>
-            <span className="text-gray-500 text-sm">Pachá Night Club · Exclusivo Mayores</span>
+            <span className="text-gray-500 text-sm">Pacha Disco · Av. Italia 378 · Corral de Bustos</span>
             <a href="https://maps.app.goo.gl/outiaSZFTh14BhGK8" target="_blank" rel="noopener noreferrer"
               onClick={() => trackConversion("como_llegar")}
               className="text-xs font-semibold px-4 py-2 rounded-lg transition-all"
@@ -93,13 +93,8 @@ export default function About() {
         {/* Contact */}
         <div className="text-center p-6 md:p-10 rounded-2xl" style={{ background: "#111", border: "1px solid #222" }}>
           <h2 className="text-3xl font-bold text-white mb-4" style={{ fontFamily: "'Playfair Display', serif" }}>Contacto</h2>
-          <p className="text-gray-400 mb-6">Para eventos privados, prensa o consultas:</p>
+          <p className="text-gray-400 mb-6">Para consultas generales y presupuestos de Escape Experience:</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="mailto:damianrodriguez432@gmail.com"
-             className="px-8 py-3 rounded-xl font-semibold text-sm tracking-wider uppercase"
-             style={{ background: "linear-gradient(135deg, #C9A84C 0%, #E8C97A 50%, #C9A84C 100%)", color: "#0A0A0A" }}>
-             Email
-            </a>
             <a href="https://www.instagram.com/pachaoficialok" target="_blank" rel="noopener noreferrer"
              className="px-8 py-3 rounded-xl font-semibold text-sm tracking-wider uppercase"
              style={{ border: "1px solid #C9A84C", color: "#C9A84C" }}>
