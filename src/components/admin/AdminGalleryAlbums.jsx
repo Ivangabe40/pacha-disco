@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
 import { Plus, Trash2, ExternalLink, Edit2, Check, X, ImageIcon } from "lucide-react";
 import ImageSizeHint from "./ImageSizeHint";
+import { safeHttpUrl } from "@/lib/safeHttpUrl";
 
 export default function AdminGalleryAlbums() {
   const [albums, setAlbums] = useState([]);
@@ -139,7 +140,7 @@ export default function AdminGalleryAlbums() {
                 <p className="text-gray-500 text-xs truncate mt-0.5">{a.link}</p>
               </div>
               <div className="flex items-center gap-1 sm:gap-2 shrink-0">
-                <a href={a.link} target="_blank" rel="noopener noreferrer"
+                <a href={safeHttpUrl(a.link) || undefined} target="_blank" rel="noopener noreferrer"
                   className="p-2 rounded-lg text-gray-400 hover:text-white transition-colors"
                   style={{ background: "#1a1a1a" }}>
                   <ExternalLink size={14} />
