@@ -78,7 +78,7 @@ export default function PastEventsCarousel({ events }) {
                     style={{ border: "1px solid #1e1e1e" }}>
                     {event.flyer_url ? (
                       <img src={event.flyer_url} alt={event.title}
-                        className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
+                        className="w-full h-full object-contain"
                         style={{ filter: "brightness(0.85) saturate(1)" }} />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center"
