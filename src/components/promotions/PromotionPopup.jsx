@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
 import { X } from "lucide-react";
+import { safeHttpUrl } from "@/lib/safeHttpUrl";
 
 export default function PromotionPopup() {
   const [promo, setPromo] = useState(null);
@@ -70,8 +71,8 @@ export default function PromotionPopup() {
             {promo.description && (
               <p className="text-xs text-gray-400 mb-3 leading-relaxed">{promo.description}</p>
             )}
-            {promo.button_url && (
-              <a href={promo.button_url} target="_blank" rel="noopener noreferrer" onClick={close}
+            {safeHttpUrl(promo.button_url) && (
+              <a href={safeHttpUrl(promo.button_url)} target="_blank" rel="noopener noreferrer" onClick={close}
                 className="block w-full text-center py-2.5 rounded-xl font-bold text-xs tracking-widest uppercase transition-all active:scale-95"
                 style={{ background: "linear-gradient(135deg,#FF0000,#FF6666)", color: "#fff" }}>
                 {promo.button_label || "Ver más"}
