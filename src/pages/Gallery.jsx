@@ -24,11 +24,11 @@ export default function Gallery() {
   }, []);
 
   return (
-    <div style={{ background: "#0A0A0A", minHeight: "100vh" }}>
+    <div style={{ background: "#0A0A0A" }}>
 
       {/* Header */}
       <motion.div
-        className="relative py-20 md:py-28 px-4 text-center overflow-hidden"
+        className="relative py-10 md:py-16 px-4 text-center overflow-hidden"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
@@ -71,13 +71,13 @@ export default function Gallery() {
         </div>
       </motion.div>
 
-      <div className="max-w-6xl mx-auto px-4 md:px-8 pb-28">
+      <div className="max-w-6xl mx-auto px-4 md:px-8 pb-10 md:pb-16">
         {loading ? (
-          <div className="flex justify-center py-24">
+          <div className="flex justify-center py-12">
             <div className="w-10 h-10 rounded-full border-2 border-t-yellow-500 border-gray-800 animate-spin" />
           </div>
         ) : albums.length === 0 ? (
-          <div className="text-center py-24">
+          <div className="text-center py-12">
             <Camera size={48} className="mx-auto mb-4 opacity-20" style={{ color: "#C9A84C" }} />
             <p className="text-gray-500">Próximamente fotos de nuestros eventos</p>
           </div>
@@ -90,14 +90,14 @@ export default function Gallery() {
               <Card
                 key={album.id}
                 {...(link ? { href: link, target: "_blank", rel: "noopener noreferrer" } : {})}
-                className="group block rounded-2xl overflow-hidden"
+                className={`group block rounded-2xl overflow-hidden ${link ? "cursor-pointer" : ""}`}
                 style={{ background: "#111", border: "1px solid #222", boxShadow: "0 6px 30px rgba(0,0,0,0.5)" }}
                 custom={i}
                 variants={fadeUp}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-60px" }}
-                whileHover={{ y: -6, transition: { duration: 0.25 } }}
+                whileHover={link ? { y: -6, transition: { duration: 0.25 } } : undefined}
                 onMouseEnter={e => e.currentTarget.style.borderColor = "rgba(255,0,0,0.45)"}
                 onMouseLeave={e => e.currentTarget.style.borderColor = "#222"}
               >
@@ -134,7 +134,7 @@ export default function Gallery() {
                 {/* Title bar */}
                 <div className="px-5 py-4 flex items-center justify-between gap-3">
                   <p className="text-white font-semibold text-sm leading-snug">{album.title}</p>
-                  <ExternalLink size={13} className="text-gray-600 group-hover:text-red-500 transition-colors shrink-0" />
+                  {link && <ExternalLink size={13} className="text-gray-600 group-hover:text-red-500 transition-colors shrink-0" />}
                 </div>
               </Card>
               );
