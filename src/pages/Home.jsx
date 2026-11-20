@@ -60,7 +60,7 @@ export default function Home() {
       <PullToRefresh onRefresh={loadEvents}>
         <div className="relative" style={{ background: "#070707" }}>
           {loadError && (
-            <div role="alert" className="max-w-3xl mx-auto mx-4 sm:mx-auto my-5 p-4 text-center rounded-xl text-gray-200 text-sm" style={{ background: "#171717", border: "1px solid #555" }}>
+            <div role="alert" className="max-w-3xl mx-4 sm:mx-auto my-5 p-4 text-center rounded-xl text-gray-200 text-sm" style={{ background: "#171717", border: "1px solid #555" }}>
               No se pudo actualizar la agenda. <button onClick={loadEvents} className="underline text-red-400 ml-2">Reintentar</button>
             </div>
           )}
@@ -126,6 +126,7 @@ export default function Home() {
                   <img
                     src="https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/1cf2e2e4d_IMG-20260614-WA00172.jpg"
                     alt="El equipo de Pachá"
+                    loading="lazy" decoding="async"
                     className="w-full aspect-[4/3] object-cover"
                   />
                 </div>
