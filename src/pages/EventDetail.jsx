@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { useEventReminder } from "@/hooks/useEventReminder";
 import GoogleReviewInvite from "@/components/GoogleReviewInvite";
-import { getDisplayDate } from "@/lib/eventDisplay";
+import { getDisplayDate, hasConfirmedEventTime } from "@/lib/eventDisplay";
 
 export default function EventDetail() {
   const [event, setEvent] = useState(null);
@@ -191,7 +191,7 @@ export default function EventDetail() {
                 <div className="flex items-center gap-2 text-gray-400 text-xs uppercase tracking-wider mb-1">
                   <Clock size={12} style={{ color: "#C9A84C" }} /> Hora
                 </div>
-                <div className="text-white font-semibold">{format(date, "HH:mm")}hs</div>
+                <div className="text-white font-semibold">{hasConfirmedEventTime(event) ? `${format(date, "HH:mm")}hs` : "Horario a confirmar"}</div>
               </div>
               {event.genres &&
               <div className="p-4 rounded-xl" style={{ background: "#111", border: "1px solid #222" }}>
