@@ -1,10 +1,11 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { Home, Calendar, Wine } from "lucide-react";
+import { Home, Calendar, Wine, Sparkles } from "lucide-react";
 import { useTabHistory } from "@/components/TabHistoryProvider";
 
 const tabs = [
   { label: "Inicio", icon: Home, path: "/" },
   { label: "Eventos", icon: Calendar, path: "/Eventos" },
+  { label: "EE", icon: Sparkles, path: "/Escape", ariaLabel: "Escape Experience" },
   { label: "Carta", icon: Wine, path: "/Menu" },
 ];
 
@@ -44,8 +45,8 @@ export default function MobileBottomBar() {
         paddingBottom: "env(safe-area-inset-bottom, 0px)",
       }}
     >
-      <div className="grid grid-cols-3 gap-1 px-2" style={{ height: 68 }}>
-        {tabs.map(({ label, icon: Icon, path }) => {
+      <div className="grid grid-cols-4 gap-1 px-2" style={{ height: 68 }}>
+        {tabs.map(({ label, icon: Icon, path, ariaLabel }) => {
           const isActive =
             path === "/"
               ? location.pathname === "/" || location.pathname === "/Home"
@@ -54,7 +55,7 @@ export default function MobileBottomBar() {
             <button
               key={path}
               onClick={() => handleTabClick(path)}
-              aria-label={label}
+              aria-label={ariaLabel || label}
               aria-current={isActive ? "page" : undefined}
               className="flex flex-col items-center justify-center gap-1 min-w-0 h-full rounded-2xl active:scale-[0.96] transition-transform"
               style={{
