@@ -88,7 +88,7 @@ export default function Escape() {
 
               <p className="flex items-center justify-center md:justify-start gap-1.5 text-gray-500 text-[11px] md:text-xs mt-5 tracking-wider">
                 <MapPin size={12} style={{ color: "#C9A84C" }} />
-                Italia 378 · Corral de Bustos, Córdoba
+                Av. Italia 378 · Corral de Bustos, Córdoba
               </p>
             </div>
           </div>
