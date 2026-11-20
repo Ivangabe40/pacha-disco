@@ -9,7 +9,6 @@ const CONFIG_DEFAULTS = {
   social_tiktok: "",
   social_whatsapp: "",
   show_home_video: "true",
-  show_newsletter: "true",
 };
 
 export default function AdminConfiguracion() {
@@ -114,9 +113,6 @@ export default function AdminConfiguracion() {
           <Toggle label="Mostrar video en la página de inicio" description="Sección de video promocional"
             value={form.show_home_video === "true"}
             onChange={v => setForm({ ...form, show_home_video: v ? "true" : "false" })} />
-          <Toggle label="Mostrar formulario de newsletter" description="Suscripción al boletín"
-            value={form.show_newsletter === "true"}
-            onChange={v => setForm({ ...form, show_newsletter: v ? "true" : "false" })} />
         </Section>
 
         {/* Save button */}
@@ -145,7 +141,7 @@ function Section({ icon: Icon, title, color, children }) {
   );
 }
 
-function Field({ label, icon: Icon, children }) {
+function Field({ label, icon: Icon = null, children }) {
   return (
     <div>
       <label className="text-xs text-gray-400 uppercase tracking-wider block mb-1.5">{label}</label>
@@ -157,7 +153,7 @@ function Field({ label, icon: Icon, children }) {
   );
 }
 
-function Toggle({ label, description, value, onChange }) {
+function Toggle({ label, description = "", value, onChange }) {
   return (
     <div className="flex items-center justify-between py-1">
       <div>

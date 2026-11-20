@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
+import { uploadPublicFile } from "@/lib/uploadFile";
 import { Plus, Trash2, Upload, ToggleLeft, ToggleRight } from "lucide-react";
 import ImageSizeHint from "./ImageSizeHint";
 
@@ -10,7 +11,7 @@ export default function AdminPromotions() {
   const [form, setForm] = useState(EMPTY);
   const [showForm, setShowForm] = useState(false);
   const [editing, setEditing] = useState(null);
-  const [uploading, setUploading] = useState(false);
+  const [uploading, setUploading] = useState("");
 
   const load = () => base44.entities.Promotion.list("-created_date").then(setPromos).catch(() => {});
   useEffect(() => { load(); }, []);
@@ -20,10 +21,10 @@ export default function AdminPromotions() {
     if (!file) return;
     setUploading("image");
     try {
-      const { file_url } = await base44.integrations.Core.UploadPublicFile({ file });
+      const file_url = await uploadPublicFile(file);
       setForm(f => ({ ...f, image_url: file_url }));
     } catch { alert("Error al subir la imagen"); }
-    finally { setUploading(false); }
+    finally { setUploading(""); }
   };
 
   const handleVideo = async (e) => {
@@ -31,10 +32,10 @@ export default function AdminPromotions() {
     if (!file) return;
     setUploading("video");
     try {
-      const { file_url } = await base44.integrations.Core.UploadPublicFile({ file });
+      const file_url = await uploadPublicFile(file);
       setForm(f => ({ ...f, video_url: file_url }));
     } catch { alert("Error al subir el video"); }
-    finally { setUploading(false); }
+    finally { setUploading(""); }
   };
 
   const save = async () => {

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
+import { uploadPublicFile } from "@/lib/uploadFile";
 import { Upload, Trash2, Video } from "lucide-react";
 import ImageSizeHint from "./ImageSizeHint";
 
@@ -22,7 +23,7 @@ export default function AdminHomeVideo() {
 
   const handleUpload = async (file) => {
     setUploading(true);
-    const { file_url } = await base44.integrations.Core.UploadPublicFile({ file });
+    const file_url = await uploadPublicFile(file);
     setVideoUrl(file_url);
     await save(file_url);
     setUploading(false);

@@ -67,7 +67,7 @@ export function checkEventReminders(events) {
     if (!saved) return;
 
     const eventDate = new Date(saved.date);
-    const daysUntil = Math.ceil((eventDate - now) / (1000 * 60 * 60 * 24));
+    const daysUntil = Math.ceil((eventDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
 
     // Aviso si el estado cambió
     if (saved.status !== reminder.status) {

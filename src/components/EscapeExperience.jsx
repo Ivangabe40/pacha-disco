@@ -1,5 +1,4 @@
 import { MessageCircle, MapPin, CalendarCheck } from "lucide-react";
-import PrivateEventRequestForm from "@/components/PrivateEventRequestForm";
 import { trackConversion } from "@/lib/adsConversion";
 
 const FLYER = "https://base44.app/api/apps/69ad4033370fdc9f9fe8b117/files/mp/public/69ad4033370fdc9f9fe8b117/2f1d73910_escape-experience.jpg";
@@ -67,10 +66,6 @@ export default function EscapeExperience() {
               <span className="text-[11px] md:text-xs tracking-widest uppercase font-condensed" style={{ color: "#E8C97A" }}>
                 Consultá disponibilidad de fechas
               </span>
-            </div>
-
-            <div className="mb-6">
-              <PrivateEventRequestForm />
             </div>
 
             <a href={WHATSAPP} target="_blank" rel="noopener noreferrer"

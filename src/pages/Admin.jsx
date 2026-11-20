@@ -7,13 +7,10 @@ import AdminGalleryAlbums from "@/components/admin/AdminGalleryAlbums";
 import AdminMenu from "@/components/admin/AdminMenu";
 import MenuQR from "@/components/admin/MenuQR";
 import AdminPromotions from "@/components/admin/AdminPromotions";
-import AdminNewsletter from "@/components/admin/AdminNewsletter";
-import AdminNotifications from "@/components/admin/AdminNotifications";
 import AdminNovedades from "@/components/admin/AdminNovedades";
 import AdminConfiguracion from "@/components/admin/AdminConfiguracion";
 import AdminHomeVideo from "@/components/admin/AdminHomeVideo";
-import AdminPrivateRequests from "@/components/admin/AdminPrivateRequests";
-import { Calendar, Music, Camera, Wine, Megaphone, Mail, Bell, Sparkles, Settings, LogOut, Inbox } from "lucide-react";
+import { Calendar, Music, Camera, Wine, Megaphone, Sparkles, Settings, LogOut } from "lucide-react";
 
 const LOGO_RED = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/dbb6d658e_pacha-logo-nuevo.png";
 
@@ -23,17 +20,14 @@ const tabs = [
   { id: "gallery", label: "Galería", icon: Camera },
   { id: "menu", label: "Carta", icon: Wine },
   { id: "promos", label: "Promos", icon: Megaphone },
-  { id: "newsletter", label: "Newsletter", icon: Mail },
-  { id: "notifications", label: "Notif.", icon: Bell },
   { id: "novedades", label: "Novedades", icon: Sparkles },
-  { id: "requests", label: "Solicitudes", icon: Inbox },
   { id: "config", label: "Config", icon: Settings },
 ];
 
 export default function Admin() {
   const [activeTab, setActiveTab] = useState("events");
   const [stats, setStats] = useState({
-    events: 0, artists: 0, albums: 0, menu: 0, promos: 0, subscribers: 0, requests: 0,
+    events: 0, artists: 0, albums: 0, menu: 0, promos: 0,
   });
 
   useEffect(() => {
@@ -43,10 +37,8 @@ export default function Admin() {
       base44.entities.GalleryAlbum.count({}),
       base44.entities.MenuItem.count({}),
       base44.entities.Promotion.count({}),
-      base44.entities.NewsletterSubscriber.count({ is_active: true }),
-      base44.entities.PrivateEventRequest.count({ status: "pendiente" }),
-    ]).then(([events, artists, albums, menu, promos, subscribers, requests]) => {
-      setStats({ events, artists, albums, menu, promos, subscribers, requests });
+    ]).then(([events, artists, albums, menu, promos]) => {
+      setStats({ events, artists, albums, menu, promos });
     }).catch(() => {});
   }, []);
 
@@ -73,15 +65,13 @@ export default function Admin() {
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-7 gap-2 pb-3">
+          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2 pb-3">
             {[
               { label: "Eventos", value: stats.events, color: "#C9A84C" },
               { label: "Artistas", value: stats.artists, color: "#8888FF" },
               { label: "Álbumes", value: stats.albums, color: "#22c55e" },
               { label: "Carta", value: stats.menu, color: "#f97316" },
               { label: "Promos", value: stats.promos, color: "#ec4899" },
-              { label: "Suscriptores", value: stats.subscribers, color: "#38bdf8" },
-              { label: "Solicitudes", value: stats.requests, color: "#FF0000" },
             ].map(s => (
               <div key={s.label} className="p-2 md:p-3 rounded-xl text-center" style={{ background: "#111", border: "1px solid #222" }}>
                 <div className="text-sm md:text-xl font-bold truncate" style={{ color: s.color }}>{s.value}</div>
@@ -114,10 +104,7 @@ export default function Admin() {
         {activeTab === "artists" && <AdminArtists />}
         {activeTab === "gallery" && <AdminGalleryAlbums />}
         {activeTab === "promos" && <AdminPromotions />}
-        {activeTab === "newsletter" && <AdminNewsletter />}
-        {activeTab === "notifications" && <AdminNotifications />}
         {activeTab === "novedades" && <AdminNovedades />}
-        {activeTab === "requests" && <AdminPrivateRequests />}
         {activeTab === "config" && (
           <div className="space-y-6">
             <AdminHomeVideo />

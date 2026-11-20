@@ -6,7 +6,7 @@
 // anterior, para que el cliente nunca vea "domingo".
 export function getDisplayDate(event) {
   const d = new Date(event.date);
-  if (!isNaN(d) && d.getHours() < 12) {
+  if (!isNaN(d.getTime()) && d.getHours() < 12) {
     d.setDate(d.getDate() - 1);
   }
   return d;
@@ -21,7 +21,7 @@ export function getDisplayDate(event) {
 export function getEventPhase(event, now = new Date()) {
   if (event.status === "cancelado") return "cancelado";
   const raw = new Date(event.date);
-  if (isNaN(raw)) return "finalizado";
+  if (isNaN(raw.getTime())) return "finalizado";
   const start = new Date(raw.getTime() - 30 * 60000);
   const end = new Date(raw.getTime() + 7 * 3600000); // cierre ~06:30 de la madrugada
   if (now >= end) return "finalizado";

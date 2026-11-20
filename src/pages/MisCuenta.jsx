@@ -1,22 +1,10 @@
 import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
-import { User, LogOut, Trash2 } from "lucide-react";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
+import { User, LogOut, MessageCircle } from "lucide-react";
 
 export default function MisCuenta() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
     base44.auth.me()
@@ -26,20 +14,6 @@ export default function MisCuenta() {
   }, []);
 
   const handleLogout = () => base44.auth.logout("/");
-
-  const handleDeleteAccount = async () => {
-    setDeleting(true);
-    try {
-      if (user?.id) await base44.entities.User.delete(user.id);
-    } catch {
-      // La plataforma puede restringir la autobaja: se continúa con el cierre de sesión
-    }
-    try {
-      await base44.auth.logout();
-    } catch {
-      window.location.href = "/";
-    }
-  };
 
   if (loading) return (
     <div className="min-h-screen flex items-center justify-center" style={{ background: "#070707" }}>
@@ -94,31 +68,24 @@ export default function MisCuenta() {
           <LogOut size={15} /> Cerrar sesión
         </button>
 
-        <AlertDialog>
-          <AlertDialogTrigger asChild>
-            <button className="w-full py-3 rounded-xl text-sm font-bold flex items-center justify-center gap-2 transition-all"
-              style={{ background: "rgba(239,68,68,0.08)", color: "#ef4444", border: "1px solid rgba(239,68,68,0.2)" }}>
-              <Trash2 size={15} /> Eliminar Cuenta
-            </button>
-          </AlertDialogTrigger>
-          <AlertDialogContent style={{ background: "#0f0f0f", border: "1px solid rgba(239,68,68,0.3)" }}>
-            <AlertDialogHeader>
-              <AlertDialogTitle className="text-white">¿Eliminar tu cuenta?</AlertDialogTitle>
-              <AlertDialogDescription className="text-gray-400">
-                Esta acción es permanente e irreversible. Se eliminarán los datos asociados a tu cuenta.
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogCancel style={{ background: "#1a1a1a", color: "#888", border: "1px solid #2a2a2a" }}>
-                Cancelar
-              </AlertDialogCancel>
-              <AlertDialogAction onClick={handleDeleteAccount} disabled={deleting}
-                style={{ background: "#ef4444", color: "#fff" }}>
-                {deleting ? "Eliminando..." : "Sí, eliminar cuenta"}
-              </AlertDialogAction>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
+        <div className="rounded-2xl p-5" style={{ background: "#0d0d0d", border: "1px solid #1e1e1e" }}>
+          <h2 className="text-white font-bold text-sm mb-2">Baja de cuenta</h2>
+          <p className="text-gray-500 text-xs leading-relaxed mb-3">
+            La baja se gestiona con el equipo de Pachá para poder verificar la identidad del titular.
+            Escribinos y la procesamos desde la administración.
+          </p>
+          <ul className="text-gray-600 text-xs leading-relaxed space-y-1 mb-4">
+            <li>· Se elimina tu cuenta de acceso y los datos de tu perfil.</li>
+            <li>· Pueden permanecer registros históricos que no contienen datos personales.</li>
+            <li>· Cerrar sesión no elimina la cuenta.</li>
+          </ul>
+          <a href="https://wa.me/5493468546935?text=Hola!%20Quiero%20dar%20de%20baja%20mi%20cuenta"
+            target="_blank" rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs font-bold"
+            style={{ border: "1px solid #25D366", color: "#25D366" }}>
+            <MessageCircle size={13} /> Pedir la baja por WhatsApp
+          </a>
+        </div>
       </div>
     </div>
   );

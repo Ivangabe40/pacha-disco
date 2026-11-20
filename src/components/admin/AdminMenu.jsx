@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { base44 } from "@/api/base44Client";
+import { uploadPublicFile } from "@/lib/uploadFile";
 import { Plus, Pencil, Trash2, Star, X, Check, Wine, Upload, Loader2 } from "lucide-react";
 
 const CATEGORIES = ["Sin Alcohol", "Vodkas", "Vermuts", "Cervezas", "Gin", "Clásicos", "Whiskies", "Bottle Service", "Espumosos"];
@@ -66,7 +67,7 @@ export default function AdminMenu() {
     if (!file) return;
     setImporting(true);
     try {
-      const { file_url } = await base44.integrations.Core.UploadPublicFile({ file });
+      const file_url = await uploadPublicFile(file);
       const { data } = await base44.functions.invoke("extractMenuItems", { file_url });
       if (data?.items?.length) {
         const toCreate = data.items.map((item, idx) => ({
@@ -222,7 +223,7 @@ export default function AdminMenu() {
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2">
                   <span className="text-white text-sm font-semibold truncate">{item.name}</span>
-                  {item.is_featured && <Star size={11} fill="#C9A84C" style={{ color: "#C9A84C", shrink: 0 }} />}
+                  {item.is_featured && <Star size={11} fill="#C9A84C" style={{ color: "#C9A84C", flexShrink: 0 }} />}
                 </div>
                 <div className="flex items-center gap-2 mt-0.5">
                   <span className="text-xs text-gray-600">{item.category}</span>

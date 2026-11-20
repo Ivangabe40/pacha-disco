@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
+import { uploadPublicFile } from "@/lib/uploadFile";
 import { Plus, Pencil, Trash2, Upload, X } from "lucide-react";
 import ImageSizeHint from "./ImageSizeHint";
 
@@ -22,7 +23,7 @@ export default function AdminArtists() {
   const handlePhoto = async (file) => {
     setUploading(true);
     try {
-      const { file_url } = await base44.integrations.Core.UploadPublicFile({ file });
+      const file_url = await uploadPublicFile(file);
       setForm(f => ({ ...f, photo_url: file_url }));
     } catch { alert("Error al subir la foto"); }
     finally { setUploading(false); }

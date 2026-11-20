@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import QRCode from "qrcode";
 import { Download, ExternalLink } from "lucide-react";
 
-const APP_URL = "https://pachadisco.base44.app/";
+const APP_URL = "https://pachadisco.com.ar/";
 const LOGO_RED = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/dbb6d658e_pacha-logo-nuevo.png";
 
 export default function QRPage() {

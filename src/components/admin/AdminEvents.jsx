@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
+import { uploadPublicFile } from "@/lib/uploadFile";
 import { Plus, Pencil, Trash2, Star, StarOff, Upload, X } from "lucide-react";
 import ImageSizeHint from "./ImageSizeHint";
 import { format } from "date-fns";
@@ -29,7 +30,7 @@ export default function AdminEvents() {
   const handleFlyer = async (file) => {
     setUploading(true);
     try {
-      const { file_url } = await base44.integrations.Core.UploadPublicFile({ file });
+      const file_url = await uploadPublicFile(file);
       setForm(f => ({ ...f, flyer_url: file_url }));
     } catch { alert("Error al subir el flyer"); }
     finally { setUploading(false); }
@@ -38,7 +39,7 @@ export default function AdminEvents() {
   const handleVideo = async (file) => {
     setUploadingVideo(true);
     try {
-      const { file_url } = await base44.integrations.Core.UploadPublicFile({ file });
+      const file_url = await uploadPublicFile(file);
       setForm(f => ({ ...f, video_url: file_url }));
     } catch { alert("Error al subir el video"); }
     finally { setUploadingVideo(false); }
@@ -48,7 +49,7 @@ export default function AdminEvents() {
   const handleBackground = async (file) => {
     setUploadingBg(true);
     try {
-      const { file_url } = await base44.integrations.Core.UploadPublicFile({ file });
+      const file_url = await uploadPublicFile(file);
       setForm(f => ({ ...f, background_url: file_url }));
     } catch { alert("Error al subir la imagen de fondo"); }
     finally { setUploadingBg(false); }
