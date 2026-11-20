@@ -130,9 +130,8 @@ export default function Layout({ children, currentPageName }) {
         }
       </nav>
 
-      {/* PAGE CONTENT — add bottom padding on mobile for the bottom bar */}
-      <main className="flex-1" style={{ paddingBottom: "calc(84px + env(safe-area-inset-bottom, 0px))", position: "relative", zIndex: 1 }}>
-        <style>{`@media(min-width:768px){main{padding-bottom:0!important}}`}</style>
+      {/* PAGE CONTENT — no artificial gap between content and footer */}
+      <main className="flex-1" style={{ position: "relative", zIndex: 1 }}>
         {children}
       </main>
 
@@ -141,7 +140,7 @@ export default function Layout({ children, currentPageName }) {
       <MobileBottomBar />
 
       {/* FOOTER */}
-      <footer className="pt-8 pb-12 md:py-14 px-4" style={{ background: "#050505", borderTop: "1px solid rgba(255,0,0,0.15)", position: "relative", zIndex: 1 }}>
+      <footer className="pt-8 pb-24 md:py-14 px-4" style={{ background: "#050505", borderTop: "1px solid rgba(255,0,0,0.15)", position: "relative", zIndex: 1 }}>
         <div className="max-w-7xl mx-auto">
           {/* Red divider */}
           <div className="h-px w-full mb-8 md:mb-10" style={{ background: "linear-gradient(90deg, transparent, rgba(255,0,0,0.4), transparent)" }} />
