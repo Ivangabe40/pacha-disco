@@ -55,7 +55,7 @@ export default function Home() {
     <div style={{ background: "#070707" }}>
       <PromotionPopup />
       <PullToRefresh onRefresh={loadEvents}>
-        <div className="relative" style={{ background: "#070707", minHeight: "100vh" }}>
+        <div className="relative" style={{ background: "#070707" }}>
           {/* BANNER NOVEDAD */}
           <NovedadBanner />
 
@@ -82,7 +82,7 @@ export default function Home() {
 
           {/* CARRUSEL DE PASADOS */}
           {noUpcoming && past.length === 0 ? (
-            <div className="text-center py-24 md:py-40">
+            <div className="text-center py-12 md:py-20">
               <Calendar size={48} className="mx-auto mb-4" style={{ color: "#FF0000", opacity: 0.3 }} />
               <p className="text-gray-500 text-lg">Próximamente nuevos eventos</p>
               <p className="text-gray-700 text-sm mt-2 tracking-wider uppercase">Seguinos en redes para enterarte primero</p>
@@ -95,7 +95,7 @@ export default function Home() {
           ) : null}
 
           {/* GRACIAS POR ESTAR */}
-          <section className="py-12 md:py-24 px-4" style={{ background: "#070707" }}>
+          <section className="py-8 md:py-14 px-4" style={{ background: "#070707" }}>
             <div className="max-w-2xl mx-auto text-center">
               <p className="text-xs tracking-widest uppercase mb-3 font-condensed" style={{ color: "#FF0000" }}>Nuestro equipo</p>
               <h2 className="text-2xl md:text-5xl font-black text-white uppercase mb-8 md:mb-10"
