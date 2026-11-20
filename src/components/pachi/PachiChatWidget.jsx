@@ -15,6 +15,10 @@ export default function PachiChatWidget() {
   const isHidden = HIDDEN_PREFIXES.some((p) => location.pathname.startsWith(p));
 
   useEffect(() => {
+    if (isHidden) setOpen(false);
+  }, [isHidden]);
+
+  useEffect(() => {
     const el = scrollRef.current;
     if (el && open) el.scrollTop = el.scrollHeight;
   }, [open]);
@@ -64,7 +68,7 @@ export default function PachiChatWidget() {
           <div className="flex items-center justify-between px-4 py-3 shrink-0"
             style={{ background: "#0f0f0f", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
             <div className="flex items-center gap-2.5">
-              <div className="w-2 h-2 rounded-full" style={{ background: "#22c55e", boxShadow: "0 0 8px rgba(34,197,94,0.7)" }} />
+              <div className="w-2 h-2 rounded-full" style={{ background: failed ? "#f87171" : "#22c55e", boxShadow: failed ? "none" : "0 0 8px rgba(34,197,94,0.7)" }} />
               <div>
                 <p className="text-white text-sm font-bold" style={{ fontFamily: "'Playfair Display', serif" }}>Pachi Bot</p>
                 <p className="text-gray-500 text-xs font-condensed tracking-wide">Asistente de Pacha Disco</p>
