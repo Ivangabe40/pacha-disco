@@ -35,7 +35,8 @@ export default function Home() {
     loadEvents();
   }, [loadEvents]);
 
-  const upcoming = events.filter(e => ["proximo", "vigente"].includes(getEventPhase(e)));
+  const upcoming = events.filter(e => ["proximo", "vigente"].includes(getEventPhase(e)))
+    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
   const past = events.filter(e => ["finalizado", "cancelado"].includes(getEventPhase(e)));
   const featured = upcoming.find(e => e.is_featured) || upcoming[0];
 
@@ -88,7 +89,7 @@ export default function Home() {
               <p className="text-gray-700 text-sm mt-2 tracking-wider uppercase">Seguinos en redes para enterarte primero</p>
             </div>
           ) : past.length > 0 ? (
-            <section className="max-w-7xl mx-auto px-4 md:px-8 py-8 md:py-12">
+            <section className="max-w-7xl mx-auto px-4 md:px-8 py-4 md:py-8">
               <div className="h-px w-full mb-6 md:mb-8" style={{ background: "linear-gradient(90deg, transparent, rgba(255,0,0,0.15), transparent)" }} />
               <PastEventsCarousel events={past} />
             </section>
