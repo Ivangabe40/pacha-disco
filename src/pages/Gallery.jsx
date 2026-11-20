@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
 import { Camera, ExternalLink, ImageIcon } from "lucide-react";
 import { motion } from "framer-motion";
+import { safeHttpUrl } from "@/lib/safeHttpUrl";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -85,7 +86,7 @@ export default function Gallery() {
             {albums.map((album, i) => (
               <motion.a
                 key={album.id}
-                href={album.link}
+                href={safeHttpUrl(album.link) || undefined}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group block rounded-2xl overflow-hidden"
