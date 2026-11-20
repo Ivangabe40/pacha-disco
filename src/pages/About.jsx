@@ -1,4 +1,5 @@
 import { base44 } from '@/api/base44Client';
+import { trackConversion } from "@/lib/adsConversion";
 
 const LOGO_GOLD = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/dbb6d658e_pacha-logo-nuevo.png";
 
@@ -81,6 +82,7 @@ export default function About() {
           <div className="px-6 py-4 flex items-center justify-between" style={{ background: "#111" }}>
             <span className="text-gray-500 text-sm">Pachá Night Club · Exclusivo Mayores</span>
             <a href="https://maps.app.goo.gl/outiaSZFTh14BhGK8" target="_blank" rel="noopener noreferrer"
+              onClick={() => trackConversion("como_llegar")}
               className="text-xs font-semibold px-4 py-2 rounded-lg transition-all"
               style={{ background: "rgba(255,0,0,0.15)", border: "1px solid rgba(255,0,0,0.35)", color: "#FF0000" }}>
               Abrir en Maps →
@@ -104,6 +106,7 @@ export default function About() {
              @pachaoficialok
             </a>
             <a href="https://wa.me/5493468546935" target="_blank" rel="noopener noreferrer"
+            onClick={() => trackConversion("contacto")}
             className="px-8 py-3 rounded-xl font-semibold text-sm tracking-wider uppercase"
             style={{ border: "1px solid #25D366", color: "#25D366" }}>
             WhatsApp

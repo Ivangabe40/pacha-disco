@@ -1,4 +1,5 @@
 import { Instagram, MessageCircle, Mail, MapPin } from "lucide-react";
+import { trackConversion } from "@/lib/adsConversion";
 
 export default function Contact() {
   return (
@@ -16,6 +17,7 @@ export default function Contact() {
             <Mail size={18} className="text-red-500" /> contacto@pachadisco.com.ar
           </a>
           <a href="https://wa.me/5493468546935" target="_blank" rel="noopener noreferrer"
+            onClick={() => trackConversion("contacto")}
             className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors">
             <MessageCircle size={18} className="text-green-500" /> WhatsApp: +54 9 3468 546935
           </a>
@@ -24,6 +26,7 @@ export default function Contact() {
             <Instagram size={18} className="text-pink-500" /> @pachaoficialok
           </a>
           <a href="https://maps.app.goo.gl/outiaSZFTh14BhGK8" target="_blank" rel="noopener noreferrer"
+            onClick={() => trackConversion("como_llegar")}
             className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors">
             <MapPin size={18} className="text-yellow-500" /> Ver ubicación en Google Maps
           </a>

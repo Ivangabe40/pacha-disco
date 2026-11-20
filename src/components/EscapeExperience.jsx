@@ -1,4 +1,6 @@
 import { MessageCircle, MapPin, CalendarCheck } from "lucide-react";
+import PrivateEventRequestForm from "@/components/PrivateEventRequestForm";
+import { trackConversion } from "@/lib/adsConversion";
 
 const FLYER = "https://base44.app/api/apps/69ad4033370fdc9f9fe8b117/files/mp/public/69ad4033370fdc9f9fe8b117/2f1d73910_escape-experience.jpg";
 const WHATSAPP = "https://wa.me/5493468546935?text=Hola!%20Quiero%20consultar%20por%20Escape%20Experience";
@@ -67,7 +69,12 @@ export default function EscapeExperience() {
               </span>
             </div>
 
+            <div className="mb-6">
+              <PrivateEventRequestForm />
+            </div>
+
             <a href={WHATSAPP} target="_blank" rel="noopener noreferrer"
+              onClick={() => trackConversion("contacto")}
               className="flex sm:inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-4 rounded-full text-xs md:text-sm font-black tracking-widest uppercase transition-transform hover:-translate-y-0.5"
               style={{ border: "2px solid #D4AF37", color: "#F5E7C0", background: "rgba(0,0,0,0.6)" }}>
               <MessageCircle size={16} style={{ color: "#D4AF37" }} />

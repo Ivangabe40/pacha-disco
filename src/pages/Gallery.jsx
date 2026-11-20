@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
 import { Camera, ExternalLink, ImageIcon } from "lucide-react";
 import { motion } from "framer-motion";
-import { safeExternalUrl } from "@/lib/safeUrl";
+import { safeExternalUrl, safeMediaUrl } from "@/lib/safeUrl";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -103,9 +103,9 @@ export default function Gallery() {
               >
                 {/* Cover */}
                 <div className="relative overflow-hidden" style={{ aspectRatio: "16/9", background: "#0f0f0f" }}>
-                  {album.cover_url ? (
+                  {safeMediaUrl(album.cover_url) ? (
                     <img
-                      src={album.cover_url}
+                      src={safeMediaUrl(album.cover_url)}
                       alt={album.title}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                       style={{ transition: "transform 0.6s ease" }}

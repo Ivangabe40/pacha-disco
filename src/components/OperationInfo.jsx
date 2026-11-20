@@ -1,4 +1,5 @@
 import { Calendar, Clock, Ticket, ShieldCheck, CreditCard, MessageCircle } from "lucide-react";
+import { trackConversion } from "@/lib/adsConversion";
 
 // Información PERMANENTE de operación de Pacha Disco.
 // Fuente de verdad única; Pachi Bot consulta lo mismo vía SiteConfig.
@@ -47,6 +48,7 @@ export default function OperationInfo() {
         </div>
 
         <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"
+          onClick={() => trackConversion("contacto")}
           className="mt-5 md:mt-6 inline-flex items-center gap-2 px-6 py-3 rounded-full text-xs font-black tracking-widest uppercase transition-all"
           style={{ background: "linear-gradient(135deg, #FF0000, #FF6666)", color: "#fff" }}>
           <MessageCircle size={14} />

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
 import MenuCategorySection from "@/components/menu/MenuCategorySection";
 import { Wine, Star, Tag, ExternalLink, Sparkles } from "lucide-react";
-import { safeExternalUrl } from "@/lib/safeUrl";
+import { safeExternalUrl, safeMediaUrl } from "@/lib/safeUrl";
 
 const CATEGORY_ORDER = [
   "Sin Alcohol", "Vodkas", "Vermuts", "Cervezas", "Gin",
@@ -170,9 +170,9 @@ export default function Menu() {
               {promos.map(promo => (
                 <div key={promo.id} className="rounded-2xl overflow-hidden"
                   style={{ background: "#0f0f0f", border: "1px solid rgba(255,0,0,0.2)" }}>
-                  {promo.image_url && (
+                  {safeMediaUrl(promo.image_url) && (
                     <div className="w-full aspect-video relative overflow-hidden">
-                      <img src={promo.image_url} alt={promo.title}
+                      <img src={safeMediaUrl(promo.image_url)} alt={promo.title}
                         className="w-full h-full object-cover" />
                       <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%)" }} />
                       <div className="absolute top-3 left-3">

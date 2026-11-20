@@ -1,0 +1,27 @@
+{
+  "id": "/",
+  "name": "Pachá Night Club",
+  "short_name": "Pachá",
+  "description": "Discoteca en Corral de Bustos, Córdoba. Eventos, DJs, galería y carta.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#070707",
+  "theme_color": "#070707",
+  "lang": "es-AR",
+  "icons": [
+    {
+      "src": "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/dbb6d658e_pacha-logo-nuevo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/dbb6d658e_pacha-logo-nuevo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

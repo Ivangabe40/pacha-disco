@@ -8,10 +8,23 @@ const tabs = [
   { label: "Carta", icon: Wine, path: "/Menu" },
 ];
 
+// Rutas privadas o administrativas: no muestran la barra pública.
+const HIDDEN_ROUTES = new Set([
+  "/Admin",
+  "/configuracion",
+  "/gestor-menu",
+  "/QR",
+  "/qr-carta",
+  "/MisCuenta",
+  "/pachi",
+]);
+
 export default function MobileBottomBar() {
   const location = useLocation();
   const navigate = useNavigate();
   const tabHistory = useTabHistory();
+
+  if (HIDDEN_ROUTES.has(location.pathname)) return null;
 
   const handleTabClick = (path) => {
     if (tabHistory?.navigateToTab) {

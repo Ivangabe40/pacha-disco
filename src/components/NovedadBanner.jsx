@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
 import { X } from "lucide-react";
-import { safeExternalUrl } from "@/lib/safeUrl";
+import { safeExternalUrl, safeMediaUrl } from "@/lib/safeUrl";
 
 export default function NovedadBanner() {
   const [novedad, setNovedad] = useState(null);
@@ -13,7 +13,8 @@ export default function NovedadBanner() {
     }).catch(() => {});
   }, []);
 
-  if (!novedad || dismissed) return null;
+  const safeImage = safeMediaUrl(novedad?.image_url);
+  if (!novedad || dismissed || !safeImage) return null;
 
   const safeLink = safeExternalUrl(novedad.link);
   const Wrapper = safeLink ? "a" : "div";
@@ -35,7 +36,7 @@ export default function NovedadBanner() {
       <Wrapper {...wrapperProps} className="block relative overflow-hidden cursor-pointer group">
         {/* Image */}
         <img
-          src={novedad.image_url}
+          src={safeImage}
           alt={novedad.title}
           className="w-full aspect-[4/5] object-cover md:aspect-auto md:h-[400px] transition-transform duration-500 group-hover:scale-[1.02]"
         />
