@@ -2,12 +2,12 @@ import { Instagram } from "lucide-react";
 
 export default function InstagramFollow() {
   return (
-    <section className="px-4 md:px-8 py-6 md:py-10" style={{ background: "#070707" }}>
+    <section className="px-4 md:px-8 py-4 md:py-6" style={{ background: "#070707" }}>
       <a
         href="https://www.instagram.com/pachaoficialok"
         target="_blank"
         rel="noopener noreferrer"
-        className="block max-w-3xl mx-auto text-center rounded-2xl px-6 py-7 md:py-9 transition-transform hover:scale-[1.02]"
+        className="block max-w-3xl mx-auto text-center rounded-2xl px-5 py-5 md:py-7 transition-transform hover:scale-[1.02]"
         style={{
           background: "linear-gradient(135deg, #FF0000 0%, #8B0000 55%, #1a0000 100%)",
           border: "2px solid rgba(255,255,255,0.15)",
