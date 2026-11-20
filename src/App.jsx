@@ -12,6 +12,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 // Rutas no críticas: se cargan bajo demanda para acelerar el arranque
 const Eventos = lazy(() => import('./pages/Eventos'));
+const Escape = lazy(() => import('./pages/Escape'));
 const Contact = lazy(() => import('./pages/Contact'));
 const MisCuenta = lazy(() => import('./pages/MisCuenta'));
 const QRPage = lazy(() => import('./pages/QRPage'));
@@ -99,6 +100,7 @@ const AuthenticatedApp = () => {
         <Route path="/configuracion" element={<LayoutWrapper currentPageName="Configuracion"><Configuracion /></LayoutWrapper>} />
         <Route path="/gestor-menu" element={<LayoutWrapper currentPageName="GestorMenu"><GestorMenu /></LayoutWrapper>} />
         <Route path="/Eventos" element={<LayoutWrapper currentPageName="Eventos"><Eventos /></LayoutWrapper>} />
+        <Route path="/Escape" element={<LayoutWrapper currentPageName="Escape"><Escape /></LayoutWrapper>} />
         <Route path="/pachi" element={<Pachi />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>

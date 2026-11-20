@@ -7,13 +7,14 @@ import PachiChatWidget from "@/components/pachi/PachiChatWidget";
 import { useImageOptimization } from "@/hooks/useImageOptimization";
 import { trackConversion } from "@/lib/adsConversion";
 
-const ROOT_ROUTES = new Set(["/", "/Home", "/Eventos", "/Artists", "/Gallery", "/Menu", "/About", "/Contact", "/Admin", "/configuracion", "/gestor-menu", "/MisCuenta", "/QR"]);
+const ROOT_ROUTES = new Set(["/", "/Home", "/Eventos", "/Escape", "/Artists", "/Gallery", "/Menu", "/About", "/Contact", "/Admin", "/configuracion", "/gestor-menu", "/MisCuenta", "/QR"]);
 
 const LOGO_RED = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/dbb6d658e_pacha-logo-nuevo.png";
 
 const navLinks = [
 { label: "Inicio", page: "Home" },
 { label: "Eventos", page: "Eventos" },
+{ label: "Escape", page: "Escape" },
 { label: "Galería", page: "Gallery" },
 { label: "Carta", page: "Menu" },
 { label: "Nosotros", page: "About" }];

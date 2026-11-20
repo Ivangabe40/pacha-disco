@@ -14,7 +14,6 @@ import OperationInfo from "@/components/OperationInfo";
 import PullToRefresh from "@/components/PullToRefresh";
 import GoogleReviewInvite from "@/components/GoogleReviewInvite";
 import InstagramFollow from "@/components/InstagramFollow";
-import EscapeExperience from "@/components/EscapeExperience";
 
 export default function Home() {
   const [events, setEvents] = useState([]);
@@ -65,9 +64,6 @@ export default function Home() {
 
           {/* OPERACIÓN ACTUAL — información permanente */}
           <OperationInfo />
-
-          {/* ESCAPE EXPERIENCE — celebraciones privadas */}
-          <EscapeExperience />
 
           {/* COUNTDOWN BANNERS — solo si hay próximos eventos */}
           {upcoming.length > 0 && <UpcomingEventsBanner events={upcoming} />}
