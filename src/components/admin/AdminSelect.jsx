@@ -11,7 +11,7 @@ export default function AdminSelect({
   options = [],
   placeholder = "Seleccionar",
   className = "",
-  style,
+  style = {},
 }) {
   return (
     <Select value={value} onValueChange={onValueChange}>
