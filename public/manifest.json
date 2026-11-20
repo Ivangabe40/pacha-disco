@@ -1,0 +1,19 @@
+{
+  "id": "/",
+  "name": "Pacha Disco",
+  "short_name": "Pacha",
+  "description": "Sitio oficial de Pacha Disco, Corral de Bustos, Córdoba, Argentina.",
+  "lang": "es-AR",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#070707",
+  "theme_color": "#070707",
+  "icons": [
+    {
+      "src": "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/dbb6d658e_pacha-logo-nuevo.png",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
