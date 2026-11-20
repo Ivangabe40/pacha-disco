@@ -2,6 +2,7 @@ import ReactMarkdown from "react-markdown";
 
 export default function PachiMessageBubble({ message }) {
   const isUser = message.role === "user";
+  if (!isUser && !String(message.content || "").trim()) return null;
   return (
     <div className={`flex ${isUser ? "justify-end" : "justify-start"}`}>
       <div
