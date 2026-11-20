@@ -1,0 +1,685 @@
+[
+  {
+    "entity_name": "GalleryAlbum",
+    "entity_schema": {
+      "name": "GalleryAlbum",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Título del álbum (ej: Sábado 5 de Abril)"
+        },
+        "link": {
+          "type": "string",
+          "description": "URL del álbum de fotos externo"
+        },
+        "cover_url": {
+          "type": "string",
+          "description": "Imagen de portada (opcional)"
+        },
+        "description": {
+          "type": "string",
+          "description": "Descripción del álbum",
+          "maxLength": 1000
+        }
+      },
+      "required": [
+        "title",
+        "link"
+      ],
+      "rls": {
+        "read": {},
+        "create": {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        "update": {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        "delete": {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      }
+    }
+  },
+  {
+    "entity_name": "Promotion",
+    "entity_schema": {
+      "name": "Promotion",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Título de la promoción"
+        },
+        "description": {
+          "type": "string",
+          "description": "Descripción breve"
+        },
+        "image_url": {
+          "type": "string",
+          "description": "URL de la imagen de la promoción"
+        },
+        "video_url": {
+          "type": "string",
+          "description": "URL del video tipo reel (9:16)"
+        },
+        "button_label": {
+          "type": "string",
+          "description": "Texto del botón"
+        },
+        "button_url": {
+          "type": "string",
+          "description": "URL destino del botón"
+        },
+        "is_active": {
+          "type": "boolean",
+          "default": true,
+          "description": "Mostrar popup en el sitio"
+        }
+      },
+      "required": [
+        "title"
+      ],
+      "rls": {
+        "read": {},
+        "create": {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        "update": {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        "delete": {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      }
+    }
+  },
+  {
+    "entity_name": "MenuItem",
+    "entity_schema": {
+      "name": "MenuItem",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Nombre del producto"
+        },
+        "description": {
+          "type": "string",
+          "description": "Descripción breve"
+        },
+        "price": {
+          "type": "number",
+          "description": "Precio en ARS"
+        },
+        "category": {
+          "type": "string",
+          "enum": [
+            "Sin Alcohol",
+            "Vodkas",
+            "Vermuts",
+            "Cervezas",
+            "Gin",
+            "Clásicos",
+            "Whiskies",
+            "Bottle Service",
+            "Espumosos"
+          ],
+          "description": "Categoría del producto"
+        },
+        "is_available": {
+          "type": "boolean",
+          "default": true,
+          "description": "Disponible"
+        },
+        "is_featured": {
+          "type": "boolean",
+          "default": false,
+          "description": "Destacado"
+        },
+        "sort_order": {
+          "type": "number",
+          "default": 0,
+          "description": "Orden de aparición"
+        }
+      },
+      "required": [
+        "name",
+        "price",
+        "category"
+      ],
+      "rls": {
+        "read": {},
+        "create": {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        "update": {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        "delete": {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      }
+    }
+  },
+  {
+    "entity_name": "GalleryPhoto",
+    "entity_schema": {
+      "name": "GalleryPhoto",
+      "type": "object",
+      "properties": {
+        "photo_url": {
+          "type": "string",
+          "description": "URL de la foto"
+        },
+        "caption": {
+          "type": "string",
+          "description": "Descripción de la foto"
+        },
+        "event_name": {
+          "type": "string",
+          "description": "Evento relacionado"
+        },
+        "date": {
+          "type": "string",
+          "format": "date",
+          "description": "Fecha de la foto"
+        },
+        "description": {
+          "type": "string",
+          "description": "Descripción extendida de la foto",
+          "maxLength": 1000
+        }
+      },
+      "required": [
+        "photo_url"
+      ],
+      "rls": {
+        "read": {},
+        "create": {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        "update": {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        "delete": {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      }
+    }
+  },
+  {
+    "entity_name": "PachaCoins",
+    "entity_schema": {
+      "name": "PachaCoins",
+      "type": "object",
+      "properties": {
+        "user_email": {
+          "type": "string",
+          "description": "Email del usuario"
+        },
+        "user_name": {
+          "type": "string",
+          "description": "Nombre del usuario"
+        },
+        "coins": {
+          "type": "number",
+          "default": 0,
+          "description": "Saldo actual de Pachá Coins"
+        },
+        "total_earned": {
+          "type": "number",
+          "default": 0,
+          "description": "Total de coins ganados históricamente"
+        },
+        "tickets_count": {
+          "type": "number",
+          "default": 0,
+          "description": "Cantidad de eventos asistidos"
+        },
+        "notes": {
+          "type": "string",
+          "description": "Notas del administrador"
+        }
+      },
+      "required": [
+        "user_email"
+      ],
+      "rls": {
+        "read": {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        "create": {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        "update": {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        "delete": {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      }
+    }
+  },
+  {
+    "entity_name": "Event",
+    "entity_schema": {
+      "name": "Event",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Nombre del evento"
+        },
+        "date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Fecha y hora del evento"
+        },
+        "description": {
+          "type": "string",
+          "description": "Descripción del evento"
+        },
+        "flyer_url": {
+          "type": "string",
+          "description": "URL del flyer del evento"
+        },
+        "background_url": {
+          "type": "string",
+          "description": "URL de la imagen de fondo del hero (independiente del flyer)"
+        },
+        "video_url": {
+          "type": "string",
+          "description": "URL del video flyer del evento"
+        },
+        "genres": {
+          "type": "string",
+          "description": "Géneros musicales"
+        },
+        "djs": {
+          "type": "string",
+          "description": "DJs / artistas del evento"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "activo",
+            "agotado",
+            "cancelado"
+          ],
+          "default": "activo"
+        },
+        "is_featured": {
+          "type": "boolean",
+          "default": false,
+          "description": "Evento destacado"
+        }
+      },
+      "required": [
+        "title",
+        "date"
+      ],
+      "rls": {
+        "read": {},
+        "create": {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        "update": {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        "delete": {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      }
+    }
+  },
+  {
+    "entity_name": "NewsletterSubscriber",
+    "entity_schema": {
+      "name": "NewsletterSubscriber",
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "Email del suscriptor"
+        },
+        "name": {
+          "type": "string",
+          "description": "Nombre del suscriptor (opcional)"
+        },
+        "is_active": {
+          "type": "boolean",
+          "default": true,
+          "description": "Suscripción activa"
+        },
+        "source": {
+          "type": "string",
+          "description": "Origen y fecha de consentimiento registrados por el servidor"
+        },
+        "description": {
+          "type": "string",
+          "description": "Notas sobre el suscriptor",
+          "maxLength": 1000
+        }
+      },
+      "required": [
+        "email"
+      ],
+      "rls": {
+        "read": {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        "create": {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        "update": {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        "delete": {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      }
+    }
+  },
+  {
+    "entity_name": "SiteConfig",
+    "entity_schema": {
+      "name": "SiteConfig",
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Clave de configuración (ej: mp_link)"
+        },
+        "value": {
+          "type": "string",
+          "description": "Valor de configuración"
+        },
+        "description": {
+          "type": "string",
+          "description": "Descripción de esta configuración",
+          "maxLength": 1000
+        }
+      },
+      "required": [
+        "key",
+        "value"
+      ],
+      "rls": {
+        "read": {},
+        "create": {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        "update": {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        "delete": {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      }
+    }
+  },
+  {
+    "entity_name": "NovedadBanner",
+    "entity_schema": {
+      "name": "NovedadBanner",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Título de la novedad"
+        },
+        "image_url": {
+          "type": "string",
+          "description": "URL de la imagen o flyer"
+        },
+        "link": {
+          "type": "string",
+          "description": "URL de destino al hacer click (opcional)"
+        },
+        "is_active": {
+          "type": "boolean",
+          "default": true,
+          "description": "Mostrar en el sitio"
+        },
+        "description": {
+          "type": "string",
+          "description": "Descripción adicional del banner",
+          "maxLength": 1000
+        }
+      },
+      "required": [
+        "title",
+        "image_url"
+      ],
+      "rls": {
+        "read": {},
+        "create": {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        "update": {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        "delete": {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      }
+    }
+  },
+  {
+    "entity_name": "Artist",
+    "entity_schema": {
+      "name": "Artist",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Nombre del artista / DJ"
+        },
+        "genre": {
+          "type": "string",
+          "description": "Género musical"
+        },
+        "bio": {
+          "type": "string",
+          "description": "Biografía corta"
+        },
+        "photo_url": {
+          "type": "string",
+          "description": "Foto del artista"
+        },
+        "instagram": {
+          "type": "string",
+          "description": "Instagram handle"
+        },
+        "soundcloud": {
+          "type": "string",
+          "description": "URL SoundCloud"
+        },
+        "is_resident": {
+          "type": "boolean",
+          "default": false,
+          "description": "DJ Residente"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "rls": {
+        "read": {},
+        "create": {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        "update": {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        "delete": {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      }
+    }
+  },
+  {
+    "entity_name": "PrivateEventRequest",
+    "entity_schema": {
+      "name": "PrivateEventRequest",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Nombre del solicitante"
+        },
+        "email": {
+          "type": "string",
+          "description": "Email de contacto"
+        },
+        "phone": {
+          "type": "string",
+          "description": "Teléfono de contacto"
+        },
+        "event_type": {
+          "type": "string",
+          "description": "Tipo de evento privado"
+        },
+        "date": {
+          "type": "string",
+          "format": "date",
+          "description": "Fecha tentativa del evento"
+        },
+        "guests": {
+          "type": "number",
+          "description": "Cantidad de invitados"
+        },
+        "message": {
+          "type": "string",
+          "description": "Mensaje o descripción del evento"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "pendiente",
+            "confirmada",
+            "cancelada"
+          ],
+          "default": "pendiente",
+          "description": "Estado de la solicitud"
+        },
+        "description": {
+          "type": "string",
+          "description": "Descripción adicional del evento privado",
+          "maxLength": 1000
+        }
+      },
+      "required": [
+        "name",
+        "email"
+      ],
+      "rls": {
+        "read": {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        "create": {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        "update": {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        "delete": {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      }
+    }
+  },
+  {
+    "entity_name": "User",
+    "entity_schema": {
+      "properties": {
+        "role": {
+          "type": "string",
+          "description": "The role of the user in the app",
+          "enum": [
+            "admin",
+            "user"
+          ]
+        }
+      },
+      "required": [
+        "role"
+      ],
+      "name": "User",
+      "type": "object"
+    }
+  }
+]
