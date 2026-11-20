@@ -40,16 +40,20 @@ export default function Menu() {
   const [items, setItems] = useState([]);
   const [promos, setPromos] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [menuError, setMenuError] = useState(false);
+  const [promosError, setPromosError] = useState(false);
   const [activeTab, setActiveTab] = useState(TAB_MENU);
 
   useEffect(() => {
-    Promise.all([
+    Promise.allSettled([
       base44.entities.MenuItem.list("sort_order"),
       base44.entities.Promotion.filter({ is_active: true })
-    ]).then(([menuData, promoData]) => {
-      setItems(menuData);
-      setPromos(promoData);
-    }).catch(() => {}).finally(() => setLoading(false));
+    ]).then(([menuResult, promoResult]) => {
+      if (menuResult.status === "fulfilled") setItems(menuResult.value);
+      else setMenuError(true);
+      if (promoResult.status === "fulfilled") setPromos(promoResult.value);
+      else setPromosError(true);
+    }).finally(() => setLoading(false));
   }, []);
 
   const available = items.filter(i => i.is_available !== false);
@@ -64,9 +68,9 @@ export default function Menu() {
   );
 
   return (
-    <div style={{ background: "#070707", minHeight: "100vh" }}>
+    <div style={{ background: "#070707" }}>
       {/* Header */}
-      <div className="relative py-12 px-4 text-center overflow-hidden">
+      <div className="relative py-8 md:py-12 px-4 text-center overflow-hidden">
         <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, rgba(255,0,0,0.08) 0%, transparent 70%)" }} />
         <div className="h-0.5 w-full absolute top-0 left-0" style={{ background: "linear-gradient(90deg, transparent, #FF0000 30%, #FF0000 70%, transparent)" }} />
         <div className="relative z-10">
@@ -135,7 +139,7 @@ export default function Menu() {
           )}
 
           {/* Categorías desplegables */}
-          <div className="max-w-2xl mx-auto px-4 pb-20 space-y-4">
+          <div className="max-w-2xl mx-auto px-4 pb-10 md:pb-16 space-y-3">
             {categories.map((cat, idx) => (
               <MenuCategorySection
                 key={cat}
@@ -147,9 +151,10 @@ export default function Menu() {
             ))}
 
             {categories.length === 0 && (
-              <div className="text-center py-20 text-gray-600">
+              <div role={menuError ? "alert" : undefined} className="text-center py-12 text-gray-500">
                 <Wine size={40} className="mx-auto mb-3 opacity-30" />
-                <p>No hay productos disponibles</p>
+                <p>{menuError ? "No se pudo cargar la carta." : "No hay productos disponibles"}</p>
+                {menuError && <button onClick={() => window.location.reload()} className="mt-3 underline text-gray-300">Reintentar</button>}
               </div>
             )}
           </div>
@@ -158,12 +163,12 @@ export default function Menu() {
 
       {/* ─── PROMOCIONES TAB ─── */}
       {activeTab === TAB_PROMOS && (
-        <div className="max-w-2xl mx-auto px-4 pb-20">
+        <div className="max-w-2xl mx-auto px-4 pb-10 md:pb-16">
           {promos.length === 0 ? (
-            <div className="text-center py-24">
+            <div role={promosError ? "alert" : undefined} className="text-center py-12">
               <Sparkles size={40} className="mx-auto mb-3 opacity-20" style={{ color: "#FF0000" }} />
-              <p className="text-gray-600 text-sm">No hay promociones activas en este momento.</p>
-              <p className="text-gray-700 text-xs mt-1">¡Seguinos en Instagram para no perderte las novedades!</p>
+              <p className="text-gray-500 text-sm">{promosError ? "No se pudieron consultar las promociones." : "No hay promociones activas en este momento."}</p>
+              {promosError && <button onClick={() => window.location.reload()} className="mt-3 underline text-gray-300 text-xs">Reintentar</button>}
             </div>
           ) : (
             <div className="space-y-4 mt-2">
@@ -171,9 +176,9 @@ export default function Menu() {
                 <div key={promo.id} className="rounded-2xl overflow-hidden"
                   style={{ background: "#0f0f0f", border: "1px solid rgba(255,0,0,0.2)" }}>
                   {safeMediaUrl(promo.image_url) && (
-                    <div className="w-full aspect-video relative overflow-hidden">
+                    <div className="w-full aspect-[4/5] sm:aspect-video relative overflow-hidden">
                       <img src={safeMediaUrl(promo.image_url)} alt={promo.title}
-                        className="w-full h-full object-cover" />
+                        className="w-full h-full object-contain" style={{ background: "#0b0b0b" }} />
                       <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%)" }} />
                       <div className="absolute top-3 left-3">
                         <span className="text-xs font-bold px-2.5 py-1 rounded-full tracking-wider uppercase"
