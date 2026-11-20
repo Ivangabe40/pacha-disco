@@ -141,7 +141,7 @@ export default function Layout({ children, currentPageName }) {
       <MobileBottomBar />
 
       {/* FOOTER */}
-      <footer className="pt-10 pb-28 md:py-14 px-4" style={{ background: "#050505", borderTop: "1px solid rgba(255,0,0,0.15)", position: "relative", zIndex: 1 }}>
+      <footer className="pt-8 pb-12 md:py-14 px-4" style={{ background: "#050505", borderTop: "1px solid rgba(255,0,0,0.15)", position: "relative", zIndex: 1 }}>
         <div className="max-w-7xl mx-auto">
           {/* Red divider */}
           <div className="h-px w-full mb-8 md:mb-10" style={{ background: "linear-gradient(90deg, transparent, rgba(255,0,0,0.4), transparent)" }} />
