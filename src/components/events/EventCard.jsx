@@ -25,7 +25,7 @@ export default function EventCard({ event }) {
           <img
             src={event.flyer_url}
             alt={event.title}
-            className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
+            className="w-full h-full object-contain" style={{ background: "#0b0b0b" }}
           />
         ) : (
           <div className="w-full h-full flex flex-col items-center justify-center gap-3"
