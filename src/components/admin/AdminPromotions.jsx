@@ -58,8 +58,15 @@ export default function AdminPromotions() {
   };
 
   const toggleActive = async (promo) => {
-    try { await base44.entities.Promotion.update(promo.id, { is_active: !promo.is_active }); load(); }
-    catch { /* silent */ }
+    const next = !promo.is_active;
+    // Optimista: cambia al instante, se revierte si falla
+    setPromos(prev => prev.map(p => (p.id === promo.id ? { ...p, is_active: next } : p)));
+    try {
+      const updated = await base44.entities.Promotion.update(promo.id, { is_active: next });
+      if (updated?.id) setPromos(prev => prev.map(p => (p.id === promo.id ? { ...p, ...updated } : p)));
+    } catch {
+      setPromos(prev => prev.map(p => (p.id === promo.id ? { ...p, is_active: promo.is_active } : p)));
+    }
   };
 
   const edit = (p) => {
@@ -69,7 +76,7 @@ export default function AdminPromotions() {
   };
 
   return (
-    <div>
+    <div className="admin-panel">
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-white font-bold text-lg" style={{ fontFamily: "'Playfair Display', serif" }}>Promociones</h2>
         <button onClick={() => { setForm(EMPTY); setEditing(null); setShowForm(true); }}
@@ -166,7 +173,7 @@ export default function AdminPromotions() {
               {p.button_url && <p className="text-xs truncate" style={{ color: "#FF0000" }}>{p.button_url}</p>}
             </div>
             <div className="flex flex-col gap-2 shrink-0">
-              <button onClick={() => toggleActive(p)} className="text-gray-400 hover:text-white transition-colors">
+              <button onClick={() => toggleActive(p)} className="p-2 min-w-[44px] min-h-[44px] md:min-w-0 md:min-h-0 flex items-center justify-center text-gray-400 hover:text-white transition-colors">
                 {p.is_active ? <ToggleRight size={20} style={{ color: "#00c864" }} /> : <ToggleLeft size={20} />}
               </button>
               <button onClick={() => edit(p)} className="text-xs text-gray-400 hover:text-white transition-colors px-2 py-1 rounded"

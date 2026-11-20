@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { useState, useEffect } from "react";
 import { Menu, X, Instagram, MessageCircle, MapPin, ChevronLeft } from "lucide-react";
@@ -23,6 +23,7 @@ export default function Layout({ children, currentPageName }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
   const isSubRoute = !ROOT_ROUTES.has(location.pathname);
 
   useImageOptimization([location.pathname]);
@@ -63,7 +64,7 @@ export default function Layout({ children, currentPageName }) {
           {/* Mobile: back button on sub-routes, logo otherwise */}
           {isSubRoute ?
           <button
-            onClick={() => window.history.back()}
+            onClick={() => navigate(-1)}
             className="md:hidden flex items-center gap-1.5 text-gray-400 hover:text-white transition-colors"
             style={{ userSelect: "none" }}>
             

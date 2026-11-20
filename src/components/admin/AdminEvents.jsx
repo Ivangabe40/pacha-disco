@@ -3,6 +3,7 @@ import { base44 } from "@/api/base44Client";
 import { uploadPublicFile } from "@/lib/uploadFile";
 import { Plus, Pencil, Trash2, Star, StarOff, Upload, X } from "lucide-react";
 import ImageSizeHint from "./ImageSizeHint";
+import AdminSelect from "./AdminSelect";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 
@@ -81,14 +82,19 @@ export default function AdminEvents() {
   };
 
   const toggleFeatured = async (event) => {
+    const next = !event.is_featured;
+    // Optimista: cambia al instante, se revierte si falla
+    setEvents(prev => prev.map(e => (e.id === event.id ? { ...e, is_featured: next } : e)));
     try {
-      await base44.entities.Event.update(event.id, { is_featured: !event.is_featured });
-      load();
-    } catch { /* silent */ }
+      const updated = await base44.entities.Event.update(event.id, { is_featured: next });
+      if (updated?.id) setEvents(prev => prev.map(e => (e.id === event.id ? { ...e, ...updated } : e)));
+    } catch {
+      setEvents(prev => prev.map(e => (e.id === event.id ? { ...e, is_featured: event.is_featured } : e)));
+    }
   };
 
   return (
-    <div>
+    <div className="admin-panel">
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-2xl font-bold text-white" style={{ fontFamily: "'Playfair Display', serif" }}>Eventos</h2>
         <button onClick={openNew}
@@ -120,13 +126,17 @@ export default function AdminEvents() {
             </div>
             <div>
               <label className="text-xs text-gray-400 uppercase tracking-wider block mb-1">Estado</label>
-              <select value={form.status} onChange={e => setForm({ ...form, status: e.target.value })}
-                className="w-full px-4 py-2.5 rounded-xl text-white text-sm outline-none"
-                style={{ background: "#1a1a1a", border: "1px solid #333" }}>
-                <option value="activo">Activo</option>
-                <option value="agotado">Agotado</option>
-                <option value="cancelado">Cancelado</option>
-              </select>
+              <AdminSelect
+                value={form.status}
+                onValueChange={(value) => setForm({ ...form, status: value })}
+                options={[
+                  { value: "activo", label: "Activo" },
+                  { value: "agotado", label: "Agotado" },
+                  { value: "cancelado", label: "Cancelado" },
+                ]}
+                className="py-2.5 rounded-xl"
+                style={{ border: "1px solid #333" }}
+              />
             </div>
             <div>
               <label className="text-xs text-gray-400 uppercase tracking-wider block mb-1">Géneros</label>
@@ -263,14 +273,14 @@ export default function AdminEvents() {
                 </p>
               </div>
               <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
-                <button onClick={() => toggleFeatured(event)} className="p-2 rounded-lg hover:bg-gray-800 transition-colors"
+                <button onClick={() => toggleFeatured(event)} className="p-2 min-w-[44px] min-h-[44px] md:min-w-0 md:min-h-0 rounded-lg hover:bg-gray-800 transition-colors"
                   title={event.is_featured ? "Quitar destacado" : "Destacar"}>
                   {event.is_featured ? <Star size={15} style={{ color: "#C9A84C" }} /> : <StarOff size={15} className="text-gray-600" />}
                 </button>
-                <button onClick={() => openEdit(event)} className="p-2 rounded-lg hover:bg-gray-800 text-gray-400 hover:text-white transition-colors">
+                <button onClick={() => openEdit(event)} className="p-2 min-w-[44px] min-h-[44px] md:min-w-0 md:min-h-0 rounded-lg hover:bg-gray-800 text-gray-400 hover:text-white transition-colors">
                   <Pencil size={15} />
                 </button>
-                <button onClick={() => handleDelete(event.id)} className="p-2 rounded-lg hover:bg-red-900/30 text-gray-600 hover:text-red-300 transition-colors">
+                <button onClick={() => handleDelete(event.id)} className="p-2 min-w-[44px] min-h-[44px] md:min-w-0 md:min-h-0 rounded-lg hover:bg-red-900/30 text-gray-600 hover:text-red-300 transition-colors">
                   <Trash2 size={15} />
                 </button>
               </div>

@@ -14,8 +14,10 @@ function getReminders() {
 function saveReminders(reminders) {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(reminders));
+    return true;
   } catch {
     // localStorage may be unavailable (private browsing, quota exceeded)
+    return false;
   }
 }
 
@@ -30,14 +32,13 @@ export function useEventReminder(event) {
 
   const toggle = () => {
     if (!event?.id) return;
-    const reminders = getReminders();
+    const next = !reminded;
 
-    if (reminded) {
-      delete reminders[event.id];
-      saveReminders(reminders);
-      setReminded(false);
-      toast("Recordatorio eliminado", { description: `Ya no recibirás avisos de "${event.title}".` });
-    } else {
+    // Optimista: la UI responde al instante
+    setReminded(next);
+
+    const reminders = getReminders();
+    if (next) {
       reminders[event.id] = {
         eventId: event.id,
         title: event.title,
@@ -45,11 +46,23 @@ export function useEventReminder(event) {
         status: event.status,
         savedAt: new Date().toISOString(),
       };
-      saveReminders(reminders);
-      setReminded(true);
+    } else {
+      delete reminders[event.id];
+    }
+
+    if (!saveReminders(reminders)) {
+      // Rollback si no se pudo persistir
+      setReminded(!next);
+      toast.error("No se pudo guardar el recordatorio", { description: "Revisá el almacenamiento del navegador." });
+      return;
+    }
+
+    if (next) {
       toast.success("¡Recordatorio activado!", {
         description: `Te avisaremos cuando se acerque "${event.title}".`,
       });
+    } else {
+      toast("Recordatorio eliminado", { description: `Ya no recibirás avisos de "${event.title}".` });
     }
   };
 

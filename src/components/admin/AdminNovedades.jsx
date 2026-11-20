@@ -53,8 +53,15 @@ export default function AdminNovedades() {
   };
 
   const toggleActive = async (item) => {
-    try { await base44.entities.NovedadBanner.update(item.id, { is_active: !item.is_active }); load(); }
-    catch { /* silent */ }
+    const next = !item.is_active;
+    // Optimista: cambia al instante, se revierte si falla
+    setItems(prev => prev.map(i => (i.id === item.id ? { ...i, is_active: next } : i)));
+    try {
+      const updated = await base44.entities.NovedadBanner.update(item.id, { is_active: next });
+      if (updated?.id) setItems(prev => prev.map(i => (i.id === item.id ? { ...i, ...updated } : i)));
+    } catch {
+      setItems(prev => prev.map(i => (i.id === item.id ? { ...i, is_active: item.is_active } : i)));
+    }
   };
 
   const handleDelete = async (item) => {
@@ -63,7 +70,7 @@ export default function AdminNovedades() {
   };
 
   return (
-    <div>
+    <div className="admin-panel">
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-xl font-bold text-white" style={{ fontFamily: "'Playfair Display', serif" }}>
           Banners de Novedades
@@ -156,18 +163,18 @@ export default function AdminNovedades() {
             </div>
             <div className="flex items-center gap-1 sm:gap-2 shrink-0">
               <button onClick={() => handleEdit(item)}
-                className="w-8 h-8 flex items-center justify-center rounded-lg transition-all"
+                className="w-11 h-11 md:w-8 md:h-8 flex items-center justify-center rounded-lg transition-all"
                 style={{ background: "rgba(255,0,0,0.1)" }}
                 title="Editar">
                 <Pencil size={13} style={{ color: "#FF0000" }} />
               </button>
               <button onClick={() => toggleActive(item)}
-                className="w-8 h-8 flex items-center justify-center rounded-lg transition-all"
+                className="w-11 h-11 md:w-8 md:h-8 flex items-center justify-center rounded-lg transition-all"
                 style={{ background: item.is_active ? "rgba(34,197,94,0.15)" : "rgba(255,255,255,0.05)" }}>
                 {item.is_active ? <Eye size={14} className="text-green-500" /> : <EyeOff size={14} className="text-gray-600" />}
               </button>
               <button onClick={() => handleDelete(item)}
-                className="w-8 h-8 flex items-center justify-center rounded-lg"
+                className="w-11 h-11 md:w-8 md:h-8 flex items-center justify-center rounded-lg"
                 style={{ background: "rgba(255,0,0,0.1)" }}>
                 <Trash2 size={14} style={{ color: "#FF0000" }} />
               </button>

@@ -7,15 +7,18 @@ import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-route
 import PageNotFound from './lib/PageNotFound';
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import UserNotRegisteredError from '@/components/UserNotRegisteredError';
-import Eventos from './pages/Eventos';
-import Contact from './pages/Contact';
-import MisCuenta from './pages/MisCuenta';
-import QRPage from './pages/QRPage';
-import CartaQR from './pages/CartaQR';
-import Configuracion from './pages/Configuracion';
-import GestorMenu from './pages/GestorMenu';
-import Pachi from './pages/Pachi';
+import { lazy, Suspense } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+
+// Rutas no críticas: se cargan bajo demanda para acelerar el arranque
+const Eventos = lazy(() => import('./pages/Eventos'));
+const Contact = lazy(() => import('./pages/Contact'));
+const MisCuenta = lazy(() => import('./pages/MisCuenta'));
+const QRPage = lazy(() => import('./pages/QRPage'));
+const CartaQR = lazy(() => import('./pages/CartaQR'));
+const Configuracion = lazy(() => import('./pages/Configuracion'));
+const GestorMenu = lazy(() => import('./pages/GestorMenu'));
+const Pachi = lazy(() => import('./pages/Pachi'));
 import { ThemeProvider } from 'next-themes';
 import { TabHistoryProvider } from '@/components/TabHistoryProvider';
 
@@ -32,6 +35,12 @@ const PageTransition = ({ children }) => (
   >
     {children}
   </motion.div>
+);
+
+const RouteFallback = () => (
+  <div className="fixed inset-0 flex items-center justify-center">
+    <div className="w-8 h-8 border-4 border-neutral-800 border-t-neutral-400 rounded-full animate-spin" />
+  </div>
 );
 
 const LayoutWrapper = ({ children, currentPageName }) => Layout ?
@@ -65,6 +74,7 @@ const AuthenticatedApp = () => {
   // Render the main app
   return (
     <AnimatePresence mode="wait" initial={false}>
+      <Suspense fallback={<RouteFallback />}>
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={
           <LayoutWrapper currentPageName={mainPageKey}>
@@ -92,6 +102,7 @@ const AuthenticatedApp = () => {
         <Route path="/pachi" element={<Pachi />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
+      </Suspense>
     </AnimatePresence>
   );
 };

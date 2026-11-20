@@ -23,6 +23,11 @@ export function TabHistoryProvider({ children }) {
 
   const navigateToTab = useCallback(
     (tabPath) => {
+      // Volver a tocar la pestaña activa siempre lleva a su raíz
+      if (activeTab.current === tabPath) {
+        navigate(tabPath);
+        return;
+      }
       const saved = tabPaths.current.get(tabPath);
       if (saved && saved !== tabPath) {
         navigate(saved);

@@ -47,14 +47,17 @@
  *
  * The mainPage value must match a key in the PAGES object exactly.
  */
-import About from './pages/About';
-import Admin from './pages/Admin';
-import Artists from './pages/Artists';
-import EventDetail from './pages/EventDetail';
-import Gallery from './pages/Gallery';
+import { lazy } from 'react';
 import Home from './pages/Home';
-import Menu from './pages/Menu';
 import __Layout from './Layout.jsx';
+
+// Páginas no críticas con carga diferida
+const About = lazy(() => import('./pages/About'));
+const Admin = lazy(() => import('./pages/Admin'));
+const Artists = lazy(() => import('./pages/Artists'));
+const EventDetail = lazy(() => import('./pages/EventDetail'));
+const Gallery = lazy(() => import('./pages/Gallery'));
+const Menu = lazy(() => import('./pages/Menu'));
 
 
 export const PAGES = {

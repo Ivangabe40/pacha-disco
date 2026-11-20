@@ -85,4 +85,40 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  /* WebView de Android: sin rebote de la página completa */
+  html,
+  body {
+    overscroll-behavior: none;
+  }
+
+  /* Controles táctiles: sin selección de texto ni highlight azul */
+  button,
+  [role="button"],
+  [role="tab"],
+  [role="menuitem"] {
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Contenedores con scroll interno: evitan el scroll chaining del WebView */
+.scroll-contain-y {
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.scroll-contain-x {
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Panel admin en móvil: texto legible (mín. 14px) */
+@media (max-width: 767px) {
+  .admin-panel .text-xs,
+  .admin-panel .text-\[11px\] {
+    font-size: 14px;
+    line-height: 1.35rem;
+  }
 }

@@ -113,7 +113,7 @@ export default function EventDetail() {
         }
         <div className="mx-4 pr-4 pl-4 absolute inset-0" style={{ background: "linear-gradient(to top, #0A0A0A 20%, transparent 100%)" }} />
         <div className="relative z-10 max-w-5xl mx-auto px-4 md:px-8 pt-8 pb-16">
-          <Link to={createPageUrl("Eventos")} className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-8 text-sm">
+          <Link to={createPageUrl("Eventos")} className="hidden md:inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-8 text-sm">
             <ChevronLeft size={16} /> Volver a eventos
           </Link>
           <h1 className="text-3xl md:text-6xl font-bold text-white leading-tight" style={{ fontFamily: "'Playfair Display', serif" }}>

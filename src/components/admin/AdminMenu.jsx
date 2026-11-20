@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { base44 } from "@/api/base44Client";
 import { uploadPublicFile } from "@/lib/uploadFile";
 import { Plus, Pencil, Trash2, Star, X, Check, Wine, Upload, Loader2 } from "lucide-react";
+import AdminSelect from "./AdminSelect";
 
 const CATEGORIES = ["Sin Alcohol", "Vodkas", "Vermuts", "Cervezas", "Gin", "Clásicos", "Whiskies", "Bottle Service", "Espumosos"];
 
@@ -53,13 +54,26 @@ export default function AdminMenu() {
   };
 
   const toggleAvailable = async (item) => {
-    try { await base44.entities.MenuItem.update(item.id, { is_available: !item.is_available }); loadItems(); }
-    catch { /* silent */ }
+    const next = !item.is_available;
+    // Optimista: cambia al instante, se revierte si falla
+    setItems(prev => prev.map(i => (i.id === item.id ? { ...i, is_available: next } : i)));
+    try {
+      const updated = await base44.entities.MenuItem.update(item.id, { is_available: next });
+      if (updated?.id) setItems(prev => prev.map(i => (i.id === item.id ? { ...i, ...updated } : i)));
+    } catch {
+      setItems(prev => prev.map(i => (i.id === item.id ? { ...i, is_available: item.is_available } : i)));
+    }
   };
 
   const toggleFeatured = async (item) => {
-    try { await base44.entities.MenuItem.update(item.id, { is_featured: !item.is_featured }); loadItems(); }
-    catch { /* silent */ }
+    const next = !item.is_featured;
+    setItems(prev => prev.map(i => (i.id === item.id ? { ...i, is_featured: next } : i)));
+    try {
+      const updated = await base44.entities.MenuItem.update(item.id, { is_featured: next });
+      if (updated?.id) setItems(prev => prev.map(i => (i.id === item.id ? { ...i, ...updated } : i)));
+    } catch {
+      setItems(prev => prev.map(i => (i.id === item.id ? { ...i, is_featured: item.is_featured } : i)));
+    }
   };
 
   const handleImportExcel = async (e) => {
@@ -93,7 +107,7 @@ export default function AdminMenu() {
   const filtered = activeCategory === "all" ? items : items.filter(i => i.category === activeCategory);
 
   return (
-    <div>
+    <div className="admin-panel">
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
@@ -120,7 +134,7 @@ export default function AdminMenu() {
       </div>
 
       {/* Category filter */}
-      <div className="flex gap-2 overflow-x-auto pb-2 mb-5 scrollbar-hide">
+      <div className="flex gap-2 overflow-x-auto pb-2 mb-5 scrollbar-hide scroll-contain-x">
         <button onClick={() => setActiveCategory("all")}
           className="shrink-0 px-3 py-1.5 rounded-full text-xs font-bold transition-all"
           style={activeCategory === "all" ? { background: "#FF0000", color: "#fff" } : { background: "#1a1a1a", color: "#666" }}>
@@ -176,11 +190,12 @@ export default function AdminMenu() {
               </div>
               <div>
                 <label className="text-xs text-gray-500 uppercase tracking-wider mb-1 block">Categoría *</label>
-                <select value={form.category} onChange={e => setForm({ ...form, category: e.target.value })}
-                  className="w-full px-4 py-3 rounded-lg text-white text-sm outline-none"
-                  style={{ background: "#1a1a1a", border: "1px solid #2a2a2a" }}>
-                  {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
-                </select>
+                <AdminSelect
+                  value={form.category}
+                  onValueChange={(value) => setForm({ ...form, category: value })}
+                  options={CATEGORIES.map(c => ({ value: c, label: c }))}
+                  placeholder="Elegí una categoría"
+                />
               </div>
               <div className="flex gap-4">
                 <label className="flex items-center gap-2 cursor-pointer">
@@ -236,17 +251,17 @@ export default function AdminMenu() {
               <div className="flex items-center gap-1 shrink-0">
                 <button onClick={() => toggleAvailable(item)}
                   title={item.is_available ? "Deshabilitar" : "Habilitar"}
-                  className="w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold transition-all"
+                  className="w-11 h-11 md:w-7 md:h-7 rounded-lg flex items-center justify-center text-xs font-bold transition-all"
                   style={{ background: item.is_available ? "rgba(34,197,94,0.15)" : "#1a1a1a", color: item.is_available ? "#22c55e" : "#555" }}>
                   {item.is_available ? "✓" : "✗"}
                 </button>
                 <button onClick={() => openEdit(item)}
-                  className="w-7 h-7 rounded-lg flex items-center justify-center transition-all hover:text-white text-gray-600"
+                  className="w-11 h-11 md:w-7 md:h-7 rounded-lg flex items-center justify-center transition-all hover:text-white text-gray-600"
                   style={{ background: "#1a1a1a" }}>
                   <Pencil size={12} />
                 </button>
                 <button onClick={() => handleDelete(item.id)}
-                  className="w-7 h-7 rounded-lg flex items-center justify-center transition-all hover:text-red-400 text-gray-700"
+                  className="w-11 h-11 md:w-7 md:h-7 rounded-lg flex items-center justify-center transition-all hover:text-red-400 text-gray-700"
                   style={{ background: "#1a1a1a" }}>
                   <Trash2 size={12} />
                 </button>
