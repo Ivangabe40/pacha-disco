@@ -170,7 +170,7 @@ export default function EventDetail() {
             </div> :
             event.flyer_url ?
             <div className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl">
-              <img src={event.flyer_url} alt={event.title} className="absolute inset-0 w-full h-full object-cover" />
+              <img src={event.flyer_url} alt={event.title} className="absolute inset-0 w-full h-full object-contain" style={{ background: "#0b0b0b" }} />
             </div> :
             null}
           </div>
