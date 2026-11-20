@@ -18,7 +18,7 @@ export default function PastEventsCarousel({ events }) {
     setScrollSnaps(emblaApi.scrollSnapList());
     syncSelection();
     emblaApi.on("select", syncSelection);
-    return () => emblaApi.off("select", syncSelection);
+    return () => { emblaApi.off("select", syncSelection); };
   }, [emblaApi]);
 
   if (!events || events.length === 0) return null;
