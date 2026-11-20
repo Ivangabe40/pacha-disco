@@ -33,32 +33,19 @@ export default function About() {
 
       {/* Content */}
       <div className="max-w-5xl mx-auto px-4 md:px-8 pb-24">
-        <div className="grid md:grid-cols-2 gap-8 md:gap-12 mb-16">
-          <div>
-            <h2 className="text-3xl font-bold text-white mb-4" style={{ fontFamily: "'Playfair Display', serif" }}>
-              Club Premium
-            </h2>
-            <p className="text-gray-400 leading-relaxed mb-4">
-              Un espacio de encuentro para los amantes de la buena música. Multigenero, sin fronteras, donde conviven el reggaeton, la electrónica, el pop y los clásicos.
-            </p>
-            <p className="text-gray-400 leading-relaxed">
-              Nuestro equipo de sound system de última generación y una iluminación de espectáculo crean el ambiente perfecto para que la noche se viva al máximo.
-            </p>
-          </div>
-          <div className="space-y-4">
-            {[
-              { label: "Capacidad", value: "500+ personas" },
-              { label: "Sistema de sonido", value: "D&B Audiotechnik" },
-              { label: "DJs residentes", value: "Roster exclusivo" },
-              { label: "Dress code", value: "Elegante informal" },
-            ].map(item => (
-              <div key={item.label} className="flex items-center justify-between p-4 rounded-xl"
-                style={{ background: "#111", border: "1px solid #222" }}>
-                <span className="text-gray-500 text-sm uppercase tracking-wider">{item.label}</span>
-                <span className="text-white font-semibold">{item.value}</span>
-              </div>
-            ))}
-          </div>
+        <div className="max-w-3xl mx-auto mb-16 text-center rounded-2xl p-8 md:p-10"
+          style={{ background: "#111", border: "1px solid #222" }}>
+          <p className="text-xs uppercase tracking-[0.3em] mb-3" style={{ color: "#C9A84C" }}>
+            Nuestra trayectoria
+          </p>
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4"
+            style={{ fontFamily: "'Playfair Display', serif" }}>
+            23 años de historia
+          </h2>
+          <p className="text-gray-400 leading-relaxed">
+            Una historia construida en Corral de Bustos a través de la música, los encuentros y las noches compartidas.
+            La programación actual se anuncia en la sección Eventos.
+          </p>
         </div>
 
         {/* Map */}
