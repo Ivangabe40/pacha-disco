@@ -23,7 +23,8 @@ export default function Eventos() {
 
   useEffect(() => { loadEvents(); }, [loadEvents]);
 
-  const upcoming = events.filter(e => ["proximo", "vigente"].includes(getEventPhase(e)));
+  const upcoming = events.filter(e => ["proximo", "vigente"].includes(getEventPhase(e)))
+    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
   const past = events.filter(e => ["finalizado", "cancelado"].includes(getEventPhase(e)));
 
   if (loading) return (
