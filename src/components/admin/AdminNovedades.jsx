@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
 import { Plus, Trash2, Eye, EyeOff, Upload, ExternalLink, Pencil, X } from "lucide-react";
 import ImageSizeHint from "./ImageSizeHint";
+import { safeHttpUrl } from "@/lib/safeHttpUrl";
 
 export default function AdminNovedades() {
   const [items, setItems] = useState([]);
@@ -147,8 +148,8 @@ export default function AdminNovedades() {
             )}
             <div className="flex-1 min-w-0">
               <p className="text-white text-sm font-bold truncate">{item.title}</p>
-              {item.link && (
-                <a href={item.link} target="_blank" rel="noopener noreferrer" className="text-xs flex items-center gap-1" style={{ color: "#C9A84C" }}>
+              {safeHttpUrl(item.link) && (
+                <a href={safeHttpUrl(item.link)} target="_blank" rel="noopener noreferrer" className="text-xs flex items-center gap-1" style={{ color: "#C9A84C" }}>
                   <ExternalLink size={10} /> Link
                 </a>
               )}
