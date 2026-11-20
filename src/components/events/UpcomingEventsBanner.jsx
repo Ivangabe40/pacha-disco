@@ -26,7 +26,7 @@ export default function UpcomingEventsBanner({ events }) {
             {/* Flyer thumbnail */}
             {event.flyer_url &&
             <img src={event.flyer_url} alt={event.title}
-            className="w-16 md:w-20 h-16 md:h-20 object-cover rounded-xl shrink-0" />
+            className="w-16 md:w-20 h-16 md:h-20 object-contain rounded-xl shrink-0" style={{ background: "#0b0b0b" }} />
             }
 
             {/* Info */}
