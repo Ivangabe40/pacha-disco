@@ -9,7 +9,6 @@ import MenuQR from "@/components/admin/MenuQR";
 import AdminPromotions from "@/components/admin/AdminPromotions";
 import AdminNovedades from "@/components/admin/AdminNovedades";
 import AdminConfiguracion from "@/components/admin/AdminConfiguracion";
-import AdminHomeVideo from "@/components/admin/AdminHomeVideo";
 import { Calendar, Music, Camera, Wine, Megaphone, Sparkles, Settings, LogOut } from "lucide-react";
 
 const LOGO_RED = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/dbb6d658e_pacha-logo-nuevo.png";
@@ -105,12 +104,7 @@ export default function Admin() {
         {activeTab === "gallery" && <AdminGalleryAlbums />}
         {activeTab === "promos" && <AdminPromotions />}
         {activeTab === "novedades" && <AdminNovedades />}
-        {activeTab === "config" && (
-          <div className="space-y-6">
-            <AdminHomeVideo />
-            <AdminConfiguracion />
-          </div>
-        )}
+        {activeTab === "config" && <AdminConfiguracion />}
         {activeTab === "menu" && (
           <div className="grid md:grid-cols-3 gap-6">
             <div className="md:col-span-2"><AdminMenu /></div>

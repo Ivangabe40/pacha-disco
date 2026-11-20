@@ -9,14 +9,12 @@ import { createPageUrl } from "@/utils";
 import { checkEventReminders } from "@/hooks/useEventReminder";
 import PastEventsCarousel from "@/components/events/PastEventsCarousel";
 import { getEventPhase } from "@/lib/eventDisplay";
-import HomeVideoSection from "@/components/HomeVideoSection";
 import NovedadBanner from "@/components/NovedadBanner";
 import OperationInfo from "@/components/OperationInfo";
 import PullToRefresh from "@/components/PullToRefresh";
 import GoogleReviewInvite from "@/components/GoogleReviewInvite";
 import InstagramFollow from "@/components/InstagramFollow";
 import EscapeExperience from "@/components/EscapeExperience";
-import IntroVideoOverlay from "@/components/IntroVideoOverlay";
 
 export default function Home() {
   const [events, setEvents] = useState([]);
@@ -56,7 +54,6 @@ export default function Home() {
 
   return (
     <div style={{ background: "#070707" }}>
-      <IntroVideoOverlay />
       <PromotionPopup />
       <PullToRefresh onRefresh={loadEvents}>
         <div className="relative" style={{ background: "#070707", minHeight: "100vh" }}>
@@ -71,9 +68,6 @@ export default function Home() {
 
           {/* ESCAPE EXPERIENCE — celebraciones privadas */}
           <EscapeExperience />
-
-          {/* VIDEO SECTION — Lo que se viene (dinámico desde SiteConfig) */}
-          <HomeVideoSection />
 
           {/* COUNTDOWN BANNERS — solo si hay próximos eventos */}
           {upcoming.length > 0 && <UpcomingEventsBanner events={upcoming} />}
