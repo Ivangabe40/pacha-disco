@@ -19,6 +19,12 @@ export default function PachiChatWidget() {
     if (el && open) el.scrollTop = el.scrollHeight;
   }, [open]);
 
+  useEffect(() => {
+    const openChat = () => setOpen(true);
+    window.addEventListener("pachi:open", openChat);
+    return () => window.removeEventListener("pachi:open", openChat);
+  }, []);
+
   const handleKeyDown = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
@@ -38,7 +44,7 @@ export default function PachiChatWidget() {
         <button
           onClick={() => setOpen(true)}
           aria-label="Abrir chat de Pachi Bot"
-          className="fixed z-50 flex items-center gap-2 pl-3.5 pr-4 py-3 rounded-full transition-all active:scale-95 hover:scale-105 bottom-[calc(78px_+_env(safe-area-inset-bottom,0px))] left-4 md:bottom-6 md:left-6"
+          className="hidden md:flex fixed z-50 items-center gap-2 pl-3.5 pr-4 py-3 rounded-full transition-all active:scale-95 hover:scale-105 md:bottom-6 md:left-6"
           style={{ background: "linear-gradient(135deg, #FF0000, #CC0000)", boxShadow: "0 4px 24px rgba(255,0,0,0.5)" }}
         >
           <span className="absolute inset-0 rounded-full animate-ping opacity-20" style={{ background: "#FF0000" }} />

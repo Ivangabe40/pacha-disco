@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { Home, Calendar, Wine, Sparkles } from "lucide-react";
+import { Home, Calendar, Wine, Sparkles, Bot } from "lucide-react";
 import { useTabHistory } from "@/components/TabHistoryProvider";
 
 const tabs = [
@@ -35,6 +35,8 @@ export default function MobileBottomBar() {
     }
   };
 
+  const items = [...tabs.slice(0, 2), { key: "pachi" }, ...tabs.slice(2)];
+
   return (
     <nav
       className="md:hidden fixed bottom-0 left-0 right-0 z-50"
@@ -45,8 +47,43 @@ export default function MobileBottomBar() {
         paddingBottom: "env(safe-area-inset-bottom, 0px)",
       }}
     >
-      <div className="grid grid-cols-4 gap-1 px-2" style={{ height: 68 }}>
-        {tabs.map(({ label, icon: Icon, path, ariaLabel }) => {
+      <div className="grid grid-cols-5 gap-0.5 px-1 items-center" style={{ height: 68 }}>
+        {items.map((item) => {
+          if (item.key === "pachi") {
+            return (
+              <button
+                key="pachi"
+                onClick={() => window.dispatchEvent(new CustomEvent("pachi:open"))}
+                aria-label="Abrir chat de Pachi Bot"
+                className="flex flex-col items-center justify-center h-full active:scale-[0.96] transition-transform"
+                style={{
+                  userSelect: "none",
+                  WebkitTapHighlightColor: "transparent",
+                  background: "transparent",
+                  border: "none",
+                  cursor: "pointer",
+                  touchAction: "manipulation",
+                  padding: 0,
+                }}
+              >
+                <span
+                  className="flex items-center justify-center rounded-full"
+                  style={{
+                    width: 54,
+                    height: 54,
+                    marginTop: -22,
+                    background: "linear-gradient(135deg, #FF0000, #CC0000)",
+                    border: "2px solid #070707",
+                    boxShadow: "0 4px 18px rgba(255,0,0,0.55)",
+                  }}
+                >
+                  <Bot size={26} className="text-white" />
+                </span>
+              </button>
+            );
+          }
+
+          const { label, icon: Icon, path, ariaLabel } = item;
           const isActive =
             path === "/"
               ? location.pathname === "/" || location.pathname === "/Home"
