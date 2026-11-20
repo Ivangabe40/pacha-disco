@@ -12,17 +12,21 @@ import AdminNotifications from "@/components/admin/AdminNotifications";
 import AdminNovedades from "@/components/admin/AdminNovedades";
 import AdminConfiguracion from "@/components/admin/AdminConfiguracion";
 import AdminHomeVideo from "@/components/admin/AdminHomeVideo";
-import { Calendar, Music, Camera, Wine, Megaphone, Mail, Bell, Sparkles, Settings, LogOut } from "lucide-react";
+import AdminOverview from "@/components/admin/AdminOverview";
+import AdminPrivateRequests from "@/components/admin/AdminPrivateRequests";
+import { Calendar, Music, Camera, Wine, Megaphone, Mail, Bell, Sparkles, Settings, LogOut, LayoutDashboard, ClipboardList } from "lucide-react";
 
 const LOGO_RED = "https://media.base44.com/images/public/69ad4033370fdc9f9fe8b117/dbb6d658e_pacha-logo-nuevo.png";
 
 const tabs = [
+  { id: "overview", label: "Resumen", icon: LayoutDashboard },
   { id: "events", label: "Eventos", icon: Calendar },
   { id: "artists", label: "Artistas", icon: Music },
   { id: "gallery", label: "Galería", icon: Camera },
   { id: "menu", label: "Carta", icon: Wine },
   { id: "promos", label: "Promos", icon: Megaphone },
   { id: "newsletter", label: "Newsletter", icon: Mail },
+  { id: "requests", label: "Solicitudes", icon: ClipboardList },
   { id: "notifications", label: "Notif.", icon: Bell },
   { id: "novedades", label: "Novedades", icon: Sparkles },
   { id: "config", label: "Config", icon: Settings },
@@ -30,7 +34,7 @@ const tabs = [
 
 export default function Admin() {
   const [authed, setAuthed] = useState(isAdminAuthenticated());
-  const [activeTab, setActiveTab] = useState("events");
+  const [activeTab, setActiveTab] = useState("overview");
   const [stats, setStats] = useState({ events: 0, artists: 0 });
 
   useEffect(() => {
@@ -100,6 +104,8 @@ export default function Admin() {
 
       {/* Tab Content */}
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-8">
+        {activeTab === "overview" && <AdminOverview onNavigate={setActiveTab} />}
+        {activeTab === "requests" && <AdminPrivateRequests />}
         {activeTab === "events" && <AdminEvents />}
         {activeTab === "artists" && <AdminArtists />}
         {activeTab === "gallery" && <AdminGalleryAlbums />}
