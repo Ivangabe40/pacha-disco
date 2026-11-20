@@ -166,7 +166,7 @@ export default function EventDetail() {
           <div className="md:col-span-1">
             {event.video_url ?
             <div className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl">
-              <video src={event.video_url} className="absolute inset-0 w-full h-full object-cover" autoPlay loop muted playsInline />
+              <video src={event.video_url} className="absolute inset-0 w-full h-full object-contain" autoPlay loop muted playsInline />
             </div> :
             event.flyer_url ?
             <div className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl">
