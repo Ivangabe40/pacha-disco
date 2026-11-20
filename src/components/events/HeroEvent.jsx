@@ -3,7 +3,7 @@ import { createPageUrl } from "@/utils";
 import { Calendar, Music, Zap } from "lucide-react";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
-import { getDisplayDate } from "@/lib/eventDisplay";
+import { getDisplayDate, hasConfirmedEventTime } from "@/lib/eventDisplay";
 
 export default function HeroEvent({ event }) {
   if (!event) return null;
@@ -92,10 +92,12 @@ export default function HeroEvent({ event }) {
                   {format(date, "EEEE d 'de' MMMM", { locale: es })}
                 </span>
               </div>
-              <div className="flex items-center gap-1.5 px-3 md:px-4 py-1.5 md:py-2 rounded-full"
-                style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}>
-                <span className="text-xs md:text-sm text-gray-300 font-condensed">{format(date, "HH:mm")}hs</span>
-              </div>
+              {hasConfirmedEventTime(event) && (
+                <div className="flex items-center gap-1.5 px-3 md:px-4 py-1.5 md:py-2 rounded-full"
+                  style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}>
+                  <span className="text-xs md:text-sm text-gray-300 font-condensed">{format(date, "HH:mm")}hs</span>
+                </div>
+              )}
               {event.genres && (
                 <div className="flex items-center gap-1.5 px-3 md:px-4 py-1.5 md:py-2 rounded-full"
                   style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}>
