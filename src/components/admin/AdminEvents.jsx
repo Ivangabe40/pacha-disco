@@ -19,11 +19,18 @@ export default function AdminEvents() {
   const [form, setForm] = useState(emptyEvent);
   const [uploading, setUploading] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [loadError, setLoadError] = useState(false);
+  const [notice, setNotice] = useState("");
 
-  const load = () => base44.entities.Event.list("-date").then(d => { setEvents(d); }).catch(() => {}).finally(() => setLoading(false));
+  const load = () => {
+    setLoading(true);
+    setLoadError(false);
+    return base44.entities.Event.list("-date").then(d => setEvents(d)).catch(() => setLoadError(true)).finally(() => setLoading(false));
+  };
   useEffect(() => { load(); }, []);
 
-  const openNew = () => { setForm(emptyEvent); setEditing(null); setShowForm(true); };
+  const openNew = () => { setForm({ ...emptyEvent }); setEditing(null); setNotice(""); setShowForm(true); };
   const openEdit = (e) => { setForm({ title: e.title || "", date: e.date || "", description: e.description || "", genres: e.genres || "", djs: e.djs || "", flyer_url: e.flyer_url || "", background_url: e.background_url || "", video_url: e.video_url || "", status: e.status || "activo", is_featured: e.is_featured || false }); setEditing(e); setShowForm(true); };
 
   const [uploadingVideo, setUploadingVideo] = useState(false);
@@ -57,11 +64,14 @@ export default function AdminEvents() {
   };
 
   const handleSave = async () => {
+    if (saving || uploading || uploadingVideo || uploadingBg) return;
     if (!form.title.trim() || !form.date) {
-      alert("Completá el nombre y la fecha del evento");
+      setNotice("Completá el nombre y la fecha del evento.");
       return;
     }
-    const data = { ...form };
+    const data = { ...form, title: form.title.trim() };
+    setSaving(true);
+    setNotice("");
     try {
       if (editing) {
         await base44.entities.Event.update(editing.id, data);
@@ -69,8 +79,14 @@ export default function AdminEvents() {
         await base44.entities.Event.create(data);
       }
       setShowForm(false);
-      load();
-    } catch { alert("Error al guardar el evento"); }
+      setEditing(null);
+      await load();
+      setNotice(editing ? "Evento actualizado correctamente." : "Evento creado correctamente.");
+    } catch {
+      setNotice("No se pudo guardar el evento. Conservá el formulario e intentá nuevamente.");
+    } finally {
+      setSaving(false);
+    }
   };
 
   const handleDelete = async (id) => {
@@ -95,6 +111,7 @@ export default function AdminEvents() {
 
   return (
     <div className="admin-panel">
+      {notice && <p role="status" className="mb-4 px-4 py-3 rounded-lg text-sm text-gray-100" style={{ background: "#212121", border: "1px solid #454545" }}>{notice}</p>}
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-2xl font-bold text-white" style={{ fontFamily: "'Playfair Display', serif" }}>Eventos</h2>
         <button onClick={openNew}
@@ -236,10 +253,10 @@ export default function AdminEvents() {
           <div className="flex justify-end gap-3 mt-6">
             <button onClick={() => setShowForm(false)} className="px-5 py-2 rounded-xl text-gray-400 text-sm"
               style={{ border: "1px solid #333" }}>Cancelar</button>
-            <button onClick={handleSave} disabled={!form.title || !form.date}
+            <button onClick={handleSave} disabled={saving || uploading || uploadingBg || uploadingVideo || !form.title.trim() || !form.date}
               className="px-6 py-2 rounded-xl text-sm font-semibold"
               style={{ background: "linear-gradient(135deg, #C9A84C 0%, #E8C97A 50%, #C9A84C 100%)", color: "#0A0A0A" }}>
-              {editing ? "Guardar cambios" : "Crear evento"}
+              {saving ? "Guardando..." : editing ? "Guardar cambios" : "Crear evento"}
             </button>
           </div>
         </div>
@@ -249,6 +266,11 @@ export default function AdminEvents() {
       {loading ? (
         <div className="flex justify-center py-12">
           <div className="w-8 h-8 rounded-full border-2 border-t-yellow-500 border-gray-800 animate-spin"></div>
+        </div>
+      ) : loadError ? (
+        <div role="alert" className="text-center py-10 text-gray-300">
+          <p>No se pudieron cargar los eventos.</p>
+          <button className="mt-4 px-4 py-2 rounded-lg border border-gray-600" onClick={load}>Reintentar</button>
         </div>
       ) : events.length === 0 ? (
         <div className="text-center py-16 text-gray-500">No hay eventos aún. ¡Crea el primero!</div>
