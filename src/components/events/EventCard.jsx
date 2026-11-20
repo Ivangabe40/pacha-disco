@@ -3,7 +3,7 @@ import { createPageUrl } from "@/utils";
 import { Calendar, Clock, Music } from "lucide-react";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
-import { getDisplayDate, getEventPhase } from "@/lib/eventDisplay";
+import { getDisplayDate, getEventPhase, hasConfirmedEventTime } from "@/lib/eventDisplay";
 
 export default function EventCard({ event }) {
   const date = getDisplayDate(event);
@@ -73,9 +73,13 @@ export default function EventCard({ event }) {
           <div className="flex items-center gap-2 text-xs text-gray-500">
             <Calendar size={11} style={{ color: "#FF0000" }} />
             <span className="capitalize">{format(date, "EEE d 'de' MMM", { locale: es })}</span>
-            <span className="text-gray-700">·</span>
-            <Clock size={11} style={{ color: "#FF0000" }} />
-            <span>{format(date, "HH:mm")}hs</span>
+            {hasConfirmedEventTime(event) && (
+              <>
+                <span className="text-gray-700">·</span>
+                <Clock size={11} style={{ color: "#FF0000" }} />
+                <span>{format(date, "HH:mm")}hs</span>
+              </>
+            )}
           </div>
           {event.genres && (
             <div className="flex items-center gap-2 text-xs text-gray-600">
